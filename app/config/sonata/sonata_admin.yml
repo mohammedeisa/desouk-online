@@ -49,6 +49,12 @@ sonata_admin:
 #            - { position: right, type: sonata.block.service.rss, settings: { title: Sonata Project's Feeds, url: http://sonata-project.org/blog/archive.rss, template: SonataAdminBundle:Block:block_rss_dashboard.html.twig }}
 
         groups:
+            sonata.admin.group.meisa:
+                          label: Menu
+                          icon:  '<i class="fa fa-play-circle"></i>'
+                          items:
+                              - meisa.menu.config
+                              - meisa.menu.name
             sonata.admin.group.administration:
                 label:           sonata_administration
                 label_catalogue: SonataAdminBundle

@@ -1,3 +1,7 @@
+meisa_menu:
+    resource: "@MeisaMenuBundle/Controller/"
+    type:     annotation
+    prefix:   /
 _front:
     resource: routing_front.yml
 

@@ -75,7 +75,8 @@ class AppKernel extends Kernel
             // CMF Integration
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle()
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new \Meisa\MenuBundle\MeisaMenuBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

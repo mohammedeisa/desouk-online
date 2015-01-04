@@ -15,7 +15,7 @@ imports:
     # FriendOfSymfony Bundles
     - { resource: fos/fos_rest.yml }
     - { resource: fos/fos_user.yml }
-
+#////////////////
     # Sonata Core Bundles
     - { resource: sonata/sonata_block.yml }
     - { resource: sonata/sonata_formatter.yml }

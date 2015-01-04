@@ -3,31 +3,32 @@ imports:
     - { resource: security.yml }
     - { resource: @MeisaMenuBundle/Resources/config/menu_definition.yml }
     - { resource: doctrine_extensions.yml }
-
     - { resource: assetic.yml }
-
-    # Mopa Bootstrap
-    - { resource: mopa/mopa_bootstrap.yml }
-
-    # Knp Paginator
-#    - { resource: knp/knp_paginator.yml }
-
     # FriendOfSymfony Bundles
     - { resource: fos/fos_rest.yml }
     - { resource: fos/fos_user.yml }
-#////////////////
     # Sonata Core Bundles
     - { resource: sonata/sonata_block.yml }
     - { resource: sonata/sonata_formatter.yml }
     - { resource: sonata/sonata_cache.yml }
     - { resource: sonata/sonata_intl.yml }
     - { resource: sonata/sonata_core.yml }
-
     # Sonata Feature Bundles
     - { resource: sonata/sonata_admin.yml }
     - { resource: sonata/sonata_media.yml }
     - { resource: sonata/sonata_user.yml }
+    - { resource: mopa/mopa_bootstrap.yml }
+#    - { resource: knp/knp_paginator.yml }
 
+    - { resource: desouk_online/article.yml }
+    - { resource: desouk_online/focus.yml }
+    - { resource: desouk_online/category.yml }
+    - { resource: desouk_online/product.yml }
+    - { resource: desouk_online/product_has_category.yml }
+    - { resource: desouk_online/product_hasTag.yml }
+    - { resource: desouk_online/banner.yml }
+    - { resource: desouk_online/news.yml }
+    - { resource: desouk_online/faq.yml }
 
 framework:
     #esi:                   ~
@@ -65,7 +66,7 @@ twig:
             - 'SonataFormatterBundle:Form:formatter.html.twig'
             - 'SonataMediaBundle:Form:media_widgets.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
-            - 'MeisaMenuBundle:Form:tabssoft_link_field.html.twig'
+            - 'MeisaMenuBundle:Form:meisa_link_field.html.twig'
 
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
@@ -85,7 +86,7 @@ doctrine:
 
         types:
             json:     Sonata\Doctrine\Types\JsonType
-            currency: Sonata\Component\Currency\CurrencyDoctrineType
+#            currency: Sonata\Component\Currency\CurrencyDoctrineType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%

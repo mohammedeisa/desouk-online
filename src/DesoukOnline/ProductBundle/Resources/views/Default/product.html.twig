@@ -1,0 +1,15 @@
+{{ product.name }} {{ product.description }}
+
+{% if product.gallery %}
+       {% for galleryHasMedia in product.gallery.GalleryHasMedias %}
+
+               {% thumbnail galleryHasMedia.media, 'big' %}
+
+       {%endfor%}{% endif %}
+{% if product.getProductTag %}
+{% for tag in product.getProductTag %}
+ Tag:
+{{  tag.getIdTag }}
+
+
+{% endfor %}{% endif %}

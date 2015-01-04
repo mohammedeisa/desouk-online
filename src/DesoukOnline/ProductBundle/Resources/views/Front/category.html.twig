@@ -1,0 +1,150 @@
+{% extends '::base.html.twig' %}
+{% block header %}
+ {% if current_category.isElevators() %}
+     {{ render(controller('DesoukOnlineHomeBundle:Front:lang',{'slug':current_category.slug})) }}
+     {% else %}
+         {{ render(controller('DesoukOnlineHomeBundle:Front:header')) }}
+ {% endif %}
+{% endblock %}
+{% block body %}
+
+         <section id="page-title">
+         <div class="grid-bg">
+             {{ render(controller('DesoukOnlineBannerBundle:Front:banner',{'configBanner':config.getProductsBanner(), 'itemBanner':current_category.getBanner()})) }}
+             <div class="container"> <!-- 1080 pixels Container -->
+                 <div class="full-width columns">
+                 </div>
+             </div>
+             <div class="container_title_stripe blue">
+                 <ul class="breadcrumb-nav clearfix">
+                     <li><a href="{{ path('home') }}" class="link-sm">Home<span></span></a></li>
+                     <li><a href="{{ path('products') }}" class="link-sm">Categories<span></span></a></li>
+                     <li>{{ current_category.name }}</li>
+                 </ul>
+                 <h1>Category: {{ current_category.name }}</h1>
+             </div>
+         </div>
+     </section>
+
+     <!-- Page Content -->
+     <section id="page-content">
+{% if category.items|length>0 %}
+         <div class="container"> <!-- 1080 pixels Container -->
+
+             <!-- Portfolio Items -->
+             <div id="portfolio-wrapper" class="one-col mb-5px">
+            {#{{ dump(category) }}#}
+                 {% for childCat in category.items  if childCat|getClass == 'DesoukOnline\\ProductBundle\\Entity\\Category' %}
+                     <div class="portfolio-item-preview clearfix">
+                         <div class="two-thirds columns alpha">
+                             <div class="item-picture" data-type="link">
+                                 <img src="{% path  childCat.image, 'wide' %}" alt="">
+
+                                 <div class="image-overlay">
+                                     <a href="{{ path('product_category' , {'slug':childCat.getSlug()}) }}"
+                                        title="{{ childCat.name }}"><span class="link"></span></a>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="one-third columns omega">
+                             <div class="item-description">
+                                 <a href="{{ path('product_category' , {'slug':childCat.getSlug()}) }}"><h3
+                                             class="title">{{ childCat.name }}</h3></a>
+
+                                 <div class="intro-tags light-grey mb-15px">
+                                     <span>{{ childCat.getUpdatedAt()|date("M d Y") }}<span>|</span></span>
+                                     <span>
+                                         {% for childCategory in childCat.getChildren %}
+                                             {{ childCategory.name }}
+                                             {% if loop.index < childCat.getChildren|length %}
+                                                 ,
+                                             {% endif %}
+                                         {% endfor %}
+
+                                     </span>
+                                 </div>
+                                 <p class="mb-15px">
+                                     {{ childCat.description |raw }}
+                                 </p>
+                                 <a href="{{ path('product_category' , {'slug':childCat.getSlug()}) }}"
+                                    class="link-sm">View details<span></span></a>
+                             </div>
+                         </div>
+                     </div>
+                 {% endfor %}
+                 {#{% media  category.image, 'small' %}#}
+                 {% for productCategory in category.items if productCategory|getClass == 'DesoukOnline\\ProductBundle\\Entity\\ProductHasCategory' %}
+                     <div class="portfolio-item-preview clearfix">
+                         <div class="two-thirds columns alpha">
+                             <div class="item-picture" data-type="link">
+                                 <img src="{% path  productCategory.getIdProduct().image, 'wide' %}" alt="">
+
+                                 <div class="image-overlay">
+                                     <a href="{{ path('product_show' , {'slug':productCategory.getIdProduct().getSlug()}) }}"
+                                        title="{{ productCategory.getIdProduct().name }}"><span class="link"></span></a>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="one-third columns omega">
+                             <div class="item-description">
+                                 <a href="{{ path('product_show' , {'slug':productCategory.getIdProduct().getSlug()}) }}"><h3
+                                             class="title">{{ productCategory.getIdProduct().name }}</h3></a>
+
+                                 <div class="intro-tags light-grey mb-15px">
+                                     <span>{{ productCategory.getIdProduct().getUpdatedAt()|date("M d Y") }}<span>|</span></span>
+                                     <span>
+                                          {% for product_category in productCategory.getIdProduct.getProductCategory() %}
+                                              {{ product_category.getIdCategory().name }}
+                                              {% if loop.index < productCategory.getIdProduct.getProductCategory()|length %}
+                                              ,
+                                              {% endif %}
+                                          {% endfor %}
+
+                                     </span>
+                                 </div>
+                                 <p class="mb-15px">
+                                     {{ productCategory.getIdProduct().description |raw }}
+                                 </p>
+                                 <a href="{{ path('product_show' , {'slug':productCategory.getIdProduct().getSlug()}) }}"
+                                    class="link-sm">View details<span></span></a>
+                             </div>
+                         </div>
+                     </div>
+                 {% endfor %}
+
+             </div>
+             <!-- end Portfolio Items -->
+
+             <!-- Pagination -->
+             <div class="full-width columns">
+                 <hr class="divider-line dotted colored mb-25px">
+                 {#<nav class="pagination clearfix">#}
+                     {#<span class="current">1</span>#}
+                     {#<a href="#" title="Page 2">2</a>#}
+                     {#<span class="pages">Page 1 of 2</span>#}
+                 {#</nav>#}
+
+                     {{ knp_pagination_render(category) }}
+             </div>
+
+         </div>
+            {% else %}
+                 <div class="container">
+                     <div id="portfolio-wrapper" class="one-col mb-5px">
+                        <h3>There is no products related to this category</h3>
+                     </div>
+                 </div>
+            {% endif %}
+
+     </section>
+     <!-- end Page Content -->
+
+     {% if current_category.isElevators() %}
+         <style>
+             #lang{
+                 display: block;
+             }
+         </style>
+     {% endif %}
+
+ {% endblock %}

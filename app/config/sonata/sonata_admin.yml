@@ -49,6 +49,19 @@ sonata_admin:
 #            - { position: right, type: sonata.block.service.rss, settings: { title: Sonata Project's Feeds, url: http://sonata-project.org/blog/archive.rss, template: SonataAdminBundle:Block:block_rss_dashboard.html.twig }}
 
         groups:
+
+            sonata.admin.group.desouk_online:
+                          label: Main
+                          icon:  '<i class="fa fa-play-circle"></i>'
+                          items:
+                              - desouk_online.category
+                              - desouk_online.product
+                              - desouk_online.article
+                              - desouk_online.news
+                              - desouk_online.banner
+                              - desouk_online.focus
+                              - desouk_online.focus.links
+                              - desouk_online.faq        
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'

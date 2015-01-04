@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+
+    {% spaceless %}
+        {#% if object.parent.children[0].id != object.id %#}
+        <a href="{{ path('article_cat_tree_up', {'id': object.id}) }}">
+            <i class="icon-circle-arrow-up"></i>
+        </a>
+        {#% endif %#}
+    {% endspaceless %}
+{% endblock %}

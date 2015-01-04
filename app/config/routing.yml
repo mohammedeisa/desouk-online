@@ -1,7 +1,76 @@
+desouk_online_banner:
+    resource: "@DesoukOnlineBannerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 meisa_menu:
     resource: "@MeisaMenuBundle/Controller/"
     type:     annotation
     prefix:   /
+    
+#fos_js_routing:
+#    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+desouk_online_faq:
+    resource: "@DesoukOnlineFaqBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+desouk_online_news:
+    resource: "@DesoukOnlineNewsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+#_liip_imagine:
+#    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+desouk_online_article:
+    resource: "@DesoukOnlineArticleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+desouk_online_banner:
+    resource: "@DesoukOnlineBannerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+desouk_online_product:
+    resource: "@DesoukOnlineProductBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+desouk_online_focus:
+    resource: "@DesoukOnlineFocusBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+# app/config/routing.yml
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+#fos_user_register:
+#    resource: "@ApplicationFOSUserBundle/Resources/config/routing/registration.xml"
+#    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+    
+    
 _front:
     resource: routing_front.yml
 

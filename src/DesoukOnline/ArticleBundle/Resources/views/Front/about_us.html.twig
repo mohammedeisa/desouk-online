@@ -1,0 +1,137 @@
+{% extends '::base.html.twig' %}
+    {% block breadcrumbs %}
+        {#<section id="page-title">#}
+            {#<div class="grid-bg">#}
+                {#<div class="container"> <!-- 1080 pixels Container -->#}
+                    {#<div class="full-width columns">#}
+                        {#<ul class="breadcrumb-nav clearfix">#}
+                            {#<li><a href="index.html" class="link-sm">Home<span></span></a></li>#}
+                            {#<li class="italic">{{ aboutUs.getFrontName() }}</li>#}
+                        {#</ul>#}
+                        {#<h1>{{ aboutUs.getFrontName() }}</h1>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</section>#}
+
+<section id="page-title">
+    <div class="grid-bg">
+        {% set articleBanner=null %}
+        {% set aboutBanner=null %}
+
+        {% if(config.getArticlesBanner()|length >0) %}
+            {% set articleBanner=config.getArticlesBanner() %}
+        {% endif %}
+        {% if(aboutUs|length >0 and aboutUs.getBanner()|length >0) %}
+            {% set aboutBanner=aboutUs.getBanner() %}
+        {% endif %}
+
+        {{ render(controller('DesoukOnlineBannerBundle:Front:banner',{'configBanner':articleBanner, 'itemBanner':aboutBanner})) }}
+        <div class="container"> <!-- 1080 pixels Container -->
+            <div class="full-width columns">
+            </div>
+        </div>
+        <div class="container_title_stripe blue">
+            <ul class="breadcrumb-nav clearfix">
+                <li><a href="{{ path('home') }}" class="link-sm">Home<span></span></a></li>
+                <li class="italic"> {{  (aboutUs is defined and aboutUs.getFrontName() is defined and aboutUs.getFrontName()|length>0)? aboutUs.getFrontName(): '' }} </li>
+            </ul>
+            <h1>{{  (aboutUs is defined and aboutUs.getFrontName() is defined and aboutUs.getFrontName()|length>0)? aboutUs.getFrontName(): '' }}</h1>
+        </div>
+
+    </div>
+</section>
+    {% endblock %}
+{% block content %}
+    <section id="page-content" class="sidebar-layout">
+
+    <div class="container"> <!-- 1080 pixels Container -->
+
+    <!-- Content with left-aligned Sidebar -->
+    <div class="columns-wrapper sb-left">
+
+    <!-- Sidebar (left aligned) -->
+    <aside id="sidebar" class="one-fourth columns page-left-col">
+
+        <!-- Side Menu -->
+        <div class="widget" data-smallscreen="yes"> <!-- show widget on a small-screen mobile device: "yes" or "no" -->
+            {% if aboutUs.id is defined %}
+            {{ render(controller('DesoukOnlineHomeBundle:Front:leftmenu',{'currentId':aboutUs.id})) }}
+            {% endif %}
+        </div>
+
+        <!-- Flickr Photostream -->
+        <div class="widget separator" data-smallscreen="no">
+            <h4 class="grey mb-30px">Downloads</h4>
+
+            <div class="flickr-widget clearfix">
+                {#<script type="text/javascript"#}
+                {#src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=random&amp;size=s&amp;layout=x&amp;source=user_set&amp;set=72157622590393532"></script>#}
+
+                {{ render(controller('DesoukOnlineDownloadsBundle:Front:widget')) }}
+            </div>
+        </div>
+
+    </aside>
+    <!-- end Sidebar -->
+
+    <!-- Page Right Column -->
+    <section id="main-content" class="three-fourths columns page-right-col"> <!-- inner grid 840 pixels wide -->
+
+        <div class="full-width columns">
+            {% if aboutUs | length > 0 %}
+                <h3 class="slogan colored-text-1 mb-10px">{{ aboutUs.getFrontName() }}</h3>
+                {{ aboutUs.description|raw('html') }}
+                <hr class="divider-line dotted colored mb-40px">
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+
+        <!-- Feature Boxes with top icon (picture) -->
+        <section class="feature-boxes small-col-space top-icon-box mb-30px">
+
+            <div class="row">
+                {% if aboutUs is defined and aboutUs and  aboutUs is not empty and  aboutUs is not null %}
+                {% for child in aboutUs.getChildren() %}
+                    <div class="one-third columns">
+                        <article>
+                            {% if child.image %}
+                            <a href="{{ path ('article_show',{'slug':child.slug}) }}" class="thumbnail">
+                                {#{% media  child.image, 'preview' %}#}
+                                {% set path %}{% path child.image, 'reference' %}{% endset %}
+                                <img src="{{ path | imagine_filter('about') }}" alt=""/>
+                            </a>
+                            {% endif %}
+                            <div>
+                                <a href="{{ path ('article_show',{'slug':child.slug}) }}"><h5 class="title mb-3px">{{ child.getFrontName() }}</h5></a>
+                                <p>{{ child.description|striptags }}</p>
+                            </div>
+                            <a href="{{ path ('article_show',{'slug':child.slug}) }}">Read more</a>
+                        </article>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+        </section>
+        <!-- end Feature Boxes -->
+    </section>
+    <!-- end Page Right Column -->
+
+    </div>
+    <!-- end columns-wrapper sb-left -->
+
+    </div>
+
+    </section>
+
+    <script>
+        jQuery(document).ready(function($){
+            $('.feature-boxes div.one-third>article>div').each(function(){
+                if($(this).height()>150){
+                 $(this).next().show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

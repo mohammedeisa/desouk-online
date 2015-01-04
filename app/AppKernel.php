@@ -76,7 +76,14 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
-            new \Meisa\MenuBundle\MeisaMenuBundle()
+            new \Meisa\MenuBundle\MeisaMenuBundle(),
+            new DesoukOnline\BannerBundle\DesoukOnlineBannerBundle(),
+            new DesoukOnline\ArticleBundle\DesoukOnlineArticleBundle(),
+            new DesoukOnline\FocusBundle\DesoukOnlineFocusBundle(),
+            new DesoukOnline\ProductBundle\DesoukOnlineProductBundle(),
+            new DesoukOnline\NewsBundle\DesoukOnlineNewsBundle(),
+            new DesoukOnline\FaqBundle\DesoukOnlineFaqBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

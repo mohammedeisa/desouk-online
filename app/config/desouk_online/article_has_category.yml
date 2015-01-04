@@ -1,0 +1,11 @@
+services:
+    desouk_online.articlehascategory:
+        class: DesoukOnline\ArticleBundle\Admin\ArticleHasCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm , group: "DesoukOnline", label: "ArticleCat" , show_in_dashboard: false }
+        arguments:
+            - ~
+            - DesoukOnline\ArticleBundle\Entity\ArticleHasCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [DesoukOnlineArticleBundle]]

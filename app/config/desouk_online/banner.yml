@@ -1,0 +1,11 @@
+services:
+    desouk_online.banner:
+        class: DesoukOnline\BannerBundle\Admin\BannerAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Banner" }
+        arguments:
+            - ~
+            - DesoukOnline\BannerBundle\Entity\Banner
+            - ~
+        calls:
+            - [ setTranslationDomain, [DesoukOnlineBannerBundle]]

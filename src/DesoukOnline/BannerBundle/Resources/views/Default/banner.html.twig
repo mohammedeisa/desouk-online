@@ -1,0 +1,6 @@
+{% for banner in banner %}
+{{ banner.title }}
+    {{ banner.body }}
+    {{ banner.link }}
+    {% thumbnail banner.image, 'big'  %}
+{% endfor %}

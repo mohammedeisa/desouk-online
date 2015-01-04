@@ -1,0 +1,314 @@
+{% extends '::base.html.twig' %}
+ {% block body %}
+     <!-- Page Title -->
+     <section id="page-title">
+         <div class="grid-bg">
+             {{ render(controller('DesoukOnlineBannerBundle:Front:banner',{'configBanner':config.getProductsBanner(), 'itemBanner':product.getBanner()})) }}
+             <div class="container"> <!-- 1080 pixels Container -->
+                 <div class="full-width columns">
+                 </div>
+             </div>
+             <div class="container_title_stripe blue">
+                 <ul class="breadcrumb-nav clearfix">
+                     <li><a href="{{ path('home')}}" class="link-sm">Home<span></span></a></li>
+                     <li><a href="{{ path('products') }}" class="link-sm">Categories<span></span></a></li>
+                     <li class="italic">{{ product.getName() }}</li>
+                 </ul>
+                 <h1>{{ product.name }}</h1>
+             </div>
+         </div>
+     </section>
+    {% block flash_messages %}
+        {{ parent() }}
+    {% endblock %}
+     {#{% for flashMessage in app.session.flashbag.get('message') %} {{ parent() }}{% endfor %}#}
+     <!-- Page Content -->
+     <section id="page-content">
+
+     <div class="container"> <!-- 1080 pixels Container -->
+
+     <!-- Headline -->
+     <section class="headline clearfix">
+
+         <div class="two-thirds columns">
+             <h2>{{ product.name }}</h2>
+         </div>
+
+         <div class="one-third columns">
+             <div>
+                 {#<span class="small-font-size uppercase">Design & Marketing</span>#}
+                 <span class="small-font-size light-grey"><a href="{{ path('products') }}"><em>Back to categories</em></a></span>
+             </div>
+         </div>
+
+     </section>
+
+     <div class="full-width columns">
+         <hr class="divider-line colored mb-25px">
+     </div>
+     <div class="clear"></div>
+
+     <!-- Single Item Details -->
+     <section class="single-item-details clearfix">
+
+     <!-- Media Box -->
+     <div class="two-thirds columns">
+         <div class="media-box">
+
+             <!-- Slider -->
+     {% if product.getGallery() and product.getGallery().GalleryHasMedias|length>0 %}
+             <section class="flexslider" data-slideshow="yes" data-animation="slide" data-control-nav="no">
+                 <ul class="slides">
+                     {% for galleryHasMedia in product.getGallery().GalleryHasMedias %}
+                             <li>
+                                 {#{% thumbnail galleryHasMedia.media, product.getGallery().defaultFormat with {'class': 'media-object'} %}#}
+                                 {% thumbnail  galleryHasMedia.media, 'big' %}
+                              </li>
+                     {% endfor %}
+                 </ul>
+             </section>
+     {% endif %}
+         </div>
+     </div>
+
+     <!-- Info Board -->
+     <div class="one-third columns">
+         <div class="info-board colored">
+
+             <h5>Overview</h5>
+             {{ render(controller('DesoukOnlineShoppingBundle:Front:addtocartform', {'id': product.id, 'url': app.request.uri } )) }}
+             {{ render(controller('DesoukOnlineShoppingBundle:Front:cartBox', {'id': product.id, 'url': app.request.uri } )) }}
+
+
+             <p>This is an example of a single project page with an image slideshow.</p>
+             <p>Each element of the portfolio item description can be easily modified.</p>
+             <ul class="check-list colored tight mb-25px">
+                 <li>Fluid preview image</li>
+                 <li>"Fade" or "Slide" transition effect</li>
+                 <li>Responsive design</li>
+             </ul>
+             <div class="small-bar colored mb-15px"></div>
+             <a href="#" class="link-sm">your-website.com<span></span></a>
+
+         </div>
+     </div>
+
+     <!-- Text Description -->
+     <div class="two-thirds columns">
+         <div class="text-description white-bg">
+
+             <h3>Description</h3>
+             <p class="mb-30px">
+                 {{product.description|raw}}
+             </p>
+
+             <!-- Tabs -->
+             <ul class="tabs-nav uppercase bordered clearfix">
+                 <li class="active"><a href="#tab1">Overview</a></li>
+                 <li><a href="#tab2">Dates & Rates</a></li>
+                 <li><a href="#tab3">Itinerary</a></li>
+                 <li><a href="#tab4">More</a></li>
+             </ul>
+
+             <div class="tabs-container bordered">
+
+                 <!-- Tab 1 content -->
+                 <div id="tab1" class="tab-content">
+                     <ul class="arrow-list colored data margin-left-small remove-bottom">
+                         <li><strong>Duration:</strong> 6 days</li>
+                         <li><strong>Length:</strong> 48 miles</li>
+                         <li><strong>Intensity:</strong> Intermediate</li>
+                         <li><strong>Season:</strong> June-September</li>
+                         <li><strong>Begins In:</strong> Stanley, Idaho</li>
+                         <li><strong>Ends In:</strong> Boise, Idaho</li>
+                         <li><strong>Airport:</strong> Boise, Idaho</li>
+                         <li><strong>Wildlife:</strong> Big Horn Sheep, Eagles, Hawks, Songbirds, Waterfowl</li>
+                     </ul>
+                 </div>
+
+                 <!-- Tab 2 content -->
+                 <div id="tab2" class="tab-content">
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras leo urna, convallis at tincidunt vel, convallis quis nisi. In eleifend ligula sit amet lacus suscipit tristique tempor turpis aliquet. Etiam sollicitudin turpis in quam tincidunt lacinia.</p>
+                     <ul class="disc">
+                         <li>Class aptent taciti sociosqu ad litora torquent.</li>
+                         <li>Nulla ornare neque sit amet magna volutpat cursus sit amet sollicitudin massa.</li>
+                         <li>Duis quis elit eu purus fringilla gravida sed arcu vehicula.</li>
+                         <li>Duis quis elit eu purus fringilla.</li>
+                     </ul>
+                     <p class="remove-bottom">Vivamus diam eros, consectetur eu eleifend quis, varius et felis. Aliquam gravida tortor eu nulla congue praesent tristique egestas tincidunt. Nulla convallis, nisi ac fringilla pharetra, est nulla tincidunt lacus.</p>
+                 </div>
+
+                 <!-- Tab 3 content -->
+                 <div id="tab3" class="tab-content clearfix">
+                     <img src="images/pic-screenshot.jpg" alt="" class="image-left scale-with-grid adapted-max-767px">
+                     Nam sodales erat ornare erat iaculis commodo. Curabitur et luctus augue. Vivamus ut arcu in arcu mollis consectetur id id mauris. Curabitur porta risus eu lorem tempus vitae sodales ante mollis. Curabitur gravida tincidunt ornare. Sed vulputate, nunc a cursus imperdiet, felis tortor interdum purus, non viverra justo libero et erat. Aliquam dignissim lorem ac leo egestas pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ultrices magna non sapien varius sollicitudin. Pellentesque tincidunt lacinia justo, ac convallis turpis rhoncus ut. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                 </div>
+
+                 <!-- Tab 4 content -->
+                 <div id="tab4" class="tab-content">
+                     Aliquam dignissim lorem ac leo egestas pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In ultrices magna non sapien varius sollicitudin. Pellentesque tincidunt lacinia justo, ac convallis turpis rhoncus ut. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                 </div>
+
+             </div>
+             <!-- end Tabs -->
+
+             <p>Nam sodales erat ornare erat iaculis commodo. Curabitur et luctus vivamus ut arcu in arcu mollis consectetur id id mauris. Curabitur porta risus eu lorem tempus vitae sodales ante mollis. Curabitur gravida tincidunt ornare. Sed vulputate, a cursus imperdiet, felis tortor interdum purus, non viverra justo libero et erat. Aliquam dignissim lorem ac leo egestas pellentesque.</p>
+             <ul class="disc">
+                 <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                 <li>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</li>
+                 <li>Nulla ornare neque sit amet magna volutpat cursus sit amet sollicitudin massa. Sed a sapien ac odio fringilla accumsan, aliquam lectus ligula, fringilla quis ornare nec, sodales mollis nibh.</li>
+                 <li>Aliquam lectus ligula, fringilla quis ornare nec, sodales mollis nibh.</li>
+                 <li>Curabitur gravida tincidunt ornare. Sed vulputate, nunc a cursus imperdiet, felis tortor interdum purus, non viverra justo libero et erat. Aliquam dignissim lorem ac leo egestas pellentesque.</li>
+             </ul>
+
+             <!-- Standard Table -->
+             <table class="standard mb-30px">
+                 <tr>
+                     <th>Header 1</th>
+                     <th>Header 2</th>
+                     <th>Header 3</th>
+                     <th>Header 4</th>
+                 </tr>
+                 <tr>
+                     <td>Item #1</td>
+                     <td>Description</td>
+                     <td>100 units</td>
+                     <td>100 units</td>
+                 </tr>
+                 <tr>
+                     <td>Item #2</td>
+                     <td>Description</td>
+                     <td>200 units</td>
+                     <td>200 units</td>
+                 </tr>
+                 <tr>
+                     <td>Item #3</td>
+                     <td>Description</td>
+                     <td>300 units</td>
+                     <td>300 units</td>
+                 </tr>
+             </table>
+             <!-- end Standard Table -->
+
+             <p class="mb-30px">Donec non eros ipsum, vel suscipit enim. Proin at leo a ligula egestas pellentesque. Maecenas porta pretium quam, et rutrum nunc lobortis id. Aenean cursus, justo ut tristique tincidunt, sapien turpis egestas nisi, non ultricies lorem risus nec neque. In nec quam sit amet erat iaculis cursus. Morbi porta, urna at euismod placerat, nibh mauris tincidunt erat, quis lobortis leo augue ac erat. Aenean quis diam nunc.</p>
+
+             <hr class="divider-line mb-15px">
+
+             <!-- Social share -->
+             <ul class="social-share clearfix mb-15px">
+                 <li class="google">
+                     <div class="g-plusone" data-size="medium"></div>
+                     <script type="text/javascript">
+                         (function() {
+                             if (document.querySelector('html').className.split(' ')[1] != 'ie8') {
+                                 var po = document.createElement('script');
+                                 po.type = 'text/javascript';
+                                 po.async = true;
+                                 po.src = 'https://apis.google.com/js/plusone.js';
+                                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                             }
+                         })();
+                     </script>
+                 </li>
+                 <li class="twitter">
+                     <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                 </li>
+                 <li class="facebook">
+                     <div id="fb-root"></div>
+                     <script>
+                         (function(d, s, id) {
+                             var js, fjs = d.getElementsByTagName(s)[0];
+                             if (d.getElementById(id)) return;
+                             js = d.createElement(s); js.id = id;
+                             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                             fjs.parentNode.insertBefore(js, fjs);
+                         }(document, 'script', 'facebook-jssdk'));
+                     </script>
+                     <div class="fb-like" data-href="http://e-merald.com/themes/emerix/single-project.html" data-width="125" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+                 </li>
+                 <li class="pinterest">
+                     <a href="//www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" alt=""></a>
+                     <script type="text/javascript">
+                         (function (w, d, load) {
+                             var script, first = d.getElementsByTagName('SCRIPT')[0], n = load.length, i = 0, go = function () {
+                                 for (i = 0; i < n; i = i + 1) {
+                                     script = d.createElement('SCRIPT');script.type = 'text/javascript';script.async = true; script.src = load[i];first.parentNode.insertBefore(script, first);
+                                 }
+                             }
+                             if (w.attachEvent) { w.attachEvent('onload', go); } else { w.addEventListener('load', go, false); }
+                         }(window, document, ['//assets.pinterest.com/js/pinit.js']));
+                     </script>
+                 </li>
+             </ul>
+             <!-- end Social share -->
+
+         </div>
+     </div>
+
+     <!-- Extra Content -->
+     <div class="one-third columns">
+         <div class="extra-content">
+
+             <hr class="divider-line colored mb-25px">
+             <h5 class="align-center mb-20px">Related Projects</h5>
+
+             <!-- Portfolio Items -->
+             <div id="portfolio-wrapper" class="small-col-space clearfix">
+                    {% for productTag in product.getProductTag() %}
+                        {#{% for productTag in productTag.getIdTag().getTagProduct() %}#}
+                        {% set tag = productTag.getIdTag() %}
+                        {% set product = productTag.getIdProduct() %}
+                        <div class="one-fourth columns portfolio-item-preview">
+                            <article>
+                                <div class="item-picture" data-type="link">
+                                    {% thumbnail  product.image, 'small' %}
+                                    <div class="image-overlay">
+                                        <a href="{{ url('product_show', {'slug':  product.slug }) }}" title="Real Estate News"><span class="link"></span></a>
+                                    </div>
+                                </div>
+                                <div class="item-description align-center">
+                                    <a href="{{ url('product_show', {'slug':  product.slug }) }}"><h6 class="title colored-text-1">{{ product.name }}</h6></a>
+                                    <p class="small-font-size">{{ product.description|raw }}</p>
+                                </div>
+                            </article>
+                        </div>
+                    <!-- 1/4 page width -->
+                        {#{% endfor %}#}
+                    {% endfor %}
+             </div>
+             <!-- end Portfolio Items -->
+
+         </div>
+     </div>
+
+     </section>
+     <!-- end Single Item Details -->
+
+     </div>
+
+     </section>
+     <!-- end Page Content -->
+
+
+     {#{% media  product.image, 'small' %}#}
+     {#{{ product.name }}#}
+     {#{{ product.description }}#}
+
+     {#Gallery#}
+     {#<br>#}
+
+     {#{% if(product.getGallery()) %}#}
+     {#<h1>{{ product.gallery.name }}</h1>#}
+
+     {#<div class="sonata-media-gallery-media-list">#}
+         {#{% for galleryHasMedia in product.getGallery().GalleryHasMedias %}#}
+             {#<div class="media sonata-media-gallery-media-item">#}
+                 {#<a class="pull-left sonata-media-gallery-media-item-link" href="{{ url('sonata_media_view', {'id': galleryHasMedia.media|sonata_urlsafeid }) }}">#}
+                     {#{% thumbnail galleryHasMedia.media, product.getGallery().defaultFormat with {'class': 'media-object'} %}#}
+                 {#</a>#}
+             {#</div>#}
+         {#{% endfor %}#}
+     {#</div>#}
+{#{% endif %}#}
+ {% endblock %}

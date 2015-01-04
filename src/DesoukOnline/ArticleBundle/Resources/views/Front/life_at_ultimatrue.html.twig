@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+{% block breadcrumbs %}
+{% endblock %}
+{% block content %}
+    <section id="page-title" class="custom-bg values">
+        {% if life_at_ultimatrue.image %}
+            {% set image=life_at_ultimatrue.image %}
+        {% elseif config.getArticlesBanner() %}
+            {% set image=config.getArticlesBanner() %}
+        {% endif %}
+        {% set path %}{% path image, 'reference' %}{% endset %}
+        <style>
+            #page-title.custom-bg.values{
+                background-image: url({{ path | imagine_filter('vision_philosophy_banner') }});
+            }
+        </style>
+        <div class="container"> <!-- 1080 pixels Container -->
+            <div class="full-width columns">
+                <h1 class="slogan">{{ life_at_ultimatrue.name }}</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secondary Menu -->
+    <nav id="subheader-bar">
+
+        <div class="container"> <!-- 1080 pixels Container -->
+            <div class="full-width columns">
+                {{ render(controller('DesoukOnlineMenuBundle:Front:historyMenu')) }}
+                <!-- You can also use here a breadcrumb navigation -->
+                <!--
+                <ul class="breadcrumb-nav clearfix">
+                    <li><a href="index.html" class="link-sm">Home<span></span></a></li>
+                    <li><a href="about-us.html" class="link-sm">Pages<span></span></a></li>
+                    <li class="italic">Custom Header</li>
+                </ul>
+                -->
+
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Page Content -->
+    <section id="page-content">
+
+        <div class="container"> <!-- 1080 pixels Container -->
+
+            <div class="full-width columns">
+                <p>
+                    {{ life_at_ultimatrue.description|raw }}
+                </p>
+
+            </div> <!-- end full-width columns -->
+        </div> <!-- end 1080 pixels Container -->
+    </section>
+    <script>
+        $('.menu-life_at_ultimatrue').addClass('current');
+        $('.vision-philosophy-menu-parent').parent().find('>a').css('color','#dcaa2b');
+    </script>
+{% endblock %}

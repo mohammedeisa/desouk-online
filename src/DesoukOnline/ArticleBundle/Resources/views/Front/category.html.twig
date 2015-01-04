@@ -1,0 +1,6 @@
+{% extends '::base.html.twig' %}
+ {% block body %}
+     {% for article in category.getArticleCategory() %}
+         <a href="{{ path('article_show' , {'slug':article.getIdArticle().getSlug()}) }}">{{ article.getIdArticle().getFrontName() }}</a>
+     {% endfor %}
+ {% endblock %}

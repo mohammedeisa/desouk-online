@@ -32,9 +32,7 @@ class ProductAdmin extends Admin
             ->add('code')
             ->add('price')
             ->add('description')
-            ->add('enabled')
-
-        ;
+            ->add('enabled');
     }
 
     /**
@@ -53,9 +51,7 @@ class ProductAdmin extends Admin
                     'edit' => array(),
                     'delete' => array(),
                 )
-            ))
-
-        ;
+            ));
     }
 
     /**
@@ -66,8 +62,7 @@ class ProductAdmin extends Admin
         $datagridMapper
             ->add('name')
             ->add('enabled')
-            ->add('code')
-        ;
+            ->add('code');
     }
 
     /**
@@ -80,17 +75,20 @@ class ProductAdmin extends Admin
         $qb = $repository->createQueryBuilder('c');
 
         $formMapper
-        ->with('English')
+            ->with('English', array('tab' => true))
             ->add('name')
+            ->add('description', 'ckeditor')
+            ->end()
+            ->end()
+            ->with('Arabic', array('tab' => true))
+            ->add('nameAr')
+            ->add('descriptionAr', 'ckeditor')
+            ->end()
+            ->end()
+            ->with('General', array('tab' => true))
             ->add('code')
             ->add('price')
-            ->add('description','ckeditor')
-            ->end()
-            ->with('Arabic')
-            ->add('nameAr')
-            ->add('descriptionAr','ckeditor')
-            ->end()
-            ->add('gallery', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'default')))
+            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
             ->add('product_category', 'sonata_type_collection', array(
                     'cascade_validation' => true,
                 ), array(
@@ -100,39 +98,11 @@ class ProductAdmin extends Admin
                     'link_parameters' => array('context' => 'default'),
                 )
             )
-            ->add('product_tag', 'sonata_type_collection', array(
-                'cascade_validation' => true,
-            ), array(
-                'edit' => 'inline',
-                'inline' => 'table',
-                'sortable' => 'position',
-                'link_parameters' => array('context' => 'default'),
-            ))
-            ->add('enabled' ,null, array('required' => true, 'data' => True))
-            ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_product')))
-            ->add('banner', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_banner')))
-
-        ;
+            ->add('enabled', null, array('required' => true, 'data' => True))
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_product')))
+            ->add('banner', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_banner')))
+            ->end()
+            ->end();
     }
-    public function prePersist($product) {
-
-        $product->setProductCategory($product->getProductCategory());
-        $product->setProductTag($product->getProductTag());
-    }
-
-    public function preUpdate($product) {
-
-        $product->setProductCategory($product->getProductCategory());
-        $product->setProductTag($product->getProductTag());
-
-    }
-
-
-
-
-
-
-
-
 
 }

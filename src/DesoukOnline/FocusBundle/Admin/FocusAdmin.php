@@ -72,24 +72,11 @@ class FocusAdmin extends Admin
     {
         $formMapper
            ->add('title')
-           ->add('body','ckeditor')
-           ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_focus')))
-            ->add('links', 'sonata_type_collection', array(
-                    'cascade_validation' => true,
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                    'link_parameters' => array('context' => 'default'),
-                )
-            )
+            ->add('link' ,'meisa_link')
+            ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_focus')))
+            ->add('body','ckeditor')
             ->add('enabled' ,null, array('required' => true, 'data' => True))
-
         ;
     }
-    public function preUpdate($focus){
-        foreach($focus->getLinks() as $link){
-            $link->setFocus($focus);
-        }
-    }
+
 }

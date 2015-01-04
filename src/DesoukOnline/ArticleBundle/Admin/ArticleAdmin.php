@@ -71,18 +71,7 @@ class ArticleAdmin extends Admin
             ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_article')))
             ->add('banner', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_banner')))
             ->add('enabled', null, array('required' => true, 'data' => True))
-            ->add('isIntro', null, array('required' => false))
-            ->add('isFeaturedContent', null, array('required' => false))
-            ->add('isHistory', null, array('required' => false))
-            ->add('isAboutRoot', null, array('required' => false))
             ->add('isAbout', null, array('required' => false))
-            ->add('isVision', null, array('required' => false))
-            ->add('isPhilosophy', null, array('required' => false))
-            ->add('isLifeAtUltimatrue', null, array('required' => false))
-//            ->add('translations', 'collection', array(
-//                'type'         => new TranslationEntityType('DesoukOnline\ArticleBundle\Entity\ArticleTranslations'),
-//                'allow_add'    => true,
-//            ))
         ;
     }
 
@@ -167,18 +156,6 @@ class ArticleAdmin extends Admin
 
     }
 
-    public function preUpdate($article)
-    {
-
-//        $translations = $article->getTranslations();
-//        foreach($translations as $trans){
-//
-//            $name = $trans->getName();
-//            var_dump($name);
-//        }
-//        exit;
-
-    }
 
     public function prePersist($cat)
     {

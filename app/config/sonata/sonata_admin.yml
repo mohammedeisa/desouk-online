@@ -60,8 +60,10 @@ sonata_admin:
                               - desouk_online.news
                               - desouk_online.banner
                               - desouk_online.focus
-                              - desouk_online.focus.links
-                              - desouk_online.faq        
+                              - desouk_online.faq
+                              - desouk_online.real_estate
+                              - desouk_online.car
+                              - desouk_online.for_sale
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'

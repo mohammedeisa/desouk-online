@@ -1,0 +1,9 @@
+services:
+    desouk_online.real_estate:
+        class: DesoukOnline\RealEstateBundle\Admin\RealEstateAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Real Estate" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\RealEstateBundle\Entity\RealEstate
+            - ~

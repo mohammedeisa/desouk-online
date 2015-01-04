@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace DesoukOnline\NewsBundle\Admin;
+namespace DesoukOnline\RealEstateBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -20,18 +20,37 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class NewsAdmin extends Admin
+class RealEstateAdmin extends Admin
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('title')
+            ->add('type','choice',array('choices'=>array('house'=>'House','apartment'=>'Apartment')))
+            ->add('description', 'ckeditor')
+            ->add('purpose')
+            ->add('price')
+            ->add('area')
+            ->add('enabled', null, array('required' => true, 'data' => True));
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('name')
+            ->add('title')
+            ->add('type')
             ->add('description')
             ->add('enabled')
-            ->add('date');
+            ->add('purpose')
+            ->add('price')
+            ->add('area');
     }
 
     /**
@@ -40,10 +59,11 @@ class NewsAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name')
-            ->add('description')
+            ->add('title')
+            ->add('type')
+            ->add('price')
+            ->add('area')
             ->add('enabled')
-            ->add('date')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -59,21 +79,14 @@ class NewsAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('enabled')
-            ->add('date');
+            ->add('title')
+            ->add('type')
+            ->add('purpose')
+            ->add('price')
+            ->add('area')
+            ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-            ->add('name')
-            ->add('description')
-            ->add('date', 'sonata_type_datetime_picker')
-            ->add('enabled')->add('enabled', null, array('required' => true, 'data' => True));
-    }
+
 
 }

@@ -9,14 +9,3 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [DesoukOnlineFocusBundle]]
-
-    desouk_online.focus.links:
-        class: DesoukOnline\FocusBundle\Admin\LinkAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Links" , show_in_dashboard: false }
-        arguments:
-            - ~
-            - DesoukOnline\FocusBundle\Entity\Link
-            - ~
-        calls:
-            - [ setTranslationDomain, [DesoukOnlineFocusBundle]]

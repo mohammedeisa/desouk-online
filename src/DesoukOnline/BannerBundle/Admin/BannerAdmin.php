@@ -75,7 +75,7 @@ class BannerAdmin extends Admin
            ->add('title')
            ->add('body')
            ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_banner')))
-            ->add('link','desouk_online_link',array('attr'=>array('class'=>'menu-link-input')))
+            ->add('link','meisa_link',array('attr'=>array('class'=>'menu-link-input')))
             ->add('enabled' ,null, array('required' => true, 'data' => True))
         ;
     }

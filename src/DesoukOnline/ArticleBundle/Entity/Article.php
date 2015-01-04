@@ -10,8 +10,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Translatable\Translatable;
 
 
-
-
 /**
  * Article
  * @Gedmo\Tree(type="nested")
@@ -86,26 +84,6 @@ class Article
      */
     private $enabled;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_intro", type="boolean", options={"default":0})
-     */
-    private $isIntro;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_featured_content", type="boolean", options={"default":0})
-     */
-    private $isFeaturedContent;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_about_root", type="boolean", options={"default":0})
-     */
-    private $isAboutRoot;
 
     /**
      * @var boolean
@@ -113,36 +91,6 @@ class Article
      * @ORM\Column(name="is_about", type="boolean", options={"default":0})
      */
     private $isAbout;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_history", type="boolean", options={"default":0})
-     */
-    private $isHistory;
-
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_vision", type="boolean", options={"default":0})
-     */
-    private $isVision;
-
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_philosophy", type="boolean", options={"default":0})
-     */
-    private $isPhilosophy;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_life_at_ultimatrue", type="boolean", options={"default":0})
-     */
-    private $isLifeAtUltimatrue;
 
     /**
      * @var string
@@ -554,119 +502,6 @@ class Article
         $this->slug = str_replace(" ", "_", strtolower($this->name)) . '_' . $this->id;
     }
 
-
-
-    /**
-     * @param boolean $isFeaturedContent
-     */
-    public function setIsFeaturedContent($isFeaturedContent)
-    {
-        $this->isFeaturedContent = $isFeaturedContent;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsFeaturedContent()
-    {
-        return $this->isFeaturedContent;
-    }
-
-    /**
-     * @param boolean $isIntro
-     */
-    public function setIsIntro($isIntro)
-    {
-        $this->isIntro = $isIntro;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsIntro()
-    {
-        return $this->isIntro;
-    }
-
-    /**
-     * @param boolean $isAboutRoot
-     */
-    public function setIsAboutRoot($isAboutRoot)
-    {
-        $this->isAboutRoot = $isAboutRoot;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsAboutRoot()
-    {
-        return $this->isAboutRoot;
-    }
-
-    /**
-     * @param boolean $isHistory
-     */
-    public function setIsHistory($isHistory)
-    {
-        $this->isHistory = $isHistory;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsHistory()
-    {
-        return $this->isHistory;
-    }
-
-    /**
-     * @param boolean $isPhilosophy
-     */
-    public function setIsPhilosophy($isPhilosophy)
-    {
-        $this->isPhilosophy = $isPhilosophy;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsPhilosophy()
-    {
-        return $this->isPhilosophy;
-    }
-
-    /**
-     * @param boolean $isVision
-     */
-    public function setIsVision($isVision)
-    {
-        $this->isVision = $isVision;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsVision()
-    {
-        return $this->isVision;
-    }
-
-    /**
-     * @param boolean $isLifeAtUltimatrue
-     */
-    public function setIsLifeAtUltimatrue($isLifeAtUltimatrue)
-    {
-        $this->isLifeAtUltimatrue = $isLifeAtUltimatrue;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsLifeAtUltimatrue()
-    {
-        return $this->isLifeAtUltimatrue;
-    }
 
     /**
      * @param boolean $isAbout

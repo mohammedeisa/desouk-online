@@ -53,9 +53,11 @@ class Focus
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\FocusBundle\Entity\Link", mappedBy="focus" , cascade={"All"})
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255)
      */
-    protected $links;
+    protected $link;
 
 
     /**
@@ -161,60 +163,28 @@ class Focus
         return $this->image;
     }
 
-
-    /**
-     * @param mixed $links
-     */
-    public function setLinks($links)
-    {
-        $this->links = new ArrayCollection();
-
-        foreach ($links as $field) {
-            $this->addLinks($field);
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLinks()
-    {
-        return $this->links;
-    }
-
-
-
-
-    /**
-     * Add page_image
-     *
-     * @param ProductHasCategory $categoryProduct
-     * @return Page
-     */
-    public function addLinks($link)
-    {
-        $link->setFocus($this);
-        $this->links[] = $link;
-
-        return $this;
-    }
-
-    /**
-     * Remove page_image
-     *
-     * @param ProductHasCategory $categoryProduct
-     */
-    public function removeLinks($links)
-    {
-        $this->links->removeElement($links);
-    }
-
     public function __toString()
     {
         if (!$this->getTitle())
             return '';
         return $this->getTitle();
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param string $link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
     }
 
 }

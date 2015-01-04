@@ -1,0 +1,9 @@
+services:
+    desouk_online.for_sale:
+        class: DesoukOnline\ForSaleBundle\Admin\ForSaleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "For Sale" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\ForSaleBundle\Entity\ForSale
+            - ~

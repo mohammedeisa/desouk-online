@@ -6,6 +6,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * Category
  * @Gedmo\Tree(type="nested")
@@ -140,7 +141,7 @@ class Category
      * @ORM\Column(name="description_ar", type="string", length=255, nullable=true)
      */
     private $descriptionAr;
-     
+
     /**
      * @var integer
      *
@@ -155,20 +156,6 @@ class Category
      */
     private $enabled;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_elevators", type="boolean", options={"default":0})
-     */
-    private $isElevators;
-
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_arabic", type="boolean", options={"default":0})
-     */
-    private $isArabic;
 
     /**
      * Set enabled
@@ -194,7 +181,6 @@ class Category
     }
 
 
-
     /**
      * Set image
      *
@@ -207,6 +193,7 @@ class Category
 
         return $this;
     }
+
     /**
      * Get image
      *
@@ -216,7 +203,6 @@ class Category
     {
         return $this->image;
     }
-
 
 
     public function setPosition($position)
@@ -229,6 +215,7 @@ class Category
     {
         return $this->position;
     }
+
     /**
      * Set title
      * @param string $name
@@ -250,6 +237,7 @@ class Category
         $this->names_hierarchy = $names_hierarchy;
         return $this;
     }
+
     /**
      * Set description
      * @param string $description
@@ -267,7 +255,7 @@ class Category
      * @param Category $parent
      * @return Menu
      */
-    public function setParent( $parent = null)
+    public function setParent($parent = null)
     {
         $this->parent = $parent;
 
@@ -290,7 +278,7 @@ class Category
      * @param Category $children
      * @return Category
      */
-    public function setChildren( $children )
+    public function setChildren($children)
     {
         $this->children = $children;
 
@@ -329,6 +317,7 @@ class Category
     {
         return $this->lft;
     }
+
     /**
      * Set lvl
      *
@@ -351,6 +340,7 @@ class Category
     {
         return $this->lvl;
     }
+
     /**
      * Set rgt
      *
@@ -396,6 +386,7 @@ class Category
     {
         return $this->root;
     }
+
     /**
      * Set createdAt
      *
@@ -463,6 +454,7 @@ class Category
     {
         return $this->name;
     }
+
     public function getNamesHierarchy()
     {
         return $this->names_hierarchy;
@@ -477,15 +469,17 @@ class Category
     {
         return $this->description;
     }
+
     public function __toString()
     {
-        $space="";
-        for ($i=0 ; $i < $this->lvl ; $i++){
-            $space = $space."----";
+        $space = "";
+        for ($i = 0; $i < $this->lvl; $i++) {
+            $space = $space . "----";
         }
-        $this->names_hierarchy = $space.$this->name;
-        return  $space.$this->name;
+        $this->names_hierarchy = $space . $this->name;
+        return $space . $this->name;
     }
+
     /**
      * @var string
      *
@@ -525,7 +519,7 @@ class Category
      * @param ProductHasCategory $categoryProduct
      * @return Page
      */
-    public function addCategoryProduct( $categoryProduct)
+    public function addCategoryProduct($categoryProduct)
     {
         $this->category_product[] = $categoryProduct;
 
@@ -537,7 +531,7 @@ class Category
      *
      * @param ProductHasCategory $categoryProduct
      */
-    public function removeCategoryProduct( $categoryProduct)
+    public function removeCategoryProduct($categoryProduct)
     {
         $this->category_product->removeElement($categoryProduct);
     }
@@ -566,38 +560,6 @@ class Category
     public function getBanner()
     {
         return $this->banner;
-    }
-
-    /**
-     * @param boolean $isElevators
-     */
-    public function setIsElevators($isElevators)
-    {
-        $this->isElevators = $isElevators;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsElevators()
-    {
-        return $this->isElevators;
-    }
-
-    /**
-     * @param boolean $isArabic
-     */
-    public function setIsArabic($isArabic)
-    {
-        $this->isArabic = $isArabic;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function getIsArabic()
-    {
-        return $this->isArabic;
     }
 
     /**

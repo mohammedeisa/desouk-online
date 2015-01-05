@@ -64,6 +64,7 @@ sonata_admin:
                               - desouk_online.real_estate
                               - desouk_online.car
                               - desouk_online.for_sale
+                              - desouk_online.vendor
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'

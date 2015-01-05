@@ -13,4 +13,6 @@
 /web/assetic/*[0-9]*
 /.idea/*
 /.idea
-
+.project
+.settings/
+*~

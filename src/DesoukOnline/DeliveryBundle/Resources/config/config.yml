@@ -1,0 +1,9 @@
+services:
+    desouk_online.delivery:
+        class: DesoukOnline\DeliveryBundle\Admin\DeliveryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Delivery" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\DeliveryBundle\Entity\Delivery
+            - ~

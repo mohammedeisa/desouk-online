@@ -2,13 +2,23 @@
 # more information can be found here http://sonata-project.org/bundles/user
 #
 # Enable Doctrine to map the provided entities
+fos_user:
+#    db_driver:      orm # can be orm or odm
+    firewall_name:  main
+    user_class:     Application\Sonata\UserBundle\Entity\User
+
+    group:
+        group_class: Application\Sonata\UserBundle\Entity\Group
+
+# Enable Doctrine to map the provided entities
 doctrine:
     orm:
         entity_managers:
             default:
                 mappings:
                     FOSUserBundle: ~
-                    ApplicationSonataUserBundle: ~
+                    ApplicationSonataUserBundle:
+                        type: annotation
                     SonataUserBundle: ~
 
 # if you change the class configuration, please also alter the fos_user.yml file
@@ -17,9 +27,22 @@ sonata_user:
     table:
         user_group:           fos_user_user_group
 
+    class:                  # Entity Classes
+            user:               Application\Sonata\UserBundle\Entity\User
+            group:              Application\Sonata\UserBundle\Entity\Group
+
+
+    admin:                  # Admin Classes
+            user:
+                class:          Application\Sonata\UserBundle\Admin\UserAdmin
+                controller:     SonataAdminBundle:CRUD
+                translation:    SonataUserBundle
+
+
     impersonating:
         route:                page_slug
         parameters:           { path: / }
+
 
     google_authenticator:
         server:               %sonata_user.google_authenticator.server%

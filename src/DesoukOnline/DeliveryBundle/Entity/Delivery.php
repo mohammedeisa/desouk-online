@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\Entity;
+namespace DesoukOnline\DeliveryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -9,10 +9,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * News
  *
- * @ORM\Table(name="vendor")
+ * @ORM\Table(name="delivery")
  * @ORM\Entity
  */
-class Vendor
+class Delivery
 {
     /**
      * @var integer
@@ -57,7 +57,7 @@ class Vendor
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" , cascade={"all"},inversedBy="vendors" )
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" , cascade={"all"},inversedBy="deliveries" )
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $user;

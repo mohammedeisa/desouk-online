@@ -24,7 +24,6 @@ imports:
     - { resource: @DesoukOnlineRealEstateBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineCarBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineForSaleBundle/Resources/config/config.yml }
-
     - { resource: @DesoukOnlineArticleBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineBannerBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineFaqBundle/Resources/config/config.yml }

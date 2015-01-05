@@ -7,3 +7,12 @@ services:
             - ~
             - DesoukOnline\ForSaleBundle\Entity\ForSale
             - ~
+
+    desouk_online.for_sale_category:
+        class: DesoukOnline\ForSaleBundle\Admin\ForSaleCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "For Sale Category" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\ForSaleBundle\Entity\Category
+            - ~

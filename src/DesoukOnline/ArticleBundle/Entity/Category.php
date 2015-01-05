@@ -511,22 +511,10 @@ class Category
         return $this->slug;
     }
 
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
-
-    /**
-     * @ORM\PostPersist
-     * @ORM\PrePersist
-     * @ORM\PostUpdate
-     */
-    public function postPersist()
-    {
-        $this->slug = str_replace(" ", "_", strtolower($this->name)) . '_' . $this->id;
-    }
 }

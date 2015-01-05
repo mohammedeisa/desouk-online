@@ -93,9 +93,8 @@ class Article
     private $isAbout;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -489,17 +488,6 @@ class Article
         }
         $this->names_hierarchy = $space . $this->name;
         return $space . $this->name;
-    }
-
-
-    /**
-     * @ORM\PostPersist
-     * * @ORM\PrePersist
-     * @ORM\PostUpdate
-     */
-    public function postPersist()
-    {
-        $this->slug = str_replace(" ", "_", strtolower($this->name)) . '_' . $this->id;
     }
 
 

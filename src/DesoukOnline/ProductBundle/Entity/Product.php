@@ -329,9 +329,8 @@ class Product
     }
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
      */
     private $slug;
 
@@ -349,16 +348,6 @@ class Product
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * @ORM\PostPersist
-     * * @ORM\PrePersist
-     * @ORM\PostUpdate
-     */
-    public function prePersist()
-    {
-        $this->slug = str_replace(" ", "_", strtolower($this->name)) . '_' . $this->id;
     }
 
     /**

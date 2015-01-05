@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace DesoukOnline\RealEstateBundle\Admin;
+namespace DesoukOnline\ForSaleBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class RealEstateAdmin extends Admin
+class ForSaleCategoryAdmin extends Admin
 {
 
     /**
@@ -30,12 +30,8 @@ class RealEstateAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('type', 'choice', array('choices' => array('house' => 'House', 'apartment' => 'Apartment')))
             ->add('description', 'ckeditor')
-            ->add('purpose')
-            ->add('price')
-            ->add('area')
-            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_focus')))
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
@@ -45,13 +41,7 @@ class RealEstateAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-            ->add('title')
-            ->add('type')
-            ->add('description')
-            ->add('enabled')
-            ->add('purpose')
-            ->add('price')
-            ->add('area');
+            ->add('title');
     }
 
     /**
@@ -61,10 +51,6 @@ class RealEstateAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('type')
-            ->add('price')
-            ->add('area')
-            ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -80,12 +66,7 @@ class RealEstateAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
-            ->add('type')
-            ->add('purpose')
-            ->add('price')
-            ->add('area')
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('title');
     }
 
 

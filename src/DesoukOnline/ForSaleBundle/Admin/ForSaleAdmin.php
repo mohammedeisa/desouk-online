@@ -33,6 +33,7 @@ class ForSaleAdmin extends Admin
             ->add('description', 'ckeditor')
             ->add('price')
             ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
+            ->add('category')
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
@@ -46,7 +47,7 @@ class ForSaleAdmin extends Admin
             ->add('description')
             ->add('enabled')
             ->add('price')
-        ;
+            ->add('category');
     }
 
     /**
@@ -57,6 +58,7 @@ class ForSaleAdmin extends Admin
         $listMapper
             ->add('title')
             ->add('price')
+            ->add('category')
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
@@ -75,9 +77,9 @@ class ForSaleAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('price')
+            ->add('category')
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
-
 
 
 }

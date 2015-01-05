@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\Entity;
+namespace DesoukOnline\ForSaleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -9,10 +9,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * News
  *
- * @ORM\Table(name="vendor")
+ * @ORM\Table(name="for_sale_category")
  * @ORM\Entity
  */
-class Vendor
+class Category
 {
     /**
      * @var integer
@@ -26,7 +26,7 @@ class Vendor
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $title;
 
@@ -38,33 +38,25 @@ class Vendor
      */
     private $description;
 
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="contacts", type="text")
-     */
-    private $contacts;
-
     /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="logo_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $logo;
+    private $image;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="enabled", type="boolean")
-     */
-    private $enabled;
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
      */
     private $slug;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="ForSale", mappedBy="category", cascade={ "all"}, orphanRemoval=true)
+     */
+    protected $forSaleProperties;
 
     /**
      * @var \DateTime
@@ -83,19 +75,26 @@ class Vendor
     private $updatedAt;
 
     /**
-     * @return string
+     * @var string
+     *
+     * @ORM\Column(name="enabled", type="boolean")
      */
-    public function getContacts()
+    private $enabled;
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
-        return $this->contacts;
+        return $this->createdAt;
     }
 
     /**
-     * @param string $contacts
+     * @param \DateTime $createdAt
      */
-    public function setContacts($contacts)
+    public function setCreatedAt($createdAt)
     {
-        $this->contacts = $contacts;
+        $this->createdAt = $createdAt;
     }
 
     /**
@@ -149,17 +148,33 @@ class Vendor
     /**
      * @return string
      */
-    public function getLogo()
+    public function getImage()
     {
-        return $this->logo;
+        return $this->image;
     }
 
     /**
-     * @param string $logo
+     * @param string $image
      */
-    public function setLogo($logo)
+    public function setImage($image)
     {
-        $this->logo = $logo;
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**
@@ -181,38 +196,6 @@ class Vendor
     /**
      * @return \DateTime
      */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
-
-    /**
-     * @return \DateTime
-     */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -226,4 +209,37 @@ class Vendor
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @param mixed $objects
+     */
+    public function setStudentSessions($objects)
+    {
+        $this->forSaleProperties = new ArrayCollection();
+        foreach ($objects as $object) {
+            $object->setCategory($this);
+            $this->addForSaleProperties($object);
+        }
+    }
+
+    public function addForSaleProperties($object)
+    {
+        $this->forSaleProperties[] = $object;
+        return $this;
+    }
+
+    /**
+     * Remove Menu
+     *
+     * @param StudentSessions $object
+     */
+    public function removeStudentSessions($object)
+    {
+        $this->forSaleProperties->removeElement($object);
+    }
+
+    function __toString()
+    {
+        if ($this->getTitle()) return $this->getTitle();
+        return '';
+    }
 }

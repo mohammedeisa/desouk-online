@@ -20,19 +20,20 @@ imports:
     - { resource: mopa/mopa_bootstrap.yml }
 #    - { resource: knp/knp_paginator.yml }
 
-    - { resource: desouk_online/article.yml }
-    - { resource: desouk_online/focus.yml }
-    - { resource: desouk_online/category.yml }
-    - { resource: desouk_online/product.yml }
-    - { resource: desouk_online/product_has_category.yml }
-    - { resource: desouk_online/product_hasTag.yml }
-    - { resource: desouk_online/banner.yml }
-    - { resource: desouk_online/news.yml }
-    - { resource: desouk_online/faq.yml }
+
     - { resource: @DesoukOnlineRealEstateBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineCarBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineForSaleBundle/Resources/config/config.yml }
 
+    - { resource: @DesoukOnlineArticleBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineBannerBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineFaqBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineFocusBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineNewsBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineProductBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineProductBundle/Resources/config/category.yml }
+    - { resource: @DesoukOnlineProductBundle/Resources/config/product_has_category.yml }
+    - { resource: @DesoukOnlineProductBundle/Resources/config/product_hasTag.yml }
 
 framework:
     #esi:                   ~

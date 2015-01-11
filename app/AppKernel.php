@@ -86,8 +86,8 @@ class AppKernel extends Kernel
             new DesoukOnline\RealEstateBundle\DesoukOnlineRealEstateBundle(),
             new DesoukOnline\CarBundle\DesoukOnlineCarBundle(),
             new DesoukOnline\ForSaleBundle\DesoukOnlineForSaleBundle(),
-            new DesoukOnline\VendorBundle\DesoukOnlineVendorBundle(),
             new DesoukOnline\DeliveryBundle\DesoukOnlineDeliveryBundle(),
+            new DesoukOnline\MallBundle\DesoukOnlineMallBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

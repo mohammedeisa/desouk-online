@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace DesoukOnline\VendorBundle\Admin;
+namespace DesoukOnline\MallBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class VendorAdmin extends Admin
+class CategoryAdmin extends Admin
 {
 
     /**
@@ -28,11 +28,15 @@ class VendorAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $repository_ = $this->getModelManager()->getEntityManager($this->getClass())->getRepository($this->getClass());
+        $repository = $repository_->createQueryBuilder('p')
+            ->addOrderBy('p.root', 'ASC')
+            ->addOrderBy('p.lft', 'ASC');
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
-            ->add('contacts')
-            ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_category')))
+            ->add('parent', 'sonata_type_model', array('required' => false, 'query' => $repository), array('edit' => 'standard'))
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
@@ -41,12 +45,14 @@ class VendorAdmin extends Admin
      */
     protected function configureShowFields(ShowMapper $showMapper)
     {
+
         $showMapper
             ->add('title')
+            ->add('image')
+            ->add('parent')
             ->add('description')
-            ->add('contacts')
-            ->add('logo')
-            ->add('enabled');
+            ->add('enabled')
+        ;
     }
 
     /**
@@ -73,8 +79,9 @@ class VendorAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
-            ->add('enabled');
+            ->add('enabled', null, array('required' => true, 'data' => True));
     }
+
 
 
 }

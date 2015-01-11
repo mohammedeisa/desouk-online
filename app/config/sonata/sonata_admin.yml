@@ -65,8 +65,16 @@ sonata_admin:
                               - desouk_online.car
                               - desouk_online.for_sale
                               - desouk_online.for_sale_category
-                              - desouk_online.vendor
                               - desouk_online.delivery
+
+            sonata.admin.group.desouk_online.mall:
+                          label: Mall
+                          icon:  '<i class="fa fa-play-circle"></i>'
+                          items:
+                              - desouk_online.mall.vendor
+                              - desouk_online.mall.category
+                              - desouk_online.mall.product
+
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'
@@ -80,6 +88,7 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
+
     assets:
         stylesheets:
             # The sandbox includes default pre-optimized version of some css and js

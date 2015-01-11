@@ -1,0 +1,28 @@
+services:
+    desouk_online.mall.vendor:
+        class: DesoukOnline\MallBundle\Admin\VendorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Vendors" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\Vendor
+            - ~
+
+    desouk_online.mall.category:
+        class: DesoukOnline\MallBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Categories" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\Category
+            - ~
+
+
+    desouk_online.mall.product:
+        class: DesoukOnline\MallBundle\Admin\ProductAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Products" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\Product
+            - ~

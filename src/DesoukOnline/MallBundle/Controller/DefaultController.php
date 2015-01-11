@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\Controller;
+namespace DesoukOnline\MallBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

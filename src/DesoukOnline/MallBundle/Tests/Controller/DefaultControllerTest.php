@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\Tests\Controller;
+namespace DesoukOnline\MallBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

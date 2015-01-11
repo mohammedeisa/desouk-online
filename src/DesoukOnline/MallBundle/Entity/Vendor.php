@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\Entity;
+namespace DesoukOnline\MallBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -65,9 +65,23 @@ class Vendor
     /**
      * @var string
      *
+     * @ORM\ManyToOne(targetEntity="Category" , cascade={"all"},inversedBy="vendors" )
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $category;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="enabled", type="boolean")
      */
     private $enabled;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     */
+    protected $products;
+
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
@@ -248,6 +262,60 @@ class Vendor
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+
+    /**
+     * @param mixed $objects
+     */
+    public function setProducts($objects)
+    {
+        $this->products = new ArrayCollection();
+        foreach ($objects as $object) {
+            $object->setVendor($this);
+            $this->addProducts($object);
+        }
+    }
+
+    public function addProducts($object)
+    {
+        $this->vendors[] = $object;
+        return $this;
+    }
+
+    /**
+     * Remove Menu
+     *
+     * @param StudentSessions $object
+     */
+    public function removeVendors($object)
+    {
+        $this->products->removeElement($object);
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getVendors()
+    {
+        return $this->products;
     }
 
 }

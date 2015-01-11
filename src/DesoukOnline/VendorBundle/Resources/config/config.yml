@@ -1,9 +1,0 @@
-services:
-    desouk_online.vendor:
-        class: DesoukOnline\VendorBundle\Admin\VendorAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Vendors" , show_in_dashboard: true }
-        arguments:
-            - ~
-            - DesoukOnline\VendorBundle\Entity\Vendor
-            - ~

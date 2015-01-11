@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\VendorBundle\DependencyInjection;
+namespace DesoukOnline\MallBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('desouk_online_vendor');
+        $rootNode = $treeBuilder->root('desouk_online_mall');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

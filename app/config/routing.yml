@@ -1,10 +1,10 @@
-desouk_online_delivery:
-    resource: "@DesoukOnlineDeliveryBundle/Controller/"
+desouk_online_mall:
+    resource: "@DesoukOnlineMallBundle/Controller/"
     type:     annotation
     prefix:   /
 
-desouk_online_vendor:
-    resource: "@DesoukOnlineVendorBundle/Controller/"
+desouk_online_delivery:
+    resource: "@DesoukOnlineDeliveryBundle/Controller/"
     type:     annotation
     prefix:   /
 

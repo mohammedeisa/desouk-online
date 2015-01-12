@@ -15,4 +15,21 @@ class FrontController extends Controller
     public function indexAction()
     {
     }
+
+    /**
+     * @Route("/mall/vendor/{slug}", name ="vendor")
+     * @Template("DesoukOnlineMallBundle:Front:Mall/vendor.html.twig")
+     */
+    public function vendorAction()
+    {
+    }
+
+
+    /**
+     * @Route("/mall/category/{slug}", name ="category")
+     * @Template("DesoukOnlineMallBundle:Front:Mall/category.html.twig")
+     */
+    public function categoryAction()
+    {
+    }
 }

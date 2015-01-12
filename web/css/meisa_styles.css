@@ -1,3 +1,9 @@
 .thumbnail{
     margin-bottom: 20px;
 }
+.portfolio-item .item-inner{
+    background: #222;
+}
+.portfolio-item h5,.portfolio-item h5 a{
+    color: white;
+}

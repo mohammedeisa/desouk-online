@@ -46,6 +46,13 @@ class VendorProductCategory
     private $enabled;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_in_home", type="boolean", options={"default":1})
+     */
+    private $isInHome;
+
+    /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -415,6 +422,22 @@ class VendorProductCategory
     public function setVendor($vendor)
     {
         $this->vendor = $vendor;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsInHome()
+    {
+        return $this->isInHome;
+    }
+
+    /**
+     * @param boolean $isInHome
+     */
+    public function setIsInHome($isInHome)
+    {
+        $this->isInHome = $isInHome;
     }
 
 }

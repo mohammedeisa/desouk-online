@@ -37,7 +37,7 @@ class CategoryAdmin extends Admin
             ->add('description', 'ckeditor')
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_category')))
             ->add('parent', 'sonata_type_model', array('required' => false, 'query' => $repository), array('edit' => 'standard'))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('enabled', null, array());
     }
 
     /**

@@ -38,7 +38,8 @@ class VendorProductCategoryAdmin extends Admin
             ->add('vendor')
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_category')))
             ->add('parent', 'sonata_type_model', array('required' => false, 'query' => $repository), array('edit' => 'standard'))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('isInHome', null, array())
+            ->add('enabled', null, array());
     }
 
     /**
@@ -64,6 +65,7 @@ class VendorProductCategoryAdmin extends Admin
         $listMapper
             ->add('title')
             ->add('enabled')
+            ->add('isInHome', null, array('editable'=>true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

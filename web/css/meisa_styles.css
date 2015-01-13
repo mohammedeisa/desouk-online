@@ -11,3 +11,30 @@
     width: 155px;
     height: 155px;
 }
+
+
+#vendor_product_category .portfolio-item img{
+    height: 170px;
+}
+
+#mall_category .portfolio-item img{
+    height: 135px;
+}
+#vendor_product .carousel-inner>.item>img, .carousel-inner{
+    height: 300px;
+}
+#vendor_product .carousel-inner>.item>img, .carousel-inner>.item>a>img{
+    max-height: 300px;
+}
+
+.carousel-control.left {
+    background-image: none;
+    background-repeat: no-repeat;
+}
+.carousel-control.right {
+    background-image:none;
+    background-repeat: no-repeat;
+}
+#vendor_homepage .thumbnail>img{
+    height: 120px;
+}

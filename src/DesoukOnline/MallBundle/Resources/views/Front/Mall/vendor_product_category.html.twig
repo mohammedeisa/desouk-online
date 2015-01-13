@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    <section id="">
+    <section id="vendor_product_category">
         <div class="container">
             <div class="box">
                 <div class="row">
@@ -21,29 +21,18 @@
 
                             <p class="lead">{{ vendor_product_category.description|raw }}</p>
                         </div>
-                        <ul class="portfolio-items col-4 isotope"
-                            style="position: relative; overflow: hidden; height: 258px;">
-                            {% for product in vendor_product_category.products %}
-                                <li class="portfolio-item apps isotope-item"
-                                    style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);">
-                                    <div class="item-inner">
-                                        <div class="portfolio-image">
-                                            <img src="{% path product.image , 'preview' %}"
-                                                 alt="">
+                        {% for product in vendor_product_category.products %}
 
-                                            <div class="overlay">
-                                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                                   href="{% path product.image , 'large' %}"><i
-                                                            class="icon-eye-open"></i></a>
-                                            </div>
-                                        </div>
-                                        <h5>
-                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
-                                        </h5>
-                                    </div>
-                                </li><!--/.portfolio-item-->
-                            {% endfor %}
-                        </ul>
+                            <div class="col-md-4 portfolio-item">
+                                <a href="#">
+                                    <img class="img-responsive" src="{% path product.image , 'preview' %}" alt="">
+                                </a>
+
+                                <h4>
+                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                </h4>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

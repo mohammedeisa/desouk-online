@@ -35,8 +35,8 @@ class ProductAdmin extends Admin
             ->add('vendorProductCategory')
             ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_product')))
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_product')))
-            ->add('enabled', null, array('required' => true, 'data' => True))
-        ;
+            ->add('isInHome', null, array())
+            ->add('enabled', null, array());
     }
 
 
@@ -63,6 +63,7 @@ class ProductAdmin extends Admin
             ->add('code')
             ->add('price')
             ->add('enabled')
+            ->add('isInHome', null, array('editable'=>true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

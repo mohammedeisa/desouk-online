@@ -65,6 +65,13 @@ class Product
 
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_in_home", type="boolean", options={"default":1})
+     */
+    private $isInHome;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -338,6 +345,22 @@ class Product
     public function setVendorProductCategory($vendorProductCategory)
     {
         $this->vendorProductCategory = $vendorProductCategory;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIsInHome()
+    {
+        return $this->isInHome;
+    }
+
+    /**
+     * @param boolean $isInHome
+     */
+    public function setIsInHome($isInHome)
+    {
+        $this->isInHome = $isInHome;
     }
 
 

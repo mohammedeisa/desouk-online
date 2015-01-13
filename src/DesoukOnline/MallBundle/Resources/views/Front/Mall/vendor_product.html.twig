@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
 
-    <section>
+    <section id="vendor_product">
         <div class="container">
             <div class="box">
 
@@ -12,7 +12,8 @@
 
                         <div class="list-group">
                             {% for category in product.vendorProductCategory.vendor.getVendorProductCategories() %}
-                                <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}" class="list-group-item">{{ category.title }}</a>
+                                <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
+                                   class="list-group-item">{{ category.title }}</a>
                             {% endfor %}
                         </div>
                     </div>

@@ -78,9 +78,17 @@ class Vendor
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
      */
-    protected $products;
+    protected $vendorProductCategories;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
+     * @ORM\JoinColumn(name="banners_gallery_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $banners;
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -284,16 +292,16 @@ class Vendor
     /**
      * @param mixed $objects
      */
-    public function setProducts($objects)
+    public function setVendorProductCategories($objects)
     {
-        $this->products = new ArrayCollection();
+        $this->vendorProductCategories = new ArrayCollection();
         foreach ($objects as $object) {
             $object->setVendor($this);
-            $this->addProducts($object);
+            $this->addVendorProductCategories($object);
         }
     }
 
-    public function addProducts($object)
+    public function addVendorProductCategories($object)
     {
         $this->vendors[] = $object;
         return $this;
@@ -304,18 +312,40 @@ class Vendor
      *
      * @param StudentSessions $object
      */
-    public function removeVendors($object)
+    public function removeVendorProductCategories($object)
     {
-        $this->products->removeElement($object);
+        $this->vendorProductCategories->removeElement($object);
     }
 
 
     /**
      * @return mixed
      */
-    public function getVendors()
+    public function getVendorProductCategories()
     {
-        return $this->products;
+        return $this->vendorProductCategories;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBanners()
+    {
+        return $this->banners;
+    }
+
+    /**
+     * @param string $banners
+     */
+    public function setBanners($banners)
+    {
+        $this->banners = $banners;
+    }
+
+    function __toString()
+    {
+        if ($this->getTitle()) return $this->getTitle();
+        return '';
     }
 
 }

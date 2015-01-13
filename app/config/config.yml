@@ -76,6 +76,24 @@ twig:
 
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 
+#liip_imagine:
+##    driver:               gd
+##    web_root:             %kernel.root_dir%/../../public_html
+##    data_root:            %kernel.root_dir%/../../public_html
+##    cache_mkdir_mode:     0777
+##    cache_prefix:         uploads/media/cache
+##    cache:                web_path
+##    cache_clearer:        true
+##    data_loader:          filesystem
+##    controller_action:    liip_imagine.controller:filterAction
+##    formats:              []
+#    resolvers:
+#        default:
+#            web_path:
+#              #web_root: %kernel.root_dir%/../../public_html
+#              web_root: %kernel.root_dir%/../web
+#              cache_prefix: /uploads/media/cache
+#
 # Doctrine Configuration
 doctrine:
     dbal:

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <section id="">
+        <div class="container">
+            <div class="box">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="lead">Shop Name</p>
+
+                        <div class="list-group">
+                            {% for category in vendor_product_category.vendor.getVendorProductCategories() %}
+                                <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
+                                   class="list-group-item">{{ category.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+
+                        <div class="center">
+                            <h4>{{ vendor_product_category.title }}</h4>
+
+                            <p class="lead">{{ vendor_product_category.description|raw }}</p>
+                        </div>
+                        <ul class="portfolio-items col-4 isotope"
+                            style="position: relative; overflow: hidden; height: 258px;">
+                            {% for product in vendor_product_category.products %}
+                                <li class="portfolio-item apps isotope-item"
+                                    style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);">
+                                    <div class="item-inner">
+                                        <div class="portfolio-image">
+                                            <img src="{% path product.image , 'preview' %}"
+                                                 alt="">
+
+                                            <div class="overlay">
+                                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
+                                                   href="{% path product.image , 'large' %}"><i
+                                                            class="icon-eye-open"></i></a>
+                                            </div>
+                                        </div>
+                                        <h5>
+                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                        </h5>
+                                    </div>
+                                </li><!--/.portfolio-item-->
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--/.box-->
+        </div>
+        <!--/.container-->
+    </section>
+{% endblock %}

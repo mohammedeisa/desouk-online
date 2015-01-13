@@ -6,7 +6,9 @@
             <div class="box">
                 <div class="center">
                     <h2>Meet the Team</h2>
-                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis egestas.</p>
+
+                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac
+                        turpis egestas.</p>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -14,47 +16,21 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="member">
-                                                <p><img class="img-responsive img-thumbnail img-circle"
-                                                        src="/images/team1.jpg" alt=""></p>
+                                        {% for category in categories %}
+                                            <div class="col-sm-3">
+                                                <div class="member">
+                                                    <p>
+                                                        <img class="img-responsive img-thumbnail img-circle" src="{% path category.image, 'preview' %}" alt="">
+                                                    </p>
 
-                                                <h3>Agnes Smith
-                                                    <small class="designation">CEO &amp; Founder</small>
-                                                </h3>
+                                                    <h3><a href="{{ path('mall_category',{'slug':category.slug}) }}">{{ category.title }}</a>
+                                                        <small class="designation">
+                                                            {{ category.description|raw }}
+                                                        </small>
+                                                    </h3>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="member">
-                                                <p><img class="img-responsive img-thumbnail img-circle"
-                                                        src="/images/team2.jpg" alt=""></p>
-
-                                                <h3>Donald Ford
-                                                    <small class="designation">Senior Vice President</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <div class="member">
-                                                <p><img class="img-responsive img-thumbnail img-circle"
-                                                        src="/images/team3.jpg" alt=""></p>
-
-                                                <h3>Karen Richardson
-                                                    <small class="designation">Assitant Vice President</small>
-                                                </h3>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-3">
-                                            <div class="member">
-                                                <p><img class="img-responsive img-thumbnail img-circle"
-                                                        src="/images/team3.jpg" alt=""></p>
-
-                                                <h3>Karen Richardson
-                                                    <small class="designation">Assitant Vice President</small>
-                                                </h3>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>

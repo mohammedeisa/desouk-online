@@ -26,3 +26,13 @@ services:
             - ~
             - DesoukOnline\MallBundle\Entity\Product
             - ~
+
+
+    desouk_online.mall.vendor.product.category:
+        class: DesoukOnline\MallBundle\Admin\VendorProductCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Product categories" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\VendorProductCategory
+            - ~

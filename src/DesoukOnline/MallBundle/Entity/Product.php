@@ -79,6 +79,58 @@ class Product
      * @ORM\Column(name="updatedAt", type="datetime")
      */
     private $updatedAt;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory" , cascade={"all"},inversedBy="products" )
+     * @ORM\JoinColumn(name="vendor_product_category_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $vendorProductCategory;
+
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /////////add gallary to the product////////////////////
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
+     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $gallery;
+
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    /**
+     * Get gallery
+     *
+     * @return string
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+//////////////////////////////////////////////
     /**
      * Set createdAt
      *
@@ -141,52 +193,6 @@ class Product
     {
         return $this->image;
     }
-
-
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $image;
-
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Vendor" , cascade={"all"},inversedBy="products" )
-     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $vendor;
-
-/////////add gallary to the product////////////////////
-
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
-     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $gallery;
-
-    public function setGallery($gallery)
-    {
-        $this->gallery = $gallery;
-
-        return $this;
-    }
-
-    /**
-     * Get gallery
-     *
-     * @return string
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-//////////////////////////////////////////////
 
     /**
      * Set enabled
@@ -268,11 +274,6 @@ class Product
         return $this->description;
     }
 
-    /**
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(length=128, unique=true)
-     */
-    private $slug;
 
     /**
      * @param string $slug
@@ -326,17 +327,18 @@ class Product
     /**
      * @return string
      */
-    public function getVendor()
+    public function getVendorProductCategory()
     {
-        return $this->vendor;
+        return $this->vendorProductCategory;
     }
 
     /**
-     * @param string $vendor
+     * @param string $vendorProductCategory
      */
-    public function setVendor($vendor)
+    public function setVendorProductCategory($vendorProductCategory)
     {
-        $this->vendor = $vendor;
+        $this->vendorProductCategory = $vendorProductCategory;
     }
+
 
 }

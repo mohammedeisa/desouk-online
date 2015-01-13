@@ -32,8 +32,8 @@ class ProductAdmin extends Admin
             ->add('description', 'ckeditor')
             ->add('code')
             ->add('price')
-            ->add('vendor')
-            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
+            ->add('vendorProductCategory')
+            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_product')))
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_product')))
             ->add('enabled', null, array('required' => true, 'data' => True))
         ;

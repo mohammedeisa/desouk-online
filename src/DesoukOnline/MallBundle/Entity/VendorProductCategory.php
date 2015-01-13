@@ -11,9 +11,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="vendor_category")
  * @ORM\Entity
  * @Gedmo\Tree(type="nested")
- * @ORM\Table(name = "vendor_category")
+ * @ORM\Table(name = "vendor_product_category")
  */
-class Category
+class VendorProductCategory
 {
     /**
      * @var integer
@@ -51,10 +51,19 @@ class Category
      */
     private $slug;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="Vendor", mappedBy="category", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Product", mappedBy="vendorProductCategory", cascade={ "all"}, orphanRemoval=true)
      */
-    protected $vendors;
+    protected $products;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\Vendor" , cascade={"all"},inversedBy="vendorProductCategories" )
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $vendor;
 
     /**
      * @var string
@@ -127,18 +136,18 @@ class Category
     /**
      * @param mixed $objects
      */
-    public function setVendors($objects)
+    public function setProducts($objects)
     {
-        $this->vendors = new ArrayCollection();
+        $this->products = new ArrayCollection();
         foreach ($objects as $object) {
-            $object->setUser($this);
-            $this->addVendors($object);
+            $object->setVendorProductCategory($this);
+            $this->addProducts($object);
         }
     }
 
-    public function addVendors($object)
+    public function addProducts($object)
     {
-        $this->vendors[] = $object;
+        $this->products[] = $object;
         return $this;
     }
 
@@ -147,18 +156,18 @@ class Category
      *
      * @param StudentSessions $object
      */
-    public function removeVendors($object)
+    public function removeProducts($object)
     {
-        $this->vendors->removeElement($object);
+        $this->products->removeElement($object);
     }
 
 
     /**
      * @return mixed
      */
-    public function getVendors()
+    public function getProducts()
     {
-        return $this->vendors;
+        return $this->products;
     }
 
     /**
@@ -390,6 +399,22 @@ class Category
         if ($this->getTitle())
             return $this->getTitle();
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
+
+    /**
+     * @param string $vendor
+     */
+    public function setVendor($vendor)
+    {
+        $this->vendor = $vendor;
     }
 
 }

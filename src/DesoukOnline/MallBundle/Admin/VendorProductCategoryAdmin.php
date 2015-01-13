@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class CategoryAdmin extends Admin
+class VendorProductCategoryAdmin extends Admin
 {
 
     /**
@@ -35,6 +35,7 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
+            ->add('vendor')
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_category')))
             ->add('parent', 'sonata_type_model', array('required' => false, 'query' => $repository), array('edit' => 'standard'))
             ->add('enabled', null, array('required' => true, 'data' => True));

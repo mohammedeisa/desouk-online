@@ -73,6 +73,7 @@ sonata_admin:
                           items:
                               - desouk_online.mall.vendor
                               - desouk_online.mall.category
+                              - desouk_online.mall.vendor.product.category
                               - desouk_online.mall.product
 
             sonata.admin.group.meisa:

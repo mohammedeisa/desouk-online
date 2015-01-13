@@ -19,38 +19,69 @@ sonata_media:
                 small: { width: 100, quality: 100}
                 big:   { width: 970 , quality: 100}
 
-        news:
+        desouk_online_mall_category:
             providers:
                 - sonata.media.provider.image
-
             formats:
-                abstract: { width: 100, quality: 100}
-                wide:     { width: 820, quality: 100}
-
-        sonata_collection:
-            providers:
-              - sonata.media.provider.image
-
-            formats:
-                preview: { width: 100, quality: 100}
-                wide:    { width: 820, quality: 100}
-
-        sonata_category:
-            providers:
-              - sonata.media.provider.image
-
-            formats:
-                preview: { width: 100, quality: 100}
-                wide:    { width: 820, quality: 100}
-
-        sonata_product:
-            providers:
-                - sonata.media.provider.image
-
-            formats:
-                preview:   { width: 100, quality: 100}
+                preview:   { width: 155, quality: 100}
                 small:     { width: 300, quality: 100}
                 large:     { width: 750, quality: 100}
+
+        desouk_online_mall_vendor:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+        desouk_online_mall_vendor_banners:
+            providers:
+                - sonata.media.provider.image
+
+            formats:
+                large:     { width: 800, quality: 100}
+
+        desouk_online_product:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 155, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+#        news:
+#            providers:
+#                - sonata.media.provider.image
+#
+#            formats:
+#                abstract: { width: 100, quality: 100}
+#                wide:     { width: 820, quality: 100}
+#
+#        sonata_collection:
+#            providers:
+#              - sonata.media.provider.image
+#
+#            formats:
+#                preview: { width: 100, quality: 100}
+#                wide:    { width: 820, quality: 100}
+#
+#        sonata_category:
+#            providers:
+#              - sonata.media.provider.image
+#
+#            formats:
+#                preview: { width: 100, quality: 100}
+#                wide:    { width: 820, quality: 100}
+#
+#        sonata_product:
+#            providers:
+#                - sonata.media.provider.image
+#
+#            formats:
+#                preview:   { width: 100, quality: 100}
+#                small:     { width: 300, quality: 100}
+#                large:     { width: 750, quality: 100}
 
     cdn:
         # define the public base url for the uploaded media
@@ -67,19 +98,25 @@ sonata_media:
         # ...
         file:
             # the resizer must be set to false, otherwhise this can delete icon files from the fs
+            service:    sonata.media.provider.file
             resizer:    false
+            filesystem: sonata.media.filesystem.local
+            cdn:        sonata.media.cdn.server
+            generator:  sonata.media.generator.default
+            thumbnail:  sonata.media.thumbnail.format
+            allowed_extensions: ['pdf', 'txt', 'rtf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pttx', 'odt', 'odg', 'odp', 'ods', 'odc', 'odf', 'odb', 'csv', 'xml', 'zip', 'rar']
         image:
            thumbnail: sonata.media.thumbnail.format          # default value
-#           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
-#            thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
+        #           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
+        #            thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
         vimeo:
             thumbnail: sonata.media.thumbnail.format          # default value
-#           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
-#           thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
+        #           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
+        #           thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
         youtube:
             thumbnail: sonata.media.thumbnail.format          # default value
-#           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
-#           thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
+        #           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task
+        #           thumbnail: sonata.media.thumbnail.liip_imagine    # use the LiipImagineBundle to resize the image
         dailymotion:
             thumbnail: sonata.media.thumbnail.format          # default value
 #           thumbnail: sonata.media.thumbnail.consumer.format # can be used to dispatch the resize action to async task

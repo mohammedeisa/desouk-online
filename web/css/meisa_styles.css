@@ -7,3 +7,7 @@
 .portfolio-item h5,.portfolio-item h5 a{
     color: white;
 }
+.img-circle{
+    width: 155px;
+    height: 155px;
+}

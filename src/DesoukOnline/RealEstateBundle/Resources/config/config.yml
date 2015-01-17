@@ -7,3 +7,11 @@ services:
             - ~
             - DesoukOnline\RealEstateBundle\Entity\RealEstate
             - ~
+    desouk_online.real_estate.area:
+        class: DesoukOnline\RealEstateBundle\Admin\AreaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Areas" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\RealEstateBundle\Entity\Area
+            - ~

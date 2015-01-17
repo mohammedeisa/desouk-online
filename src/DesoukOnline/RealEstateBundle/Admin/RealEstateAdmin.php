@@ -30,13 +30,31 @@ class RealEstateAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('type', 'choice', array('choices' => array('house' => 'House', 'apartment' => 'Apartment')))
+            ->add('type', 'choice', 
+            	array('choices' => 
+            		array(
+            			'منزل' => 'منزل', 
+            			'شقة' => 'شقة',
+            			'محل' => 'محل', 
+            			'أرض بناء' => 'أرض بناء',
+            			'أرض زراعية' => 'أرض زراعية'
+					)
+				)
+			)
             ->add('description', 'ckeditor')
-            ->add('purpose')
+            ->add('purpose', 'choice', 
+            	array('choices' => 
+            		array(
+            			'للبيع' => 'للبيع', 
+            			'للإيجار' => 'للإيجار',
+					)
+				)
+			)
             ->add('price')
             ->add('area')
             ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('enabled', null, array('required' => true, 'data' => True))
+			->add('file', 'file', array('required' => false));
     }
 
     /**
@@ -88,5 +106,20 @@ class RealEstateAdmin extends Admin
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
-
+	 public function prePersist($realestate) {
+	    $this->renameFile($realestate);
+	 }
+	
+	 public function preUpdate($realestate) {
+	    $this->renameFile($realestate);
+	 }
+	
+	 public function renameFile($realestate) {
+	    if (null !== $realestate->getFile()) {
+	        // do whatever you want to generate a unique name
+	        $realestate->upload();
+	        // $filename = sha1(uniqid(mt_rand(), true));
+	        // $realestate->setPath($filename.'.'.$realestate->getFile()->guessExtension());
+	    }
+	 }
 }

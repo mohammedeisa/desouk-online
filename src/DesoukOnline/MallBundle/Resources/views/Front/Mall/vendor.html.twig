@@ -1,21 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <!-- Page Content -->
-    <section id="vendor_homepage">
+    <section id="vendor_homepage" class="inner_page">
         <div class="container">
             <div class="box">
                 <div class="row">
-                    <div class="col-md-3">
-                        <p class="lead">{{ vendor.title|capitalize }}</p>
-
-                        <div class="list-group">
-                            {% for category in vendor.getVendorProductCategories() %}
-                                <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
-                                   class="list-group-item">{{ category.title }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor.slug})) }}
                     <div class="col-md-9">
                         {% if vendor.banners %}
 
@@ -67,7 +57,9 @@
                                     {% for product in category.products if product.isInHome %}
                                         <div class="col-sm-4 col-lg-4 col-md-4">
                                             <div class="thumbnail">
-                                                <img src="{% path product.image , 'preview' %}" alt="">
+                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                                    <img src="{% path product.image , 'preview' %}" alt="">
+                                                </a>
 
                                                 <div class="caption">
                                                     <h4 class="pull-right">{{ product.price }} LE</h4>
@@ -75,7 +67,9 @@
                                                         <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
                                                     </h4>
 
-                                                    {{ product.description|raw }}
+                                                    {{ product.description|striptags|slice(0, 90) }}
+                                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                                        see more </a>
                                                 </div>
                                                 <div class="ratings">
                                                     <p class="pull-right">15 reviews</p>

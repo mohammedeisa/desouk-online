@@ -22,7 +22,28 @@ class DesoukOnlineMallExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('config.yml');
+
+        $groups['sonata.admin.group.desouk_online.mall']=array();
+        $mall = $groups['sonata.admin.group.desouk_online.mall'];
+        $mall['icon']='<i class="fa fa-play-circle"></i>';
+        $mall['label']='Mall';
+
+        $mall['items'][] = 'desouk_online.mall.config';
+        $mall['items'][] = 'desouk_online.mall.vendor';
+        $mall['items'][] = 'desouk_online.mall.category';
+        $mall['items'][] = 'desouk_online.mall.vendor.product.category';
+        $mall['items'][] = 'desouk_online.mall.product';
+        $mall['items'][] = 'desouk_online.mall.vendor.article';
+
+        $groups['sonata.admin.group.desouk_online.mall'] = $mall;
+        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
+
+//        $def = $container->findDefinition('');
+//        var_dump($container);exit;
+
     }
 }

@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <!-- Page Content -->
-    <section>
+    <section id="mall" class="inner_page">
         <div class="container">
             <div class="box">
-                <div class="center">
-                    <h2>Meet the Team</h2>
+                {% if config is defined %}
+                    <div class="center">
+                        <h3>{{ config.mallTitle }}</h3>
 
-                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac
-                        turpis egestas.</p>
-                </div>
+                        <p class="lead">{{ config.mallDescription|raw }}</p>
+                    </div>
+                {% endif %}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -20,15 +21,16 @@
                                             <div class="col-sm-3">
                                                 <div class="member">
                                                     <p>
-                                                        <img class="img-responsive img-thumbnail img-circle" src="{% path category.image, 'preview' %}" alt="">
+                                                        <img class="img-responsive img-thumbnail img-circle"
+                                                             src="{% path category.image, 'preview' %}" alt="">
                                                     </p>
 
-                                                    <h3><a href="{{ path('mall_category',{'slug':category.slug}) }}">{{ category.title }}</a>
-                                                        <small class="designation">
-                                                            {{ category.description|raw }}
-                                                        </small>
+                                                    <h3>
+                                                        <a href="{{ path('mall_category',{'slug':category.slug}) }}">{{ category.title }}</a>
+
                                                     </h3>
                                                 </div>
+
                                             </div>
                                         {% endfor %}
                                     </div>

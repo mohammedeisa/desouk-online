@@ -2,6 +2,8 @@
 
 namespace DesoukOnline\MallBundle\Controller;
 
+use DesoukOnline\MallBundle\Entity\Article;
+use DesoukOnline\MallBundle\Entity\MallConfig;
 use DesoukOnline\MallBundle\Entity\Product;
 use DesoukOnline\MallBundle\Entity\Vendor;
 use DesoukOnline\MallBundle\Entity\VendorProductCategory;
@@ -18,8 +20,16 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
+        $config=null;
+        $query = $this->getDoctrine()->getManager()
+            ->createQuery('SELECT p FROM ' . get_class(new MallConfig()) . ' p ');
+        try {
+            $config = $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
         $categories = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findAll();
-        return array('categories' => $categories);
+        return array('categories' => $categories, 'config' => $config);
     }
 
     /**
@@ -64,4 +74,24 @@ class FrontController extends Controller
         return array('product' => $product);
     }
 
+
+    /**
+     * @Route("/mall/vendor/article/{slug}", name ="vendor_article")
+     * @Template("DesoukOnlineMallBundle:Front:Mall/vendor_article.html.twig")
+     */
+    public function vendorArticleAction()
+    {
+        $article = $this->getDoctrine()->getManager()->getRepository(get_class(new Article()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
+        return array('article' => $article);
+    }
+
+    /**
+     * @Route("/vendor_menu/{vendor}" , name ="vendor_menu")
+     * @Template("DesoukOnlineMallBundle:Front:Mall/vendor_menu.html.twig")
+     */
+    public function vendorMenuAction()
+    {
+        $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
+        return array('vendor' => $vendor);
+    }
 }

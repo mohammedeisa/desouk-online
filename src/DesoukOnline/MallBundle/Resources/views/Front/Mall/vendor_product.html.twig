@@ -1,24 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block content %}
 
-    <section id="vendor_product">
+    <section id="vendor_product" class="inner_page">
         <div class="container">
             <div class="box">
 
                 <div class="row">
-
-                    <div class="col-md-3">
-                        <p class="lead">Shop Name</p>
-
-                        <div class="list-group">
-                            {% for category in product.vendorProductCategory.vendor.getVendorProductCategories() %}
-                                <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
-                                   class="list-group-item">{{ category.title }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                     <div class="col-md-9">
+                        <div class="left">
+                            <h4>{{ product.name }}</h4>
+                        </div>
 
                         <div class="thumbnail">
                             {% if product.gallery %}
@@ -57,11 +49,21 @@
                             {% endif %}
                             <div class="caption-full">
                                 <h4 class="pull-right">{{ product.price }} LE</h4>
-                                <h4><a href="#">{{ product.name }}</a>
-                                </h4>
 
                                 {{ product.description|raw }}
                             </div>
+                            <div class="ratings">
+                                <p class="pull-right">15 reviews</p>
+
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 

@@ -42,6 +42,14 @@ sonata_media:
             formats:
                 large:     { width: 800, quality: 100}
 
+        desouk_online_mall_articles:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
         desouk_online_product:
             providers:
                 - sonata.media.provider.image

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    <section id="vendor_product" class="inner_page">
+        <div class="container">
+            <div class="box">
+
+                <div class="row">
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':article.vendor.slug})) }}
+                    <div class="col-md-9">
+                        <div class="left">
+                            <h4>{{ article.title }}</h4>
+                        </div>
+
+                        <div class="thumbnail">
+                            {% if article.banner %}
+
+                                <img src="{% path article.banner ,'large' %}">
+                            {% endif %}
+                            <div class="caption-full">
+
+                                {{ article.description|raw }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

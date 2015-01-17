@@ -22,6 +22,7 @@ imports:
 
 
     - { resource: @DesoukOnlineRealEstateBundle/Resources/config/config.yml }
+    - { resource: @DesoukOnlineMallBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineCarBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineForSaleBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineArticleBundle/Resources/config/config.yml }
@@ -70,7 +71,7 @@ twig:
             - 'SonataFormatterBundle:Form:formatter.html.twig'
             - 'SonataMediaBundle:Form:media_widgets.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
-            - 'MeisaMenuBundle:Form:tabssoft_link_field.html.twig'
+            - 'MeisaMenuBundle:Form:meisa_link_field.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 

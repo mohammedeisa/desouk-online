@@ -83,6 +83,11 @@ class Vendor
     protected $vendorProductCategories;
 
     /**
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Article", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     */
+    protected $articles;
+
+    /**
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
@@ -325,6 +330,45 @@ class Vendor
     {
         return $this->vendorProductCategories;
     }
+
+
+    /**
+     * @param mixed $objects
+     */
+    public function setArticles($objects)
+    {
+        $this->articles = new ArrayCollection();
+        foreach ($objects as $object) {
+            $object->setVendor($this);
+            $this->addArticles($object);
+        }
+    }
+
+    public function addArticles($object)
+    {
+        $this->articles[] = $object;
+        return $this;
+    }
+
+    /**
+     * Remove Menu
+     *
+     * @param StudentSessions $object
+     */
+    public function removeArticles($object)
+    {
+        $this->articles->removeElement($object);
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
 
     /**
      * @return string

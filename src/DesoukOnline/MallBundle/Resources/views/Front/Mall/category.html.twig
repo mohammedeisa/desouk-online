@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <!-- Page Content -->
-    <section id="mall_category">
+    <section id="mall_category" class="inner_page">
         <div class="container">
             <div class="box">
                 <div class="center">
-                    <h2>{{ category.title }}</h2>
+                    <h3>{{ category.title }}</h3>
 
                     <p class="lead">{{ category.description|raw }}</p>
                 </div>
@@ -14,15 +14,17 @@
                         <li class="portfolio-item apps">
                             <div class="item-inner">
                                 <div class="portfolio-image">
-                                    <img src="{% path vendor.logo, 'preview' %}" alt="">
+                                    <a href="{{ path('vendor',{'slug':vendor.slug}) }}">
+                                        <img src="{% path vendor.logo, 'preview' %}" alt="">
+                                    </a>
 
-                                    <div class="overlay">
-                                        <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                           href="{% path vendor.logo, 'large' %}"><i
-                                                    class="icon-eye-open"></i></a>
-                                    </div>
+                                    {#<div class="overlay">#}
+                                    {#<a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"#}
+                                    {#href="{% path vendor.logo, 'large' %}"><i#}
+                                    {#class="icon-eye-open"></i></a>#}
+                                    {#</div>#}
                                 </div>
-                                <h5><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a> </h5>
+                                <h5><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a></h5>
                             </div>
                         </li><!--/.portfolio-item-->
                     {% endfor %}

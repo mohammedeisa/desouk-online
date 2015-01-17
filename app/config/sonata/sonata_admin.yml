@@ -66,16 +66,6 @@ sonata_admin:
                               - desouk_online.for_sale
                               - desouk_online.for_sale_category
                               - desouk_online.delivery
-
-            sonata.admin.group.desouk_online.mall:
-                          label: Mall
-                          icon:  '<i class="fa fa-play-circle"></i>'
-                          items:
-                              - desouk_online.mall.vendor
-                              - desouk_online.mall.category
-                              - desouk_online.mall.vendor.product.category
-                              - desouk_online.mall.product
-
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'

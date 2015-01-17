@@ -1,0 +1,14 @@
+<div class="col-md-3">
+    <p class="lead"><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}</a></p>
+
+    <div class="list-group">
+        {% for category in vendor.getVendorProductCategories() %}
+            <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
+               class="list-group-item">{{ category.title }}</a>
+        {% endfor %}
+        {% for article in vendor.getArticles %}
+            <a href="{{ path('vendor_article',{'slug':article.slug}) }}"
+               class="list-group-item">{{ article.title }}</a>
+        {% endfor %}
+    </div>
+</div>

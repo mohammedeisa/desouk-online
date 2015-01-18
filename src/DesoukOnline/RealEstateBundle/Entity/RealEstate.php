@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -106,6 +107,45 @@ class RealEstate
      * @ORM\Column(name="updatedAt", type="datetime")
      */
     private $updatedAt;
+	
+	//////////////////////////////// Images //////////////////////////////////////////////
+	/**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="realestate" ,cascade="persist")
+     */
+    protected $images;
+
+    /**
+     * @param mixed $images
+     */
+    public function setImages($images)
+    {
+        $this->images = new ArrayCollection();
+        foreach ($images as $field) {
+            $this->addImage($field);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function addImage($field)
+    {
+        $field->setRealestate($this);
+
+        $this->images[] = $field;
+
+    }
+
+    public function removeImages( $fields)
+    {
+        $this->getImages()->removeElement($fields);
+    }
+	//////////////////////////////////////////////////////////////////////////////////////
 	
 	////////////////////////////////  Image Field ////////////////////////////////////////
 	/**

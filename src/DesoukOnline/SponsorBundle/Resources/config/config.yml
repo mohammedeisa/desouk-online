@@ -1,0 +1,11 @@
+services:
+    desouk_online.sponsor:
+        class: DesoukOnline\SponsorBundle\Admin\SponsorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Sponsors" }
+        arguments:
+            - ~
+            - DesoukOnline\SponsorBundle\Entity\Sponsor
+            - ~
+        calls:
+            - [ setTranslationDomain, [DesoukOnlineProductBundle]]

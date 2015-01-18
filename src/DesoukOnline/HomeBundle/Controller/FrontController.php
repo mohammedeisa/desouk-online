@@ -3,6 +3,7 @@
 namespace DesoukOnline\HomeBundle\Controller;
 
 use DesoukOnline\BannerBundle\Entity\Banner;
+use DesoukOnline\MallBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -52,5 +53,16 @@ class FrontController extends Controller
     {
     }
 
+
+    /**
+     * @Route("/recent_products" , name ="recent_products")
+     * @Template("DesoukOnlineHomeBundle:Front:recent_products.html.twig")
+     */
+    public function recentProductsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $vendorProducts = $em->createQuery('SELECT a FROM ' . get_class(new Product()) . ' a order by a.updatedAt DESC')->setMaxResults(3)->getResult();
+        return array('vendor_products' => $vendorProducts);
+    }
 
 }

@@ -78,6 +78,16 @@ sonata_media:
                 preview:   { width: 235, quality: 100}
                 small:     { width: 300, quality: 100}
                 large:     { width: 750, quality: 100}
+
+        desouk_online_sponsor:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+
     cdn:
         # define the public base url for the uploaded media
         server:

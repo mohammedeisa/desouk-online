@@ -28,6 +28,21 @@ class RealEstateAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+    	///////////////////////////// Add Image preview /////////////////////////////////////
+    	// get the current Image instance
+        $realestate = $this->getSubject();
+
+        // use $fileFieldOptions so we can add other options to the field
+        $fileFieldOptions = array('required' => false);
+        if ($realestate && ($webPath = $realestate->getWebPath())) {
+            // get the container so the full path to the image can be set
+            $container = $this->getConfigurationPool()->getContainer();
+            $fullPath = $container->get('request')->getBasePath().'/'.$webPath;
+
+            // add a 'help' option containing the preview's img tag
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="'.$fullPath.'" class="admin-preview" />';
+        }
+    	/////////////////////////////////////////////////////////////////////////////////////
         $formMapper
             ->add('title')
             ->add('type', 'choice', 
@@ -54,7 +69,19 @@ class RealEstateAdmin extends Admin
             ->add('area')
             ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
             ->add('enabled', null, array('required' => true, 'data' => True))
-			->add('file', 'file', array('required' => false));
+			->add('file', 'file', $fileFieldOptions)
+			->add('images', 'sonata_type_collection',
+                array(
+                    'required' => false,
+                    'by_reference' => false
+                ),
+                array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'allow_delete' =>true,
+
+            ))
+			;
     }
 
     /**
@@ -108,10 +135,12 @@ class RealEstateAdmin extends Admin
 
 	 public function prePersist($realestate) {
 	    $this->renameFile($realestate);
+		$this->manageEmbeddedImageAdmins($realestate);
 	 }
 	
 	 public function preUpdate($realestate) {
 	    $this->renameFile($realestate);
+		$this->manageEmbeddedImageAdmins($realestate);
 	 }
 	
 	 public function renameFile($realestate) {
@@ -122,4 +151,20 @@ class RealEstateAdmin extends Admin
 	        // $realestate->setPath($filename.'.'.$realestate->getFile()->guessExtension());
 	    }
 	 }
+	 private function manageEmbeddedImageAdmins($realestate) {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            // detect embedded Admins that manage Images
+            if ($fieldName == 'images') {
+                /** @var Image $image */
+                $images = $realestate->getImages();
+				foreach ($images as $image) {
+					if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->upload();
+                    } 
+				}
+            }
+        }
+    }
 }

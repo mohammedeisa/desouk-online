@@ -15,3 +15,11 @@ services:
             - ~
             - DesoukOnline\RealEstateBundle\Entity\Area
             - ~
+    desouk_online.real_estate.image:
+        class: DesoukOnline\RealEstateBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Images" }
+        arguments:
+            - ~
+            - DesoukOnline\RealEstateBundle\Entity\Image
+            - ~

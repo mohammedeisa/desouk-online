@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class DeliveryAdmin extends Admin
+class MenuAdmin extends Admin
 {
 
     /**
@@ -31,9 +31,18 @@ class DeliveryAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
-            ->add('contacts', 'ckeditor')
-            ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_delivery')))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('delivery')
+            ->add('menuItems', 'sonata_type_collection', array(
+                    'cascade_validation' => true,
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
+                    'link_parameters' => array('context' => 'default'),
+                )
+            )
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_menu')))
+        ;
     }
 
     /**
@@ -46,7 +55,7 @@ class DeliveryAdmin extends Admin
             ->add('description')
             ->add('contacts')
             ->add('logo')
-            ->add('enabled');
+        ;
     }
 
     /**
@@ -56,7 +65,7 @@ class DeliveryAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('enabled')
+
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -73,8 +82,20 @@ class DeliveryAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
-            ->add('enabled');
+        ;
+    }
+    public function prePersist($object)
+    {
+        foreach ($object->getMenuItems() as $menuItem) {
+            $menuItem->setMenu($object);
+        }
     }
 
+    public function preUpdate($object)
+    {
+        foreach ($object->getMenuItems() as $menuItem) {
+            $menuItem->setMenu($object);
+        }
+    }
 
 }

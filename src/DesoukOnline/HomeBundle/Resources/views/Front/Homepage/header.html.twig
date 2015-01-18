@@ -8,18 +8,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('home') }}"></a>
+                {#<a class="navbar-brand" href="{{ path('home') }}"></a>#}
+                <div id="logo" class="navbar-brand">
+                    <a class="" href="{{ path('home') }}">
+
+                        <div id="logo_words_letters">
+                            <span id="logo_letters">
+                                <span id="logo_letter_d">D</span>
+                                <span id="logo_letter_o">O</span>
+                            </span>
+
+                            <div id="logo_words">
+                                <p id="logo_desouk_word">
+                                    دسوق
+                                </p>
+
+                                <p id="logo_desouk_online">
+                                    اونــلايــن
+                                </p>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+
+
             </div>
             <div class="collapse navbar-collapse">
                 {{ "header_1"|show_menu|raw }}
-                {#<ul class="nav navbar-nav">#}
-                    {#<li class="active"><a href="#main-slider"><i class="icon-home"></i></a></li>#}
-                    {#<li><a href="#services">Services</a></li>#}
-                    {#<li><a href="#portfolio">Portfolio</a></li>#}
-                    {#<li><a href="#pricing">Pricing</a></li>#}
-                    {#<li><a href="#about-us">About Us</a></li>#}
-                    {#<li><a href="#contact">Contact</a></li>#}
-                {#</ul>#}
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class DeliveryAdmin extends Admin
+class MenuItemAdmin extends Admin
 {
 
     /**
@@ -30,10 +30,10 @@ class DeliveryAdmin extends Admin
     {
         $formMapper
             ->add('title')
-            ->add('description', 'ckeditor')
-            ->add('contacts', 'ckeditor')
-            ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_delivery')))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('description')
+            ->add('price')
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_menu_item')))
+        ;
     }
 
     /**
@@ -44,9 +44,9 @@ class DeliveryAdmin extends Admin
         $showMapper
             ->add('title')
             ->add('description')
-            ->add('contacts')
-            ->add('logo')
-            ->add('enabled');
+            ->add('price')
+            ->add('image')
+        ;
     }
 
     /**
@@ -56,7 +56,7 @@ class DeliveryAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('enabled')
+            ->add('price')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -73,7 +73,7 @@ class DeliveryAdmin extends Admin
     {
         $datagridMapper
             ->add('title')
-            ->add('enabled');
+            ->add('price');
     }
 
 

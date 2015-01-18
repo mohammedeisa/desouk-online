@@ -7,3 +7,20 @@ services:
             - ~
             - DesoukOnline\DeliveryBundle\Entity\Delivery
             - ~
+
+    desouk_online.delivery.menu:
+        class: DesoukOnline\DeliveryBundle\Admin\MenuAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Delivery Menus" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\DeliveryBundle\Entity\Menu
+            - ~
+    desouk_online.delivery.menu.item:
+        class: DesoukOnline\DeliveryBundle\Admin\MenuItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Delivery Menus items" , show_in_dashboard: false }
+        arguments:
+            - ~
+            - DesoukOnline\DeliveryBundle\Entity\MenuItem
+            - ~

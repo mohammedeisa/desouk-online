@@ -22,7 +22,8 @@
 .inner_page {
     margin-top: 60px;
 }
-#mall_category, #vendor_homepage,#vendor_product_category,#vendor_product {
+
+#mall_category, #vendor_homepage, #vendor_product_category, #vendor_product {
     margin-top: 60px;
 }
 
@@ -48,6 +49,85 @@
     background-repeat: no-repeat;
 }
 
-#vendor_homepage .thumbnail > a>img {
+#vendor_homepage .thumbnail > a > img {
     height: 120px;
+}
+
+.carousel-content h2 {
+    color: #ffffff;
+}
+
+/*LOGO*/
+#logo {
+    text-align: right
+}
+
+#logo a {
+    display: inline-block;
+}
+
+#logo_words_letters {
+    float: right;
+}
+
+#logo_letters {
+    margin-bottom: 0;
+    font-weight: bolder;
+    display: inline-block;
+    float: right;
+    font-size: 48px;
+}
+
+#logo_letters span {
+    margin-right: 1px;
+}
+
+#logo_letter_d {
+    float: left;
+    /*transform: rotate(180deg);*/
+    /*line-height: 33px;*/
+    line-height: 57px;
+
+}
+
+#logo_letter_o {
+    margin-left: -2px;
+    line-height: 57px;
+}
+
+#logo_words {
+    float: right;
+    display: inline-block;
+}
+
+#logo_desouk_word {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+#logo_desouk_online {
+    color: #999;
+    /*margin-right: 30px;*/
+}
+
+/*LOGO*/
+
+.menu_table img{
+    max-width: 50px;
+    max-height: 50px;
+}
+.delivery_contacts{
+    text-align: right;
+    display: inline-block;
+}
+.delivery_data{
+    display: inline-block;
+width: 49%;
+    vertical-align: top;
+}
+.delivery_logo{
+    display: inline-block;
+    width: 49%;
+    text-align: left;
+    vertical-align: top;
 }

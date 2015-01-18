@@ -42,8 +42,5 @@ class DesoukOnlineMallExtension extends Extension
         $groups['sonata.admin.group.desouk_online.mall'] = $mall;
         $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
 
-//        $def = $container->findDefinition('');
-//        var_dump($container);exit;
-
     }
 }

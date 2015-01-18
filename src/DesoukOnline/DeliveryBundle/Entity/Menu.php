@@ -10,10 +10,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * News
  *
- * @ORM\Table(name="delivery")
+ * @ORM\Table(name="delivery_menu")
  * @ORM\Entity
  */
-class Delivery
+class Menu
 {
     /**
      * @var integer
@@ -31,7 +31,6 @@ class Delivery
      */
     private $title;
 
-
     /**
      * @var string
      *
@@ -39,42 +38,28 @@ class Delivery
      */
     private $description;
 
-
     /**
      * @var string
      *
-     * @ORM\Column(name="contacts", type="text")
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery" , cascade={"all"},inversedBy="menus" )
+     * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $contacts;
+    private $delivery;
 
     /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="logo_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\MenuItem", mappedBy="menu", cascade={ "all"}, orphanRemoval=true)
      */
-    private $logo;
-
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" , cascade={"all"},inversedBy="deliveries" )
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $user;
-
-    /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Menu", mappedBy="delivery", cascade={ "all"}, orphanRemoval=true)
-     */
-    protected $menus;
+    private $menuItems;
 
 
     /**
      * @var string
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media" , cascade={"remove"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $enabled;
+    private $image;
+
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
@@ -97,21 +82,6 @@ class Delivery
      */
     private $updatedAt;
 
-    /**
-     * @return string
-     */
-    public function getContacts()
-    {
-        return $this->contacts;
-    }
-
-    /**
-     * @param string $contacts
-     */
-    public function setContacts($contacts)
-    {
-        $this->contacts = $contacts;
-    }
 
     /**
      * @return string
@@ -129,21 +99,6 @@ class Delivery
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * @param string $enabled
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-    }
 
     /**
      * @return int
@@ -161,21 +116,6 @@ class Delivery
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getLogo()
-    {
-        return $this->logo;
-    }
-
-    /**
-     * @param string $logo
-     */
-    public function setLogo($logo)
-    {
-        $this->logo = $logo;
-    }
 
     /**
      * @return string
@@ -244,34 +184,34 @@ class Delivery
     /**
      * @return string
      */
-    public function getUser()
+    public function getDelivery()
     {
-        return $this->user;
+        return $this->delivery;
     }
 
     /**
-     * @param string $user
+     * @param string $delivery
      */
-    public function setUser($user)
+    public function setDelivery($delivery)
     {
-        $this->user = $user;
+        $this->delivery = $delivery;
     }
 
     /**
      * @param mixed $objects
      */
-    public function setMenus($objects)
+    public function setMenuItems($objects)
     {
-        $this->menus = new ArrayCollection();
+        $this->menuItems = new ArrayCollection();
         foreach ($objects as $object) {
-            $object->setVendor($this);
-            $this->addMenus($object);
+            $object->setMenu($this);
+            $this->addMenuItems($object);
         }
     }
 
-    public function addMenus($object)
+    public function addMenuItems($object)
     {
-        $this->menus[] = $object;
+        $this->menuItems[] = $object;
         return $this;
     }
 
@@ -280,23 +220,39 @@ class Delivery
      *
      * @param StudentSessions $object
      */
-    public function removeMenus($object)
+    public function removeMenuItems($object)
     {
-        $this->menus->removeElement($object);
+        $this->menuItems->removeElement($object);
     }
-
 
     /**
      * @return mixed
      */
-    public function getMenus()
+    public function getMenuItems()
     {
-        return $this->menus;
+        return $this->menuItems;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     function __toString()
     {
         return ($this->getTitle()) ? $this->getTitle() : '';
     }
+
 
 }

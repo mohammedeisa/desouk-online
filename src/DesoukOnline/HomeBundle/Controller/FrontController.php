@@ -2,6 +2,7 @@
 
 namespace DesoukOnline\HomeBundle\Controller;
 
+use DesoukOnline\BannerBundle\Entity\Banner;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -39,6 +40,8 @@ class FrontController extends Controller
      */
     public function bannerAction()
     {
+        $banners = $this->getDoctrine()->getManager()->getRepository(get_class(new Banner()))->findAll();
+        return array('banners' => $banners);
     }
 
     /**

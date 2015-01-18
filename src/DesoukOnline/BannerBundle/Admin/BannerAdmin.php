@@ -25,16 +25,27 @@ class BannerAdmin extends Admin
     /**
      * {@inheritdoc}
      */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->add('title')
+            ->add('body','ckeditor')
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_h0me_banner')))
+            ->add('link', 'meisa_link', array('attr' => array('class' => 'menu-link-input')))
+            ->add('enabled', null, array('required' => true, 'data' => True));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
-
             ->add('title')
             ->add('body')
             ->add('image')
             ->add('link')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     /**
@@ -51,8 +62,7 @@ class BannerAdmin extends Admin
                     'edit' => array(),
                     'delete' => array(),
                 )
-            ))
-        ;
+            ));
     }
 
     /**
@@ -61,23 +71,9 @@ class BannerAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-           ->add('title')
-            ->add('enabled')
-        ;
+            ->add('title')
+            ->add('enabled');
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-        $formMapper
-           ->add('title')
-           ->add('body')
-           ->add('image', 'sonata_type_model_list', array(), array( 'link_parameters' => array('context' => 'desouk_online_banner')))
-            ->add('link','meisa_link',array('attr'=>array('class'=>'menu-link-input')))
-            ->add('enabled' ,null, array('required' => true, 'data' => True))
-        ;
-    }
 
 }

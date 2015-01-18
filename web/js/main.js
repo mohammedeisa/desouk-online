@@ -27,9 +27,9 @@ jQuery(function($) {
 	//});
 
 	//scrollspy
-	$('[data-spy="scroll"]').each(function () {
-		var $spy = $(this).scrollspy('refresh')
-	})
+	//$('[data-spy="scroll"]').each(function () {
+	//	var $spy = $(this).scrollspy('refresh')
+	//})
 
 	//PrettyPhoto
 	$("a.preview").prettyPhoto({

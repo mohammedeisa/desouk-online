@@ -30,7 +30,15 @@
 #mall_category .portfolio-item img {
     height: 135px;
 }
-
+#search_page .portfolio-item img{
+    height: 135px;
+}
+#search_page .portfolio-item .stars{
+    text-align: left;
+}
+#search_page .portfolio-item .product_name{
+    text-align: left;
+}
 #vendor_product .carousel-inner > .item > img, .carousel-inner {
     height: 300px;
 }
@@ -130,4 +138,16 @@ width: 49%;
     width: 49%;
     text-align: left;
     vertical-align: top;
+}
+
+.home-search-form{
+    direction: ltr;
+}
+.home-search-form button,.home-search-form input{
+text-align: right;
+    direction: rtl;
+}
+.home-search-form >div{
+    float: none;
+    margin: auto;
 }

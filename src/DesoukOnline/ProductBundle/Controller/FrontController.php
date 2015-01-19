@@ -148,23 +148,6 @@ class FrontController extends Controller
     }
 
     /**
-     * @Route("/search/{s}", name="search" , defaults={"s" = null})
-     * @Template("DesoukOnlineProductBundle:Front:search.html.twig")
-     */
-    public function searchAction(Request $request)
-    {
-        $config=$this->get('request')->getSession()->get('tabs_config');
-        $search= $request->query->get('s');
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT p FROM DesoukOnlineProductBundle:Product p where p.name like '%".$search."%'";
-        $query= $em->createQuery($dql);
-        $searchResults= $query->getResult();
-        return array('results'=>$searchResults,'config'=>$config,'search'=>$search);
-
-    }
-
-    /**
      * @Route("/change_language/{slug}/{language}", name="change_language" )
      */
     public function changeLanguageAction(){

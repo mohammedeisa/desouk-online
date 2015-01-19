@@ -7,6 +7,7 @@ use DesoukOnline\MallBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class FrontController extends Controller
 {
@@ -62,7 +63,34 @@ class FrontController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $vendorProducts = $em->createQuery('SELECT a FROM ' . get_class(new Product()) . ' a order by a.updatedAt DESC')->setMaxResults(3)->getResult();
-        return array('vendor_products' => $vendorProducts);
+        $propertyForSale = null;
+        $propertyForRent = null;
+        $forSale = null;
+        $cars = null;
+        return array(
+            'vendor_products' => $vendorProducts,
+            'property_for_sale' => $propertyForSale,
+            'property_for_rent' => $propertyForRent,
+            'for_sale' => $forSale,
+            'cars' => $cars
+
+
+        );
+    }
+
+    /**
+     * @Route("/search/{search_string}", name="search" , defaults={"search_string" = null})
+     * @Template("DesoukOnlineHomeBundle:Front:search.html.twig")
+     */
+    public function searchAction(Request $request)
+    {
+        $search = $request->query->get('search_string');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $dql = "SELECT p FROM DesoukOnlineMallBundle:Product p where p.name like '%" . $search . "%' or p.description like '%" . $search . "%' ";
+        $query = $em->createQuery($dql);
+        $searchResults = $query->getResult();
+        return array('mall_products' => $searchResults, 'search' => $search);
+
     }
 
 }

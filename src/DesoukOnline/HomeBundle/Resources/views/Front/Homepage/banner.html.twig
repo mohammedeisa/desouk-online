@@ -19,4 +19,19 @@
     <!--/.carousel-inner-->
     <a class="prev" href="#main-slider" data-slide="prev"><i class="icon-angle-left"></i></a>
     <a class="next" href="#main-slider" data-slide="next"><i class="icon-angle-right"></i></a>
+
+    <div class="row home-search-form">
+        <div class="col-lg-6">
+            <form action="{{ path('search') }}" method="get">
+                <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">ابحث !</button>
+                </span>
+                    <input type="text" name="search_string" class="form-control" placeholder="ابحث عن">
+                </div>
+                <!-- /input-group -->
+            </form>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
 </section><!--/#main-slider-->

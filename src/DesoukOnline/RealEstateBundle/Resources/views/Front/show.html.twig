@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <section id="vendor_product" class="inner_page">
+        <div class="container">
+            <div class="box">
+
+                <div class="row">
+                    {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter')) }}
+                    <div class="col-md-9">
+                        <div class="left">
+                            <h4>{{ realestate.title }}</h4>
+                        </div>
+
+                        <div class="thumbnail">
+                            <div class="caption-full">
+                                <h4 class="pull-right">{{ realestate.price }} جنيه</h4>
+
+                                {{ realestate.description|raw }}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

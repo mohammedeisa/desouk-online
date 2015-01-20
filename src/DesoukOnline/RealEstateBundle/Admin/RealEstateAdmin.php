@@ -35,12 +35,9 @@ class RealEstateAdmin extends Admin
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
         if ($realestate && ($webPath = $realestate->getWebPath())) {
-            // get the container so the full path to the image can be set
-            $container = $this->getConfigurationPool()->getContainer();
-            $fullPath = $container->get('request')->getBasePath().'/'.$webPath;
 
             // add a 'help' option containing the preview's img tag
-            $fileFieldOptions['help'] = '<img width="100" height="100" src="'.$fullPath.'" class="admin-preview" />';
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="'.$webPath.'" class="admin-preview" />';
         }
     	/////////////////////////////////////////////////////////////////////////////////////
         $formMapper
@@ -56,6 +53,7 @@ class RealEstateAdmin extends Admin
 					)
 				)
 			)
+			->add('summary')
             ->add('description', 'ckeditor')
             ->add('purpose', 'choice', 
             	array('choices' => 

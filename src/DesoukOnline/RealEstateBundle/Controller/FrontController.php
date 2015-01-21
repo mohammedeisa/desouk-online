@@ -27,7 +27,14 @@ class FrontController extends Controller
     public function showAction($slug)
     {
         $realestate = $this->getDoctrine()->getManager()->getRepository(get_class(new RealEstate()))->findOneBy(array('slug' => $slug));
-        return array('realestate' => $realestate);
+        $variables = array('realestate' => $realestate);
+		if(is_file($realestate->getAbsolutePath())){
+			$variables['has_slider'] = true;
+		}
+		else{
+			$variables['has_slider'] = false;
+		}
+        return $variables;
     }
 	
 	/**

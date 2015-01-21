@@ -20,6 +20,15 @@
                                 <div class="realestate_title">
                                     <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">{{ realestate.title }}</a>
                                 </div>
+                                <div class="realestate_properities">
+                                	<div>السعر : <span>{{realestate.price}} جنيه</span></div>
+                                	<div>
+                                		النوع : <span>{{realestate.type}}</span>
+                                	</div>
+                                	<div >
+                                		الغرض : <span>{{realestate.purpose}}</span>
+                                	</div>
+                                </div>
                                 <div class="realestate_summary">
                                     {{realestate.summary}}
                                 </div>

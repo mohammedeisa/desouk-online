@@ -30,15 +30,19 @@
 #mall_category .portfolio-item img {
     height: 135px;
 }
-#search_page .portfolio-item img{
+
+#search_page .portfolio-item img {
     height: 135px;
 }
-#search_page .portfolio-item .stars{
+
+#search_page .portfolio-item .stars {
     text-align: left;
 }
-#search_page .portfolio-item .product_name{
+
+#search_page .portfolio-item .product_name {
     text-align: left;
 }
+
 #vendor_product .carousel-inner > .item > img, .carousel-inner {
     height: 300px;
 }
@@ -120,34 +124,50 @@
 
 /*LOGO*/
 
-.menu_table img{
+.menu_table img {
     max-width: 50px;
     max-height: 50px;
 }
-.delivery_contacts{
+
+.delivery_contacts {
     text-align: right;
     display: inline-block;
 }
-.delivery_data{
+
+.delivery_data {
     display: inline-block;
-width: 49%;
+    width: 49%;
     vertical-align: top;
 }
-.delivery_logo{
+
+.delivery_logo {
     display: inline-block;
     width: 49%;
     text-align: left;
     vertical-align: top;
 }
 
-.home-search-form{
+.home-search-form {
     direction: ltr;
 }
-.home-search-form button,.home-search-form input{
-text-align: right;
+
+.home-search-form button, .home-search-form input {
+    text-align: right;
     direction: rtl;
 }
-.home-search-form >div{
+
+.home-search-form > div {
     float: none;
     margin: auto;
+}
+
+.desouk_online_rating {
+    width: 200px;
+    text-align: left;
+    width: 100%;
+}
+
+.desouk_online_rating .voted {
+    padding-top: 4px;
+    color: #999;
 }

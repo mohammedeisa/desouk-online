@@ -34,6 +34,7 @@ imports:
     - { resource: @DesoukOnlineProductBundle/Resources/config/category.yml }
     - { resource: @DesoukOnlineProductBundle/Resources/config/product_has_category.yml }
     - { resource: @DesoukOnlineProductBundle/Resources/config/product_hasTag.yml }
+    - { resource: @DesoukOnlineRatingBundle/Resources/config/config.yml }
 
 framework:
     #esi:                   ~

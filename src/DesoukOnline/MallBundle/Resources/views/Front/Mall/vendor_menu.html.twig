@@ -1,5 +1,5 @@
 <div class="col-md-3">
-    <p class="lead"><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}</a></p>
+    <h4 class=""><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}</a></h4>
 
     <div class="list-group">
         {% for category in vendor.getVendorProductCategories() %}

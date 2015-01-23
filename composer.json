@@ -60,7 +60,8 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "gedmo/doctrine-extensions": "2.3.*@dev",
         "mohammedeisa/menu-bundle": "2.0.*@dev",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "friendsofsymfony/jsrouting-bundle": "~1.5"
     },
 
     "require-dev": {

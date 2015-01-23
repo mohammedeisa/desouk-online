@@ -49,19 +49,12 @@
                             {% endif %}
                             <div class="caption-full">
                                 <h4 class="pull-right">{{ product.price }} LE</h4>
-
+                                <hr>
                                 {{ product.description|raw }}
+                                <hr>
                             </div>
-                            <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
-
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+                            <div class="desouk_online_rating">
+                                {{ ("vendor_product_"~product.id)|show_rating|raw }}
                             </div>
 
                         </div>
@@ -72,5 +65,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}

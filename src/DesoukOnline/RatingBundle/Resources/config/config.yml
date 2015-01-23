@@ -1,0 +1,8 @@
+services:
+  desouk_online_rating:
+      class: DesoukOnline\RatingBundle\Extension\RatingTwigExtension
+      arguments:
+            em: "@doctrine.orm.entity_manager"
+            container: "@service_container"
+      tags:
+          - { name: twig.extension }

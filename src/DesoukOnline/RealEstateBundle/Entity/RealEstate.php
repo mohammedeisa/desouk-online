@@ -63,6 +63,13 @@ class RealEstate
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
 
     /**
      * @var string
@@ -206,7 +213,7 @@ class RealEstate
 	
 	public function getWebPath()
 	{
-		return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+		return null === $this->path ? null : '/'.$this->getUploadDir().'/'.$this->path;
 	}
 	
 	protected function getUploadRootDir()
@@ -229,7 +236,7 @@ class RealEstate
 	    if (null === $this->getFile()) {
 	        return;
 	    }
-		if ($file = $this->getAbsolutePath()) {
+		if (is_file($this->getAbsolutePath())) {
 	        unlink($file); 
 	    }
 		
@@ -464,4 +471,54 @@ class RealEstate
         return $this->title;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     * @return RealEstate
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return string 
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \DesoukOnline\RealEstateBundle\Entity\Image $images
+     */
+    public function removeImage(\DesoukOnline\RealEstateBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
 }

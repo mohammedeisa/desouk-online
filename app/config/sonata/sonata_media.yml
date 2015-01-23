@@ -87,6 +87,45 @@ sonata_media:
                 small:     { width: 300, quality: 100}
                 large:     { width: 750, quality: 100}
 
+        desouk_online_portfolio:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+        desouk_online_portfolio_item:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+        desouk_online_web_development:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 750, quality: 100}
+
+        desouk_online_web_development_banner:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 1030, quality: 100}
+
+        desouk_online_hosting_banner:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                preview:   { width: 235, quality: 100}
+                small:     { width: 300, quality: 100}
+                large:     { width: 1030, quality: 100}
 
     cdn:
         # define the public base url for the uploaded media

@@ -1,0 +1,25 @@
+services:
+    desouk_online.portfolio:
+        class: DesoukOnline\WebDevelopmentBundle\Admin\PortfolioAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Portfolio" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\WebDevelopmentBundle\Entity\Portfolio
+            - ~
+    desouk_online.portfolio_item:
+        class: DesoukOnline\WebDevelopmentBundle\Admin\PortfolioItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Portfolio item" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\WebDevelopmentBundle\Entity\PortfolioItem
+            - ~
+    desouk_online.web_development:
+        class: DesoukOnline\WebDevelopmentBundle\Admin\WebDevelopmentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Web development" }
+        arguments:
+            - ~
+            - DesoukOnline\WebDevelopmentBundle\Entity\WebDevelopment
+            - ~

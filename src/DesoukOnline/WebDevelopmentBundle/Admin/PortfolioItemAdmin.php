@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace DesoukOnline\DeliveryBundle\Admin;
+namespace DesoukOnline\WebDevelopmentBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -20,29 +20,28 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class MenuAdmin extends Admin
+class PortfolioItemAdmin extends Admin
 {
-
     /**
      * {@inheritdoc}
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('title')
-            ->add('description', 'ckeditor')
-            ->add('delivery')
-            ->add('menuItems', 'sonata_type_collection', array(
-                'cascade_validation' => true,
-            ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                    'link_parameters' => array('context' => 'default'),
-                )
-            )
-            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_menu')));
+            ->add('title');
+        if ($this->hasParentFieldDescription()) {
+            $formMapper->add('description', 'textarea', array('attr' => array('style' => 'height: 100px;width: 260px;')));
+        } else {
+            $formMapper->add('portfolio');
+            $formMapper->add('description', 'ckeditor');
+            $formMapper->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_portfolio_item')));
+
+        }
+        $formMapper->add('link')
+            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_portfolio_item')))
+            ->add('enabled', null, array());
     }
+
 
     /**
      * {@inheritdoc}
@@ -52,8 +51,10 @@ class MenuAdmin extends Admin
         $showMapper
             ->add('title')
             ->add('description')
-            ->add('contacts')
-            ->add('logo');
+            ->add('portfolio')
+            ->add('link')
+            ->add('image')
+            ->add('enabled');
     }
 
     /**
@@ -63,6 +64,8 @@ class MenuAdmin extends Admin
     {
         $listMapper
             ->add('title')
+            ->add('portfolio')
+            ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -78,23 +81,10 @@ class MenuAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title');
+            ->add('title')
+            ->add('portfolio')
+            ->add('enabled');
     }
 
-    public function prePersist($object)
-    {
-        if ($object->getMenuItems())
-            foreach ($object->getMenuItems() as $menuItem) {
-                $menuItem->setMenu($object);
-            }
-    }
-
-    public function preUpdate($object)
-    {
-        if ($object->getMenuItems())
-            foreach ($object->getMenuItems() as $menuItem) {
-                $menuItem->setMenu($object);
-            }
-    }
 
 }

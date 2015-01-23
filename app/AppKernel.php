@@ -92,7 +92,7 @@ class AppKernel extends Kernel
             new DesoukOnline\SponsorBundle\DesoukOnlineSponsorBundle(),
             new DesoukOnline\RatingBundle\DesoukOnlineRatingBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-
+            new DesoukOnline\WebDevelopmentBundle\DesoukOnlineWebDevelopmentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -82,6 +82,7 @@ class RatingController extends Controller
                     ->setParameter('id', $id)
                     ->getQuery()->execute();
                 if ($update) setcookie("rating_" . $id, 1, time() + 2592000);
+                $count++;
             }
         } //end for the "if(!$voted)"
         $tense = ($added == 1) ? "vote" : "votes"; //plural form votes/vote

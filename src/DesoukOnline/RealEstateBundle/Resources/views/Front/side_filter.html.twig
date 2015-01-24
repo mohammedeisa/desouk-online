@@ -1,3 +1,18 @@
+ {% if parent_request.get('purpose') %}
+    {% set purpose = parent_request.get('purpose') %}
+{% else %}
+    {% set purpose = 'all' %}
+{% endif %}
+{% if parent_request.get('type') %}
+    {% set type = parent_request.get('type') %}
+{% else %}
+    {% set type = 'all' %}
+{% endif %}
+{% if parent_request.get('area') %}
+    {% set area = parent_request.get('area') %}
+{% else %}
+    {% set area = 'all' %}
+{% endif %}
  <div class="realestate_filter">
 	<div class="panel panel-default">
         <div class="panel-heading">
@@ -8,33 +23,29 @@
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">الغرض </button>
                 <ul class="" role="menu">
-                    <li><a href="#">للبيع</a></li>
-                    <li><a href="#">للإيجار</a></li>
+                	<li ><a {{ purpose == 'all' ? 'style="color:#ccc;"' : ''}}  href="{{ path('realestate',{'purpose':'all','type':type,'area':area}) }}">الكل</a></li>
+                    <li><a {{ purpose == 'للبيع' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':'للبيع','type':type,'area':area}) }}">للبيع</a></li>
+                    <li><a {{ purpose == 'للإيجار' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':'للإيجار','type':type,'area':area}) }}">للإيجار</a></li>
                 </ul>
             </div>
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">النوع </button>
                 <ul class="" role="menu">
-                    <li><a href="#">منزل</a></li>
-                    <li><a href="#">شقة</a></li>
-                    <li><a href="#">محل</a></li>
-                    <li><a href="#">أرض زراعية</a></li>
-                    <li><a href="#">أرض مبانى</a></li>
+                	<li><a {{ type == 'all' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'all','area':area}) }}">الكل</a></li>
+                    <li><a {{ type == 'منزل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'منزل','area':area}) }}">منزل</a></li>
+                    <li><a {{ type == 'شقة' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'شقة','area':area}) }}">شقة</a></li>
+                    <li><a {{ type == 'محل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'محل','area':area}) }}">محل</a></li>
+                    <li><a {{ type == 'أرض زراعية' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'أرض زراعية','area':area}) }}">أرض زراعية</a></li>
+                    <li><a {{ type == 'أرض مبانى' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':'أرض مبانى','area':area}) }}">أرض مبانى</a></li>
                 </ul>
             </div>
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">المنطقة </button>
                 <ul class="filter_scroll" role="menu">
-                    <li><a href="#">حى دحروج</a></li>
-                    <li><a href="#">شارع الاستاد</a></li>
-                    <li><a href="#">طريق فوة</a></li>
-                    <li><a href="#">طريق المستشفى</a></li>
-                    <li><a href="#">حى الصفا</a></li>
-                    <li><a href="#">حى دحروج</a></li>
-                    <li><a href="#">شارع الاستاد</a></li>
-                    <li><a href="#">طريق فوة</a></li>
-                    <li><a href="#">طريق المستشفى</a></li>
-                    <li><a href="#">حى الصفا</a></li>
+                	<li><a {{ area == 'all' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':type,'area':'all'}) }}">الكل</a></li>
+                	{% for area_object in areas %}
+                		<li><a {{ area == area_object.name ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{'purpose':purpose,'type':type,'area':area_object.name}) }}">{{area_object.name}}</a></li>
+                	{% endfor %}
                 </ul>
             </div>
         </div>

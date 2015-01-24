@@ -4,7 +4,7 @@
     <section id="mall_category" class="inner_page">
         <div class="container">
             <div class="reaestate_box">
-               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter')) }}
+               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'parent_request': app.request })) }}
                 <div class="reaestate_items col-4">
                         <div class="reaestate_item apps">
                             <div class="reaestate_item_inner">

@@ -7,7 +7,7 @@
                 <div class="center">
                     <h3>عقارات دسوق</h3>
                 </div>
-               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter')) }}
+               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}
                 <ul class="reaestate_items col-4">
                     {% for realestate in realestates %}
                         <li class="reaestate_item apps">

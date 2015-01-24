@@ -1,47 +1,47 @@
  {% set purpose = {}  %}
  {% set type = {}  %}
  {% set area = {}  %}
- {% if parent_request.get('purpose') %}
- 	{% set purpose = {'purpose':parent_request.get('purpose')}  %}
+ {% if parameters.purpose %}
+ 	{% set purpose = {'purpose':parameters.purpose}  %}
 {% endif %}
-{% if parent_request.get('type') %}
-	{% set type = {'type':parent_request.get('type')}  %}
+{% if parameters.type %}
+	{% set type = {'type':parameters.type}  %}
 {% endif %}
-{% if parent_request.get('area') %}
-	{% set area = {'area':parent_request.get('area')}  %}
+{% if parameters.area %}
+	{% set area = {'area':parameters.area}  %}
 {% endif %}
  <div class="realestate_filter">
 	<div class="panel panel-default">
         <div class="panel-heading">
-            تصفية البحث
+           تصفية البحث
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">الغرض </button>
                 <ul class="" role="menu">
-                	<li ><a {{ not parent_request.get('purpose') ? 'style="color:#ccc;"' : ''}}  href="{{ path('realestate',type|merge(area)) }}">الكل</a></li>
-                    <li><a {{ parent_request.get('purpose') == 'للبيع' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate', {purpose:'للبيع'}|merge(type)|merge(area)) }}">للبيع</a></li>
-                    <li><a {{ parent_request.get('purpose') == 'للإيجار' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{purpose:'للإيجار'}|merge(type)|merge(area)) }}">للإيجار</a></li>
+                	<li ><a {{ not parameters.purpose ? 'style="color:#ccc;"' : ''}}  href="{{ path('realestate',type|merge(area)) }}">الكل</a></li>
+                    <li><a {{ parameters.purpose == 'للبيع' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate', {purpose:'للبيع'}|merge(type)|merge(area)) }}">للبيع</a></li>
+                    <li><a {{ parameters.purpose == 'للإيجار' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',{purpose:'للإيجار'}|merge(type)|merge(area)) }}">للإيجار</a></li>
                 </ul>
             </div>
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">النوع </button>
                 <ul class="" role="menu">
-                	<li><a {{ not parent_request.get('type') ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(area)) }}">الكل</a></li>
-                    <li><a {{ parent_request.get('type') == 'منزل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'منزل'})|merge(area)) }}">منزل</a></li>
-                    <li><a {{ parent_request.get('type') == 'شقة' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'شقة'})|merge(area)) }}">شقة</a></li>
-                    <li><a {{ parent_request.get('type') == 'محل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'محل'})|merge(area)) }}">محل</a></li>
-                    <li><a {{ parent_request.get('type') == 'أرض زراعية' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'أرض زراعية'})|merge(area)) }}">أرض زراعية</a></li>
-                    <li><a {{ parent_request.get('type') == 'أرض مبانى' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'أرض مبانى'})|merge(area)) }}">أرض مبانى</a></li>
+                	<li><a {{ not parameters.type ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(area)) }}">الكل</a></li>
+                    <li><a {{ parameters.type == 'منزل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'منزل'})|merge(area)) }}">منزل</a></li>
+                    <li><a {{ parameters.type == 'شقة' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'شقة'})|merge(area)) }}">شقة</a></li>
+                    <li><a {{ parameters.type == 'محل' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'محل'})|merge(area)) }}">محل</a></li>
+                    <li><a {{ parameters.type == 'أرض زراعية' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'أرض زراعية'})|merge(area)) }}">أرض زراعية</a></li>
+                    <li><a {{ parameters.type == 'أرض مبانى' ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge({'type':'أرض مبانى'})|merge(area)) }}">أرض مبانى</a></li>
                 </ul>
             </div>
         	<div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">المنطقة </button>
                 <ul class="filter_scroll" role="menu">
-                	<li><a {{ not parent_request.get('area') ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(type)) }}">الكل</a></li>
+                	<li><a {{ not parameters.area ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(type)) }}">الكل</a></li>
                 	{% for area_object in areas %}
-                		<li><a {{ parent_request.get('area') == area_object.name ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(type)|merge({'area':area_object.name}) ) }}">{{area_object.name}}</a></li>
+                		<li><a {{ parameters.area == area_object.name ? 'style="color:#ccc;"' : ''}} href="{{ path('realestate',purpose|merge(type)|merge({'area':area_object.name}) ) }}">{{area_object.name}}</a></li>
                 	{% endfor %}
                 </ul>
             </div>

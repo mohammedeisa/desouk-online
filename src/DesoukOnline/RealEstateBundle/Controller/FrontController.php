@@ -61,9 +61,9 @@ class FrontController extends Controller
      * @Route("/side_filter" , name ="side_filter")
      * @Template("DesoukOnlineRealEstateBundle:Front:side_filter.html.twig")
      */
-    public function sideFilterAction($parent_request)
+    public function sideFilterAction($purpose,$type,$area)
     {
     	$areas = $this->getDoctrine()->getManager()->getRepository(get_class(new Area()))->findAll();
-        return array('areas' => $areas,'parent_request'=>$parent_request);
+        return array('areas' => $areas,'parameters'=>array('purpose' => $purpose,'type' => $type,'area' => $area));
     }
 }

@@ -4,12 +4,12 @@
     <section id="mall_category" class="inner_page">
         <div class="container">
             <div class="reaestate_box">
-               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'parent_request': app.request })) }}
+               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': realestate.purpose,'type': realestate.type,'area': realestate.area })) }}
                 <div class="reaestate_items col-4">
                         <div class="reaestate_item apps">
                             <div class="reaestate_item_inner">
                                 <div class="realestate_title">
-                                    <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">{{ realestate.title }}</a>
+                                    <a >{{ realestate.title }}</a>
                                 </div>
                                 <div class="realestate_properities">
                                 	<div>السعر : <span>{{realestate.price}} جنيه</span></div>
@@ -18,6 +18,9 @@
                                 	</div>
                                 	<div >
                                 		الغرض : <span>{{realestate.purpose}}</span>
+                                	</div>
+                                	<div >
+                                		المنطقة : <span>{{realestate.area.name}}</span>
                                 	</div>
                                 </div>
                                 {% if has_slider %}

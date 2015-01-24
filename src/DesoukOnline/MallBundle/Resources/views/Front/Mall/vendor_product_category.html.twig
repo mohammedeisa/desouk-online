@@ -21,25 +21,17 @@
                                     </a>
 
                                     <div class="caption">
-                                        <h4 class="pull-right">{{ product.price }} LE</h4>
+                                        <h4 class="pull-left">{{ product.price }} جنية</h4>
                                         <h4>
                                             <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
                                         </h4>
 
                                         {{ product.description|striptags|slice(0, 90) }}
                                         <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                            see more </a>
+                                            المزيد </a>
                                     </div>
-                                    <div class="ratings">
-                                        <p class="pull-right">15 reviews</p>
-
-                                        <p>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                            <span class="glyphicon glyphicon-star"></span>
-                                        </p>
+                                    <div class="desouk_online_rating">
+                                        {{ ("vendor_product_"~product.id)|show_rating|raw }}
                                     </div>
                                 </div>
                             </div>

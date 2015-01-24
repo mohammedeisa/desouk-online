@@ -21,8 +21,10 @@
                                             <div class="col-sm-3">
                                                 <div class="member">
                                                     <p>
+                                                        <a href="{{ path('mall_category',{'slug':category.slug}) }}">
                                                         <img class="img-responsive img-thumbnail img-circle"
                                                              src="{% path category.image, 'preview' %}" alt="">
+                                                        </a>
                                                     </p>
 
                                                     <h3>

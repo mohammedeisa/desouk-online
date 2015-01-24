@@ -9,7 +9,15 @@
     {% endfor %}
     <div class="total_votes">
         <p class="voted">
-            {{ (rating.totalVotes)?rating.totalVotes:'0' }} صوت
+            {% if rating.totalVotes==0 %}
+                0 اصوات
+            {% elseif rating.totalVotes==1 %}
+                1 صوت
+            {% elseif rating.totalVotes==2 %}
+                صوتين
+            {% elseif rating.totalVotes>2 %}
+                {{ rating.totalVotes }} اصوات
+            {% endif %}
         </p>
     </div>
 </div>

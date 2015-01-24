@@ -73,16 +73,16 @@ class RatingController extends Controller
 
         if (!$voted) {     //if the user hasn't yet voted, then vote normally...
             if (($vote_sent >= 1 && $vote_sent <= $units)) { // keep votes within range, make sure IP matches
+                $oldRating = $em->getRepository(get_class(new Rating()))->findOneBy(array('voteId' => $id));
+                $oldRating->setTotalVotes($added);
+                $oldRating->setTotalValue($sum);
+                $oldRating->setUsedIps("'" . $insertedIp . "'");
                 $qb = $em->createQueryBuilder();
-                $update = $qb->update(get_class(new Rating()), 'u')
-                    ->set('u.totalVotes', $added)
-                    ->set('u.totalValue', $sum)
-                    ->set('u.usedIps', "'" . $insertedIp . "'")
-                    ->where('u.voteId = :id')
-                    ->setParameter('id', $id)
-                    ->getQuery()->execute();
-                if ($update) setcookie("rating_" . $id, 1, time() + 2592000);
+                $em->persist($oldRating);
+                $em->flush($oldRating);
+                if ($oldRating) setcookie("rating_" . $id, 1, time() + 2592000);
                 $count++;
+                $current_rating = $oldRating->getTotalValue();
             }
         } //end for the "if(!$voted)"
         $tense = ($added == 1) ? "vote" : "votes"; //plural form votes/vote
@@ -105,7 +105,16 @@ class RatingController extends Controller
         else {
             $new_back[] .= '<span class="invalid">لقد تم التصويت مسبقا</span>';
         }
-        $new_back[] .= $count . ' صوت' . '</p></div>';
+        $votesNumbersCount = '';
+        if ($count == 0) {
+            $new_back[] .= '0 اصوات' . '</p></div>';
+        } elseif ($count == 1) {
+            $new_back[] .= $count . ' صوت' . '</p></div>';
+        } elseif ($count == 2) {
+            $new_back[] .= 'صوتين' . '</p></div>';
+        } else {
+            $new_back[] .= $count . ' اصوات' . '</p></div>';
+        }
         $allnewback = join("\n", $new_back);
 
 // ========================

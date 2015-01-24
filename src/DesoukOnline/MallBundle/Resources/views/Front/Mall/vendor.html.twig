@@ -62,25 +62,19 @@
                                                 </a>
 
                                                 <div class="caption">
-                                                    <h4 class="pull-left">{{ product.price }} LE</h4>
+                                                    <h4 class="pull-left">
+                                                        {{ product.price }} جنية
+                                                    </h4>
                                                     <h4>
                                                         <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
                                                     </h4>
 
-                                                    {{ product.description|striptags|slice(0, 90) }}
-                                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                                        see more </a>
+                                                        {{ product.description|striptags|slice(0, 90) }}
+                                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
+                                                        المزيد </a>
                                                 </div>
-                                                <div class="ratings">
-                                                    <p class="pull-left">15 reviews</p>
-
-                                                    <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                    </p>
+                                                <div class="desouk_online_rating">
+                                                    {{ ("vendor_product_"~product.id)|show_rating|raw }}
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +84,7 @@
 
                                         <a class="pull-left btn btn-primary btn-lg"
                                            href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
-                                           role="button">See more</a>
+                                           role="button">المزيد</a>
                                     </div>
                                 </div>
                                 <hr>

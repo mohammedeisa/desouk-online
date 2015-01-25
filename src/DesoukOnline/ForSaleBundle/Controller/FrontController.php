@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 Use DesoukOnline\ForSaleBundle\Entity\ForSale;
+use DesoukOnline\ForSaleBundle\Entity\Image;
 Use DesoukOnline\ForSaleBundle\Entity\Category;
 
 class FrontController extends Controller
@@ -58,5 +59,27 @@ class FrontController extends Controller
     {
     	$cats = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findAll();
         return array('cats' => $cats,'parameters'=>array('cat' => $cat));
+    }
+	
+	
+	///////////////////////////// Backend Delete Image //////////////////////////////
+	/**
+     * @Route("/admin/forSale/deleteImage/{forSale}/{image_id}" , name ="forSale_deleteImge")
+     */
+    public function deleteImageAction($forSale,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'admin_desoukonline_forsale_forsale_edit',
+            array('id' => $forSale)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new Image()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
     }
 }

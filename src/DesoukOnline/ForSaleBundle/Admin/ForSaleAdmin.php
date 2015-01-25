@@ -34,6 +34,7 @@ class ForSaleAdmin extends Admin
 
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
+		$fileFieldOptions['label'] = 'Image';
         if ($car && ($webPath = $car->getWebPath()) && is_file($car->getAbsolutePath())) {
 
             // add a 'help' option containing the preview's img tag
@@ -105,6 +106,14 @@ class ForSaleAdmin extends Admin
             ->add('category')
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
+	
+	public function getFormTheme()
+	{
+	    return array_merge(
+	        parent::getFormTheme(),
+	        array('DesoukOnlineForSaleBundle:Images:images.html.twig')
+	    );
+	}
 	
 	public function prePersist($forSale) {
 	    $this->renameFile($forSale);

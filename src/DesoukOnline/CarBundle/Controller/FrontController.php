@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 Use DesoukOnline\CarBundle\Entity\Car;
+use DesoukOnline\CarBundle\Entity\Image;
 Use DesoukOnline\CarBundle\Entity\Mark;
 
 class FrontController extends Controller
@@ -64,4 +65,24 @@ class FrontController extends Controller
         return array('marks' => $marks,'parameters'=>array('type' => $type,'mark' => $mark));
     }
 	
+	///////////////////////////// Backend Delete Image //////////////////////////////
+	/**
+     * @Route("/admin/car/deleteImage/{car}/{image_id}" , name ="car_deleteImge")
+     */
+    public function deleteImageAction($car,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'admin_desoukonline_car_car_edit',
+            array('id' => $car)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new Image()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
+    }
 }

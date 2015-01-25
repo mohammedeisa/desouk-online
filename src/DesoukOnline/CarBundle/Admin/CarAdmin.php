@@ -34,6 +34,7 @@ class CarAdmin extends Admin
 
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
+		$fileFieldOptions['label'] = 'Image';
         if ($car && ($webPath = $car->getWebPath()) && is_file($car->getAbsolutePath())) {
 
             // add a 'help' option containing the preview's img tag
@@ -112,6 +113,14 @@ class CarAdmin extends Admin
             ->add('price')
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
+	
+	public function getFormTheme()
+	{
+	    return array_merge(
+	        parent::getFormTheme(),
+	        array('DesoukOnlineCarBundle:Images:images.html.twig')
+	    );
+	}
 
 	public function prePersist($car) {
 	    $this->renameFile($car);

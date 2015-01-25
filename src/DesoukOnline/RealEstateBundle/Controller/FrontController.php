@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use DesoukOnline\RealEstateBundle\Entity\RealEstate;
+use DesoukOnline\RealEstateBundle\Entity\Image;
 use DesoukOnline\RealEstateBundle\Entity\Area;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -65,5 +66,26 @@ class FrontController extends Controller
     {
     	$areas = $this->getDoctrine()->getManager()->getRepository(get_class(new Area()))->findAll();
         return array('areas' => $areas,'parameters'=>array('purpose' => $purpose,'type' => $type,'area' => $area));
+    }
+	
+	///////////////////////////// Backend Delete Image //////////////////////////////
+	/**
+     * @Route("/admin/realestate/deleteImage/{realestate}/{image_id}" , name ="realestate_deleteImge")
+     */
+    public function deleteImageAction($realestate,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'admin_desoukonline_realestate_realestate_edit',
+            array('id' => $realestate)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new Image()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
     }
 }

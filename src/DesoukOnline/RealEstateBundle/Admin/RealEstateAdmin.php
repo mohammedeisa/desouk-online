@@ -34,6 +34,7 @@ class RealEstateAdmin extends Admin
 
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
+		$fileFieldOptions['label'] = 'Image';
         if ($realestate && ($webPath = $realestate->getWebPath()) && is_file($realestate->getAbsolutePath())) {
 
             // add a 'help' option containing the preview's img tag
@@ -66,6 +67,7 @@ class RealEstateAdmin extends Admin
             ->add('price')
             ->add('area')
             ->add('enabled', null, array('required' => true, 'data' => True))
+			
 			->add('file', 'file', $fileFieldOptions)
 			->add('images', 'sonata_type_collection',
                 array(
@@ -129,6 +131,14 @@ class RealEstateAdmin extends Admin
             ->add('area')
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
+
+	public function getFormTheme()
+	{
+	    return array_merge(
+	        parent::getFormTheme(),
+	        array('DesoukOnlineRealEstateBundle:Images:images.html.twig')
+	    );
+	}
 
 	 public function prePersist($realestate) {
 	    $this->renameFile($realestate);

@@ -16,3 +16,12 @@ services:
             - ~
             - DesoukOnline\ForSaleBundle\Entity\Category
             - ~
+
+    desouk_online.for_sale.image:
+        class: DesoukOnline\ForSaleBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Images" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\ForSaleBundle\Entity\Image
+            - ~

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <!-- Page Content -->
+    <section id="mall_category" class="inner_page">
+        <div class="container">
+            <div class="reaestate_box">
+                <div class="center">
+                    <h3>سيارات دسوق</h3>
+                </div>
+                {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': app.request.get('type'),'mark': app.request.get('mark') })) }}
+                <ul class="reaestate_items col-4">
+                    {% for car in cars %}
+                        <li class="reaestate_item apps">
+                            <div class="reaestate_item_inner">
+                                <div class="realestate_image">
+                                    <a href="{{ path('car_show',{'slug':car.slug}) }}">
+                                        <img src="{{car.getWebPath()}}" alt="">
+                                    </a>
+                                </div>
+                                <div class="realestate_title">
+                                    <a href="{{ path('car_show',{'slug':car.slug}) }}">{{ car.title }}</a>
+                                </div>
+                                <div class="realestate_properities">
+                                	<div>السعر : <span>{{car.price}} جنيه</span></div>
+                                	<div>
+                                		النوع : <span>{{car.type}}</span>
+                                	</div>
+                                	<div >
+                                		الماركة : <span>{{car.mark.name}}</span>
+                                	</div>
+                                </div>
+                                <div class="realestate_summary">
+                                    {{car.summary}}
+                                </div>
+                            </div>
+                        </li><!--/.portfolio-item-->
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--/.box-->
+        </div>
+        <!--/.container-->
+    </section>
+{% endblock %}

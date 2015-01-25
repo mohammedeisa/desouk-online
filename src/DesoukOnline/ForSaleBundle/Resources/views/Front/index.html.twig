@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <!-- Page Content -->
+    <section id="mall_category" class="inner_page">
+        <div class="container">
+            <div class="reaestate_box">
+                <div class="center">
+                    <h3>المعروض للبيع فى دسوق</h3>
+                </div>
+                {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': app.request.get('cat') })) }}
+                <ul class="reaestate_items col-4">
+                    {% for forSale in forSales %}
+                        <li class="reaestate_item apps">
+                            <div class="reaestate_item_inner">
+                                <div class="realestate_image">
+                                    <a href="{{ path('forSale_show',{'slug':forSale.slug}) }}">
+                                        <img src="{{forSale.getWebPath()}}" alt="">
+                                    </a>
+                                </div>
+                                <div class="realestate_title">
+                                    <a href="{{ path('forSale_show',{'slug':forSale.slug}) }}">{{ forSale.title }}</a>
+                                </div>
+                                <div class="realestate_properities">
+                                	<div>السعر : <span>{{forSale.price}} جنيه</span></div>
+                                	<div >
+                                		القسم : <span>{{forSale.category.title}}</span>
+                                	</div>
+                                </div>
+                                <div class="realestate_summary">
+                                    {{forSale.summary}}
+                                </div>
+                            </div>
+                        </li><!--/.portfolio-item-->
+                    {% endfor %}
+                </ul>
+            </div>
+            <!--/.box-->
+        </div>
+        <!--/.container-->
+    </section>
+{% endblock %}

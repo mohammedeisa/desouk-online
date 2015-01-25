@@ -1,0 +1,23 @@
+ {% set cat = {}  %}
+{% if parameters.cat %}
+	{% set cat = {'cat':parameters.cat}  %}
+{% endif %}
+ <div class="realestate_filter">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+           تصفية البحث
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+        	<div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">القسم </button>
+                <ul class="filter_scroll" role="menu">
+                	<li><a {{ not parameters.cat ? 'style="color:#ccc;"' : ''}} href="{{ path('forSale') }}">الكل</a></li>
+                	{% for cat_object in cats %}
+                		<li><a {{ parameters.cat == cat_object.title ? 'style="color:#ccc;"' : ''}} href="{{ path('forSale',{'cat':cat_object.title} ) }}">{{cat_object.title}}</a></li>
+                	{% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

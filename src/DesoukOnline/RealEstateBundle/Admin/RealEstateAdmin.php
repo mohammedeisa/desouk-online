@@ -34,7 +34,7 @@ class RealEstateAdmin extends Admin
 
         // use $fileFieldOptions so we can add other options to the field
         $fileFieldOptions = array('required' => false);
-        if ($realestate && ($webPath = $realestate->getWebPath())) {
+        if ($realestate && ($webPath = $realestate->getWebPath()) && is_file($realestate->getAbsolutePath())) {
 
             // add a 'help' option containing the preview's img tag
             $fileFieldOptions['help'] = '<img width="100" height="100" src="'.$webPath.'" class="admin-preview" />';
@@ -65,7 +65,6 @@ class RealEstateAdmin extends Admin
 			)
             ->add('price')
             ->add('area')
-            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
             ->add('enabled', null, array('required' => true, 'data' => True))
 			->add('file', 'file', $fileFieldOptions)
 			->add('images', 'sonata_type_collection',

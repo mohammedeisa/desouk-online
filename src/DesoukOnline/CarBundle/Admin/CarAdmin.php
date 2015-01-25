@@ -28,12 +28,47 @@ class CarAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+    	///////////////////////////// Add Image preview /////////////////////////////////////
+    	// get the current Image instance
+        $car = $this->getSubject();
+
+        // use $fileFieldOptions so we can add other options to the field
+        $fileFieldOptions = array('required' => false);
+        if ($car && ($webPath = $car->getWebPath()) && is_file($car->getAbsolutePath())) {
+
+            // add a 'help' option containing the preview's img tag
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="'.$webPath.'" class="admin-preview" />';
+        }
+    	/////////////////////////////////////////////////////////////////////////////////////
         $formMapper
             ->add('title')
+			->add('type', 'choice', 
+            	array('choices' => 
+            		array(
+            			'أجرة' => 'أجرة', 
+            			'ملاكى' => 'ملاكى',
+            			'نقل' => 'نقل', 
+					)
+				)
+			)
+			->add('mark')
+			->add('summary')
             ->add('description', 'ckeditor')
             ->add('price')
             ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('enabled', null, array('required' => true, 'data' => True))
+			->add('file', 'file', $fileFieldOptions)
+			->add('images', 'sonata_type_collection',
+                array(
+                    'required' => false,
+                    'by_reference' => false
+                ),
+                array(
+                'edit' => 'inline',
+                'inline' => 'table',
+                'allow_delete' =>true,
+
+            ));
     }
 
     /**
@@ -78,6 +113,39 @@ class CarAdmin extends Admin
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
-
+	public function prePersist($car) {
+	    $this->renameFile($car);
+		$this->manageEmbeddedImageAdmins($car);
+	 }
+	
+	 public function preUpdate($car) {
+	    $this->renameFile($car);
+		$this->manageEmbeddedImageAdmins($car);
+	 }
+	
+	 public function renameFile($car) {
+	    if (null !== $car->getFile()) {
+	        // do whatever you want to generate a unique name
+	        $car->upload();
+	        // $filename = sha1(uniqid(mt_rand(), true));
+	        // $realestate->setPath($filename.'.'.$realestate->getFile()->guessExtension());
+	    }
+	 }
+	 private function manageEmbeddedImageAdmins($car) {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            // detect embedded Admins that manage Images
+            if ($fieldName == 'images') {
+                /** @var Image $image */
+                $images = $car->getImages();
+				foreach ($images as $image) {
+					if ($image->getFile()) {
+                        // update the Image to trigger file management
+                        $image->upload();
+                    } 
+				}
+            }
+        }
+    }
 
 }

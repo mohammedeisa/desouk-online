@@ -22,15 +22,15 @@ class FrontController extends Controller
 
         $query = $repository->createQueryBuilder('r')
 			->leftJoin('r.area' ,'a');
-		if ($request->query->get('purpose') && $request->query->get('purpose') != 'all') {
+		if ($request->query->get('purpose') ) {
 			$query->andWhere('r.purpose = :purpose')
 			->setParameter('purpose',$request->query->get('purpose'));
 		}
-		if ($request->query->get('type') && $request->query->get('type') != 'all') {
+		if ($request->query->get('type') ) {
 			$query->andWhere('r.type = :type')
 			->setParameter('type',$request->query->get('type'));
 		}
-		if ($request->query->get('area') && $request->query->get('area') != 'all') {
+		if ($request->query->get('area') ) {
 			$query->andWhere('a.name = :area')
 			->setParameter('area',$request->query->get('area'));
 		}	

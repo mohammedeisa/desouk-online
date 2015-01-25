@@ -7,3 +7,22 @@ services:
             - ~
             - DesoukOnline\CarBundle\Entity\Car
             - ~
+    
+    
+    desouk_online.car.mark:
+        class: DesoukOnline\CarBundle\Admin\MarkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Mark" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\CarBundle\Entity\Mark
+            - ~
+    
+    desouk_online.car.image:
+        class: DesoukOnline\CarBundle\Admin\ImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Images" }
+        arguments:
+            - ~
+            - DesoukOnline\CarBundle\Entity\Image
+            - ~

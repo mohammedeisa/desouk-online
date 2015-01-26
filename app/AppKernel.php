@@ -93,6 +93,8 @@ class AppKernel extends Kernel
             new DesoukOnline\RatingBundle\DesoukOnlineRatingBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new DesoukOnline\WebDevelopmentBundle\DesoukOnlineWebDevelopmentBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

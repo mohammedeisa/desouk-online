@@ -61,7 +61,8 @@
         "gedmo/doctrine-extensions": "2.3.*@dev",
         "mohammedeisa/menu-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "~2.4",
-        "friendsofsymfony/jsrouting-bundle": "~1.5"
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "nomaya/social-bundle": "dev-master"
     },
 
     "require-dev": {

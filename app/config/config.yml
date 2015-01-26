@@ -20,6 +20,8 @@ imports:
     - { resource: mopa/mopa_bootstrap.yml }
     - { resource: knp/knp_paginator.yml }
 
+    - { resource: nomaya/social.yml }
+
 
     - { resource: @DesoukOnlineRealEstateBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineMallBundle/Resources/config/config.yml }

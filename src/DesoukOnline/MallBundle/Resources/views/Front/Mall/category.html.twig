@@ -10,25 +10,20 @@
                     <p class="lead">{{ category.description|raw }}</p>
                 </div>
                 <ul class="portfolio-items col-4">
-                    {% for vendor in category.vendors %}
+                    {% for vendor in category_vendors %}
                         <li class="portfolio-item apps">
                             <div class="item-inner">
                                 <div class="portfolio-image">
                                     <a href="{{ path('vendor',{'slug':vendor.slug}) }}">
                                         <img src="{% path vendor.logo, 'preview' %}" alt="">
                                     </a>
-
-                                    {#<div class="overlay">#}
-                                    {#<a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"#}
-                                    {#href="{% path vendor.logo, 'large' %}"><i#}
-                                    {#class="icon-eye-open"></i></a>#}
-                                    {#</div>#}
                                 </div>
                                 <h5><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a></h5>
                             </div>
                         </li><!--/.portfolio-item-->
                     {% endfor %}
                 </ul>
+                {{ knp_pagination_render(category_vendors) }}
             </div>
             <!--/.box-->
         </div>

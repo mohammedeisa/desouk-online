@@ -15,7 +15,13 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $deliveries = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findAll();
+        $deliveriesResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findAll();
+        $paginator = $this->get('knp_paginator');
+        $deliveries = $paginator->paginate(
+            $deliveriesResult,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
         return array('deliveries' => $deliveries);
     }
 

@@ -12,7 +12,7 @@
 
                             <p class="lead">{{ vendor_product_category.description|raw }}</p>
                         </div>
-                        {% for product in vendor_product_category.products %}
+                        {% for product in category_products %}
 
                             <div class="col-sm-4 col-lg-4 col-md-4  portfolio-item">
                                 <div class="thumbnail">
@@ -38,6 +38,7 @@
                         {% endfor %}
                     </div>
                 </div>
+                {{ knp_pagination_render(category_products) }}
             </div>
             <!--/.box-->
         </div>

@@ -20,7 +20,7 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $config=null;
+        $config = null;
         $query = $this->getDoctrine()->getManager()
             ->createQuery('SELECT p FROM ' . get_class(new MallConfig()) . ' p ');
         try {
@@ -30,10 +30,10 @@ class FrontController extends Controller
         }
         $categoriesResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findAll();
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $categories = $paginator->paginate(
             $categoriesResult,
-           $this->container->get('request')->query->get('page', 1)/*page number*/,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
             2/*limit per page*/
         );
 
@@ -47,7 +47,14 @@ class FrontController extends Controller
     public function categoryAction()
     {
         $category = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
-        return array('category' => $category);
+
+        $paginator = $this->get('knp_paginator');
+        $categoryVendors = $paginator->paginate(
+            $category->getVendors(),
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+        return array('category' => $category, 'category_vendors' => $categoryVendors);
 
     }
 
@@ -68,7 +75,15 @@ class FrontController extends Controller
     public function vendorProductCategoryAction()
     {
         $vendorProductCategory = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
-        return array('vendor_product_category' => $vendorProductCategory);
+
+        $paginator = $this->get('knp_paginator');
+        $categoryProducts = $paginator->paginate(
+            $vendorProductCategory->getProducts(),
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
+        return array('vendor_product_category' => $vendorProductCategory, 'category_products' => $categoryProducts);
     }
 
 

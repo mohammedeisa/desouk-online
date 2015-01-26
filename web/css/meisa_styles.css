@@ -252,3 +252,8 @@
 	width: 100%;
 }
 /*Added by Wardany*/
+
+.pagination_container{
+ text-align: center;
+    direction: ltr;
+}

@@ -28,7 +28,15 @@ class FrontController extends Controller
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
-        $categories = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findAll();
+        $categoriesResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findAll();
+
+        $paginator  = $this->get('knp_paginator');
+        $categories = $paginator->paginate(
+            $categoriesResult,
+           $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
         return array('categories' => $categories, 'config' => $config);
     }
 

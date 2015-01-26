@@ -18,7 +18,7 @@ imports:
     - { resource: sonata/sonata_media.yml }
     - { resource: sonata/sonata_user.yml }
     - { resource: mopa/mopa_bootstrap.yml }
-#    - { resource: knp/knp_paginator.yml }
+    - { resource: knp/knp_paginator.yml }
 
 
     - { resource: @DesoukOnlineRealEstateBundle/Resources/config/config.yml }

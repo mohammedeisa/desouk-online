@@ -64,6 +64,7 @@ sonata_admin:
                               - desouk_online.real_estate
                               - desouk_online.real_estate.area
                               - desouk_online.car
+                              - desouk_online.car.mark
                               - desouk_online.for_sale
                               - desouk_online.for_sale_category
             sonata.admin.group.meisa:

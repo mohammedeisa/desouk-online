@@ -85,13 +85,6 @@ class RealEstate
      */
     private $enabled;
 
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery")
-     * @ORM\JoinColumn(name="gallery_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $gallery;
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -237,7 +230,7 @@ class RealEstate
 	        return;
 	    }
 		if (is_file($this->getAbsolutePath())) {
-	        unlink($file); 
+	        unlink($this->getAbsolutePath()); 
 	    }
 		
 		$filename = sha1(uniqid(mt_rand(), true));
@@ -402,21 +395,6 @@ class RealEstate
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
-    public function getGallery()
-    {
-        return $this->gallery;
-    }
-
-    /**
-     * @param string $gallery
-     */
-    public function setGallery($gallery)
-    {
-        $this->gallery = $gallery;
-    }
 
     /**
      * @return \DateTime

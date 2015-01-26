@@ -1,0 +1,36 @@
+ {% set type = {}  %}
+ {% set mark = {}  %}
+{% if parameters.type %}
+	{% set type = {'type':parameters.type}  %}
+{% endif %}
+{% if parameters.mark %}
+	{% set mark = {'mark':parameters.mark}  %}
+{% endif %}
+ <div class="realestate_filter">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+           تصفية البحث
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+        	<div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">النوع </button>
+                <ul class="" role="menu">
+                	<li><a {{ not parameters.type ? 'style="color:#ccc;"' : ''}} href="{{ path('car',mark) }}">الكل</a></li>
+                    <li><a {{ parameters.type == 'ملاكى' ? 'style="color:#ccc;"' : ''}} href="{{ path('car',{'type':'ملاكى'}|merge(mark)) }}">ملاكى</a></li>
+                    <li><a {{ parameters.type == 'أجرة' ? 'style="color:#ccc;"' : ''}} href="{{ path('car',{'type':'أجرة'}|merge(mark)) }}">أجرة</a></li>
+                    <li><a {{ parameters.type == 'نقل' ? 'style="color:#ccc;"' : ''}} href="{{ path('car',{'type':'نقل'}|merge(mark)) }}">نقل</a></li>
+                </ul>
+            </div>
+        	<div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">الماركة </button>
+                <ul class="filter_scroll" role="menu">
+                	<li><a {{ not parameters.mark ? 'style="color:#ccc;"' : ''}} href="{{ path('car',type) }}">الكل</a></li>
+                	{% for mark_object in marks %}
+                		<li><a {{ parameters.mark == mark_object.name ? 'style="color:#ccc;"' : ''}} href="{{ path('car',type|merge({'mark':mark_object.name}) ) }}">{{mark_object.name}}</a></li>
+                	{% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

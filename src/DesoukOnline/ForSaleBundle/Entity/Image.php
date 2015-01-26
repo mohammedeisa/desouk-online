@@ -1,6 +1,6 @@
 <?php
 
-namespace DesoukOnline\RealEstateBundle\Entity;
+namespace DesoukOnline\ForSaleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * Image
  *
- * @ORM\Table(name="realestate_image")
+ * @ORM\Table(name="forSale_image")
  * @ORM\Entity
  */
 class Image
@@ -24,10 +24,10 @@ class Image
     private $id;
 	
 	/**
-     * @ORM\ManyToOne(targetEntity="RealEstate", inversedBy="images")
-     * @ORM\JoinColumn(name="realestate_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="ForSale", inversedBy="images")
+     * @ORM\JoinColumn(name="forSale_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $realestate;
+    private $forSale;
 	
 	////////////////////////////////  Image Field ////////////////////////////////////////
 	/**
@@ -101,7 +101,7 @@ class Image
 	protected function getUploadDir()
 	{
 		// get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-	    return 'uploads/realestate_gallery';
+	    return 'uploads/forSale_gallery';
 	}
 	
 	
@@ -173,12 +173,12 @@ class Image
     /**
      * Set realestate
      *
-     * @param \DesoukOnline\RealEstateBundle\Entity\RealEstate $realestate
+     * @param \DesoukOnline\ForSaleBundle\Entity\ForSale $forSale
      * @return Image
      */
-    public function setRealestate(\DesoukOnline\RealEstateBundle\Entity\RealEstate $realestate = null)
+    public function setForSale(\DesoukOnline\ForSaleBundle\Entity\ForSale $forSale = null)
     {
-        $this->realestate = $realestate;
+        $this->forSale = $forSale;
 
         return $this;
     }
@@ -186,10 +186,10 @@ class Image
     /**
      * Get realestate
      *
-     * @return \DesoukOnline\RealEstateBundle\Entity\RealEstate 
+     * @return \DesoukOnline\ForSaleBundle\Entity\ForSale 
      */
-    public function getRealestate()
+    public function getForSale()
     {
-        return $this->realestate;
+        return $this->forSale;
     }
 }

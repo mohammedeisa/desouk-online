@@ -2,8 +2,11 @@
 
 namespace DesoukOnline\CarBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * News
  *
@@ -27,7 +30,19 @@ class Car
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $title;
-
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+	
+	/**
+     * @ORM\ManyToOne(targetEntity="Mark")
+     * @ORM\JoinColumn(name="mark_id", referencedColumnName="id")
+     */
+    private $mark;
 
     /**
      * @var string
@@ -35,7 +50,14 @@ class Car
      * @ORM\Column(name="price", type="integer")
      */
     private $price;
-
+	
+	
+	/**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
 
     /**
      * @var string
@@ -226,4 +248,264 @@ class Car
         $this->updatedAt = $updatedAt;
     }
 
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Car
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set mark
+     *
+     * @param \DesoukOnline\CarBundle\Entity\Mark $mark
+     * @return Car
+     */
+    public function setMark(\DesoukOnline\CarBundle\Entity\Mark $mark = null)
+    {
+        $this->mark = $mark;
+
+        return $this;
+    }
+
+    /**
+     * Get mark
+     *
+     * @return \DesoukOnline\CarBundle\Entity\Mark 
+     */
+    public function getMark()
+    {
+        return $this->mark;
+    }
+	
+	public function __toString()
+    {
+        return $this->title;
+    }
+	
+	
+	//////////////////////////////// Images //////////////////////////////////////////////
+	/**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="car" ,cascade="persist")
+     */
+    protected $images;
+
+    /**
+     * @param mixed $images
+     */
+    public function setImages($images)
+    {
+        $this->images = new ArrayCollection();
+        foreach ($images as $field) {
+            $this->addImage($field);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function addImage($field)
+    {
+        $field->setCar($this);
+
+        $this->images[] = $field;
+
+    }
+
+    public function removeImages( $fields)
+    {
+        $this->getImages()->removeElement($fields);
+    }
+	//////////////////////////////////////////////////////////////////////////////////////
+	
+	////////////////////////////////  Image Field ////////////////////////////////////////
+	/**
+     * Image path
+     *
+     * @var string
+     *
+     * @ORM\Column(type="text", length=255, nullable=false)
+     */
+    protected $path;
+	/**
+     * Image file
+     *
+     * @var File
+     *
+     * @Assert\File(
+     *     maxSize = "512k",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png", "image/tiff"},
+     *     maxSizeMessage = "The maxmimum allowed file size is 512KB.",
+     *     mimeTypesMessage = "Only the filetypes image are allowed."
+     * )
+     */
+    protected $file;
+	
+	/**
+	 * Sets file.
+	 *
+	 * @param UploadedFile $file
+	*/
+	public function setFile(UploadedFile $file = null)
+	{
+	    $this->file = $file;
+	}
+	
+	/**
+	 * Sets path.
+	 *
+	*/
+	public function setPath($path = null)
+	{
+	    $this->path = $path;
+	}
+	
+	/**
+	 * Get file.
+	 *
+	 * @return UploadedFile
+	*/
+	public function getFile()
+	{
+	    return $this->file;
+	}
+  	
+	public function getAbsolutePath()
+	{
+		return null === $this->path ? null : $this->getUploadRootDir().'/'.$this->path;
+	}
+	
+	public function getWebPath()
+	{
+		return null === $this->path ? null : '/'.$this->getUploadDir().'/'.$this->path;
+	}
+	
+	protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+	
+	protected function getUploadDir()
+	{
+		// get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+	    return 'uploads/car';
+	}
+	
+	
+	public function upload()
+	{
+	    // the file property can be empty if the field is not required
+	    if (null === $this->getFile()) {
+	        return;
+	    }
+		if (is_file($this->getAbsolutePath())) {
+	        unlink($this->getAbsolutePath()); 
+	    }
+		
+		$filename = sha1(uniqid(mt_rand(), true));
+        $this->path = $filename.'.'.$this->file->guessExtension();
+		
+	
+	    // we use the original file name here but you should
+	    // sanitize it at least to avoid any security issues
+	
+	    // move takes the target directory and target filename as params
+	    $this->getFile()->move(
+	        $this->getUploadRootDir(),
+	        $this->path
+	    );
+	
+	    // set the path property to the filename where you've saved the file
+	    //$this->filename = $this->getFile()->getClientOriginalName();
+	
+	    // clean up the file property as you won't need it anymore
+	    $this->setFile(null);
+	}
+	
+	/**
+	 * Called before entity removal
+	 *
+	 * @ORM\PreRemove()
+	 */
+	public function removeUpload()
+	{
+	    if ($file = $this->getAbsolutePath()) {
+	        unlink($file); 
+	    }
+	}
+	////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set summary
+     *
+     * @param string $summary
+     * @return Car
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return string 
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \DesoukOnline\CarBundle\Entity\Image $images
+     */
+    public function removeImage(\DesoukOnline\CarBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
 }

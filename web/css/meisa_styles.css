@@ -257,3 +257,10 @@
  text-align: center;
     direction: ltr;
 }
+
+.horizontal_social,.facebook_share,.twitter_share{
+    display: inline-block;
+}
+.facebook_share,.twitter_share{
+    float: right;
+}

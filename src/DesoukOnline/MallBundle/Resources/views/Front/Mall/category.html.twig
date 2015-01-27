@@ -8,6 +8,7 @@
                     <h3>{{ category.title }}</h3>
 
                     <p class="lead">{{ category.description|raw }}</p>
+                    {% include 'horizontal_social.html.twig' %}
                 </div>
                 <ul class="portfolio-items col-4">
                     {% for vendor in category_vendors %}

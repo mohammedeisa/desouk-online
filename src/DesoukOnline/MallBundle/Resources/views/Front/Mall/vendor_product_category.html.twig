@@ -11,6 +11,7 @@
                             <h4>{{ vendor_product_category.title }}</h4>
 
                             <p class="lead">{{ vendor_product_category.description|raw }}</p>
+                            {% include 'horizontal_social.html.twig' %}
                         </div>
                         {% for product in category_products %}
 

@@ -53,6 +53,8 @@
                                 {{ product.description|raw }}
                                 <hr>
                             </div>
+                            {% include 'horizontal_social.html.twig' %}
+                            <hr>
                             <div class="desouk_online_rating">
                                 {{ ("vendor_product_"~product.id)|show_rating|raw }}
                             </div>

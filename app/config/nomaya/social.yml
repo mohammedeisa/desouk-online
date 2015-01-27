@@ -12,8 +12,8 @@ nomaya_social:
             locale:         "ar"
             message:        ""
             text:           "Tweet"
-            via:            "L'Equipe cartedevisitevirtuelle.fr"
-            tag:            "ttot"
+            via:            "desoukonline.com"
+            tag:            "desouk_online"
         googleplus:
             url:            null
             locale :        "en"

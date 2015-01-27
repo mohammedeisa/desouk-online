@@ -19,69 +19,70 @@
                     </div>
                 </div>
                 {% if delivery.menus|length %}
-                <div class="raw">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            مينو   {{ delivery.title }}
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <!-- Nav tabs -->
-                            <div class="nav-tabs-custom">
-                                <ul class="nav nav-tabs">
-                                    {% for menu in delivery.menus %}
-                                        <li class="{{ (loop.index==1)?'active':'' }}">
-                                            <a href="#tab{{ loop.index }}" data-toggle="tab"
-                                               aria-expanded="{{ (loop.index==1)?'true':'false' }}">{{ menu.title }}</a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    {% for menu in delivery.menus %}
-                                        <div class="tab-pane fade {{ (loop.index==1)?'active in':'' }}"
-                                             id="tab{{ loop.index }}">
-                                            <p>
-                                                {{ menu.description|raw }}
-                                            </p>
+                    <div class="raw">
+                        {% include 'horizontal_social.html.twig' %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                مينو   {{ delivery.title }}
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <!-- Nav tabs -->
+                                <div class="nav-tabs-custom">
+                                    <ul class="nav nav-tabs">
+                                        {% for menu in delivery.menus %}
+                                            <li class="{{ (loop.index==1)?'active':'' }}">
+                                                <a href="#tab{{ loop.index }}" data-toggle="tab"
+                                                   aria-expanded="{{ (loop.index==1)?'true':'false' }}">{{ menu.title }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        {% for menu in delivery.menus %}
+                                            <div class="tab-pane fade {{ (loop.index==1)?'active in':'' }}"
+                                                 id="tab{{ loop.index }}">
+                                                <p>
+                                                    {{ menu.description|raw }}
+                                                </p>
 
-                                            <table class="table table-striped table-bordered table-hover menu_table">
-                                                <thead>
-                                                <tr class="gradeX">
-                                                    <th>#</th>
-                                                    <th>اسم النتج</th>
-                                                    <th>المواصفات</th>
-                                                    <th>صورة المنتج</th>
-                                                    <th>السعر</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody role="alert">
-                                                {% for menuItem in menu.menuItems %}
-
-                                                    <tr>
-                                                        <th scope="row">{{ loop.index }}</th>
-                                                        <td>{{ menuItem.title }}</td>
-                                                        <td>{{ menuItem.description }}</td>
-                                                        <td><img src="{% path menuItem.image, 'preview' %}"></td>
-                                                        <td>{{ menuItem.price }}</td>
+                                                <table class="table table-striped table-bordered table-hover menu_table">
+                                                    <thead>
+                                                    <tr class="gradeX">
+                                                        <th>#</th>
+                                                        <th>اسم النتج</th>
+                                                        <th>المواصفات</th>
+                                                        <th>صورة المنتج</th>
+                                                        <th>السعر</th>
                                                     </tr>
-                                                {% endfor %}
+                                                    </thead>
+                                                    <tbody role="alert">
+                                                    {% for menuItem in menu.menuItems %}
 
-                                                </tbody>
-                                            </table>
-                                            <hr>
-                                            {% if menu.image is defined %}
-                                                <div class="center"><img src="{% path menu.image, 'large' %}"></div>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                                                        <tr>
+                                                            <th scope="row">{{ loop.index }}</th>
+                                                            <td>{{ menuItem.title }}</td>
+                                                            <td>{{ menuItem.description }}</td>
+                                                            <td><img src="{% path menuItem.image, 'preview' %}"></td>
+                                                            <td>{{ menuItem.price }}</td>
+                                                        </tr>
+                                                    {% endfor %}
 
+                                                    </tbody>
+                                                </table>
+                                                <hr>
+                                                {% if menu.image is defined %}
+                                                    <div class="center"><img src="{% path menu.image, 'large' %}"></div>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
                                 </div>
                             </div>
+                            <!-- /.panel-body -->
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                </div>
                 {% endif %}
                 <div class="center">
                     <h3>
@@ -93,8 +94,6 @@
                         {{ delivery.contacts|raw }}
                     </div>
                 </div>
-                {{ twitterButton() }}
-                {{ facebookButton() }}
             </div>
             <!--/.box-->
         </div>
@@ -103,8 +102,8 @@
         <!--/.container-->
     </section>
     <script>
-    $(document).ready(function () {
-        $('.nav-tabs li').eq(0).find('a').trigger('click');
-    });
+        $(document).ready(function () {
+            $('.nav-tabs li').eq(0).find('a').trigger('click');
+        });
     </script>
 {% endblock %}

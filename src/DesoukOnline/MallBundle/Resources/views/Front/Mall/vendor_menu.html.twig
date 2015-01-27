@@ -11,4 +11,6 @@
                class="list-group-item">{{ article.title }}</a>
         {% endfor %}
     </div>
+    {{ render(controller('DesoukOnlineVisitorsBundle:Front:visitors')) }}
 </div>
+

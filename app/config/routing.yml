@@ -1,3 +1,8 @@
+desouk_online_visitors:
+    resource: "@DesoukOnlineVisitorsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 desouk_online_web_development:
     resource: "@DesoukOnlineWebDevelopmentBundle/Controller/"
     type:     annotation

@@ -1,14 +1,41 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <!-- Page Content -->
+
     <section id="vendor_homepage" class="inner_page">
         <div class="container">
             <div class="box">
-                <div class="row">
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor.slug})) }}
-                    <div style="margin-right: 16px;display: inline-block;">
-                    {% include 'horizontal_social.html.twig' %}
+
+                <div id="navbar" class="navbar navbar-default vendor_header_menu">
+                    <div class="">
+                        <ul class="nav navbar-nav">
+                            <li class=" " id=""><a
+                                        href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
+                                </a></li>
+                            <li class=" " id=""><a
+                                        href="http://desouk_online.localhost/app_dev.php/realestate">عقارات</a></li>
+                            <li class=" " id="vendor_logo_container">
+                                {% if vendor.logo is defined %}
+                                    <a href="">
+                                        <img src="{% path vendor.logo, 'preview' %}">
+                                    </a>
+                                {% endif %}
+                            </li>
+                        </ul>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 vendor_upper_data">
+                        <div id="vendor_social">
+                            {% include 'horizontal_social.html.twig' %}
+                        </div>
+
+
+                    </div>
+
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor.slug})) }}
+
                     <div class="col-md-9">
                         {% if vendor.banners %}
 
@@ -44,53 +71,53 @@
 
                             </div>
                         {% endif %}
-                            {% for category in vendor.getVendorProductCategories if category.isInHome %}
-                                <div class="row">
-                                    <div class="col-sm-12 col-lg-12 col-md-12">
+                        {% for category in vendor.getVendorProductCategories if category.isInHome %}
+                            <div class="row">
+                                <div class="col-sm-12 col-lg-12 col-md-12">
 
-                                        <div class="left">
-                                            <h3>
-                                                <a class=""
-                                                   href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
-                                                   role="button">{{ category.title }}</a>
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    {% for product in category.products if product.isInHome %}
-                                        <div class="col-sm-4 col-lg-4 col-md-4">
-                                            <div class="thumbnail">
-                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                                    <img src="{% path product.image , 'preview' %}" alt="">
-                                                </a>
-
-                                                <div class="caption">
-                                                    <h4 class="pull-left">
-                                                        {{ product.price }} جنية
-                                                    </h4>
-                                                    <h4>
-                                                        <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
-                                                    </h4>
-
-                                                        {{ product.description|striptags|slice(0, 90) }}
-                                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
-                                                        المزيد </a>
-                                                </div>
-                                                <div class="desouk_online_rating">
-                                                    {{ ("vendor_product_"~product.id)|show_rating|raw }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                    <div class="row"></div>
-                                    <div class="col-sm-12 col-lg-12 col-md-12">
-
-                                        <a class="pull-left btn btn-primary btn-lg"
-                                           href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
-                                           role="button">المزيد</a>
+                                    <div class="left">
+                                        <h3>
+                                            <a class=""
+                                               href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
+                                               role="button">{{ category.title }}</a>
+                                        </h3>
                                     </div>
                                 </div>
-                                <hr>
-                            {% endfor %}
+                                {% for product in category.products if product.isInHome %}
+                                    <div class="col-sm-4 col-lg-4 col-md-4">
+                                        <div class="thumbnail">
+                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                                <img src="{% path product.image , 'preview' %}" alt="">
+                                            </a>
+
+                                            <div class="caption">
+                                                <h4 class="pull-left">
+                                                    {{ product.price }} جنية
+                                                </h4>
+                                                <h4>
+                                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                                </h4>
+
+                                                {{ product.description|striptags|slice(0, 90) }}
+                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
+                                                    المزيد </a>
+                                            </div>
+                                            <div class="desouk_online_rating">
+                                                {{ ("vendor_product_"~product.id)|show_rating|raw }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="row"></div>
+                                <div class="col-sm-12 col-lg-12 col-md-12">
+
+                                    <a class="pull-left btn btn-primary btn-lg"
+                                       href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
+                                       role="button">المزيد</a>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

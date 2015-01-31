@@ -15,7 +15,7 @@
                             <div class="item-inner">
                                 <div class="portfolio-image">
                                     <a href="{{ path('vendor',{'slug':vendor.slug}) }}">
-                                        <img src="{% path vendor.logo, 'preview' %}" alt="">
+                                        <img src="{{vendor.getWebPath()}}" alt="">
                                     </a>
 
                                     {#<div class="overlay">#}

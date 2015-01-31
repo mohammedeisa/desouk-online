@@ -36,8 +36,6 @@ class VendorProductCategoryAdmin extends Admin
             ->add('title')
             ->add('description', 'ckeditor')
             ->add('vendor')
-            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_category')))
-            ->add('parent', 'sonata_type_model', array('required' => false, 'query' => $repository), array('edit' => 'standard'))
             ->add('isInHome', null, array())
             ->add('enabled', null, array());
     }

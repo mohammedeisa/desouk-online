@@ -8,9 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * News
  *
- * @ORM\Table(name="vendor_category")
  * @ORM\Entity
- * @Gedmo\Tree(type="nested")
  * @ORM\Table(name = "vendor_product_category")
  */
 class VendorProductCategory
@@ -72,56 +70,6 @@ class VendorProductCategory
      */
     private $vendor;
 
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media" , cascade={"remove"})
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $image;
-    /**
-     * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $parent;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     * @ORM\OrderBy({"lft" = "ASC"})
-     */
-    private $children;
-
-    /**
-     * @var integer
-     *
-     * @Gedmo\TreeLeft
-     * @ORM\Column(name="lft", type="integer")
-     */
-    private $lft;
-
-    /**
-     * @var integer
-     * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer")
-     */
-    private $lvl;
-
-    /**
-     * @var integer
-     *
-     * @Gedmo\TreeRight
-     * @ORM\Column(name="rgt", type="integer")
-     */
-    private $rgt;
-
-    /**
-     * @var integer
-     *
-     * @Gedmo\TreeRoot
-     * @ORM\Column(name="root", type="integer")
-     */
-    private $root;
 
     /**
      * @var \DateTime
@@ -177,21 +125,6 @@ class VendorProductCategory
         return $this->products;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-
-    /**
-     * @param mixed $children
-     */
-    public function setChildren($children)
-    {
-        $this->children = $children;
-    }
 
     /**
      * @return \DateTime
@@ -273,85 +206,6 @@ class VendorProductCategory
         $this->image = $image;
     }
 
-    /**
-     * @return int
-     */
-    public function getLft()
-    {
-        return $this->lft;
-    }
-
-    /**
-     * @param int $lft
-     */
-    public function setLft($lft)
-    {
-        $this->lft = $lft;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLvl()
-    {
-        return $this->lvl;
-    }
-
-    /**
-     * @param int $lvl
-     */
-    public function setLvl($lvl)
-    {
-        $this->lvl = $lvl;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param mixed $parent
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRgt()
-    {
-        return $this->rgt;
-    }
-
-    /**
-     * @param int $rgt
-     */
-    public function setRgt($rgt)
-    {
-        $this->rgt = $rgt;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRoot()
-    {
-        return $this->root;
-    }
-
-    /**
-     * @param int $root
-     */
-    public function setRoot($root)
-    {
-        $this->root = $root;
-    }
 
     /**
      * @return mixed

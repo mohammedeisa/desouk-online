@@ -6,6 +6,8 @@ use DesoukOnline\MallBundle\Entity\Article;
 use DesoukOnline\MallBundle\Entity\MallConfig;
 use DesoukOnline\MallBundle\Entity\Product;
 use DesoukOnline\MallBundle\Entity\Vendor;
+use DesoukOnline\MallBundle\Entity\VendorImage;
+use DesoukOnline\MallBundle\Entity\ProductImage;
 use DesoukOnline\MallBundle\Entity\VendorProductCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -93,5 +95,47 @@ class FrontController extends Controller
     {
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
         return array('vendor' => $vendor);
+    }
+	
+	///////////////////////////// Backend Vendor Delete Image //////////////////////////////
+	/**
+     * @Route("/admin/vendor/deleteImage/{vendor}/{image_id}" , name ="vendor_deleteImge")
+     */
+    public function deleteVendorImageAction($vendor,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'admin_desoukonline_mall_vendor_edit',
+            array('id' => $vendor)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorImage()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
+    }
+    
+    ///////////////////////////// Backend Product Delete Image //////////////////////////////
+	/**
+     * @Route("/admin/product/deleteImage/{product}/{image_id}" , name ="product_deleteImge")
+     */
+    public function deleteProductImageAction($product,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'admin_desoukonline_mall_product_edit',
+            array('id' => $product)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new ProductImage()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
     }
 }

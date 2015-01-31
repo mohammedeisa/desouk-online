@@ -117,4 +117,14 @@ class FrontController extends Controller
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
         return array('vendor' => $vendor);
     }
+
+    /**
+     * @Route("/vendor_header_menu/{vendor}" , name ="vendor_header_menu")
+     * @Template("DesoukOnlineMallBundle:Front:Mall/vendor_header_menu.html.twig")
+     */
+    public function vendorHeaderMenuAction()
+    {
+        $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
+        return array('vendor' => $vendor);
+    }
 }

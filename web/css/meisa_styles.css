@@ -309,30 +309,63 @@
     max-height: 100px;
     max-width: 100px;
 }
-.vendor_header_menu ul{
-    width: 100%;
-}
-.vendor_header_menu #vendor_logo_container{
-    float: left;
-}
-.vendor_header_menu #vendor_logo_container a {
-    padding: 9px;
-    background: none;
-}
-
-.vendor_header_menu #vendor_logo_container img {
-    max-height: 60px;
-}
-
-.vendor_header_menu div, .vendor_header_menu img, .vendor_header_menu a {
-    height: 100%;
-    text-align: left;
-}
 
 #vendor_homepage .box {
-    padding-top: 24px;
+    padding-top: 35px;
 }
 
 #vendor_homepage .navbar-default {
     border-radius: 5px;
+    margin-bottom: 9px;
+    min-width: 65%;
+}
+#vendor_header_menu_container {
+}
+
+.vendor_header_menu {
+}
+
+.vendor_header_menu ul {
+    width: 100%;
+}
+
+.vendor_header_menu #vendor_name {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.vendor_header_menu #vendor_logo_container {
+    float: left;
+}
+
+.vendor_header_menu #vendor_menu_contacts {
+    float: left;
+    text-align: right;
+    padding-top: 2px;
+}
+
+.vendor_header_menu #vendor_menu_contacts label {
+    width: 44px;
+}
+
+.vendor_email {
+    direction: ltr;
+}
+
+.vendor_header_menu #vendor_logo_container a {
+    padding: 2px;
+    background: none;
+}
+
+.vendor_header_menu #vendor_logo_container img {
+    max-height: 74px;
+}
+
+#vendor_product_category .portfolio-item{
+    float: right;
+}
+
+#vendor_header_menu_container .navbar-default .navbar-nav > li:hover >a {
+background: transparent;
+    color: #52b6ec;
 }

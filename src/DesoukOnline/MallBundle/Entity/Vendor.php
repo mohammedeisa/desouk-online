@@ -42,9 +42,25 @@ class Vendor
     /**
      * @var string
      *
-     * @ORM\Column(name="contacts", type="text")
+     * @ORM\Column(name="telephone", type="string" , length=255)
      */
-    private $contacts;
+    private $telephone;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile", type="string" , length=255)
+     */
+    private $mobile;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string" , length=255)
+     */
+    private $email;
 
     /**
      * @var string
@@ -116,22 +132,6 @@ class Vendor
      * @ORM\Column(name="updatedAt", type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @return string
-     */
-    public function getContacts()
-    {
-        return $this->contacts;
-    }
-
-    /**
-     * @param string $contacts
-     */
-    public function setContacts($contacts)
-    {
-        $this->contacts = $contacts;
-    }
 
     /**
      * @return string
@@ -390,6 +390,54 @@ class Vendor
     {
         if ($this->getTitle()) return $this->getTitle();
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * @param string $telephone
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * @param string $mobile
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
 }

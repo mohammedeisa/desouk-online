@@ -1,0 +1,36 @@
+<div id="vendor_header_menu_container" class="col-md-9">
+    <div id="navbar" class="navbar navbar-default vendor_header_menu">
+        <div class="">
+            <ul class="nav navbar-nav">
+                <li class=" " id=""><a id="vendor_name"
+                                       href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
+                    </a></li>
+
+                <li class=" " id="vendor_logo_container">
+                    {% if vendor.logo is defined %}
+                        <a href="">
+                            <img src="{% path vendor.logo, 'preview' %}">
+                        </a>
+                    {% endif %}
+                </li>
+                <li class=" " id="vendor_menu_contacts">
+                    {% if vendor.telephone %}
+                        <div class="vendor_contact">
+                            <label>تليفون</label> :{{ vendor.telephone }}
+                        </div>
+                    {% endif %}
+                    {% if vendor.mobile %}
+                        <div class="vendor_contact">
+                            <label>موبيل</label> :{{ vendor.mobile }}
+                        </div>
+                    {% endif %}
+                    {% if vendor.telephone %}
+                        <div class="vendor_contact">
+                            <label>ايميل</label> :<span class="vendor_email">{{ vendor.email }}</span>
+                        </div>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

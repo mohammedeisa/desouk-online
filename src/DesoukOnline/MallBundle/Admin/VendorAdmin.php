@@ -32,7 +32,9 @@ class VendorAdmin extends Admin
             ->add('title')
             ->add('description', 'ckeditor')
             ->add('category')
-            ->add('contacts')
+            ->add('telephone')
+            ->add('mobile')
+            ->add('email')
             ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_vendor')))
             ->add('banners', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_vendor_banners')))
             ->add('enabled', null, array('required' => true, 'data' => True));
@@ -46,7 +48,9 @@ class VendorAdmin extends Admin
         $showMapper
             ->add('title')
             ->add('description')
-            ->add('contacts')
+            ->add('telephone')
+            ->add('mobile')
+            ->add('email')
             ->add('logo')
             ->add('enabled');
     }

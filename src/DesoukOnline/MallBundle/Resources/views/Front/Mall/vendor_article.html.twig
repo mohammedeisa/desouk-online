@@ -7,8 +7,9 @@
 
                 <div class="row">
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':article.vendor.slug})) }}
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':article.vendor.slug})) }}
                     <div class="col-md-9">
-                        <div class="left">
+                        <div class="center">
                             <h4>{{ article.title }}</h4>
                             {% include 'horizontal_social.html.twig' %}
 

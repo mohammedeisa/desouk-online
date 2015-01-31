@@ -35,7 +35,7 @@ class FrontController extends Controller
             $em->persist($visitorsCount);
             $em->flush();
         }
-        $visitorsString = ($count <= 1) ? ' زائر' : ' زائرين';
+        $visitorsString = ' زائر';
         return new Response($count . $visitorsString);
     }
 }

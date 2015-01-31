@@ -5,36 +5,10 @@
     <section id="vendor_homepage" class="inner_page">
         <div class="container">
             <div class="box">
-
-                <div id="navbar" class="navbar navbar-default vendor_header_menu">
-                    <div class="">
-                        <ul class="nav navbar-nav">
-                            <li class=" " id=""><a
-                                        href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
-                                </a></li>
-                            <li class=" " id=""><a
-                                        href="http://desouk_online.localhost/app_dev.php/realestate">عقارات</a></li>
-                            <li class=" " id="vendor_logo_container">
-                                {% if vendor.logo is defined %}
-                                    <a href="">
-                                        <img src="{% path vendor.logo, 'preview' %}">
-                                    </a>
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
                 <div class="row">
-                    <div class="col-md-12 vendor_upper_data">
-                        <div id="vendor_social">
-                            {% include 'horizontal_social.html.twig' %}
-                        </div>
-
-
-                    </div>
 
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor.slug})) }}
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':vendor.slug})) }}
 
                     <div class="col-md-9">
                         {% if vendor.banners %}
@@ -71,6 +45,11 @@
 
                             </div>
                         {% endif %}
+                        <div class="col-md-12 vendor_upper_data">
+                            <div id="vendor_social">
+                                {% include 'horizontal_social.html.twig' %}
+                            </div>
+                        </div>
                         {% for category in vendor.getVendorProductCategories if category.isInHome %}
                             <div class="row">
                                 <div class="col-sm-12 col-lg-12 col-md-12">

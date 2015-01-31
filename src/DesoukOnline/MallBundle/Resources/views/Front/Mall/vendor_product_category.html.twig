@@ -23,7 +23,7 @@
                             <div class="portfolio-item">
                                 <div class="thumbnail">
                                     <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                        <img src="{% path product.image , 'preview' %}" alt="">
+                                        <img src="{{product.getWebPath()}}" alt="">
                                     </a>
 
                                     <div class="caption">

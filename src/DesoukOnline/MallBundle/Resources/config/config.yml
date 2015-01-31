@@ -55,3 +55,24 @@ services:
             - ~
             - DesoukOnline\MallBundle\Entity\Article
             - ~
+    
+    desouk_online.mall.vendor.image:
+        class: DesoukOnline\MallBundle\Admin\VendorImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Images" }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\VendorImage
+            - ~
+    
+    desouk_online.mall.product.image:
+        class: DesoukOnline\MallBundle\Admin\ProductImageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Product Images" }
+        arguments:
+            - ~
+            - DesoukOnline\MallBundle\Entity\ProductImage
+            - ~
+            
+
+    

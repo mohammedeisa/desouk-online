@@ -10,22 +10,22 @@
                     {% include 'horizontal_social.html.twig' %}
                     </div>
                     <div class="col-md-9">
-                        {% if vendor.banners %}
+                        {% if vendor.images %}
 
                             <div class="row carousel-holder">
 
                                 <div class="col-md-12">
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
-                                            {% for image in vendor.banners.galleryHasMedias %}
+                                            {% for image in vendor.images %}
                                                 <li data-target="#carousel-example-generic"  {{ (loop.index==1)?'class="active"':'' }}
                                                     data-slide-to="{{ loop.index }}"></li>
                                             {% endfor %}
                                         </ol>
                                         <div class="carousel-inner">
-                                            {% for image in vendor.banners.galleryHasMedias %}
+                                            {% for image in vendor.images %}
                                                 <div class="item {{ (loop.index==1)?'active':'' }}">
-                                                    <img class="slide-image" src="{% path image.media, 'large' %}"
+                                                    <img class="slide-image" src="{{image.getWebPath()}}"
                                                          alt="">
                                                 </div>
                                             {% endfor %}
@@ -60,7 +60,7 @@
                                         <div class="col-sm-4 col-lg-4 col-md-4">
                                             <div class="thumbnail">
                                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                                    <img src="{% path product.image , 'preview' %}" alt="">
+                                                    <img src="{{product.getWebPath()}}" alt="">
                                                 </a>
 
                                                 <div class="caption">

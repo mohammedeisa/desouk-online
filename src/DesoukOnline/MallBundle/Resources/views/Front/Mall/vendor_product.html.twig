@@ -13,22 +13,22 @@
                         </div>
 
                         <div class="thumbnail">
-                            {% if product.gallery %}
+                            {% if product.images %}
 
                                 <div class="row carousel-holder">
 
                                     <div class="col-md-12">
                                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                             <ol class="carousel-indicators">
-                                                {% for image in product.gallery.galleryHasMedias %}
+                                                {% for image in product.images %}
                                                     <li data-target="#carousel-example-generic"  {{ (loop.index==1)?'class="active"':'' }}
                                                         data-slide-to="{{ loop.index }}"></li>
                                                 {% endfor %}
                                             </ol>
                                             <div class="carousel-inner">
-                                                {% for image in product.gallery.galleryHasMedias %}
+                                                {% for image in product.images %}
                                                     <div class="item {{ (loop.index==1)?'active':'' }}">
-                                                        <img class="slide-image" src="{% path image.media, 'large' %}"
+                                                        <img class="slide-image" src="{{ image.getWebPath() }}"
                                                              alt="">
                                                     </div>
                                                 {% endfor %}

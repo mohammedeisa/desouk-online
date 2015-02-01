@@ -51,8 +51,6 @@ class VendorAdmin extends Admin
             ->add('telephone')
             ->add('mobile')
             ->add('email')
-            ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_vendor')))
-            ->add('banners', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_vendor_banners')))
             ->add('expiredAt', 'sonata_type_date_picker', array(
                 'dp_min_date' => 'now',
                 'dp_max_date' => $date->format('c'),

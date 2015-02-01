@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use DesoukOnline\MallBundle\Entity\Category;
+use Symfony\Component\HttpFoundation\Request;
 
 class FrontController extends Controller
 {
@@ -169,5 +170,93 @@ class FrontController extends Controller
         $em->flush();
 
         return $this->redirect($url);
+    }
+	
+	/////////////// Frontend User Actions //////////////////////////////////////////////////
+	/**
+     * @Route("editVendor/{vendor}" , name ="front_editVendor")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor.html.twig")
+     */
+    public function editVendorAction($vendor ,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Vendor Form ////////////////////////////////////////////////////
+    	$form = $this->get('form.factory')->createNamedBuilder('vendorForm', 'form', $vendor, array())
+	        ->add('title',null,array('label' => 'الاسم'))
+			->add('category',null,array('label' => 'التصنيف','required' => true))
+			->add('file', 'file', array('required' => false,'label'=>'الشعار'))
+			->add('save', 'submit', array('label' => 'تعديل'));
+			
+        $form = $form->getForm();
+		/////////////////////////// Vendor image Form /////////////////////////////////////////
+		$vendor_image = new VendorImage();
+		$vendor_image->setVendor($vendor);
+	    $vendor_image_form = $this->get('form.factory')->createNamedBuilder('vendorImageForm', 'form', $vendor_image, array())
+			->add('file', 'file', array('required' => false,'label'=>false))
+			->add('save', 'submit', array('label' => 'إضافة الصورة'));
+		$vendor_image_form = $vendor_image_form->getForm();
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		if('POST' === $request->getMethod()) {
+			if ($request->request->has($form->getName())) {
+	            // handle the first form
+	            $form->handleRequest($request);
+			    if ($form->isValid()) {
+			    	if($vendor->getFile()){
+			    		//echo $vendor_image->getFile();exit;
+			    		$vendor->upload();
+			    	}
+		    		$em->persist($vendor);
+					$em->flush();
+					$this->get('session')->getFlashBag()->add(
+		                'success',
+		                'تم التعديل بنجاح'
+		            );
+					
+			    }
+	        }
+	
+	        if ($request->request->has($vendor_image_form->getName())) {
+	            // handle the second form
+	            $vendor_image_form->handleRequest($request);
+			    if ($vendor_image_form->isValid()) {
+			    	if($vendor_image->getFile()){
+			    		$vendor_image->upload();
+						$em->persist($vendor_image);
+						$em->flush();
+						$this->get('session')->getFlashBag()->add(
+			                'success',
+			                'تم إضافة بانر بنجاح '
+			            );
+			    	}
+			    }
+	        }
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('vendor' => $vendor,'form' => $form->createView(),'vendor_image_form' => $vendor_image_form->createView());
+    }
+    
+    ///////////////////////////// Backend Vendor Delete Image //////////////////////////////
+	/**
+     * @Route("/vendor/deleteImage/{vendor}/{image_id}" , name ="front_vendor_deleteImge")
+     */
+    public function deleteFrontVendorImageAction($vendor,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'front_editVendor',
+            array('vendor' => $vendor)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorImage()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
     }
 }

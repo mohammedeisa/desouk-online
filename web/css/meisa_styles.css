@@ -245,11 +245,45 @@
 	height: 200px;
 	padding-top: 10px;
 }
-.realestate_filter .btn-group{
+ .btn-group{
 	width: 100%;
 }
-.realestate_filter .btn{
+ .btn{
 	width: 100%;
+}
+#user_menu{
+	top: 180px;
+	left: 0;
+	position: fixed;
+	width: 200px;
+	min-height: 200px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 0 10px 10px 0;
+	z-index: 1100;
+	padding: 5px;
+}
+#user_menu span{
+	float: right;
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	line-height: 18px;
+	color: green;
+	margin-bottom: 10px;
+}
+#vedor_user_menu{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 50px;
+	text-align: center;
+}
+#vedor_user_menu li{
+	display: inline-block;
+}
+#vendor_edit_form{
+	width: 70%;
 }
 /*Added by Wardany*/
 

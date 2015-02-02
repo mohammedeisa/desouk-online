@@ -35,6 +35,16 @@ class FrontController extends Controller
     public function footerAction()
     {
     }
+	
+	/**
+     * @Route("/userMenu" , name ="userMenu")
+     * @Template("DesoukOnlineHomeBundle:Front:Homepage/userMenu.html.twig")
+     */
+    public function userMenuAction()
+    {
+    	$loggedIn_user= $this->get('security.context')->getToken()->getUser();
+		return array('user' => $loggedIn_user);
+    }
 
     /**
      * @Route("/banner" , name ="banner")

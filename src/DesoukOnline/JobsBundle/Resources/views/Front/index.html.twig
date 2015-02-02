@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <!-- Page Content -->
+    <section id="mall_category" class="inner_page">
+        <div class="container">
+            <div class="box">
+
+                {% for job in jobs %}
+                    <div class="row-fluid post">
+                        <div class="span7">
+                            <a href="{{ path('job',{'slug':job.slug}) }}"><h3>{{ job.title }}</h3></a>
+
+                            <div class="meta">
+                                <span>االمعلن: </span>
+                                <span class="author"><a href="#"> {{ job.owner }}</a></span>
+                                <span>تاريخ الاعلان</span>
+                                <span class="author"><a href="#"> {{ job.updatedAt|date('Y/m/d') }}</a></span>
+                            </div>
+                            <p>
+                                {{ job.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('job',{'slug':job.slug}) }}" class="button">المزيد</a>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

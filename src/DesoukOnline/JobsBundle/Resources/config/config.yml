@@ -1,0 +1,9 @@
+services:
+    desouk_online.jobs:
+        class: DesoukOnline\JobsBundle\Admin\JobsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Job" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\JobsBundle\Entity\Job
+            - ~

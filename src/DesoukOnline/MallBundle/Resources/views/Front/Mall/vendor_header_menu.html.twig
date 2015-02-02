@@ -9,7 +9,7 @@
                 <li class=" " id="vendor_logo_container">
                     {% if vendor.logo is defined %}
                         <a href="">
-                            <img src="{% path vendor.logo, 'preview' %}">
+                            <img src="{{ vendor.getWebPath() }}">
                         </a>
                     {% endif %}
                 </li>

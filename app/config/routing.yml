@@ -1,3 +1,8 @@
+desouk_online_jobs:
+    resource: "@DesoukOnlineJobsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 desouk_online_visitors:
     resource: "@DesoukOnlineVisitorsBundle/Controller/"
     type:     annotation

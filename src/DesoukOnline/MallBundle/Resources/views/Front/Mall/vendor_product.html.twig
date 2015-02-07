@@ -6,8 +6,8 @@
             <div class="box">
 
                 <div class="row">
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
+                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                     <div class="col-md-9">
                         <div class="center">
                             <h4>{{ product.name }}</h4>

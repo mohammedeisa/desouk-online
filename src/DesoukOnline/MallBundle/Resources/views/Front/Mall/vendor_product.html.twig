@@ -9,9 +9,6 @@
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                     <div class="col-md-9">
-                        <div class="center">
-                            <h4>{{ product.name }}</h4>
-                        </div>
 
                         <div class="thumbnail">
                             {% if product.images %}
@@ -48,9 +45,12 @@
 
                                 </div>
                             {% endif %}
+                            <div class="center">
+                                <h4>{{ product.name }}</h4>
+                                <span class="pull-right">{{ product.price }} LE</span>
+                            </div>
+                            <hr>
                             <div class="caption-full">
-                                <h4 class="pull-right">{{ product.price }} LE</h4>
-                                <hr>
                                 {{ product.description|raw }}
                                 <hr>
                             </div>

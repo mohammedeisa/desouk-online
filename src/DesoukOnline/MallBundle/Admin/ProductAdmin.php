@@ -84,7 +84,7 @@ class ProductAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('name')
+            ->addIdentifier('name')
             ->add('code')
             ->add('price')
             ->add('enabled')

@@ -93,6 +93,11 @@ class Vendor
      * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
      */
     protected $vendorProductCategories;
+	
+	/**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     */
+    protected $products;
 
     /**
      * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Article", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
@@ -597,4 +602,113 @@ class Vendor
         $this->email = $email;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->vendorProductCategories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Add vendorProductCategories
+     *
+     * @param \DesoukOnline\MallBundle\Entity\VendorProductCategory $vendorProductCategories
+     * @return Vendor
+     */
+    public function addVendorProductCategory(\DesoukOnline\MallBundle\Entity\VendorProductCategory $vendorProductCategories)
+    {
+        $this->vendorProductCategories[] = $vendorProductCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove vendorProductCategories
+     *
+     * @param \DesoukOnline\MallBundle\Entity\VendorProductCategory $vendorProductCategories
+     */
+    public function removeVendorProductCategory(\DesoukOnline\MallBundle\Entity\VendorProductCategory $vendorProductCategories)
+    {
+        $this->vendorProductCategories->removeElement($vendorProductCategories);
+    }
+
+    /**
+     * Add products
+     *
+     * @param \DesoukOnline\MallBundle\Entity\Product $products
+     * @return Vendor
+     */
+    public function addProduct(\DesoukOnline\MallBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \DesoukOnline\MallBundle\Entity\Product $products
+     */
+    public function removeProduct(\DesoukOnline\MallBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \DesoukOnline\MallBundle\Entity\Article $articles
+     * @return Vendor
+     */
+    public function addArticle(\DesoukOnline\MallBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \DesoukOnline\MallBundle\Entity\Article $articles
+     */
+    public function removeArticle(\DesoukOnline\MallBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \DesoukOnline\MallBundle\Entity\VendorImage $images
+     */
+    public function removeImage(\DesoukOnline\MallBundle\Entity\VendorImage $images)
+    {
+        $this->images->removeElement($images);
+    }
 }

@@ -32,21 +32,21 @@ class VendorProductCategory
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255 , nullable=true)
      */
     private $description;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="enabled", type="boolean", options={"default":1})
+     * @ORM\Column(name="enabled", type="boolean", nullable=true)
      */
     private $enabled;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_in_home", type="boolean", options={"default":1})
+     * @ORM\Column(name="is_in_home", type="boolean", nullable=true)
      */
     private $isInHome;
 
@@ -190,21 +190,7 @@ class VendorProductCategory
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
 
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
 
 
     /**

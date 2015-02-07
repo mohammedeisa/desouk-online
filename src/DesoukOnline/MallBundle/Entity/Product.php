@@ -98,6 +98,14 @@ class Product
      * @ORM\JoinColumn(name="vendor_product_category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $vendorProductCategory;
+	
+	/**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="Vendor" , cascade={"all"},inversedBy="products" )
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $vendor;
 
 
     /**
@@ -476,4 +484,64 @@ class Product
 	}
 	////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get isInHome
+     *
+     * @return boolean 
+     */
+    public function getIsInHome()
+    {
+        return $this->isInHome;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * Set vendor
+     *
+     * @param \DesoukOnline\MallBundle\Entity\Vendor $vendor
+     * @return Product
+     */
+    public function setVendor(\DesoukOnline\MallBundle\Entity\Vendor $vendor = null)
+    {
+        $this->vendor = $vendor;
+
+        return $this;
+    }
+
+    /**
+     * Get vendor
+     *
+     * @return \DesoukOnline\MallBundle\Entity\Vendor 
+     */
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \DesoukOnline\MallBundle\Entity\ProductImage $images
+     */
+    public function removeImage(\DesoukOnline\MallBundle\Entity\ProductImage $images)
+    {
+        $this->images->removeElement($images);
+    }
 }

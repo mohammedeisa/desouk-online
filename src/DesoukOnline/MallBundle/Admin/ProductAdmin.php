@@ -45,6 +45,7 @@ class ProductAdmin extends Admin
             ->add('description', 'ckeditor')
             ->add('code')
             ->add('price')
+			->add('vendor')
             ->add('vendorProductCategory')
             ->add('isInHome', null, array())
             ->add('enabled', null, array())

@@ -239,7 +239,7 @@ class FrontController extends Controller
         return array('vendor' => $vendor,'form' => $form->createView(),'vendor_image_form' => $vendor_image_form->createView());
     }
     
-    ///////////////////////////// Backend Vendor Delete Image //////////////////////////////
+    ///////////////////////////// FrontEnd Vendor Delete Image //////////////////////////////
 	/**
      * @Route("/vendor/deleteImage/{vendor}/{image_id}" , name ="front_vendor_deleteImge")
      */
@@ -258,5 +258,102 @@ class FrontController extends Controller
 		$em->flush();
 		
 		return $this->redirect($url);
+    }
+	
+	////////////////// Add Categories /////////////////////////////////////
+	/**
+     * @Route("editVendor/categories/{vendor}" , name ="front_editVendor_categories")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_categories.html.twig")
+     */
+    public function editVendorCategoriesAction($vendor ,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Vendor Category Form /////////////////////////////////////////
+		$vendor_product_category = new VendorProductCategory();
+		$vendor_product_category->setVendor($vendor);
+	    $vendor_product_category_form = $this->get('form.factory')->createNamedBuilder('vendorProductCategoryForm', 'form', $vendor_product_category, array())
+			->add('title',null,array('label' => 'الاسم'))
+			->add('isInHome',null,array('label' => 'الظهور فى الصفحة الرئيسية للمحل','required'  => false,))
+			->add('save', 'submit', array('label' => 'إضافة قسم'));
+		$vendor_product_category_form = $vendor_product_category_form->getForm();
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		$vendor_product_category_form->handleRequest($request);
+	    if ($vendor_product_category_form->isValid()) {
+	    	$em->persist($vendor_product_category);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add(
+                'success',
+                'تم إضافة القسم بنجاح'
+            );
+			return $this->redirect($this->generateUrl('front_editVendor_categories',array('vendor' => $vendor->getId())));
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('vendor' => $vendor,'vendor_product_category_form' => $vendor_product_category_form->createView());
+    }
+
+	////////////////// Edit Category /////////////////////////////////////
+	/**
+     * @Route("editVendor/categories/edit/{category_id}" , name ="front_editVendor_categories_edit")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_categories_edit.html.twig")
+     */
+    public function editVendorCategoriesEditAction($category_id ,Request $request)
+    {
+    	$vendor_product_category = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneById($category_id);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Vendor Category Form /////////////////////////////////////////
+	    $vendor_product_category_form = $this->get('form.factory')->createNamedBuilder('vendorProductCategoryForm', 'form', $vendor_product_category, array())
+			->add('title',null,array('label' => 'الاسم'))
+			->add('isInHome',null,array('label' => 'الظهور فى الصفحة الرئيسية للمحل','required'  => false,))
+			->add('save', 'submit', array('label' => 'تعديل القسم'));
+		$vendor_product_category_form = $vendor_product_category_form->getForm();
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		$vendor_product_category_form->handleRequest($request);
+	    if ($vendor_product_category_form->isValid()) {
+	    	$em->persist($vendor_product_category);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add(
+                'success',
+                'تم تعديل القسم بنجاح'
+            );
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('vendor' => $vendor_product_category->getVendor(),'vendor_product_category_form' => $vendor_product_category_form->createView());
+    }
+
+	///////////////////////////// FrontEnd Vendor Delete Category //////////////////////////////
+	/**
+     * @Route("/vendor/deleteCategory/{vendor}/{category_id}" , name ="front_vendor_deleteCategory")
+     */
+    public function deleteFrontVendorCategoryAction($vendor,$category_id)
+    {
+    	$url = $this->generateUrl(
+            'front_editVendor',
+            array('vendor' => $vendor)
+        );
+		$category = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneBy(array('id' => $category_id));
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($category);
+		$em->flush();
+		
+		return $this->redirect($url);
+    }
+	
+	////////////////// Products /////////////////////////////////////
+	/**
+     * @Route("editVendor/products/{vendor}" , name ="front_editVendor_products")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_products.html.twig")
+     */
+    public function editVendorProductsAction($vendor ,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+	    
+        return array('vendor' => $vendor);
     }
 }

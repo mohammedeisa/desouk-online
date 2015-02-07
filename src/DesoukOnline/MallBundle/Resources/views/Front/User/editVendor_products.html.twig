@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                	{{ include('DesoukOnlineMallBundle:Front:User/userMenu.html.twig', { 'selected': 'vendor' }) }}
+                   {{ include('DesoukOnlineMallBundle:Front:User/userMenu.html.twig', { 'selected': 'product' }) }}
 		            {% for flashMessage in app.session.flashbag.get('success') %}
 		            	<div class="alert alert-success">
 						    <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -17,36 +17,26 @@
 						</div>
 					{% endfor %}
 		            <div id="vendor_edit_form">
-		            	{{ form_start(form) }}
-		            	{{ form_row(form.title) }}
-		            	{{ form_row(form.category) }}
-		            	{{ form_row(form.file) }}
-		            	<div class="form-group ">
-		            		<img width="100" height="100" src="{{ vendor.getWebPath() }}">
-	            		</div>
-						{{ form_widget(form) }}
-						{{ form_end(form) }}
 	                    <div class="raw">
 	                        <div class="panel panel-default">
 	                            <div class="panel-heading">
-	                                البانرات "يمكنك إضافة 5 بانر"
+	                                المنتجات
 	                            </div>
 	                            <!-- /.panel-heading -->
 	                            <div class="panel-body">
-	                            	{% if vendor.images|length < 5 %}
 	                            	<div class="user_new_form">
-	                            		{{ form_start(vendor_image_form) }}
-	                            		{{ form_widget(vendor_image_form) }}
-										{{ form_end(vendor_image_form) }}
+	                            		<ul id = "vedor_user_menu">
+									    	<li><a class="btn btn-primary "  href="">إضافة منتج جديد </a></li>
+										</ul>
 	                            	</div>
-	                            	{% endif %}
                                     <table class="table table-striped table-bordered table-hover ">
                                         <tbody role="alert">
-                                        {% for image in vendor.images %}
+                                        {% for product in vendor.products %}
 
                                             <tr>
-                                                <td><img width="200"  src="{{ image.getWebPath() }}"></td>
-                                                <td><a href="{{ path('front_vendor_deleteImge',{'vendor':vendor.id,'image_id':image.id}) }}">حذف</a></td>
+                                                <td width="50%">{{product.name}}</td>
+                                                <td><a href="{{ path('front_editVendor_categories_edit',{'category_id':product.id}) }}">تعديل</a></td>
+                                                <td><a href="{{ path('front_vendor_deleteCategory',{'vendor':vendor.id,'category_id':product.id}) }}">حذف</a></td>
                                             </tr>
                                         {% endfor %}
 

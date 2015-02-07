@@ -409,3 +409,10 @@ padding: 10px 0 0;
 background: transparent;
     color: #52b6ec;
 }
+
+
+.home-search-form .dropdown-menu{
+    right:0;
+    text-align: right;
+    left:auto;
+}

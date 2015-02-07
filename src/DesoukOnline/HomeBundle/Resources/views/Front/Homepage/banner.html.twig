@@ -28,6 +28,24 @@
                     <button class="btn btn-default" type="button">ابحث !</button>
                 </span>
                     <input type="text" name="search_string" class="form-control" placeholder="ابحث عن">
+                    <input type="hidden" name="search_in" id="search_in">
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-expanded="false"><span class="text">ابحث فى</span><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li><a value="real_estate" href="#">عقارات</a></li>
+                            <li><a value="for_sale" href="#">للبيع</a></li>
+                            <li><a value="cars" href="#">سيارات</a></li>
+                            <li class="divider"></li>
+                            <li><a value="desouk_mall" href="#">دسوق مول</a></li>
+                            <li><a value="delivery" href="#">ديلفرى</a></li>
+                            <li><a value="jobs" href="#">وظايف</a></li>
+                            <li><a value="desouk_online" href="#">دسوق اونلاين</a></li>
+                        </ul>
+                    </div>
+                    <!-- /btn-group -->
                 </div>
                 <!-- /input-group -->
             </form>

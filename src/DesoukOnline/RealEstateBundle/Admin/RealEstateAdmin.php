@@ -106,6 +106,7 @@ class RealEstateAdmin extends Admin
         $listMapper
             ->add('title')
             ->add('type')
+            ->add('purpose')
             ->add('price')
             ->add('area')
             ->add('enabled')

@@ -1,11 +1,7 @@
-<div id="vendor_header_menu_container" class="col-md-9">
+<div id="vendor_header_menu_container" class="col-md-12">
     <div id="navbar" class="navbar navbar-default vendor_header_menu">
         <div class="">
             <ul class="nav navbar-nav">
-                <li class=" " id=""><a id="vendor_name"
-                                       href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
-                    </a></li>
-
                 <li class=" " id="vendor_logo_container">
                     {% if vendor.file is defined %}
                         <a href="">
@@ -13,6 +9,10 @@
                         </a>
                     {% endif %}
                 </li>
+                <li class=" " id=""><a id="vendor_name"
+                                       href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
+                    </a></li>
+
                 <li class=" " id="vendor_menu_contacts">
                     {% if vendor.telephone %}
                         <div class="vendor_contact">

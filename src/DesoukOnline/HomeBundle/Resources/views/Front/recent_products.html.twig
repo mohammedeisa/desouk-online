@@ -1,4 +1,4 @@
-<section id="portfolio">
+<section id="portfolio" class="home_portfolio">
     <div class="container">
         <div class="box">
             <div class="center gap">
@@ -6,21 +6,70 @@
             </div>
             <!--/.center-->
             <ul class="portfolio-filter">
-                <li><a class="btn btn-primary active" href="#" data-filter="*">الكل</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".vendor_products">دسوق مول</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".property_for_sale">عقارات للبيع</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".property_for_rent">عقارات للايجار</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter="*">الكل</a></li>
+                <li><a class="btn btn-primary active" href="#" data-filter=".real_estate">عقارات</a></li>
                 <li><a class="btn btn-primary" href="#" data-filter=".for_sale">للبيع</a></li>
                 <li><a class="btn btn-primary" href="#" data-filter=".cars">سيارات</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".desouk_mall">دسوق مول</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".delivery">ديليفرى</a></li>
             </ul>
             <!--/#portfolio-filter-->
             <ul class="portfolio-items col-4">
-                {% for product in vendor_products %}
-                    <li class="portfolio-item joomla vendor_products">
+                {% for product in real_estate %}
+                    <li class="portfolio-item real_estate">
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{product.getWebPath()}}" alt="">
+                                    <img src="{{ product.getWebPath() }}" alt="">
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in for_sale %}
+                    <li class="portfolio-item for_sale">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    <img src="{{ product.getWebPath() }}" alt="">
+
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in cars %}
+                    <li class="portfolio-item cars">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    <img src="{{ product.getWebPath() }}" alt="">
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in desouk_mall %}
+                    <li class="portfolio-item desouk_mall">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    <img src="{{ product.getWebPath() }}" alt="">
                                 </a>
                             </div>
                             <h5>
@@ -31,12 +80,12 @@
                         </div>
                     </li><!--/.portfolio-item-->
                 {% endfor %}
-                {% for product in property_for_sale %}
-                    <li class="portfolio-item joomla property_for_sale">
+                {% for product in delivery %}
+                    <li class="portfolio-item delivery">
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{% path product.image, 'preview' %}" alt="">
+                                    <img src="{% path product.logo, 'preview' %}" alt="">
                                 </a>
                             </div>
                             <h5>
@@ -47,54 +96,7 @@
                         </div>
                     </li><!--/.portfolio-item-->
                 {% endfor %}
-                {% for product in property_for_rent %}
-                    <li class="portfolio-item joomla property_for_rent">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{% path product.image, 'preview' %}" alt="">
-                                </a>
-                            </div>
-                            <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    {{ product.title }}
-                                </a>
-                            </h5>
-                        </div>
-                    </li><!--/.portfolio-item-->
-                {% endfor %}
-                {% for product in for_sale %}
-                    <li class="portfolio-item joomla for_sale">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{% path product.image, 'preview' %}" alt="">
-                                </a>
-                            </div>
-                            <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    {{ product.title }}
-                                </a>
-                            </h5>
-                        </div>
-                    </li><!--/.portfolio-item-->
-                {% endfor %}
-                {% for product in for_sale %}
-                    <li class="portfolio-item joomla cars">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{% path product.image, 'preview' %}" alt="">
-                                </a>
-                            </div>
-                            <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    {{ product.title }}
-                                </a>
-                            </h5>
-                        </div>
-                    </li><!--/.portfolio-item-->
-                {% endfor %}
+
             </ul>
         </div>
         <!--/.box-->

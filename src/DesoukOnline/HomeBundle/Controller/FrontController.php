@@ -78,19 +78,18 @@ class FrontController extends Controller
     public function recentProductsAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $vendorProducts = $em->createQuery('SELECT a FROM ' . get_class(new Product()) . ' a order by a.updatedAt DESC')->setMaxResults(3)->getResult();
-        $propertyForSale = null;
-        $propertyForRent = null;
-        $forSale = null;
-        $cars = null;
+        $realEstate = $em->createQuery('SELECT a FROM ' . get_class(new RealEstate()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+        $forSale = $em->createQuery('SELECT a FROM ' . get_class(new ForSale()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+        $cars = $em->createQuery('SELECT a FROM ' . get_class(new Car()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+        $desoukMall = $em->createQuery('SELECT a FROM ' . get_class(new Product()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+        $delivery = $em->createQuery('SELECT a FROM ' . get_class(new Delivery()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+
         return array(
-            'vendor_products' => $vendorProducts,
-            'property_for_sale' => $propertyForSale,
-            'property_for_rent' => $propertyForRent,
+            'real_estate' => $realEstate,
             'for_sale' => $forSale,
-            'cars' => $cars
-
-
+            'cars' => $cars,
+            'desouk_mall' => $desoukMall,
+            'delivery' => $delivery
         );
     }
 
@@ -171,7 +170,6 @@ class FrontController extends Controller
                 ->getResult();
             $results['delivery'] = $delivery;
         }
-
         if ($searchIn == 'jobs' || $searchIn == 'desouk_online' || $searchIn == '') {
             $delivery = $queryBuilder
                 ->select('jobs')
@@ -183,7 +181,6 @@ class FrontController extends Controller
                 ->getResult();
             $results['jobs'] = $delivery;
         }
-
         return array('results' => $results, 'search' => $search, 'search_in' => $searchIn);
 
     }

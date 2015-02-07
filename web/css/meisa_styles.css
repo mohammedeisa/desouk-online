@@ -58,6 +58,9 @@
     background-image: none;
     background-repeat: no-repeat;
 }
+.home_portfolio ul li img{
+    max-height: 156px;
+}
 
 .carousel-control.right {
     background-image: none;

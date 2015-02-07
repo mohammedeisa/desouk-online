@@ -1,29 +1,29 @@
-<div id="user_menu">
-    <span>مرحبا : {{user.username}}</span>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى </button>
-        <ul class="" role="menu">
-        	<li ><a   href="">تغيير كلمة المرور</a></li>
-        	<li ><a   href="">تسجيل الخروج</a></li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات المحلات </button>
-        <ul class="" role="menu">
-        	{% if user.vendors|length == 0 %}
-        		<li ><a   href="">لا يوجد لديك محلات فى دسوق مول</a></li>
-        	{% endif %}
-        	{% for vendor in user.vendors %}
-        		<li ><a   href="{{ path('front_editVendor',{'vendor':vendor.id}) }}">{{vendor.title}}</a></li>
-        	{% endfor %}
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى </button>
-        <ul class="" role="menu">
-        	<li ><a   href="">الكل</a></li>
-            <li><a  href="">للبيع</a></li>
-            <li><a  href="">للإيجار</a></li>
-        </ul>
-    </div>
-</div>
+{#<div id="user_menu">#}
+    {#<span>مرحبا : {{user.username}}</span>#}
+    {#<div class="btn-group">#}
+        {#<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى </button>#}
+        {#<ul class="" role="menu">#}
+        	{#<li ><a   href="">تغيير كلمة المرور</a></li>#}
+        	{#<li ><a   href="">تسجيل الخروج</a></li>#}
+        {#</ul>#}
+    {#</div>#}
+    {#<div class="btn-group">#}
+        {#<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات المحلات </button>#}
+        {#<ul class="" role="menu">#}
+        	{#{% if user.vendors|length == 0 %}#}
+        		{#<li ><a   href="">لا يوجد لديك محلات فى دسوق مول</a></li>#}
+        	{#{% endif %}#}
+        	{#{% for vendor in user.vendors %}#}
+        		{#<li ><a   href="{{ path('front_editVendor',{'vendor':vendor.id}) }}">{{vendor.title}}</a></li>#}
+        	{#{% endfor %}#}
+        {#</ul>#}
+    {#</div>#}
+    {#<div class="btn-group">#}
+        {#<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى </button>#}
+        {#<ul class="" role="menu">#}
+        	{#<li ><a   href="">الكل</a></li>#}
+            {#<li><a  href="">للبيع</a></li>#}
+            {#<li><a  href="">للإيجار</a></li>#}
+        {#</ul>#}
+    {#</div>#}
+{#</div>#}

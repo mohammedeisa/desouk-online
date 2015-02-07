@@ -22,6 +22,9 @@
 .inner_page {
     margin-top: 60px;
 }
+.inner_page .carousel-inner img{
+    max-height: 300px;
+}
 
 #mall_category, #vendor_homepage, #vendor_product_category, #vendor_product {
     margin-top: 60px;
@@ -202,8 +205,8 @@
 .realestate_image {
     width: 35%;
     text-align: center;
-    background: #222;
-    padding: 10px;
+    /*background: #222;*/
+    /*padding: 10px;*/
     border-bottom: 1px solid #e1e1e1;
     float: right;
 }
@@ -252,7 +255,13 @@
     float: right;
     width: 25%;
 }
+.realestate_filter .panel-body{
+padding: 10px 0 0;
+}
 
+.realestate_filter .panel-body .btn{
+    border-radius: 0;
+}
 .filter_scroll {
     overflow-y: scroll;
     height: 200px;

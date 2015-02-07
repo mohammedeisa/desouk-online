@@ -62,7 +62,8 @@
         "mohammedeisa/menu-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "~2.4",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "nomaya/social-bundle": "dev-master"
+        "nomaya/social-bundle": "dev-master",
+        "mohammedeisa/rating-bundle": "~2.0"
     },
 
     "require-dev": {

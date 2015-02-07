@@ -90,12 +90,13 @@ class AppKernel extends Kernel
             new DesoukOnline\MallBundle\DesoukOnlineMallBundle(),
             new DesoukOnline\HomeBundle\DesoukOnlineHomeBundle(),
             new DesoukOnline\SponsorBundle\DesoukOnlineSponsorBundle(),
-            new DesoukOnline\RatingBundle\DesoukOnlineRatingBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new DesoukOnline\WebDevelopmentBundle\DesoukOnlineWebDevelopmentBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new DesoukOnline\VisitorsBundle\DesoukOnlineVisitorsBundle(),
             new DesoukOnline\JobsBundle\DesoukOnlineJobsBundle(),
+            new \Meisa\RatingBundle\MeisaRatingBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

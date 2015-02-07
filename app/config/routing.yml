@@ -1,3 +1,8 @@
+meisa_rating:
+    resource: "@MeisaRatingBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 desouk_online_jobs:
     resource: "@DesoukOnlineJobsBundle/Controller/"
     type:     annotation
@@ -15,11 +20,6 @@ desouk_online_web_development:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-desouk_online_rating:
-    resource: "@DesoukOnlineRatingBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 desouk_online_sponsor:
     resource: "@DesoukOnlineSponsorBundle/Controller/"

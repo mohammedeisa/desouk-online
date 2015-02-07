@@ -12,15 +12,12 @@
                                 <h4>{{ vendor_product_category.title }}</h4>
                                 <p class="lead">{{ vendor_product_category.description|raw }}</p>
                             </div>
-
-                            <div id="social_items">
-                                {% include 'horizontal_social.html.twig' %}
-                            </div>
                         </div>
+<div class="col-md-12">
 
                         {% for product in category_products %}
 
-                            <div class="portfolio-item">
+                            <div class="portfolio-item col-md-4">
                                 <div class="thumbnail">
                                     <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
                                         <img src="{{product.getWebPath()}}" alt="">
@@ -42,6 +39,7 @@
                                 </div>
                             </div>
                         {% endfor %}
+</div>
                     </div>
                 </div>
                 {{ knp_pagination_render(category_products) }}

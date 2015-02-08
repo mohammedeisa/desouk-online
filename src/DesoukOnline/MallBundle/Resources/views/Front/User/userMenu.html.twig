@@ -2,5 +2,5 @@
     <li><a class="btn btn-primary {{ selected == 'vendor' ? 'active' }}"  href="{{ path('front_editVendor',{'vendor':vendor.id}) }}">إدارة بيانات المحل </a></li>
     <li><a class="btn btn-primary {{ selected == 'category' ? 'active' }}" href="{{ path('front_editVendor_categories',{'vendor':vendor.id}) }}" >إدارة الأقسام</a></li>
     <li><a class="btn btn-primary {{ selected == 'product' ? 'active' }}" href="{{ path('front_editVendor_products',{'vendor':vendor.id}) }}" >إدارة المنتجات</a></li>
-    <li><a class="btn btn-primary {{ selected == 'article' ? 'active' }}" href="#" >إدارة المقالات</a></li>
+    <li><a class="btn btn-primary {{ selected == 'article' ? 'active' }}" href="{{ path('front_editVendor_articles',{'vendor':vendor.id}) }}" >إدارة المقالات</a></li>
 </ul>

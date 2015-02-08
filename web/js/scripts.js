@@ -7,4 +7,5 @@ $(document).ready(function(){
         $(this).closest('.input-group-btn').find('.btn .text').text($(this).html());
         $('#search_in').val($(this).attr('value'));
     });
+
 });

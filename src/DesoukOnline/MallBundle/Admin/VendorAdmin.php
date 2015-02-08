@@ -49,7 +49,7 @@ class VendorAdmin extends Admin
             ->add('description', 'ckeditor')
             ->add('category')
             ->add('telephone')
-            ->add('mobile')
+            ->add('facebook')
             ->add('email')
             ->add('expiredAt', 'sonata_type_date_picker', array(
                 'dp_min_date' => 'now',
@@ -82,7 +82,7 @@ class VendorAdmin extends Admin
             ->add('title')
             ->add('description')
             ->add('telephone')
-            ->add('mobile')
+            ->add('facebook')
             ->add('email')
             ->add('enabled');
     }

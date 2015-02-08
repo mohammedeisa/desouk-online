@@ -53,9 +53,9 @@ class Vendor
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile", type="string" , length=255)
+     * @ORM\Column(name="facebook", type="string" , length=255)
      */
-    private $mobile;
+    private $facebook;
 
 
     /**
@@ -573,17 +573,17 @@ class Vendor
     /**
      * @return string
      */
-    public function getMobile()
+    public function getFacebook()
     {
-        return $this->mobile;
+        return $this->facebook;
     }
 
     /**
-     * @param string $mobile
+     * @param string $facebook
      */
-    public function setMobile($mobile)
+    public function setFacebook($facebook)
     {
-        $this->mobile = $mobile;
+        $this->facebook = $facebook;
     }
 
     /**

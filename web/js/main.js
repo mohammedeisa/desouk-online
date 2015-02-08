@@ -56,6 +56,7 @@ jQuery(function($) {
 			return false;
 		});
 
+		$('.real_state_portfolio_button').trigger('click');
 
 	});
 });

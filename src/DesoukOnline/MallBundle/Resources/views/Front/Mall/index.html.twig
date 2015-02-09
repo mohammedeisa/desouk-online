@@ -12,37 +12,39 @@
                         {% include 'horizontal_social.html.twig' %}
                     </div>
                 {% endif %}
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
+                {% if categories is defined %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="row">
-                                        {% for category in categories %}
-                                            <div class="col-sm-3">
-                                                <div class="member">
-                                                    <p>
-                                                        <a href="{{ path('mall_category',{'slug':category.slug}) }}">
-                                                            <img class="img-responsive img-thumbnail img-circle"
-                                                                 src="{% path category.image, 'preview' %}" alt="">
-                                                        </a>
-                                                    </p>
+                                        <div class="row">
+                                            {% for category in categories %}
+                                                <div class="col-sm-3">
+                                                    <div class="member">
+                                                        <p>
+                                                            <a href="{{ path('mall_category',{'slug':category.slug}) }}">
+                                                                <img class="img-responsive img-thumbnail img-circle"
+                                                                     src="{% path category.image, 'preview' %}" alt="">
+                                                            </a>
+                                                        </p>
 
-                                                    <h3>
-                                                        <a href="{{ path('mall_category',{'slug':category.slug}) }}">{{ category.title }}</a>
+                                                        <h3>
+                                                            <a href="{{ path('mall_category',{'slug':category.slug}) }}">{{ category.title }}</a>
 
-                                                    </h3>
+                                                        </h3>
+                                                    </div>
+
                                                 </div>
-
-                                            </div>
-                                        {% endfor %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 {{ knp_pagination_render(categories) }}
+                {% endif %}
             </div>
         </div>
         <!-- /.container -->

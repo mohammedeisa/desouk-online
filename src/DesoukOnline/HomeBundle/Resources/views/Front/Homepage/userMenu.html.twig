@@ -1,5 +1,8 @@
+{% if app.user %}
 <div id="user_menu">
-    <span>مرحبا : {{user.username}}</span>
+    <div class="panel panel-default">
+
+    <div class="panel-heading">مرحبا  {{user.username}}</div>
     <div class="btn-group">
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى </button>
         <ul class="" role="menu">
@@ -27,3 +30,5 @@
         </ul>
     </div>
 </div>
+    </div>
+{% endif %}

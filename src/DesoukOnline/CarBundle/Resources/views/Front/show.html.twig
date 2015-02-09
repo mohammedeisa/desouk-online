@@ -16,9 +16,11 @@
                                 	<div>
                                 		النوع : <span>{{car.type}}</span>
                                 	</div>
-                                	<div >
+									{% if car.mark %}
+									<div >
                                 		الماركة : <span>{{car.mark.name}}</span>
                                 	</div>
+									{% endif %}
                                 </div>
                                 {% if has_slider %}
 	

@@ -8,33 +8,35 @@
                     <h3>سيارات دسوق</h3>
                 </div>
                 {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': app.request.get('type'),'mark': app.request.get('mark') })) }}
-                <ul class="reaestate_items col-4">
+                <div class="row reaestate_items col-md-12">
                     {% for car in cars %}
-                        <li class="reaestate_item apps">
-                            <div class="reaestate_item_inner">
-                                <div class="realestate_image">
-                                    <a href="{{ path('car_show',{'slug':car.slug}) }}">
-                                        <img src="{{car.getWebPath()}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="realestate_title">
-                                    <a href="{{ path('car_show',{'slug':car.slug}) }}">{{ car.title }}</a>
-                                </div>
-                                <div class="realestate_properities">
-                                	<div>السعر : <span>{{car.price}} جنيه</span></div>
-                                	<div>
-                                		النوع : <span>{{car.type}}</span>
-                                	</div>
-                                	<div >
-                                		الماركة : <span>{{car.mark.name}}</span>
-                                	</div>
-                                </div>
-                                <div class="realestate_summary">
-                                    {{car.summary}}
-                                </div>
+                    <div class="col-sm-4 col-lg-4 col-md-4 ">
+                        <div class="reaestate_item_inner  thumbnail">
+                            <div class="realestate_image">
+                                <a href="{{ path('car_show',{'slug':car.slug}) }}">
+                                    <img src="{{ car.getWebPath() }}" alt="">
+                                </a>
                             </div>
-                        </li><!--/.portfolio-item-->
-                    {% endfor %}
+                            <div class="caption">
+                                <h4>
+                                    <a href="{{ path('car_show',{'slug':car.slug}) }}">{{ car.title }}</a>
+                                </h4>
+                                <label>السعر :</label>
+                                <span>{{ car.price }} جنيه</span><br>
+                                <label>النوع :</label>
+                                <span>{{ car.type }}</span><br>
+                                {% if car.mark %}
+                                    <label>الماركة :</label>
+                                    <span>{{ car.mark.name }}</span>
+                                {% endif %}
+                                {{ car.summary }}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--/.portfolio-item-->
+                {% endfor %}
                 </ul>
             </div>
             <!--/.box-->

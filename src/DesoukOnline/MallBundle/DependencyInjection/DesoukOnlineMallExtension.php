@@ -33,8 +33,8 @@ class DesoukOnlineMallExtension extends Extension
         $mall['label']='Mall';
 
         $mall['items'][] = 'desouk_online.mall.config';
-        $mall['items'][] = 'desouk_online.mall.vendor';
         $mall['items'][] = 'desouk_online.mall.category';
+        $mall['items'][] = 'desouk_online.mall.vendor';
         $mall['items'][] = 'desouk_online.mall.vendor.product.category';
         $mall['items'][] = 'desouk_online.mall.product';
         $mall['items'][] = 'desouk_online.mall.vendor.article';

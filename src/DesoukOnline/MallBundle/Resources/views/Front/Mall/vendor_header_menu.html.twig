@@ -13,10 +13,10 @@
                                        href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
                     </a></li>
 
-                <li class=" " id="vendor_menu_contacts" style="color: #395388">
+                <li class=" " id="vendor_menu_contacts" style="color: #555">
                     {% if vendor.telephone %}
                         <div class="vendor_contact">
-                            <i class="fa fa-mobile-phone fa-fw" style="font-size: 28px;padding-right: 5px;"></i>{{ vendor.telephone }}
+                            <i class="fa fa-mobile-phone fa-fw" id="header_menu_tel_icon" ></i>{{ vendor.telephone }}
                         </div>
                     {% endif %}
                     {% if vendor.telephone %}
@@ -25,8 +25,8 @@
                         </div>
                     {% endif %}
                     {% if vendor.facebook %}
-                        <div class="vendor_contact">
-                            <i class="fa fa-facebook-official fa-fw"></i><a href="{{ vendor.facebook }}" style="color: #528BFF"><span class="vendor_email">صفحتنا على الفيسبوك</span></a>
+                        <div class="vendor_contact" style="color: #44619D">
+                            <i class="fa fa-facebook-official fa-fw"></i><a href="{{ vendor.facebook }}" style="color: #44619D"><span class="vendor_email">صفحتنا على الفيسبوك</span></a>
                         </div>
                     {% endif %}
 

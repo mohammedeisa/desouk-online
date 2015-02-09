@@ -204,7 +204,6 @@ class FrontController extends Controller
 	            $form->handleRequest($request);
 			    if ($form->isValid()) {
 			    	if($vendor->getFile()){
-			    		//echo $vendor_image->getFile();exit;
 			    		$vendor->upload();
 			    	}
 		    		$em->persist($vendor);
@@ -353,7 +352,260 @@ class FrontController extends Controller
     public function editVendorProductsAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-	    
         return array('vendor' => $vendor);
+    }
+    
+	////////////////// Edit Product /////////////////////////////////////
+	/**
+     * @Route("editVendor/products/edit/{product_id}" , name ="front_editVendor_products_edit")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_products_edit.html.twig")
+     */
+    public function editVendorProductsEditAction($product_id ,Request $request)
+    {
+    	$product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneById($product_id);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Product Form /////////////////////////////////////////
+	    $product_form = $this->get('form.factory')->createNamedBuilder('ProductForm', 'form', $product, array())
+			->add('name',null,array('label' => 'الاسم'))
+			->add('description','ckeditor',array('label' => 'الوصف و البيانات'))
+			->add('code',null,array('label' => 'كود المنتج'))
+			->add('price',null,array('label' => 'السعر'))
+			->add('vendorProductCategory',null,array('label' => 'القسم','choices'   =>$product->getVendor()->getVendorProductCategories()))
+			->add('isInHome',null,array('label' => 'الظهور فى الصفحة الرئيسية للمحل','required'  => false,))
+			->add('file', 'file', array('required' => false,'label'=>'الصورة الرئيسية'))
+			->add('save', 'submit', array('label' => 'تعديل المنتج'));
+		$product_form = $product_form->getForm();
+		
+		/////////////////////////// Vendor image Form /////////////////////////////////////////
+		$product_image = new ProductImage();
+		$product_image->setProduct($product);
+	    $product_image_form = $this->get('form.factory')->createNamedBuilder('productImageForm', 'form', $product_image, array())
+			->add('file', 'file', array('required' => false,'label'=>false))
+			->add('save', 'submit', array('label' => 'إضافة الصورة'));
+		$product_image_form = $product_image_form->getForm();
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		if('POST' === $request->getMethod()) {
+			if ($request->request->has($product_form->getName())) {
+	            // handle the first form
+	            $product_form->handleRequest($request);
+			    if ($product_form->isValid()) {
+			    	if($product->getFile()){
+			    		$product->upload();
+			    	}
+			    	$em->persist($product);
+					$em->flush();
+					$this->get('session')->getFlashBag()->add(
+		                'success',
+		                'تم تعديل المنتج بنجاح'
+		            );
+					$this->redirect($request->headers->get('referer'));
+			    }
+	        }
+	
+	        if ($request->request->has($product_image_form->getName())) {
+	            // handle the second form
+	            $product_image_form->handleRequest($request);
+			    if ($product_image_form->isValid()) {
+			    	if($product_image->getFile()){
+			    		$product_image->upload();
+						$em->persist($product_image);
+						$em->flush();
+						$this->get('session')->getFlashBag()->add(
+			                'success',
+			                'تم إضافة بانر بنجاح '
+			            );
+			    	}
+			    }
+	        }
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('product' => $product,'vendor' => $product->getVendor(),'product_form' => $product_form->createView(),'product_image_form' => $product_image_form->createView());
+    }
+
+	///////////////////////////// FrontEnd Vendor Products Delete Image //////////////////////////////
+	/**
+     * @Route("/vendor/products/deleteImage/{product}/{image_id}" , name ="front_vendor_products_deleteImge")
+     */
+    public function deleteFrontVendorProductsImageAction($product,$image_id)
+    {
+    	$url = $this->generateUrl(
+            'front_editVendor_products_edit',
+            array('product_id' => $product)
+        );
+		$image = $this->getDoctrine()->getManager()->getRepository(get_class(new ProductImage()))->findOneBy(array('id' => $image_id));
+		if (is_file($image->getAbsolutePath())) {
+			unlink($image->getAbsolutePath());
+		}
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($image);
+		$em->flush();
+		
+		return $this->redirect($url);
+    }
+	
+	////////////////// new Product /////////////////////////////////////
+	/**
+     * @Route("editVendor/{vendor}/products/new" , name ="front_editVendor_products_new")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_products_new.html.twig")
+     */
+    public function editVendorProductsNewAction($vendor,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	$product = new Product();
+		$product->setVendor($vendor);
+		$product->setEnabled(true);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Product Form /////////////////////////////////////////
+	    $product_form = $this->get('form.factory')->createNamedBuilder('ProductForm', 'form', $product, array())
+			->add('name',null,array('label' => 'الاسم'))
+			->add('description','ckeditor',array('label' => 'الوصف و البيانات'))
+			->add('code',null,array('label' => 'كود المنتج'))
+			->add('price',null,array('label' => 'السعر'))
+			->add('vendorProductCategory',null,array('label' => 'القسم','choices'   =>$product->getVendor()->getVendorProductCategories()))
+			->add('isInHome',null,array('label' => 'الظهور فى الصفحة الرئيسية للمحل','required'  => false,))
+			->add('file', 'file', array('required' => false,'label'=>'الصورة الرئيسية'))
+			->add('save', 'submit', array('label' => 'إضافة المنتج'));
+		$product_form = $product_form->getForm();
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////
+        $product_form->handleRequest($request);
+	    if ($product_form->isValid()) {
+	    	if($product->getFile()){
+	    		$product->upload();
+	    	}
+	    	$em->persist($product);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add(
+                'success',
+                'تم إضافة المنتج بنجاح'
+            );
+			return $this->redirect($this->generateUrl('front_editVendor_products_edit', array('product_id' => $product->getId())));
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('vendor' => $vendor,'product_form' => $product_form->createView());
+    }
+
+	///////////////////////////// FrontEnd Vendor Delete product //////////////////////////////
+	/**
+     * @Route("/vendor/deleteProduct/{vendor}/{product_id}" , name ="front_vendor_deleteProduct")
+     */
+    public function deleteFrontVendorProductAction($vendor,$product_id)
+    {
+    	$url = $this->generateUrl(
+            'front_editVendor_products',
+            array('vendor' => $vendor)
+        );
+		$product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneBy(array('id' => $product_id));
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($product);
+		$em->flush();
+		
+		return $this->redirect($url);
+    }
+	
+	////////////////// Articles /////////////////////////////////////
+	/**
+     * @Route("editVendor/articles/{vendor}" , name ="front_editVendor_articles")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_articles.html.twig")
+     */
+    public function editVendorArticlesAction($vendor ,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+        return array('vendor' => $vendor);
+    }
+    
+    ////////////////// Edit article /////////////////////////////////////
+	/**
+     * @Route("editVendor/articles/edit/{article_id}" , name ="front_editVendor_articles_edit")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_articles_edit.html.twig")
+     */
+    public function editVendorArticlesEditAction($article_id ,Request $request)
+    {
+    	$article = $this->getDoctrine()->getManager()->getRepository(get_class(new Article()))->findOneById($article_id);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Product Form /////////////////////////////////////////
+	    $article_form = $this->get('form.factory')->createNamedBuilder('ArticleForm', 'form', $article, array())
+			->add('title',null,array('label' => 'عنوان المقال'))
+			->add('description','ckeditor',array('label' => 'الوصف '))
+			->add('save', 'submit', array('label' => 'تعديل المقال'));
+		$article_form = $article_form->getForm();
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////
+        $article_form->handleRequest($request);
+	    if ($article_form->isValid()) {
+	    	$em->persist($article);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add(
+                'success',
+                'تم تعديل المقال بنجاح'
+            );
+			$this->redirect($request->headers->get('referer'));
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('article' => $article,'vendor' => $article->getVendor(),'article_form' => $article_form->createView());
+    }
+
+	////////////////// new Article /////////////////////////////////////
+	/**
+     * @Route("editVendor/{vendor}/articles/new" , name ="front_editVendor_articles_new")
+	 * @Template("DesoukOnlineMallBundle:Front:User/editVendor_articles_new.html.twig")
+     */
+    public function editVendorArticlesNewAction($vendor,Request $request)
+    {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	$article = new Article();
+		$article->setVendor($vendor);
+		$article->setEnabled(true);
+    	$em = $this->getDoctrine()->getManager();
+		/////////////////////////// Article Form /////////////////////////////////////////
+	     $article_form = $this->get('form.factory')->createNamedBuilder('ArticleForm', 'form', $article, array())
+			->add('title',null,array('label' => 'عنوان المقال'))
+			->add('description','ckeditor',array('label' => 'الوصف '))
+			->add('save', 'submit', array('label' => 'إضافة المقال'));
+		$article_form = $article_form->getForm();
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////
+        $article_form->handleRequest($request);
+	    if ($article_form->isValid()) {
+	    	$em->persist($article);
+			$em->flush();
+			$this->get('session')->getFlashBag()->add(
+                'success',
+                'تم إضافة المقال بنجاح'
+            );
+			return $this->redirect($this->generateUrl('front_editVendor_articles_edit', array('article_id' => $article->getId())));
+	    }
+		/////////////////////////////////////////////////////////////////////////////////////
+		
+	    
+        return array('vendor' => $vendor,'article_form' => $article_form->createView());
+    }
+
+	///////////////////////////// FrontEnd Vendor Delete article //////////////////////////////
+	/**
+     * @Route("/vendor/deleteArticle/{vendor}/{article_id}" , name ="front_vendor_deleteArticle")
+     */
+    public function deleteFrontVendorArticleAction($vendor,$article_id)
+    {
+    	$url = $this->generateUrl(
+            'front_editVendor_products',
+            array('vendor' => $vendor)
+        );
+		$article = $this->getDoctrine()->getManager()->getRepository(get_class(new Article()))->findOneBy(array('id' => $article_id));
+		$em = $this->getDoctrine()->getManager();
+		$em->remove($article);
+		$em->flush();
+		
+		return $this->redirect($url);
     }
 }

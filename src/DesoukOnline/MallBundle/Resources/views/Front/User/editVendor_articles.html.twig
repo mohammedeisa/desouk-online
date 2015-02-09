@@ -9,7 +9,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                   {{ include('DesoukOnlineMallBundle:Front:User/userMenu.html.twig', { 'selected': 'product' }) }}
+                   {{ include('DesoukOnlineMallBundle:Front:User/userMenu.html.twig', { 'selected': 'article' }) }}
 		            {% for flashMessage in app.session.flashbag.get('success') %}
 		            	<div class="alert alert-success">
 						    <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -20,23 +20,23 @@
 	                    <div class="raw">
 	                        <div class="panel panel-default">
 	                            <div class="panel-heading">
-	                                المنتجات
+	                                المقالات
 	                            </div>
 	                            <!-- /.panel-heading -->
 	                            <div class="panel-body">
 	                            	<div class="user_new_form">
 	                            		<ul id = "vedor_user_menu">
-									    	<li><a class="btn btn-primary "  href="{{ path('front_editVendor_products_new',{'vendor':vendor.id}) }}">إضافة منتج جديد </a></li>
+									    	<li><a class="btn btn-primary "  href="{{ path('front_editVendor_articles_new',{'vendor':vendor.id}) }}">إضافة مقال جديد </a></li>
 										</ul>
 	                            	</div>
                                     <table class="table table-striped table-bordered table-hover ">
                                         <tbody role="alert">
-                                        {% for product in vendor.products %}
+                                        {% for article in vendor.articles %}
 
                                             <tr>
-                                                <td width="50%">{{product.name}}</td>
-                                                <td><a href="{{ path('front_editVendor_products_edit',{'product_id':product.id}) }}">تعديل</a></td>
-                                                <td><a href="{{ path('front_vendor_deleteProduct',{'vendor':vendor.id,'product_id':product.id}) }}">حذف</a></td>
+                                                <td width="50%">{{article.title}}</td>
+                                                <td><a href="{{ path('front_editVendor_articles_edit',{'article_id':article.id}) }}">تعديل</a></td>
+                                                <td><a href="{{ path('front_vendor_deleteArticle',{'vendor':vendor.id,'article_id':article.id}) }}">حذف</a></td>
                                             </tr>
                                         {% endfor %}
 

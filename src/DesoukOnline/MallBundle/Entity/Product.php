@@ -478,8 +478,8 @@ class Product
 	 */
 	public function removeUpload()
 	{
-	    if ($file = $this->getAbsolutePath()) {
-	        unlink($file); 
+	    if (is_file($this->getAbsolutePath())) {
+	        unlink($this->getAbsolutePath()); 
 	    }
 	}
 	////////////////////////////////////////////////////////////////////////////////////////

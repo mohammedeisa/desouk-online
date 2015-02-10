@@ -21,9 +21,12 @@
     <div class="btn-group">
         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى </button>
         <ul class="" role="menu">
-        	<li ><a   href="">الكل</a></li>
-            <li><a  href="">للبيع</a></li>
-            <li><a  href="">للإيجار</a></li>
+        	{% if user.deliveries|length == 0 %}
+        		<li ><a   href="">لا يوجد لديك محلات فى دسوق ديليفرى</a></li>
+        	{% endif %}
+        	{% for delivery in user.deliveries %}
+        		<li ><a   href="{{ path('front_editDelivery',{'delivery':delivery.id}) }}">{{delivery.title}}</a></li>
+        	{% endfor %}
         </ul>
     </div>
 </div>

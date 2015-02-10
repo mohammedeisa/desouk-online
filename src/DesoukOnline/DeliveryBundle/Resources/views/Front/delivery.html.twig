@@ -13,9 +13,7 @@
                     </div>
 
                     <div class="delivery_logo">
-                        {% if delivery.logo is defined %}
-                            <img src="{% path delivery.logo, 'preview' %}">
-                        {% endif %}
+                            <img src="{{ delivery.getWebPath() }}">
                     </div>
                 </div>
                 {% if delivery.menus|length %}
@@ -63,7 +61,7 @@
                                                             <th scope="row">{{ loop.index }}</th>
                                                             <td>{{ menuItem.title }}</td>
                                                             <td>{{ menuItem.description }}</td>
-                                                            <td><img src="{% path menuItem.image, 'preview' %}"></td>
+                                                            <td><img src="{{ menuItem.getWebPath() }}"></td>
                                                             <td>{{ menuItem.price }}</td>
                                                         </tr>
                                                     {% endfor %}
@@ -72,7 +70,7 @@
                                                 </table>
                                                 <hr>
                                                 {% if menu.image is defined %}
-                                                    <div class="center"><img src="{% path menu.image, 'large' %}"></div>
+                                                    <div class="center"><img src="{{ menu.getWebPath() }}"></div>
                                                 {% endif %}
                                             </div>
                                         {% endfor %}
@@ -91,7 +89,9 @@
 
                     <div class="raw delivery_contacts">
 
-                        {{ delivery.contacts|raw }}
+                        {{ delivery.facebook }}
+                        {{ delivery.email }}
+                        {{ delivery.telephone }}
                     </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@ class MenuItemAdmin extends Admin
             ->add('title')
             ->add('description')
             ->add('price')
-            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_menu_item')))
+            ->add('file', 'file', array('required' => false,'label' => 'Logo'))
         ;
     }
 

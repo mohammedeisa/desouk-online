@@ -28,11 +28,35 @@ class DeliveryAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+    	///////////////////////////// Add Image preview /////////////////////////////////////
+        // get the current Image instance
+        $delivery = $this->getSubject();
+
+        // use $fileFieldOptions so we can add other options to the field
+        $fileFieldOptions = array('required' => false);
+        $fileFieldOptions['label'] = 'Logo';
+        if ($delivery && ($webPath = $delivery->getWebPath()) && is_file($delivery->getAbsolutePath())) {
+
+            // add a 'help' option containing the preview's img tag
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="' . $webPath . '" class="admin-preview" />';
+        }
+        /////////////////////////////////////////////////////////////////////////////////////
+        $date = new \DateTime();
+		$date_from = $date;
+        $date_to = $date->modify('+5 year');
         $formMapper
             ->add('title')
+			->add('user')
             ->add('description', 'ckeditor')
-            ->add('contacts', 'ckeditor')
-            ->add('logo', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_delivery')))
+            ->add('telephone')
+            ->add('facebook')
+            ->add('email')
+            ->add('expiredAt', 'sonata_type_date_picker', array(
+                'dp_min_date' => '2015-01-01',
+                'dp_max_date' => '2016-01-01',
+                'required' => false
+            ))
+            ->add('file', 'file', $fileFieldOptions)
             ->add('enabled', null, array('required' => true, 'data' => True));
     }
 
@@ -75,6 +99,25 @@ class DeliveryAdmin extends Admin
             ->add('title')
             ->add('enabled');
     }
+	
+	public function prePersist($delivery)
+    {
+        $this->renameFile($delivery);
+    }
 
+    public function preUpdate($delivery)
+    {
+        $this->renameFile($delivery);
+    }
+
+    public function renameFile($delivery)
+    {
+        if (null !== $delivery->getFile()) {
+            // do whatever you want to generate a unique name
+            $delivery->upload();
+            // $filename = sha1(uniqid(mt_rand(), true));
+            // $realestate->setPath($filename.'.'.$realestate->getFile()->guessExtension());
+        }
+    }
 
 }

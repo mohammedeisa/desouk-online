@@ -85,7 +85,7 @@
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{% path product.logo, 'preview' %}" alt="">
+                                    <img src="{{ product.getWebPath() }}" alt="">
                                 </a>
                             </div>
                             <h5>

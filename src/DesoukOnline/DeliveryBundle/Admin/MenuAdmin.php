@@ -28,10 +28,24 @@ class MenuAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+    	///////////////////////////// Add Image preview /////////////////////////////////////
+        // get the current Image instance
+        $menu = $this->getSubject();
+
+        // use $fileFieldOptions so we can add other options to the field
+        $fileFieldOptions = array('required' => false);
+        $fileFieldOptions['label'] = 'Logo';
+        if ($menu && ($webPath = $menu->getWebPath()) && is_file($menu->getAbsolutePath())) {
+
+            // add a 'help' option containing the preview's img tag
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="' . $webPath . '" class="admin-preview" />';
+        }
+        /////////////////////////////////////////////////////////////////////////////////////
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
             ->add('delivery')
+			->add('file', 'file', $fileFieldOptions)
             ->add('menuItems', 'sonata_type_collection', array(
                 'cascade_validation' => true,
             ), array(
@@ -40,8 +54,7 @@ class MenuAdmin extends Admin
                     'sortable' => 'position',
                     'link_parameters' => array('context' => 'default'),
                 )
-            )
-            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_delivery_menu')));
+            );
     }
 
     /**
@@ -87,6 +100,8 @@ class MenuAdmin extends Admin
             foreach ($object->getMenuItems() as $menuItem) {
                 $menuItem->setMenu($object);
             }
+		$this->renameFile($object);
+		$this->manageEmbeddedImageAdmins($object);
     }
 
     public function preUpdate($object)
@@ -95,6 +110,40 @@ class MenuAdmin extends Admin
             foreach ($object->getMenuItems() as $menuItem) {
                 $menuItem->setMenu($object);
             }
+		$this->renameFile($object);
+		$this->manageEmbeddedImageAdmins($object);
+    }
+	
+	public function getFormTheme()
+	{
+	    return array_merge(
+	        parent::getFormTheme(),
+	        array('DesoukOnlineDeliveryBundle:Images:deliveryItems.html.twig')
+	    );
+	}
+	
+	public function renameFile($object)
+    {
+        if (null !== $object->getFile()) {
+            $object->upload();
+        }
+    }
+	
+	 private function manageEmbeddedImageAdmins($product) {
+        // Cycle through each field
+        foreach ($this->getFormFieldDescriptions() as $fieldName => $fieldDescription) {
+            // detect embedded Admins that manage Images
+            if ($fieldName == 'menuItems') {
+                /** @var Image $image */
+                $menuItems = $product->getMenuItems();
+				foreach ($menuItems as $menuItem) {
+					if ($menuItem->getFile()) {
+                        // update the Image to trigger file management
+                        $menuItem->upload();
+                    } 
+				}
+            }
+        }
     }
 
 }

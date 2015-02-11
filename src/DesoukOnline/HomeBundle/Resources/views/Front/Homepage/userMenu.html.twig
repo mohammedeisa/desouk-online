@@ -1,7 +1,6 @@
 <div id="user_menu">
     {% if app.user %}
         <div class="panel panel-default">
-
             <div class="panel-heading">مرحبا  {{ user.username }}</div>
             <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى</button>
@@ -10,6 +9,7 @@
                     <li><a href="{{ path('sonata_user_security_logout') }}">تسجيل الخروج</a></li>
                 </ul>
             </div>
+
             <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات المحلات
                 </button>
@@ -22,6 +22,20 @@
                     {% endfor %}
                 </ul>
             </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى
+                </button>
+                <ul class="" role="menu">
+                    {% if user.deliveries|length == 0 %}
+                        <li><a href="">لا يوجد لديك محلات فى دسوق ديليفرى</a></li>
+                    {% endif %}
+                    {% for delivery in user.deliveries %}
+                        <li><a href="{{ path('front_editDelivery',{'delivery':delivery.id}) }}">{{ delivery.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
             <div class="btn-group">
                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى
                 </button>

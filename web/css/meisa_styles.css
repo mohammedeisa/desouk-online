@@ -175,6 +175,9 @@ img {
 .home-search-form {
     direction: ltr;
 }
+.home-search-form .form-control{
+    height: 32px;
+}
 
 .home-search-form button, .home-search-form input {
     text-align: right;
@@ -186,6 +189,11 @@ img {
     margin: auto;
 }
 
+.home-search-form .dropdown-menu {
+    right: 0;
+    text-align: right;
+    left: auto;
+}
 .desouk_online_rating {
     width: 200px;
     text-align: left;
@@ -446,16 +454,12 @@ img {
     color: #52b6ec;
 }
 
-.home-search-form .dropdown-menu {
-    right: 0;
-    text-align: right;
-    left: auto;
-}
-
 .panel-body.filter_panel_body{
     padding-top: 0;
 }
-
+#user_menu .panel{
+    margin-bottom: 0;
+}
 
 #user_menu .btn{
     border-radius: 0;
@@ -465,3 +469,24 @@ img {
     text-align: center;
 }
 
+
+.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11{
+    float:right;
+}
+
+.clear{
+    width:100% ;
+    float : right;
+    height: 1px;
+}
+
+
+#footer {
+    background: #3080A9;
+    margin-bottom: 0;
+    color: #FBFBFB;
+}
+#footer a{
+font-weight: bold;
+    color: #FBFBFB;
+}

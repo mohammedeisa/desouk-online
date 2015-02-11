@@ -1,34 +1,64 @@
-{% if app.user %}
 <div id="user_menu">
-    <div class="panel panel-default">
+    {% if app.user %}
+        <div class="panel panel-default">
 
-    <div class="panel-heading">مرحبا  {{user.username}}</div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى </button>
-        <ul class="" role="menu">
-        	<li ><a   href="">تغيير كلمة المرور</a></li>
-        	<li ><a   href="">تسجيل الخروج</a></li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات المحلات </button>
-        <ul class="" role="menu">
-        	{% if user.vendors|length == 0 %}
-        		<li ><a   href="">لا يوجد لديك محلات فى دسوق مول</a></li>
-        	{% endif %}
-        	{% for vendor in user.vendors %}
-        		<li ><a   href="{{ path('front_editVendor',{'vendor':vendor.id}) }}">{{vendor.title}}</a></li>
-        	{% endfor %}
-        </ul>
-    </div>
-    <div class="btn-group">
-        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى </button>
-        <ul class="" role="menu">
-        	<li ><a   href="">الكل</a></li>
-            <li><a  href="">للبيع</a></li>
-            <li><a  href="">للإيجار</a></li>
-        </ul>
-    </div>
+            <div class="panel-heading">مرحبا  {{ user.username }}</div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابى</button>
+                <ul class="" role="menu">
+                    <li><a href="{{ path('sonata_user_resetting_request') }}">تغيير كلمة المرور</a></li>
+                    <li><a href="{{ path('sonata_user_security_logout') }}">تسجيل الخروج</a></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات المحلات
+                </button>
+                <ul class="" role="menu">
+                    {% if user.vendors|length == 0 %}
+                        <li><a href="">لا يوجد لديك محلات فى دسوق مول</a></li>
+                    {% endif %}
+                    {% for vendor in user.vendors %}
+                        <li><a href="{{ path('front_editVendor',{'vendor':vendor.id}) }}">{{ vendor.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى
+                </button>
+                <ul class="" role="menu">
+                    <li><a href="">الكل</a></li>
+                    <li><a href="">للبيع</a></li>
+                    <li><a href="">للإيجار</a></li>
+                </ul>
+            </div>
+        </div>
+    {% else %}
+        <div class="panel panel-default" id="user_security_panel">
+            {% render controller("SonataUserBundle:Security:login") %}
+        </div>
+    {% endif %}
 </div>
-    </div>
-{% endif %}
+<style>
+    #user_menu .nav-tabs {
+        border-bottom: 0;
+    }
+
+    #user_menu .tab-content {
+        border: 1px solid rgb(216, 216, 216);
+        border-radius: 4px;
+    }
+
+    #user_menu input {
+        border-radius: 0;
+        border-right: 0;
+        border-left: 0;
+    }
+
+    #user_menu #user_security_panel {
+        border: 0;
+    }
+
+    #user_security_panel .tab-content {
+        padding: 0 6px;;
+    }
+</style>

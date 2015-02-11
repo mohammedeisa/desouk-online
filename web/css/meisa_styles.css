@@ -12,7 +12,7 @@ img {
 
 .col-centered {
     display: inline-block;
-    float: none;
+    float: none !important;
     /* reset the text-align */
     text-align: left;
     /* inline-block space fix */
@@ -298,6 +298,7 @@ img {
     border-radius: 0 10px 10px 0;
     z-index: 1100;
     padding: 5px;
+    border: 1px solid rgba(153, 153, 153, 0.46);
 }
 
 #user_menu span {
@@ -317,7 +318,28 @@ img {
     margin-bottom: 50px;
     text-align: center;
 }
+#user_menu .nav-tabs {
+    border-bottom: 0;
+}
 
+#user_menu .tab-content {
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 4px;
+}
+
+#user_menu input {
+    border-radius: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+#user_menu #user_security_panel {
+    border: 0;
+}
+
+#user_security_panel .tab-content {
+    padding: 0 6px;;
+}
 #vedor_user_menu li {
     display: inline-block;
 }

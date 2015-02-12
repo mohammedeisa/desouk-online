@@ -1,71 +1,67 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
 
-    <section id="vendor_product" class="inner_page">
+    <div id="vendor_product" class="">
         <div class="container">
-            <div class="box">
+            <div class="row">
+                {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
+                {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
+                <div class="col-md-9">
 
-                <div class="row">
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
-                    <div class="col-md-9">
+                    <div class="thumbnail">
+                        {% if product.images %}
 
-                        <div class="thumbnail">
-                            {% if product.images %}
+                            <div class="row carousel-holder">
 
-                                <div class="row carousel-holder">
-
-                                    <div class="col-md-12">
-                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                {% for image in product.images %}
-                                                    <li data-target="#carousel-example-generic"  {{ (loop.index==1)?'class="active"':'' }}
-                                                        data-slide-to="{{ loop.index }}"></li>
-                                                {% endfor %}
-                                            </ol>
-                                            <div class="carousel-inner">
-                                                {% for image in product.images %}
-                                                    <div class="item {{ (loop.index==1)?'active':'' }}">
-                                                        <img class="slide-image" src="{{ image.getWebPath() }}"
-                                                             alt="">
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                            <a class="left carousel-control" href="#carousel-example-generic"
-                                               data-slide="prev">
-                                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                            </a>
-                                            <a class="right carousel-control" href="#carousel-example-generic"
-                                               data-slide="next">
-                                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                            </a>
+                                <div class="col-md-12">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            {% for image in product.images %}
+                                                <li data-target="#carousel-example-generic"  {{ (loop.index==1)?'class="active"':'' }}
+                                                    data-slide-to="{{ loop.index }}"></li>
+                                            {% endfor %}
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            {% for image in product.images %}
+                                                <div class="item {{ (loop.index==1)?'active':'' }}">
+                                                    <img class="slide-image" src="{{ image.getWebPath() }}"
+                                                         alt="">
+                                                </div>
+                                            {% endfor %}
                                         </div>
+                                        <a class="left carousel-control" href="#carousel-example-generic"
+                                           data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic"
+                                           data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
                                     </div>
-
-
                                 </div>
-                            {% endif %}
-                            <div class="center">
-                                <h4>{{ product.name }}</h4>
-                                <span class="pull-right">{{ product.price }} جنية</span>
-                            </div>
-                            <hr>
-                            <div class="caption-full">
-                                {{ product.description|raw }}
-                                <hr>
-                            </div>
-                            {% include 'horizontal_social.html.twig' %}
-                            <hr>
-                            <div class="desouk_online_rating">
-                                {{ ("vendor_product_"~product.id)|show_rating|raw }}
-                            </div>
 
+
+                            </div>
+                        {% endif %}
+                        <div class="center">
+                            <h4>{{ product.name }}</h4>
+                            <span class="pull-right big-price">{{ product.price }} جنية</span>
                         </div>
-                    </div>
+                        <hr>
+                        <div class="caption-full">
+                            {{ product.description|raw }}
+                            <hr>
+                        </div>
+                        {% include 'horizontal_social.html.twig' %}
+                        <hr>
+                        <div class="desouk_online_rating">
+                            {{ ("vendor_product_"~product.id)|show_rating|raw }}
+                        </div>
 
+                    </div>
                 </div>
 
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

@@ -1,58 +1,64 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="mall_category" class="inner_page">
+    <section id="mall_category" class="">
         <div class="container">
-            <div class="reaestate_box box">
-            	{{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': forSale.Category.title })) }}
-                <div class="reaestate_items col-4">
-                        <div class="reaestate_item apps">
-                            <div class="reaestate_item_inner">
-                                <div class="realestate_title">
-                                    <a >{{ forSale.title }}</a>
+            <div class="row">
+                <div class="center">
+                    <h3>{{ forSale.title }}</h3>
+                </div>
+                {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': forSale.Category.title })) }}
+                <div class="reaestate_items col-md-9">
+                    {% if has_slider %}
+
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+                             style="padding-right: 20px;">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" class="active"
+                                    data-slide-to="0"></li>
+                                {% for image in forSale.images %}
+                                    <li data-target="#carousel-example-generic"
+                                        data-slide-to="{{ loop.index }}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="{{ forSale.getWebPath() }}" alt="">
                                 </div>
-                                <div class="realestate_properities">
-                                	<div>السعر : <span>{{forSale.price}} جنيه</span></div>
-                                	<div >
-                                		القسم : <span>{{forSale.category.title}}</span>
-                                	</div>
-                                </div>
-                                {% if has_slider %}
-	
-	                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-right: 20px;">
-	                                            <ol class="carousel-indicators">
-	                                            	<li data-target="#carousel-example-generic"  class="active" data-slide-to="0"></li>
-	                                                {% for image in forSale.images %}
-	                                                    <li data-target="#carousel-example-generic"  data-slide-to="{{ loop.index }}"></li>
-	                                                {% endfor %}
-	                                            </ol>
-	                                            <div class="carousel-inner">
-	                                            	<div class="item active">
-                                                        <img class="slide-image" src="{{forSale.getWebPath()}}" alt="">
-                                                    </div>
-	                                                {% for image in forSale.images %}
-	                                                    <div class="item ">
-	                                                        <img class="slide-image" src="{{image.getWebPath()}}" alt="">
-	                                                    </div>
-	                                                {% endfor %}
-	                                            </div>
-	                                            <a class="left carousel-control" href="#carousel-example-generic"
-	                                               data-slide="prev">
-	                                                <span class="glyphicon glyphicon-chevron-left"></span>
-	                                            </a>
-	                                            <a class="right carousel-control" href="#carousel-example-generic"
-	                                               data-slide="next">
-	                                                <span class="glyphicon glyphicon-chevron-right"></span>
-	                                            </a>
-	                                        </div>
-	
-	
-	                            {% endif %}
-                                <div class="realestate_summary">
-                                    {{ forSale.description|raw }}
-                                </div>
+                                {% for image in forSale.images %}
+                                    <div class="item ">
+                                        <img class="slide-image" src="{{ image.getWebPath() }}" alt="">
+                                    </div>
+                                {% endfor %}
                             </div>
-                        </div><!--/.portfolio-item-->
+                            <a class="left carousel-control" href="#carousel-example-generic"
+                               data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic"
+                               data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+
+
+                    {% endif %}
+                    <div class="reaestate_item apps col-md-12">
+                        <div class="reaestate_item_inner">
+
+                            <div class="realestate_properities">
+                                <h4>السعر : <span>{{ forSale.price }} جنيه</span></h4>
+                                <h4>
+                                    القسم : <span>{{ forSale.category.title }}</span>
+                                </h4>
+                            </div>
+
+                            <div class="realestate_summary">
+                                {{ forSale.description|raw }}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.portfolio-item-->
                 </div>
             </div>
             <!--/.box-->

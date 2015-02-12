@@ -1,67 +1,78 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="mall_category" class="inner_page">
+    <div id="mall_category">
         <div class="container">
-            <div class="reaestate_box">
-            	{{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
-                <div class="reaestate_items col-4">
+            <div class="row">
+                <div class="center">
+                    <div class="realestate_title">
+                        <h3>{{ car.title }}</h3>
+                    </div>
+                </div>
+                {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
+                <div class="col-md-9">
+                    {% if has_slider %}
+
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+                             style="padding-right: 20px;">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" class="active"
+                                    data-slide-to="0"></li>
+                                {% for image in car.images %}
+                                    <li data-target="#carousel-example-generic"
+                                        data-slide-to="{{ loop.index }}"></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="{{ car.getWebPath() }}" alt="">
+                                </div>
+                                {% for image in car.images %}
+                                    <div class="item ">
+                                        <img class="slide-image" src="{{ image.getWebPath() }}" alt="">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic"
+                               data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic"
+                               data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+
+
+                    {% endif %}
+
+
+                    <div class="reaestate_items col-md-12 container">
                         <div class="reaestate_item apps">
                             <div class="reaestate_item_inner">
-                                <div class="realestate_title">
-                                    <a >{{ car.title }}</a>
-                                </div>
+
                                 <div class="realestate_properities">
-                                	<div>السعر : <span>{{car.price}} جنيه</span></div>
-                                	<div>
-                                		النوع : <span>{{car.type}}</span>
-                                	</div>
-									{% if car.mark %}
-									<div >
-                                		الماركة : <span>{{car.mark.name}}</span>
-                                	</div>
-									{% endif %}
+                                    <h4>السعر : <span>{{ car.price }} جنيه</span></h4>
+                                    <h4>
+                                        النوع : <span>{{ car.type }}</span>
+                                    </h4>
+                                    {% if car.mark %}
+                                        <h4>
+                                            الماركة : <span>{{ car.mark.name }}</span>
+                                        </h4>
+                                    {% endif %}
                                 </div>
-                                {% if has_slider %}
-	
-	                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-right: 20px;">
-	                                            <ol class="carousel-indicators">
-	                                            	<li data-target="#carousel-example-generic"  class="active" data-slide-to="0"></li>
-	                                                {% for image in car.images %}
-	                                                    <li data-target="#carousel-example-generic"  data-slide-to="{{ loop.index }}"></li>
-	                                                {% endfor %}
-	                                            </ol>
-	                                            <div class="carousel-inner">
-	                                            	<div class="item active">
-                                                        <img class="slide-image" src="{{car.getWebPath()}}" alt="">
-                                                    </div>
-	                                                {% for image in car.images %}
-	                                                    <div class="item ">
-	                                                        <img class="slide-image" src="{{image.getWebPath()}}" alt="">
-	                                                    </div>
-	                                                {% endfor %}
-	                                            </div>
-	                                            <a class="left carousel-control" href="#carousel-example-generic"
-	                                               data-slide="prev">
-	                                                <span class="glyphicon glyphicon-chevron-left"></span>
-	                                            </a>
-	                                            <a class="right carousel-control" href="#carousel-example-generic"
-	                                               data-slide="next">
-	                                                <span class="glyphicon glyphicon-chevron-right"></span>
-	                                            </a>
-	                                        </div>
-	
-	
-	                            {% endif %}
                                 <div class="realestate_summary">
                                     {{ car.description|raw }}
                                 </div>
                             </div>
-                        </div><!--/.portfolio-item-->
+                        </div>
+                        <!--/.portfolio-item-->
+                    </div>
                 </div>
             </div>
             <!--/.box-->
         </div>
         <!--/.container-->
-    </section>
+    </div>
 {% endblock %}

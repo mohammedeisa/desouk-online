@@ -1,54 +1,52 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="delivery" class="inner_page">
+    <div id="delivery" class="">
         <div class="container">
-            <div class="box">
-                <div class="raw">
-                    {% include 'horizontal_social.html.twig' %}
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs ">
-                            {% if web_development %}
-                                <li class="active"><a href="#tab_1-1"
-                                                      data-toggle="tab">{{ web_development.webDevelopmentTitle }}</a>
-                                </li>
-                            {% endif %}
-                            {% if web_development %}
-                                <li class=""><a href="#tab_2-2"
-                                                data-toggle="tab">{{ web_development.hostingTitle }}</a></li>
-                            {% endif %}
-                            {% if portfolio %}
-                                <li class=""><a href="#tab_3-3"
-                                                data-toggle="tab">{{ portfolio.title }}</a></li>
-                            {% endif %}
-                        </ul>
-                        <div class="tab-content">
-                            {% if web_development %}
-                                <div class="tab-pane active" id="tab_1-1">
-                                    <div class="box">
-                                        {% include '@DesoukOnlineWebDevelopment/Front/web_development_tab.html.twig' with {'web_development':web_development } %}
-                                    </div>
+            <div class="raw">
+                {% include 'horizontal_social.html.twig' %}
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs ">
+                        {% if web_development %}
+                            <li class="active"><a href="#tab_1-1"
+                                                  data-toggle="tab">{{ web_development.webDevelopmentTitle }}</a>
+                            </li>
+                        {% endif %}
+                        {% if web_development %}
+                            <li class=""><a href="#tab_2-2"
+                                            data-toggle="tab">{{ web_development.hostingTitle }}</a></li>
+                        {% endif %}
+                        {% if portfolio %}
+                            <li class=""><a href="#tab_3-3"
+                                            data-toggle="tab">{{ portfolio.title }}</a></li>
+                        {% endif %}
+                    </ul>
+                    <div class="tab-content">
+                        {% if web_development %}
+                            <div class="tab-pane active" id="tab_1-1">
+                                <div class="box">
+                                    {% include '@DesoukOnlineWebDevelopment/Front/web_development_tab.html.twig' with {'web_development':web_development } %}
                                 </div>
-                            {% endif %}
-                            {% if web_development %}
-                                <div class="tab-pane " id="tab_2-2">
-                                    <div class="box">
-                                        {% include '@DesoukOnlineWebDevelopment/Front/hosting_tab.html.twig' with {'web_development':web_development } %}
-                                    </div>
+                            </div>
+                        {% endif %}
+                        {% if web_development %}
+                            <div class="tab-pane " id="tab_2-2">
+                                <div class="box">
+                                    {% include '@DesoukOnlineWebDevelopment/Front/hosting_tab.html.twig' with {'web_development':web_development } %}
                                 </div>
-                            {% endif %}
-                            {% if portfolio %}
-                                <div class="tab-pane " id="tab_3-3">
-                                    <div class="box">
-                                        {% include '@DesoukOnlineWebDevelopment/Front/portfolio_tab.html.twig' with {'portfolio':portfolio } %}
-                                    </div>
+                            </div>
+                        {% endif %}
+                        {% if portfolio %}
+                            <div class="tab-pane " id="tab_3-3">
+                                <div class="box">
+                                    {% include '@DesoukOnlineWebDevelopment/Front/portfolio_tab.html.twig' with {'portfolio':portfolio } %}
                                 </div>
-                            {% endif %}
-                        </div>
-                        <!-- /.tab-content -->
+                            </div>
+                        {% endif %}
                     </div>
+                    <!-- /.tab-content -->
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 {% endblock %}

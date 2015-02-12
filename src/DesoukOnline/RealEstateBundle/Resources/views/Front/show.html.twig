@@ -1,59 +1,59 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="mall_category" class="inner_page">
-        <div class="container">
-            <div class="reaestate_box box">
+    <div id="mall_category" class="">
+            <div class="row">
+             <div class="center"><h3>{{ realestate.title }}</h3>			 </div>
                {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': realestate.purpose,'type': realestate.type,'area': realestate.area })) }}
-                <div class="reaestate_items col-4">
-                        <div class="reaestate_item apps">
+                <div class="reaestate_items col-md-9">
+					{% if has_slider %}
+
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-right: 20px;">
+							<ol class="carousel-indicators">
+								<li data-target="#carousel-example-generic"  class="active" data-slide-to="0"></li>
+								{% for image in realestate.images %}
+									<li data-target="#carousel-example-generic"  data-slide-to="{{ loop.index }}"></li>
+								{% endfor %}
+							</ol>
+							<div class="carousel-inner">
+								<div class="item active">
+									<img class="slide-image" src="{{realestate.getWebPath()}}" alt="">
+								</div>
+								{% for image in realestate.images %}
+									<div class="item ">
+										<img class="slide-image" src="{{image.getWebPath()}}" alt="">
+									</div>
+								{% endfor %}
+							</div>
+							<a class="left carousel-control" href="#carousel-example-generic"
+							   data-slide="prev">
+								<span class="glyphicon glyphicon-chevron-left"></span>
+							</a>
+							<a class="right carousel-control" href="#carousel-example-generic"
+							   data-slide="next">
+								<span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</div>
+
+
+					{% endif %}
+					<div class="reaestate_item apps container">
                             <div class="reaestate_item_inner">
-                                <div class="realestate_title">
-                                    <a >{{ realestate.title }}</a>
-                                </div>
                                 <div class="realestate_properities">
-                                	<div>السعر : <span>{{realestate.price}} جنيه</span></div>
-                                	<div>
+
+
+                                    <h4>السعر : <span>{{realestate.price}} جنيه</span></h4>
+                                	<h4>
                                 		النوع : <span>{{realestate.type}}</span>
-                                	</div>
-                                	<div >
+                                	</h4>
+                                	<h4 >
                                 		الغرض : <span>{{realestate.purpose}}</span>
-                                	</div>
-                                	<div >
+                                	</h4>
+                                	<h4 >
                                 		المنطقة : <span>{{realestate.area.name}}</span>
-                                	</div>
+                                	</h4>
                                 </div>
-                                {% if has_slider %}
-	
-	                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-right: 20px;">
-	                                            <ol class="carousel-indicators">
-	                                            	<li data-target="#carousel-example-generic"  class="active" data-slide-to="0"></li>
-	                                                {% for image in realestate.images %}
-	                                                    <li data-target="#carousel-example-generic"  data-slide-to="{{ loop.index }}"></li>
-	                                                {% endfor %}
-	                                            </ol>
-	                                            <div class="carousel-inner">
-	                                            	<div class="item active">
-                                                        <img class="slide-image" src="{{realestate.getWebPath()}}" alt="">
-                                                    </div>
-	                                                {% for image in realestate.images %}
-	                                                    <div class="item ">
-	                                                        <img class="slide-image" src="{{image.getWebPath()}}" alt="">
-	                                                    </div>
-	                                                {% endfor %}
-	                                            </div>
-	                                            <a class="left carousel-control" href="#carousel-example-generic"
-	                                               data-slide="prev">
-	                                                <span class="glyphicon glyphicon-chevron-left"></span>
-	                                            </a>
-	                                            <a class="right carousel-control" href="#carousel-example-generic"
-	                                               data-slide="next">
-	                                                <span class="glyphicon glyphicon-chevron-right"></span>
-	                                            </a>
-	                                        </div>
-	
-	
-	                            {% endif %}
+
                                 <div class="realestate_summary">
                                     {{ realestate.description|raw }}
                                 </div>
@@ -62,7 +62,6 @@
                 </div>
             </div>
             <!--/.box-->
-        </div>
         <!--/.container-->
-    </section>
+    </div>
 {% endblock %}

@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
-{% block content %}
-    <section id="vendor_product_category" class="inner_page">
+{% block inner_content %}
+    <div id="vendor_product_category" class="">
         <div class="container">
-            <div class="box">
                 <div class="row">
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':vendor_product_category.vendor.slug})) }}
                     <div class="upper_data">
@@ -25,13 +24,19 @@
                                     </a>
 
                                     <div class="caption">
-                                        <h4 class="pull-left">{{ product.price }} جنية</h4>
-                                        <h4>
-                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
-                                        </h4>
+                                        <div class="center">
+                                            <h4>
+                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                            </h4>
+                                        </div>
+                                            <span class="">
+                                                <label class="">السعر</label>
+                                                <span class="pull-left price">{{ product.price }} جنية</span>
+                                            </span>
 
-                                        {{ product.description|striptags|slice(0, 90) }}
-                                        <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                        <br>
+                                        <p>{{ product.description|striptags|slice(0, 90) }}</p>
+                                        <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
                                             المزيد </a>
                                     </div>
                                     <div class="desouk_online_rating">
@@ -44,9 +49,8 @@
                     </div>
                 </div>
                 {{ knp_pagination_render(category_products) }}
-            </div>
             <!--/.box-->
         </div>
         <!--/.container-->
-    </section>
+    </div>
 {% endblock %}

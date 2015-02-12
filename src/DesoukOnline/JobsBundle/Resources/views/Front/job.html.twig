@@ -1,26 +1,24 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="mall_category" class="inner_page">
+    <div id="mall_category" class="">
         <div class="container">
-            <div class="box">
-                <div class="center">
-                    <h3>{{ job.title }}</h3>
-                </div>
-                <hr>
+            <div class="center">
+                <h3>{{ job.title }}</h3>
+            </div>
+            <hr>
 
-                <div class="meta">
+            <div class="meta">
                     <span>
                         <strong>
                             االمعلن :
                         </strong>
                     </span>
-                    <span class="author"><a href="#">{{ job.owner }}</a></span>
-                    <span><strong>تاريخ الاعلان :</strong></span>
-                    <span class="author"><a href="#"> {{ job.updatedAt|date('Y/m/d') }}</a></span>
-                </div>
-                <p>{{ job.description|raw }}</p>
+                <span class="author"><a href="#">{{ job.owner }}</a></span>
+                <span><strong>تاريخ الاعلان :</strong></span>
+                <span class="author"><a href="#"> {{ job.updatedAt|date('Y/m/d') }}</a></span>
             </div>
+            <p>{{ job.description|raw }}</p>
         </div>
-    </section>
+    </div>
 {% endblock %}

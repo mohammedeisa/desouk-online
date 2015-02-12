@@ -1,44 +1,58 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="mall_category" class="inner_page">
+    <div id="mall_category" class="">
         <div class="container">
-            <div class="reaestate_box box">
+            <div class="reaestate_box">
                 <div class="center">
                     <h3>عقارات دسوق</h3>
                 </div>
-               {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}
-                <ul class="reaestate_items col-4">
+                <div class="row">
+                    {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}
                     {% for realestate in realestates %}
-                        <li class="reaestate_item apps">
-                            <div class="reaestate_item_inner">
-                                <div class="realestate_image">
-                                    <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">
-                                        <img src="{{realestate.getWebPath()}}" alt="">
-                                    </a>
+                        <div class="col-sm-3 col-lg-3 col-md-3">
+                            <div class="thumbnail">
+                                <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">
+                                    <img src="{{ realestate.getWebPath() }}" alt="">
+                                </a>
+
+                                <div class="caption">
+                                    <h4>
+                                        <div class="center"><a
+                                                    href="{{ path('realestate_show',{'slug':realestate.slug}) }}">{{ realestate.title }}</a>
+                                        </div>
+                                    </h4>
+                                    <span class="">
+                                        <label class="">السعر</label>
+                                        <span class="pull-left price">{{ realestate.price }} جنية</span>
+                                    </span>
+                                    <br>
+                                    <span class="">
+                                        <label class="">النوع</label>
+                                        <span class="pull-left">{{ realestate.type }}</span>
+                                    </span>
+                                    <br>
+                                    <span class="">
+                                        <label class="">الغرض</label>
+                                        <span class="pull-left">{{ realestate.purpose }}</span>
+                                    </span>
+                                    <br>
+                                    {{ realestate.summary }}
+                                    <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}" class="">
+                                        المزيد </a>
+
+                                    <div class="desouk_online_rating">
+
+                                    </div>
                                 </div>
-                                <div class="realestate_title">
-                                    <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">{{ realestate.title }}</a>
-                                </div>
-                                <div class="realestate_properities">
-                                	<div>السعر : <span>{{realestate.price}} جنيه</span></div>
-                                	<div>
-                                		النوع : <span>{{realestate.type}}</span>
-                                	</div>
-                                	<div >
-                                		الغرض : <span>{{realestate.purpose}}</span>
-                                	</div>
-                                </div>
-                                <div class="realestate_summary">
-                                    {{realestate.summary}}
-                                </div>
+
                             </div>
-                        </li><!--/.portfolio-item-->
+                        </div>
                     {% endfor %}
-                </ul>
+                    <!--/.box-->
+                </div>
             </div>
-            <!--/.box-->
         </div>
         <!--/.container-->
-    </section>
+    </div>
 {% endblock %}

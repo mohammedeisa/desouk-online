@@ -1,98 +1,96 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+{% block inner_content %}
     <!-- Page Content -->
-    <section id="delivery" class="inner_page">
+    <div id="delivery" class="">
         <div class="container">
-            <div class="box">
-                <div class="raw">
+            <div class="raw">
 
-                    <div class="delivery_data">
-                        <h3>{{ delivery.title }}</h3>
+                <div class="delivery_data">
+                    <h3>{{ delivery.title }}</h3>
 
-                        <p class="lead">{{ delivery.description|raw }}</p>
-                    </div>
-
-                    <div class="delivery_logo">
-                            <img src="{{ delivery.getWebPath() }}">
-                    </div>
+                    <p class="lead">{{ delivery.description|raw }}</p>
                 </div>
-                {% if delivery.menus|length %}
-                    <div class="raw">
-                        {% include 'horizontal_social.html.twig' %}
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                مينو   {{ delivery.title }}
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <!-- Nav tabs -->
-                                <div class="nav-tabs-custom">
-                                    <ul class="nav nav-tabs">
-                                        {% for menu in delivery.menus %}
-                                            <li class="{{ (loop.index==1)?'active':'' }}">
-                                                <a href="#tab{{ loop.index }}" data-toggle="tab"
-                                                   aria-expanded="{{ (loop.index==1)?'true':'false' }}">{{ menu.title }}</a>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                    <!-- Tab panes -->
-                                    <div class="tab-content">
-                                        {% for menu in delivery.menus %}
-                                            <div class="tab-pane fade {{ (loop.index==1)?'active in':'' }}"
-                                                 id="tab{{ loop.index }}">
-                                                <p>
-                                                    {{ menu.description|raw }}
-                                                </p>
 
-                                                <table class="table table-striped table-bordered table-hover menu_table">
-                                                    <thead>
-                                                    <tr class="gradeX">
-                                                        <th>#</th>
-                                                        <th>اسم النتج</th>
-                                                        <th>المواصفات</th>
-                                                        <th>صورة المنتج</th>
-                                                        <th>السعر</th>
+                <div class="delivery_logo">
+                    <img src="{{ delivery.getWebPath() }}">
+                </div>
+            </div>
+            {% if delivery.menus|length %}
+                <div class="raw">
+                    {% include 'horizontal_social.html.twig' %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            مينو   {{ delivery.title }}
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    {% for menu in delivery.menus %}
+                                        <li class="{{ (loop.index==1)?'active':'' }}">
+                                            <a href="#tab{{ loop.index }}" data-toggle="tab"
+                                               aria-expanded="{{ (loop.index==1)?'true':'false' }}">{{ menu.title }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    {% for menu in delivery.menus %}
+                                        <div class="tab-pane fade {{ (loop.index==1)?'active in':'' }}"
+                                             id="tab{{ loop.index }}">
+                                            <p>
+                                                {{ menu.description|raw }}
+                                            </p>
+
+                                            <table class="table table-striped table-bordered table-hover menu_table">
+                                                <thead>
+                                                <tr class="gradeX">
+                                                    <th>#</th>
+                                                    <th>اسم النتج</th>
+                                                    <th>المواصفات</th>
+                                                    <th>صورة المنتج</th>
+                                                    <th>السعر</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody role="alert">
+                                                {% for menuItem in menu.menuItems %}
+
+                                                    <tr>
+                                                        <th scope="row">{{ loop.index }}</th>
+                                                        <td>{{ menuItem.title }}</td>
+                                                        <td>{{ menuItem.description }}</td>
+                                                        <td><img src="{{ menuItem.getWebPath() }}"></td>
+                                                        <td>{{ menuItem.price }}</td>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody role="alert">
-                                                    {% for menuItem in menu.menuItems %}
+                                                {% endfor %}
 
-                                                        <tr>
-                                                            <th scope="row">{{ loop.index }}</th>
-                                                            <td>{{ menuItem.title }}</td>
-                                                            <td>{{ menuItem.description }}</td>
-                                                            <td><img src="{{ menuItem.getWebPath() }}"></td>
-                                                            <td>{{ menuItem.price }}</td>
-                                                        </tr>
-                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            {% if menu.image is defined %}
+                                                <div class="center"><img src="{{ menu.getWebPath() }}"></div>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
 
-                                                    </tbody>
-                                                </table>
-                                                <hr>
-                                                {% if menu.image is defined %}
-                                                    <div class="center"><img src="{{ menu.getWebPath() }}"></div>
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
                                 </div>
                             </div>
-                            <!-- /.panel-body -->
                         </div>
+                        <!-- /.panel-body -->
                     </div>
-                {% endif %}
-                <div class="center">
-                    <h3>
-                        اتصل بنا
-                    </h3>
+                </div>
+            {% endif %}
+            <div class="center">
+                <h3>
+                    اتصل بنا
+                </h3>
 
-                    <div class="raw delivery_contacts">
+                <div class="raw delivery_contacts">
 
-                        {{ delivery.facebook }}
-                        {{ delivery.email }}
-                        {{ delivery.telephone }}
-                    </div>
+                    {{ delivery.facebook }}
+                    {{ delivery.email }}
+                    {{ delivery.telephone }}
                 </div>
             </div>
             <!--/.box-->
@@ -100,7 +98,7 @@
 
 
         <!--/.container-->
-    </section>
+    </div>
     <script>
         $(document).ready(function () {
             $('.nav-tabs li').eq(0).find('a').trigger('click');

@@ -52,7 +52,7 @@ class Category
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="Vendor", mappedBy="category", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Vendor", mappedBy="category")
      */
     protected $vendors;
 

@@ -69,15 +69,15 @@ class Vendor
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" , cascade={"all"},inversedBy="vendors" )
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" ,inversedBy="vendors" )
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Category" , cascade={"all"},inversedBy="vendors" )
+     * @ORM\ManyToOne(targetEntity="Category" ,inversedBy="vendors" )
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
@@ -90,17 +90,17 @@ class Vendor
     private $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory", mappedBy="vendor")
      */
     protected $vendorProductCategories;
 	
 	/**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="vendor")
      */
     protected $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Article", mappedBy="vendor", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Article", mappedBy="vendor")
      */
     protected $articles;
 
@@ -163,7 +163,7 @@ class Vendor
      *
      * @var string
      *
-     * @ORM\Column(type="text", length=255, nullable=false)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     protected $path;
     /**

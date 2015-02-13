@@ -333,7 +333,7 @@ class FrontController extends Controller
     public function deleteFrontVendorCategoryAction($vendor,$category_id)
     {
     	$url = $this->generateUrl(
-            'front_editVendor',
+            'front_editVendor_categories',
             array('vendor' => $vendor)
         );
 		$category = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneBy(array('id' => $category_id));

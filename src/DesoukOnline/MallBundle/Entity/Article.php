@@ -44,20 +44,13 @@ class Article
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\Vendor" , cascade={"all"},inversedBy="articles" )
-     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\Vendor",inversedBy="articles" )
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $vendor;
 
 
 
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumn(name="banner_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $banner;
 
 
     /**
@@ -219,21 +212,6 @@ class Article
     }
 
 
-    /**
-     * @param string $banner
-     */
-    public function setBanner($banner)
-    {
-        $this->banner = $banner;
-    }
-
-    /**
-     * @return string
-     */
-    public function getBanner()
-    {
-        return $this->banner;
-    }
 
     /**
      * @return string

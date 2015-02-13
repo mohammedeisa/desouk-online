@@ -43,13 +43,13 @@ class Menu
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery" , cascade={"all"},inversedBy="menus" )
-     * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery" ,inversedBy="menus" )
+     * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $delivery;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\MenuItem", mappedBy="menu", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\MenuItem", mappedBy="menu")
      */
     private $menuItems;
 

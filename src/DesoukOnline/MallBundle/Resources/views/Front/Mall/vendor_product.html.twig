@@ -16,14 +16,19 @@
                                 <div class="col-md-12">
                                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
+                                        	<li data-target="#carousel-example-generic"  class="active" }}
+                                                    data-slide-to="0"></li>
                                             {% for image in product.images %}
                                                 <li data-target="#carousel-example-generic"  {{ (loop.index==1)?'class="active"':'' }}
                                                     data-slide-to="{{ loop.index }}"></li>
                                             {% endfor %}
                                         </ol>
                                         <div class="carousel-inner">
+                                        	<div class="item active">
+                                        		<img class="slide-image" src="{{ product.getWebPath() }}" alt="">
+                                    	 	</div>
                                             {% for image in product.images %}
-                                                <div class="item {{ (loop.index==1)?'active':'' }}">
+                                                <div class="item ">
                                                     <img class="slide-image" src="{{ image.getWebPath() }}"
                                                          alt="">
                                                 </div>

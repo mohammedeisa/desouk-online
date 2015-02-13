@@ -58,15 +58,15 @@ class VendorProductCategory
 
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Product", mappedBy="vendorProductCategory", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Product", mappedBy="vendorProductCategory")
      */
     protected $products;
 
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\Vendor" , cascade={"all"},inversedBy="vendorProductCategories" )
-     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\Vendor" ,inversedBy="vendorProductCategories" )
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $vendor;
 

@@ -49,8 +49,8 @@ class MenuItem
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="DesoukOnline\DeliveryBundle\Entity\Menu" , cascade={"all"},inversedBy="menuItems" )
-     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\DeliveryBundle\Entity\Menu" ,inversedBy="menuItems" )
+     * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $menu;
 
@@ -76,7 +76,7 @@ class MenuItem
      *
      * @var string
      *
-     * @ORM\Column(type="text", length=255, nullable=false)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     protected $path;
     /**

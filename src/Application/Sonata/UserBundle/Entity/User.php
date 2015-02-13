@@ -41,12 +41,12 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Vendor", mappedBy="user", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\MallBundle\Entity\Vendor", mappedBy="user")
      */
     protected $vendors;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery", mappedBy="user", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery", mappedBy="user")
      */
     protected $deliveries;
 

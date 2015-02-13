@@ -78,7 +78,7 @@ class Delivery
      *
      * @var string
      *
-     * @ORM\Column(type="text", length=255, nullable=false)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     protected $path;
     /**
@@ -194,13 +194,13 @@ class Delivery
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" , cascade={"all"},inversedBy="deliveries" )
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User" ,inversedBy="deliveries" )
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Menu", mappedBy="delivery", cascade={ "all"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Menu", mappedBy="delivery")
      */
     protected $menus;
 

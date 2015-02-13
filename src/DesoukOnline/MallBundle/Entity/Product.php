@@ -94,7 +94,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory" , cascade={"all"},inversedBy="products" )
+     * @ORM\ManyToOne(targetEntity="DesoukOnline\MallBundle\Entity\VendorProductCategory" ,inversedBy="products" )
      * @ORM\JoinColumn(name="vendor_product_category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $vendorProductCategory;
@@ -102,8 +102,8 @@ class Product
 	/**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Vendor" , cascade={"all"},inversedBy="products" )
-     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Vendor" ,inversedBy="products" )
+     * @ORM\JoinColumn(name="vendor_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $vendor;
 

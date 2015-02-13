@@ -32,10 +32,23 @@ class CategoryAdmin extends Admin
         $repository = $repository_->createQueryBuilder('p')
             ->addOrderBy('p.root', 'ASC')
             ->addOrderBy('p.lft', 'ASC');
+		///////////////////////////// Add Image preview /////////////////////////////////////
+        // get the current Image instance
+        $cat = $this->getSubject();
+
+        // use $fileFieldOptions so we can add other options to the field
+        $fileFieldOptions = array('required' => false);
+        $fileFieldOptions['label'] = 'Image';
+        if ($cat && ($webPath = $cat->getWebPath()) && is_file($cat->getAbsolutePath())) {
+
+            // add a 'help' option containing the preview's img tag
+            $fileFieldOptions['help'] = '<img width="100" height="100" src="' . $webPath . '" class="admin-preview" />';
+        }
+        /////////////////////////////////////////////////////////////////////////////////////
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
-            ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_mall_category')))
+            ->add('file', 'file', $fileFieldOptions)
             ->add('enabled', null, array());
     }
 
@@ -79,6 +92,24 @@ class CategoryAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('enabled', null, array('required' => true, 'data' => True));
+    }
+	
+	public function prePersist($cat)
+    {
+        $this->renameFile($cat);
+    }
+
+    public function preUpdate($cat)
+    {
+        $this->renameFile($cat);
+    }
+
+    public function renameFile($cat)
+    {
+        if (null !== $cat->getFile()) {
+            // do whatever you want to generate a unique name
+            $cat->upload();
+        }
     }
 
 

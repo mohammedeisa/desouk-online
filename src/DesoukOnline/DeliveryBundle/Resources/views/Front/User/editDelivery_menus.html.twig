@@ -18,17 +18,17 @@
 					{% endfor %}
 		            <div id="vendor_edit_form">
 	                    <div class="raw">
-	                    	<div class="user_new_form">
-                        		{{ form_start(menu_form) }}
-                        		{{ form_widget(menu_form) }}
-								{{ form_end(menu_form) }}
-                        	</div>
 	                        <div class="panel panel-default">
 	                            <div class="panel-heading">
 	                                المنيوهات المضافة
 	                            </div>
 	                            <!-- /.panel-heading -->
 	                            <div class="panel-body">
+	                            	<div class="user_new_form">
+	                            		<ul id = "vedor_user_menu">
+									    	<li><a class="btn btn-primary "  href="{{ path('front_editDlivery_menus_new',{'delivery':delivery.id}) }}">إضافة منيو جديد </a></li>
+										</ul>
+	                            	</div>
                                     <table class="table table-striped table-bordered table-hover ">
                                         <tbody role="alert">
                                         {% for menu in delivery.menus %}

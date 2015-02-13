@@ -99,12 +99,25 @@ class FrontController extends Controller
         return array('delivery' => $delivery,'form' => $form->createView());
     }
 
-	////////////////// Add Menus /////////////////////////////////////
+	//////////////////  Menus /////////////////////////////////////
 	/**
-     * @Route("editDelivery/menus/{delivery}" , name ="front_editDlivery_menus")
+     * @Route("editDelivery/{delivery}/menus" , name ="front_editDlivery_menus")
 	 * @Template("DesoukOnlineDeliveryBundle:Front:User/editDelivery_menus.html.twig")
      */
     public function editDeliveryMenusAction($delivery ,Request $request)
+    {
+    	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
+		
+	    
+        return array('delivery' => $delivery);
+    }
+
+	////////////////// Add Menus /////////////////////////////////////
+	/**
+     * @Route("editDelivery/{delivery}/menus/new" , name ="front_editDlivery_menus_new")
+	 * @Template("DesoukOnlineDeliveryBundle:Front:User/editDelivery_menus_new.html.twig")
+     */
+    public function editDeliveryMenusNewAction($delivery ,Request $request)
     {
     	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
     	$em = $this->getDoctrine()->getManager();
@@ -197,6 +210,17 @@ class FrontController extends Controller
     public function editDeliveryProductsAction($menu_id ,Request $request)
     {
     	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
+        return array('delivery' => $menu->getDelivery(),'menu' => $menu);
+    }
+
+	////////////////// new menu item /////////////////////////////////////
+	/**
+     * @Route("editDelivery/{menu_id}/products/new" , name ="front_editDelivery_products_new")
+	 * @Template("DesoukOnlineDeliveryBundle:Front:User/editDelivery_products_new.html.twig")
+     */
+    public function editDeliveryProductsNewAction($menu_id ,Request $request)
+    {
+    	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
         $em = $this->getDoctrine()->getManager();
         /////////////////////////// Product Form /////////////////////////////////////////
         $product = new MenuItem();
@@ -223,17 +247,7 @@ class FrontController extends Controller
 		                'success',
 		                'تم إضافة الصنف بنجاح'
 		            );
-					//////////// Clear Form    ///////////////////////////////////////////////////
-					$product = new MenuItem();
-					$product->setMenu($menu);
-				    $product_form = $this->get('form.factory')->createNamedBuilder('ProductForm', 'form', $product, array())
-						->add('title',null,array('label' => 'الاسم'))
-						->add('description','ckeditor',array('label' => 'الوصف و البيانات'))
-						->add('price',null,array('label' => 'السعر'))
-						->add('file', 'file', array('required' => false,'label'=>'الصورة'))
-						->add('save', 'submit', array('label' => 'إضافة الصنف'));
-					$product_form = $product_form->getForm();
-					////////////////////////////////////////////////////////////////////////////// 
+					return $this->redirect($this->generateUrl('front_editDelivery_products_edit',array('product_id' => $product->getId())));
 			    }
 		/////////////////////////////////////////////////////////////////////////////////////
         return array('delivery' => $menu->getDelivery(),'menu' => $menu,'product_form' => $product_form->createView());

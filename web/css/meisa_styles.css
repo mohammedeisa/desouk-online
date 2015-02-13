@@ -254,6 +254,7 @@ img {
 
 .realestate_summary {
     color: #777;
+    height: 74px;
 }
 
 .realestate_properities {
@@ -271,6 +272,7 @@ img {
 .realestate_filter .panel-body {
     padding: 10px 0 0;
 }
+
 .realestate_filter .panel-body {
     padding: 0;
 }
@@ -530,7 +532,7 @@ img {
 }
 
 .inner_page > .container > .box {
-    padding-top: 10px;
+    padding-top: 22px;
 }
 
 .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11 {
@@ -550,4 +552,22 @@ img {
     font-size: 20px;
     margin-top: -5px;
     color: black;
+}
+
+.ratings {
+    padding: 0;
+}
+
+.for_sale .ratings, .car_show .ratings ,.real_estate_show .ratings{
+    width: 170px;
+    float: left;
+}
+.real_estate .thumbnail .caption {
+    height: 200px;
+}
+.real_estate .thumbnail .caption label {
+    margin-bottom: 0;
+}
+.real_estate .thumbnail .caption h4{
+    margin-bottom: 0;
 }

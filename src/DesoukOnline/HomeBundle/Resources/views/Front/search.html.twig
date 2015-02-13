@@ -2,228 +2,182 @@
 {% block inner_content %}
     <!-- Page Content -->
     <section id="search_page" class="">
-        <div class="container">
-            <div class="box">
-                <div class="row">
-                    <div class="left">
-                        <h4>
-                            نتايج البحث عن "{{ search }}"
-                        </h4>
-                    </div>
-                </div>
-                {% if results.real_estate is defined and results.real_estate|length>0 %}
-                    <div class="row">
-                        <h3>عقارات</h3>
-
-                        <div class="col-md-12">
-                            {% for product in results.real_estate %}
-                                <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                                    <div class="thumbnail">
-                                        <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
-                                            <img src="{{ product.getWebPath }}" alt="">
-                                        </a>
-
-                                        <div class="caption">
-                                            <h4 class="pull-right">{{ product.price }} جنية</h4>
-                                            <h4 class="product_name">
-                                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">{{ product.title }}</a>
-                                            </h4>
-                                            {{ product.description|striptags|slice(0, 90) }}
-                                            <a href="{{ path('realestate_show',{'slug':product.slug}) }}">see more </a>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-
-                                            <p class="stars">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if results.for_sale is defined and results.for_sale|length>0 %}
-
-                    <div class="row">
-                        <h3>للبيع</h3>
-
-                        <div class="col-md-12">
-                            {% for product in results.for_sale %}
-                                <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                                    <div class="thumbnail">
-                                        <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
-                                            <img src="{{ product.getWebPath }}" alt="">
-                                        </a>
-
-                                        <div class="caption">
-                                            <h4 class="pull-right">{{ product.price }} جنية</h4>
-                                            <h4 class="product_name">
-                                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">{{ product.title }}</a>
-                                            </h4>
-                                            {{ product.description|striptags|slice(0, 90) }}
-                                            <a href="{{ path('forSale_show',{'slug':product.slug}) }}">see more </a>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-
-                                            <p class="stars">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if results.cars is defined and results.cars|length>0 %}
-
-                    <div class="row">
-                        <h3>سيارات</h3>
-
-                        <div class="col-md-12">
-                            {% for product in results.cars %}
-                                <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                                    <div class="thumbnail">
-                                        <a href="{{ path('car_show',{'slug':product.slug}) }}">
-                                            <img src="{{ product.getWebPath }}" alt="">
-                                        </a>
-
-                                        <div class="caption">
-                                            <h4 class="pull-right">{{ product.price }} جنية</h4>
-                                            <h4 class="product_name">
-                                                <a href="{{ path('car_show',{'slug':product.slug}) }}">{{ product.title }}</a>
-                                            </h4>
-                                            {{ product.description|striptags|slice(0, 90) }}
-                                            <a href="{{ path('car_show',{'slug':product.slug}) }}">see more </a>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-
-                                            <p class="stars">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if results.desouk_mall is defined  and results.desouk_mall|length>0 %}
-
-                    <div class="row">
-                        <h3>دسوق مول</h3>
-
-                        <div class="col-md-12">
-                            {% for product in results.desouk_mall %}
-                                <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                                    <div class="thumbnail">
-                                        <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                            <img src="{{ product.getWebPath }}" alt="">
-                                        </a>
-
-                                        <div class="caption">
-                                            <h4 class="pull-right">{{ product.price }} جنية</h4>
-                                            <h4 class="product_name">
-                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
-                                            </h4>
-                                            {{ product.description|striptags|slice(0, 90) }}
-                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">see more </a>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-
-                                            <p class="stars">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if results.delivery is defined and results.delivery|length>0 %}
-
-                    <div class="row">
-                        <h3>ديليفرى</h3>
-
-                        <div class="col-md-12">
-                            {% for product in results.delivery %}
-                                <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                                    <div class="thumbnail">
-                                        <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">
-                                            <img src="{% path product.logo, 'preview' %}" alt="">
-                                        </a>
-
-                                        <div class="caption">
-                                            {#<h4 class="pull-right">{{ product.price }} جنية</h4>#}
-                                            <h4 class="pull-right">
-                                                <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">{{ product.title }}</a>
-                                            </h4>
-                                            <hr>
-                                            {{ product.description|striptags|slice(0, 90) }}
-                                            <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">see
-                                                more </a>
-                                        </div>
-                                        <div class="ratings">
-                                            <p class="pull-right">15 reviews</p>
-
-                                            <p class="stars">
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                                <span class="glyphicon glyphicon-star"></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-                {% if results.jobs is defined  and results.jobs|length>0 %}
-                    {% for job in results.jobs %}
-                        <div class="row-fluid post">
-                            <div class="span7">
-                                <a href="{{ path('job',{'slug':job.slug}) }}"><h3>{{ job.title }}</h3></a>
-
-                                <div class="meta">
-                                    <span>االمعلن: </span>
-                                    <span class="author"><a href="#"> {{ job.owner }}</a></span>
-                                    <span>تاريخ الاعلان</span>
-                                    <span class="author"><a href="#"> {{ job.updatedAt|date('Y/m/d') }}</a></span>
-                                </div>
-                                <p>
-                                    {{ job.description|striptags|slice(0, 90) }}
-                                    <a href="{{ path('job',{'slug':job.slug}) }}" class="button">المزيد</a>
-                                </p>
-                            </div>
-                        </div>
-                        <hr>
-                    {% endfor %}
-                {% endif %}
+        <div class="row">
+            <div class="col-md-12">
+                <h4>
+                    نتايج البحث عن "{{ search }}"
+                </h4>
             </div>
         </div>
+        {% if results.real_estate is defined and results.real_estate|length>0 %}
+            <div class="row">
+                <h3 class="container">عقارات</h3>
+                {% for product in results.real_estate %}
+                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
+                        <div class="thumbnail">
+                            <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
+                                <img src="{{ product.getWebPath }}" alt="">
+                            </a>
+
+                            <div class="caption">
+                                <h4 class="pull-right">{{ product.price }} جنية</h4>
+                                <h4 class="product_name">
+                                    <a href="{{ path('realestate_show',{'slug':product.slug}) }}">{{ product.title }}</a>
+                                </h4>
+                                {{ product.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">see more </a>
+
+                                <div class="desouk_online_rating">
+                                    {{ ("realestate_"~product.id)|show_rating|raw }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if results.for_sale is defined and results.for_sale|length>0 %}
+
+            <div class="row">
+                <h3 class="container">للبيع</h3>
+
+                {% for product in results.for_sale %}
+                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
+                        <div class="thumbnail">
+                            <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
+                                <img src="{{ product.getWebPath }}" alt="">
+                            </a>
+
+                            <div class="caption">
+                                <h4 class="pull-right">{{ product.price }} جنية</h4>
+                                <h4 class="product_name">
+                                    <a href="{{ path('forSale_show',{'slug':product.slug}) }}">{{ product.title }}</a>
+                                </h4>
+                                {{ product.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">see more </a>
+
+                                <div class="desouk_online_rating">
+                                    {{ ("for_sale_"~product.id)|show_rating|raw }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if results.cars is defined and results.cars|length>0 %}
+
+            <div class="row">
+                <h3 class="container">سيارات</h3>
+
+                {% for product in results.cars %}
+                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
+                        <div class="thumbnail">
+                            <a href="{{ path('car_show',{'slug':product.slug}) }}">
+                                <img src="{{ product.getWebPath }}" alt="">
+                            </a>
+
+                            <div class="caption">
+                                <h4 class="pull-right">{{ product.price }} جنية</h4>
+                                <h4 class="product_name">
+                                    <a href="{{ path('car_show',{'slug':product.slug}) }}">{{ product.title }}</a>
+                                </h4>
+                                {{ product.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('car_show',{'slug':product.slug}) }}">see more </a>
+
+                                <div class="desouk_online_rating">
+                                    {{ ("car_"~product.id)|show_rating|raw }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if results.desouk_mall is defined  and results.desouk_mall|length>0 %}
+
+            <div class="row">
+                <h3 class="container">دسوق مول</h3>
+
+                {% for product in results.desouk_mall %}
+                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
+                        <div class="thumbnail">
+                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <img src="{{ product.getWebPath }}" alt="">
+                            </a>
+
+                            <div class="caption">
+                                <h4 class="pull-right">{{ product.price }} جنية</h4>
+                                <h4 class="product_name">
+                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                </h4>
+                                {{ product.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">see more </a>
+
+                                <div class="desouk_online_rating">
+                                    {{ ("vendor_product_"~product.id)|show_rating|raw }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            </div>
+            <hr>
+        {% endif %}
+        {% if results.delivery is defined and results.delivery|length>0 %}
+
+            <div class="row">
+                <h3 class="container">ديليفرى</h3>
+
+                {% for product in results.delivery %}
+                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
+                        <div class="thumbnail">
+                            <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">
+                                <img src="{% path product.logo, 'preview' %}" alt="">
+                            </a>
+
+                            <div class="caption">
+                                {#<h4 class="pull-right">{{ product.price }} جنية</h4>#}
+                                <h4 class="pull-right">
+                                    <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">{{ product.title }}</a>
+                                </h4>
+                                <hr>
+                                {{ product.description|striptags|slice(0, 90) }}
+                                <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">see
+                                    more </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if results.jobs is defined  and results.jobs|length>0 %}
+            {% for job in results.jobs %}
+                <div class="row-fluid post">
+                    <div class="span7">
+                        <a href="{{ path('job',{'slug':job.slug}) }}"><h3>{{ job.title }}</h3></a>
+
+                        <div class="meta">
+                            <span>االمعلن: </span>
+                            <span class="author"><a href="#"> {{ job.owner }}</a></span>
+                            <span>تاريخ الاعلان</span>
+                            <span class="author"><a href="#"> {{ job.updatedAt|date('Y/m/d') }}</a></span>
+                        </div>
+                        <p>
+                            {{ job.description|striptags|slice(0, 90) }}
+                            <a href="{{ path('job',{'slug':job.slug}) }}" class="button">المزيد</a>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

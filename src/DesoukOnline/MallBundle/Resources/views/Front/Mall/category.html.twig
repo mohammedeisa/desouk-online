@@ -4,8 +4,7 @@
     <div id="mall_category" class="">
         <div class="center">
             <h3>{{ category.title }}</h3>
-
-            <p class="lead">{{ category.description|raw }}</p>
+            {{ category.description|raw }}
             {% include 'horizontal_social.html.twig' %}
         </div>
         <ul class="portfolio-items col-4">

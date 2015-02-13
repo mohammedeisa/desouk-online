@@ -7,7 +7,7 @@
                     <div class="upper_data">
                         <div class="center">
                             <h4>{{ vendor_product_category.title }}</h4>
-                            <p class="lead">{{ vendor_product_category.description|raw }}</p>
+                            {{ vendor_product_category.description|raw }}
                         </div>
                     </div>
                     {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor_product_category.vendor.slug})) }}

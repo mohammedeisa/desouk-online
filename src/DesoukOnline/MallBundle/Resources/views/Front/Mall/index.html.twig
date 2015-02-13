@@ -5,8 +5,7 @@
         {% if config is defined %}
             <div class="center">
                 <h3>{{ config.mallTitle }}</h3>
-
-                <p class="lead">{{ config.mallDescription|raw }}</p>
+                {{ config.mallDescription|raw }}
                 {% include 'horizontal_social.html.twig' %}
             </div>
         {% endif %}

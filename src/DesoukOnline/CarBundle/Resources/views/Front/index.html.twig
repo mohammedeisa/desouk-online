@@ -41,6 +41,10 @@
                     <br>
                 {% endif %}
                 {{ car.summary }}
+
+                <div class="desouk_online_rating">
+                    {{ ("car_"~car.id)|show_rating|raw }}
+                </div>
             </div>
         </div>
     </div>

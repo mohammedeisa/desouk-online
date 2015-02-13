@@ -31,6 +31,9 @@
                                     <div class="realestate_summary">
                                         {{ forSale.summary }}
                                     </div>
+                                    <div class="desouk_online_rating">
+                                        {{ ("for_sale_"~forSale.id)|show_rating|raw }}
+                                    </div>
                                 </div>
                             </div>
                         </div><!--/.portfolio-item-->

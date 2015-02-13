@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
     <!-- Page Content -->
-    <div id="mall_category">
+    <div id="mall_category" class="car_show">
         <div class="container">
             <div class="row">
                 <div class="center">
@@ -13,7 +13,7 @@
                 <div class="col-md-9">
                     {% if has_slider %}
 
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel"
+                        <div id="carousel-example-generic" class="carousel slide col-md-12" data-ride="carousel"
                              style="padding-right: 20px;">
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" class="active"
@@ -52,7 +52,13 @@
                             <div class="reaestate_item_inner">
 
                                 <div class="realestate_properities">
-                                    <h4>السعر : <span>{{ car.price }} جنيه</span></h4>
+                                    <h4>
+                                        <div class="desouk_online_rating">
+                                            {{ ("car_"~car.id)|show_rating|raw }}
+                                        </div>
+
+
+                                        السعر : <span>{{ car.price }} جنيه</span></h4>
                                     <h4>
                                         النوع : <span>{{ car.type }}</span>
                                     </h4>

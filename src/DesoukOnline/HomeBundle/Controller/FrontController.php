@@ -103,8 +103,8 @@ class FrontController extends Controller
         $searchIn = $request->query->get('search_in');
         $em = $this->get('doctrine.orm.entity_manager');
         $results = array();
-        $queryBuilder = $em->createQueryBuilder();
         if ($searchIn == 'real_estate' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
             $realEstate = $queryBuilder
                 ->select('real_estate')
                 ->from(get_class(new RealEstate()), 'real_estate')
@@ -118,7 +118,7 @@ class FrontController extends Controller
             $results['real_estate'] = $realEstate;
         }
         if ($searchIn == 'for_sale' || $searchIn == 'desouk_online' || $searchIn == '') {
-
+            $queryBuilder = $em->createQueryBuilder();
             $forSale = $queryBuilder
                 ->select('for_sale')
                 ->from(get_class(new ForSale()), 'for_sale')
@@ -131,6 +131,7 @@ class FrontController extends Controller
             $results['for_sale'] = $forSale;
         }
         if ($searchIn == 'cars' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
             $cars = $queryBuilder
                 ->select('cars')
                 ->from(get_class(new Car()), 'cars')
@@ -145,6 +146,7 @@ class FrontController extends Controller
             $results['cars'] = $cars;
         }
         if ($searchIn == 'desouk_mall' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
             $desoukMall = $queryBuilder
                 ->select('desouk_mall_products')
                 ->from(get_class(new Product()), 'desouk_mall_products')
@@ -160,6 +162,7 @@ class FrontController extends Controller
             $results['desouk_mall'] = $desoukMall;
         }
         if ($searchIn == 'delivery' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
             $delivery = $queryBuilder
                 ->select('delivery')
                 ->from(get_class(new Delivery()), 'delivery')
@@ -171,6 +174,7 @@ class FrontController extends Controller
             $results['delivery'] = $delivery;
         }
         if ($searchIn == 'jobs' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
             $delivery = $queryBuilder
                 ->select('jobs')
                 ->from(get_class(new Job()), 'jobs')

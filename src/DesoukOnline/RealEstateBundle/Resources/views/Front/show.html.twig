@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
     <!-- Page Content -->
-    <div id="mall_category" class="">
+    <div id="mall_category" class="real_estate_show">
             <div class="row">
              <div class="center"><h3>{{ realestate.title }}</h3>			 </div>
                {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': realestate.purpose,'type': realestate.type,'area': realestate.area })) }}
                 <div class="reaestate_items col-md-9">
 					{% if has_slider %}
 
-						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-right: 20px;">
+						<div id="carousel-example-generic" class="carousel slide col-md-12" data-ride="carousel" style="padding-right: 20px;">
 							<ol class="carousel-indicators">
 								<li data-target="#carousel-example-generic"  class="active" data-slide-to="0"></li>
 								{% for image in realestate.images %}
@@ -42,7 +42,11 @@
                                 <div class="realestate_properities">
 
 
-                                    <h4>السعر : <span>{{realestate.price}} جنيه</span></h4>
+                                    <h4>
+										<div class="desouk_online_rating">
+											{{ ("realestate_"~realestate.id)|show_rating|raw }}
+										</div>
+										السعر : <span>{{realestate.price}} جنيه</span></h4>
                                 	<h4>
                                 		النوع : <span>{{realestate.type}}</span>
                                 	</h4>

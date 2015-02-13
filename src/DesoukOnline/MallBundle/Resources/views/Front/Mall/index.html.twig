@@ -23,7 +23,7 @@
                                                 <p>
                                                     <a href="{{ path('mall_category',{'slug':category.slug}) }}">
                                                         <img class="img-responsive img-thumbnail img-circle"
-                                                             src="{% path category.image, 'preview' %}" alt="">
+                                                             src="{{category.getWebPath()}}" alt="">
                                                     </a>
                                                 </p>
 

@@ -31,7 +31,7 @@
 	                            	</div>
                                     <table class="table table-striped table-bordered table-hover ">
                                         <tbody role="alert">
-                                        {% for category in vendor.vendorProductCategories %}
+                                        {% for category in categories %}
 
                                             <tr>
                                                 <td width="50%">{{category.title}}</td>
@@ -43,6 +43,7 @@
                                         </tbody>
                                     </table>
 	                            </div>
+	                            {{ knp_pagination_render(categories) }}
 	                            <!-- /.panel-body -->
 	                        </div>
 	                    </div>

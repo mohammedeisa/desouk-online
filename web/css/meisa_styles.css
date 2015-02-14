@@ -360,12 +360,15 @@ img {
 .user_new_form {
     margin-bottom: 20px;
 }
-
+.pagination>li{
+	display: inline-block;
+}
 /*Added by Wardany*/
 
 .pagination_container {
     text-align: center;
-    direction: ltr;
+    direction: rtl;
+	clear: both;
 }
 
 .horizontal_social, .facebook_share, .twitter_share {

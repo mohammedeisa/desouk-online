@@ -20,7 +20,7 @@ class FrontController extends Controller
         $jobs = $paginator->paginate(
             $jobsResult,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
+            20/*limit per page*/
         );
         return array('jobs' => $jobs);
     }

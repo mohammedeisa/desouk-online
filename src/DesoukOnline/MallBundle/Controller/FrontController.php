@@ -180,6 +180,9 @@ class FrontController extends Controller
     public function editVendorAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Vendor Form ////////////////////////////////////////////////////
     	$form = $this->get('form.factory')->createNamedBuilder('vendorForm', 'form', $vendor, array())
@@ -244,6 +247,10 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorImageAction($vendor,$image_id)
     {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editVendor',
             array('vendor' => $vendor)
@@ -267,6 +274,9 @@ class FrontController extends Controller
     public function editVendorCategoriesAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Vendor Category Form /////////////////////////////////////////
 		$vendor_product_category = new VendorProductCategory();
@@ -307,6 +317,9 @@ class FrontController extends Controller
     public function editVendorCategoriesEditAction($category_id ,Request $request)
     {
     	$vendor_product_category = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneById($category_id);
+    	if (!$this->isAuthenticated($vendor_product_category->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Vendor Category Form /////////////////////////////////////////
 	    $vendor_product_category_form = $this->get('form.factory')->createNamedBuilder('vendorProductCategoryForm', 'form', $vendor_product_category, array())
@@ -337,6 +350,10 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorCategoryAction($vendor,$category_id)
     {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editVendor_categories',
             array('vendor' => $vendor)
@@ -357,6 +374,9 @@ class FrontController extends Controller
     public function editVendorProductsAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
         $paginator = $this->get('knp_paginator');
         $products = $paginator->paginate(
             $vendor->getProducts(),
@@ -374,6 +394,9 @@ class FrontController extends Controller
     public function editVendorProductsEditAction($product_id ,Request $request)
     {
     	$product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneById($product_id);
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Product Form /////////////////////////////////////////
 	    $product_form = $this->get('form.factory')->createNamedBuilder('ProductForm', 'form', $product, array())
@@ -442,6 +465,10 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorProductsImageAction($product,$image_id)
     {
+    	$product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneBy(array('id' => $product_id));
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editVendor_products_edit',
             array('product_id' => $product)
@@ -465,6 +492,9 @@ class FrontController extends Controller
     public function editVendorProductsNewAction($vendor,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$product = new Product();
 		$product->setVendor($vendor);
 		$product->setEnabled(true);
@@ -508,6 +538,10 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorProductAction($vendor,$product_id)
     {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editVendor_products',
             array('vendor' => $vendor)
@@ -528,6 +562,9 @@ class FrontController extends Controller
     public function editVendorArticlesAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
         $paginator = $this->get('knp_paginator');
         $articles = $paginator->paginate(
             $vendor->getArticles(),
@@ -545,6 +582,9 @@ class FrontController extends Controller
     public function editVendorArticlesEditAction($article_id ,Request $request)
     {
     	$article = $this->getDoctrine()->getManager()->getRepository(get_class(new Article()))->findOneById($article_id);
+    	if (!$this->isAuthenticated($article->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Product Form /////////////////////////////////////////
 	    $article_form = $this->get('form.factory')->createNamedBuilder('ArticleForm', 'form', $article, array())
@@ -579,6 +619,9 @@ class FrontController extends Controller
     public function editVendorArticlesNewAction($vendor,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($vendor)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$article = new Article();
 		$article->setVendor($vendor);
 		$article->setEnabled(true);
@@ -614,6 +657,10 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorArticleAction($vendor,$article_id)
     {
+    	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
+    	if (!$this->isAuthenticated($product->getVendor())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editVendor_products',
             array('vendor' => $vendor)
@@ -624,5 +671,21 @@ class FrontController extends Controller
 		$em->flush();
 		
 		return $this->redirect($url);
+    }
+	
+	////////////////////// Check Authentication ////////////////////////////////////////////
+	protected function isAuthenticated($vendor)
+    {
+    	$authenticated = false;
+    	$securityContext = $this->container->get('security.context');
+		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+		    $user= $securityContext->getToken()->getUser();
+			if($user->getId() == $vendor->getUser()->getId())
+			{
+				$authenticated = true;
+			}
+		}
+		
+		return $authenticated;
     }
 }

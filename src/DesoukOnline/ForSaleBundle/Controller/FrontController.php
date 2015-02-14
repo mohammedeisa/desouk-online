@@ -29,7 +29,15 @@ class FrontController extends Controller
 		}
         $query = $query->getQuery();
 
-        $forSales = $query->getResult();
+        $forSales_array = $query->getResult();
+		
+		$paginator = $this->get('knp_paginator');
+        $forSales = $paginator->paginate(
+            $forSales_array,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
+		
         return array('forSales' => $forSales);
     }
 	

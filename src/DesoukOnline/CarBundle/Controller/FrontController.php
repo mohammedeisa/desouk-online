@@ -33,7 +33,13 @@ class FrontController extends Controller
 		}
         $query = $query->getQuery();
 
-        $cars = $query->getResult();
+        $cars_array = $query->getResult();
+		$paginator = $this->get('knp_paginator');
+        $cars = $paginator->paginate(
+            $cars_array,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
         return array('cars' => $cars);
     }
 	

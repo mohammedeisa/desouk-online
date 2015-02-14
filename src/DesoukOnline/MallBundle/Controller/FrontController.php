@@ -83,7 +83,7 @@ class FrontController extends Controller
         $categoryProducts = $paginator->paginate(
             $vendorProductCategory->getProducts(),
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            20/*limit per page*/
         );
 
         return array('vendor_product_category' => $vendorProductCategory, 'category_products' => $categoryProducts);
@@ -290,8 +290,13 @@ class FrontController extends Controller
 	    }
 		/////////////////////////////////////////////////////////////////////////////////////
 		
-	    
-        return array('vendor' => $vendor,'vendor_product_category_form' => $vendor_product_category_form->createView());
+	    $paginator = $this->get('knp_paginator');
+        $vendor_product_categories = $paginator->paginate(
+            $vendor->getVendorProductCategories(),
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
+        return array('vendor' => $vendor,'categories' => $vendor_product_categories,'vendor_product_category_form' => $vendor_product_category_form->createView());
     }
 
 	////////////////// Edit Category /////////////////////////////////////
@@ -352,7 +357,13 @@ class FrontController extends Controller
     public function editVendorProductsAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        return array('vendor' => $vendor);
+        $paginator = $this->get('knp_paginator');
+        $products = $paginator->paginate(
+            $vendor->getProducts(),
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
+        return array('vendor' => $vendor,'products' => $products);
     }
     
 	////////////////// Edit Product /////////////////////////////////////
@@ -517,7 +528,13 @@ class FrontController extends Controller
     public function editVendorArticlesAction($vendor ,Request $request)
     {
     	$vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        return array('vendor' => $vendor);
+        $paginator = $this->get('knp_paginator');
+        $articles = $paginator->paginate(
+            $vendor->getArticles(),
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
+        return array('vendor' => $vendor,'articles' => $articles);
     }
     
     ////////////////// Edit article /////////////////////////////////////

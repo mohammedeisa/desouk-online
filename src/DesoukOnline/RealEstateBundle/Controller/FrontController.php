@@ -37,7 +37,14 @@ class FrontController extends Controller
 		}	
         $query = $query->getQuery();
 
-        $realestates = $query->getResult();
+        $realestates_array = $query->getResult();
+		
+		$paginator = $this->get('knp_paginator');
+        $realestates = $paginator->paginate(
+            $realestates_array,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            20/*limit per page*/
+        );
         return array('realestates' => $realestates);
     }
 	

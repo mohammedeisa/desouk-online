@@ -25,11 +25,15 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="{{ car.getWebPath() }}" alt="">
+                                    <img class="slide-image"
+                                         src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
+                                         alt="">
                                 </div>
                                 {% for image in car.images %}
                                     <div class="item ">
-                                        <img class="slide-image" src="{{ image.getWebPath() }}" alt="">
+                                        <img class="slide-image"
+                                             src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
+                                             alt="">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -42,7 +46,10 @@
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>
                         </div>
-
+                    {% else %}
+                        <div class="center">
+                            <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"/>
+                        </div>
 
                     {% endif %}
 

@@ -25,11 +25,11 @@
                                         </ol>
                                         <div class="carousel-inner">
                                         	<div class="item active">
-                                        		<img class="slide-image" src="{{ product.getWebPath() }}" alt="">
+                                        		<img class="slide-image" src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                                     	 	</div>
                                             {% for image in product.images %}
                                                 <div class="item ">
-                                                    <img class="slide-image" src="{{ image.getWebPath() }}"
+                                                    <img class="slide-image" src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
                                                          alt="">
                                                 </div>
                                             {% endfor %}

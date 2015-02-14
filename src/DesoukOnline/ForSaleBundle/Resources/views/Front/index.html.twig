@@ -14,7 +14,7 @@
                             <div class="reaestate_item_inner thumbnail">
                                 <div class="realestate_image">
                                     <a href="{{ path('forSale_show',{'slug':forSale.slug}) }}">
-                                        <img src="{{ forSale.getWebPath() }}" alt="">
+                                        <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_car_image.png') }}" alt="">
                                     </a>
                                 </div>
                                 <div class="caption">

@@ -441,6 +441,7 @@ img {
 .vendor_header_menu #vendor_menu_contacts {
     text-align: right;
     padding-top: 2px;
+    width: 25%;
 }
 
 .vendor_header_menu #vendor_menu_contacts #header_menu_tel_icon {
@@ -468,6 +469,11 @@ img {
 }
 
 #vendor_logo_container {
+    width: 25%;
+}
+#header_vendor_name_container{
+    width: 49%;
+    text-align: center;
 }
 
 .vendor_header_menu #vendor_logo_container a {
@@ -558,16 +564,27 @@ img {
     padding: 0;
 }
 
-.for_sale .ratings, .car_show .ratings ,.real_estate_show .ratings{
+.for_sale .ratings, .car_show .ratings, .real_estate_show .ratings {
     width: 170px;
     float: left;
 }
+
 .real_estate .thumbnail .caption {
     height: 200px;
 }
+
 .real_estate .thumbnail .caption label {
     margin-bottom: 0;
 }
-.real_estate .thumbnail .caption h4{
+
+.real_estate .thumbnail .caption h4 {
     margin-bottom: 0;
+}
+
+#footer div {
+    text-align: center;
+}
+
+.custom_login form {
+    text-align: right;
 }

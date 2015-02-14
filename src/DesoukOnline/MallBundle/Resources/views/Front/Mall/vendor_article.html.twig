@@ -15,16 +15,7 @@
 
                         </div>
 
-                        <div class="thumbnail">
-                            {% if article.banner %}
-
-                                <img src="{% path article.banner ,'large' %}">
-                            {% endif %}
-                            <div class="caption-full">
-
-                                {{ article.description|raw }}
-                            </div>
-                        </div>
+                        {{ article.description|raw }}
                     </div>
 
                 </div>

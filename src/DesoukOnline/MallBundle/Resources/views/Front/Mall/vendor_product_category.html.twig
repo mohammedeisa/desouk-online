@@ -20,7 +20,7 @@
                             <div class="portfolio-item col-md-4">
                                 <div class="thumbnail">
                                     <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                        <img src="{{product.getWebPath()}}" alt="">
+                                        <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                                     </a>
 
                                     <div class="caption">

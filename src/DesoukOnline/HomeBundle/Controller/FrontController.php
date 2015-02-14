@@ -73,7 +73,7 @@ class FrontController extends Controller
 
     /**
      * @Route("/recent_products" , name ="recent_products")
-     * @Template("DesoukOnlineHomeBundle:Front:recent_products.html.twig")
+     * @Template("DesoukOnlineHomeBundle:Front:Homepage/recent_products.html.twig")
      */
     public function recentProductsAction()
     {
@@ -186,6 +186,15 @@ class FrontController extends Controller
             $results['jobs'] = $delivery;
         }
         return array('results' => $results, 'search' => $search, 'search_in' => $searchIn);
+
+    }
+    ///////////////////////////// FrontEnd Vendor Delete article //////////////////////////////
+    /**
+     * @Route("/user_login" , name ="user_login")
+     * @Template("DesoukOnlineHomeBundle:Front:login.html.twig")
+     */
+    public function loginAction()
+    {
 
     }
 

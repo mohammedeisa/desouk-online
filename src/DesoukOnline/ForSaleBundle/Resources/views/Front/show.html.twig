@@ -7,7 +7,8 @@
                 <div class="center">
                     <h3>{{ forSale.title }}</h3>
                 </div>
-                {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': forSale.Category.title })) }}
+                {% set cat = (forSale.Category!=null)?forSale.Category.title:null %}
+                {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': cat })) }}
                 <div class="reaestate_items col-md-9">
                     {% if has_slider %}
 
@@ -23,11 +24,11 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="{{ forSale.getWebPath() }}" alt="">
+                                    <img class="slide-image" src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                                 </div>
                                 {% for image in forSale.images %}
                                     <div class="item ">
-                                        <img class="slide-image" src="{{ image.getWebPath() }}" alt="">
+                                        <img class="slide-image" src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                                     </div>
                                 {% endfor %}
                             </div>
@@ -41,7 +42,10 @@
                             </a>
                         </div>
 
-
+                    {% else %}
+                        <div class="center">
+                            <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_product_image.png') }}"/>
+                        </div>
                     {% endif %}
                     <div class="reaestate_item apps col-md-12">
                         <div class="reaestate_item_inner">
@@ -52,9 +56,11 @@
                                         {{ ("for_sale_"~forSale.id)|show_rating|raw }}
                                     </div>
                                     السعر : <span>{{ forSale.price }} جنيه</span></h4>
+                                {% if cat %}
                                 <h4>
-                                    القسم : <span>{{ forSale.category.title }}</span>
+                                    القسم : <span>{{ cat }}</span>
                                 </h4>
+                                {% endif %}
                             </div>
 
                             <div class="realestate_summary">

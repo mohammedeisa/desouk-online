@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block inner_content %}
+    <!-- Page Content -->
+
+    <div id="vendor_homepage" class="custom_login">
+        <div class="container">
+            <div class="box">
+                <div class="row row-centered">
+                    <div class="col-md-4 col-centered">
+                        {% render controller("SonataUserBundle:Security:login") %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

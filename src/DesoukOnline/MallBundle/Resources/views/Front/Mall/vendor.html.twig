@@ -24,7 +24,7 @@
                                     <div class="carousel-inner">
                                         {% for image in vendor.images %}
                                             <div class="item {{ (loop.index==1)?'active':'' }}">
-                                                <img class="slide-image" src="{{ image.getWebPath() }}"
+                                                <img class="slide-image" src="{{ (image.getPath())?image.getWebPath():asset('images/default/default_product_image.png') }}"
                                                      alt="">
                                             </div>
                                         {% endfor %}
@@ -60,9 +60,8 @@
                                 <div class="col-sm-4 col-lg-4 col-md-4">
                                     <div class="thumbnail">
                                         <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                            <img src="{{ product.getWebPath() }}" alt="">
+                                            <img src="{{ (product.getPath()!=null)?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                                         </a>
-
                                         <div class="caption">
                                             <div class="center">
                                                 <h4>

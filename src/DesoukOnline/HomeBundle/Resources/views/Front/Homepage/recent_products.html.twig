@@ -20,7 +20,7 @@
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{ product.getWebPath() }}" alt="">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_real_estate.png') }}" alt="">
                                 </a>
                             </div>
                             <h5>
@@ -36,7 +36,8 @@
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{ product.getWebPath() }}" alt="">
+
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_product_image') }}" alt="">
 
                                 </a>
                             </div>
@@ -53,7 +54,7 @@
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{ product.getWebPath() }}" alt="">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_car_image') }}" alt="">
                                 </a>
                             </div>
                             <h5>
@@ -69,7 +70,7 @@
                         <div class="item-inner">
                             <div class="portfolio-image">
                                 <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{ product.getWebPath() }}" alt="">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_product_image') }}" alt="">
                                 </a>
                             </div>
                             <h5>

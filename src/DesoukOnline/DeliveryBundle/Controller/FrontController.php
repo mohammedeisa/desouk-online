@@ -67,6 +67,9 @@ class FrontController extends Controller
     public function editDeliveryAction($delivery ,Request $request)
     {
     	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
+    	if (!$this->isAuthenticated($delivery)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Vendor Form ////////////////////////////////////////////////////
     	$form = $this->get('form.factory')->createNamedBuilder('deliveryForm', 'form', $delivery, array())
@@ -107,7 +110,9 @@ class FrontController extends Controller
     public function editDeliveryMenusAction($delivery ,Request $request)
     {
     	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
-		
+		if (!$this->isAuthenticated($delivery)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
 	    
         return array('delivery' => $delivery);
     }
@@ -120,6 +125,9 @@ class FrontController extends Controller
     public function editDeliveryMenusNewAction($delivery ,Request $request)
     {
     	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
+    	if (!$this->isAuthenticated($delivery)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Delivery Menu Form /////////////////////////////////////////
 		$menu = new Menu();
@@ -159,6 +167,9 @@ class FrontController extends Controller
     public function editVendorCategoriesEditAction($menu_id ,Request $request)
     {
     	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
+    	if (!$this->isAuthenticated($menu->getDelivery())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Vendor Category Form /////////////////////////////////////////
 	    $menu_form = $this->get('form.factory')->createNamedBuilder('menuForm', 'form', $menu, array())
@@ -190,6 +201,10 @@ class FrontController extends Controller
      */
     public function deleteFrontDeliveryMenuAction($delivery,$menu_id)
     {
+    	$delivery = $this->getDoctrine()->getManager()->getRepository(get_class(new Delivery()))->findOneById($delivery);
+    	if (!$this->isAuthenticated($delivery)) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editDelivery',
             array('delivery' => $delivery)
@@ -210,6 +225,9 @@ class FrontController extends Controller
     public function editDeliveryProductsAction($menu_id ,Request $request)
     {
     	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
+        if (!$this->isAuthenticated($menu->getDelivery())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
         return array('delivery' => $menu->getDelivery(),'menu' => $menu);
     }
 
@@ -221,6 +239,9 @@ class FrontController extends Controller
     public function editDeliveryProductsNewAction($menu_id ,Request $request)
     {
     	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
+        if (!$this->isAuthenticated($menu->getDelivery())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
         $em = $this->getDoctrine()->getManager();
         /////////////////////////// Product Form /////////////////////////////////////////
         $product = new MenuItem();
@@ -261,6 +282,9 @@ class FrontController extends Controller
     public function editDeliveryProductsEditAction($product_id ,Request $request)
     {
     	$product = $this->getDoctrine()->getManager()->getRepository(get_class(new MenuItem()))->findOneById($product_id);
+    	if (!$this->isAuthenticated($product->getMenu()->getDelivery())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$em = $this->getDoctrine()->getManager();
 		/////////////////////////// Product Form /////////////////////////////////////////
 	    $product_form = $this->get('form.factory')->createNamedBuilder('ProductForm', 'form', $product, array())
@@ -300,6 +324,10 @@ class FrontController extends Controller
      */
     public function deleteFrontDeliveryProductAction($menu_id,$product_id)
     {
+    	$menu = $this->getDoctrine()->getManager()->getRepository(get_class(new Menu()))->findOneById($menu_id);
+        if (!$this->isAuthenticated($menu->getDelivery())) {
+			return $this->redirect($this->generateUrl('home'));
+		}
     	$url = $this->generateUrl(
             'front_editDelivery_products',
             array('menu_id' => $menu_id)
@@ -310,6 +338,22 @@ class FrontController extends Controller
 		$em->flush();
 		
 		return $this->redirect($url);
+    }
+	
+	////////////////////// Check Authentication ////////////////////////////////////////////
+	protected function isAuthenticated($delivery)
+    {
+    	$authenticated = false;
+    	$securityContext = $this->container->get('security.context');
+		if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+		    $user= $securityContext->getToken()->getUser();
+			if($user->getId() == $delivery->getUser()->getId())
+			{
+				$authenticated = true;
+			}
+		}
+		
+		return $authenticated;
     }
 
 }

@@ -11,7 +11,7 @@
                 <li><a class="btn btn-primary" href="#" data-filter=".for_sale">للبيع</a></li>
                 <li><a class="btn btn-primary" href="#" data-filter=".cars">سيارات</a></li>
                 <li><a class="btn btn-primary" href="#" data-filter=".desouk_mall">دسوق مول</a></li>
-                <li><a class="btn btn-primary" href="#" data-filter=".delivery">ديليفرى</a></li>
+                {#<li><a class="btn btn-primary" href="#" data-filter=".delivery">ديليفرى</a></li>#}
             </ul>
             <!--/#portfolio-filter-->
             <ul class="portfolio-items col-4">
@@ -81,22 +81,22 @@
                         </div>
                     </li><!--/.portfolio-item-->
                 {% endfor %}
-                {% for product in delivery %}
-                    <li class="portfolio-item delivery">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    <img src="{{ product.getWebPath() }}" alt="">
-                                </a>
-                            </div>
-                            <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                    {{ product.title }}
-                                </a>
-                            </h5>
-                        </div>
-                    </li><!--/.portfolio-item-->
-                {% endfor %}
+                {#{% for product in delivery %}#}
+                    {#<li class="portfolio-item delivery">#}
+                        {#<div class="item-inner">#}
+                            {#<div class="portfolio-image">#}
+                                {#<a href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
+                                    {#<img src="{{ product.getWebPath() }}" alt="">#}
+                                {#</a>#}
+                            {#</div>#}
+                            {#<h5>#}
+                                {#<a href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
+                                    {#{{ product.title }}#}
+                                {#</a>#}
+                            {#</h5>#}
+                        {#</div>#}
+                    {#</li><!--/.portfolio-item-->#}
+                {#{% endfor %}#}
 
             </ul>
         </div>

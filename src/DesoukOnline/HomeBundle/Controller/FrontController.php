@@ -4,11 +4,17 @@ namespace DesoukOnline\HomeBundle\Controller;
 
 use DesoukOnline\BannerBundle\Entity\Banner;
 use DesoukOnline\CarBundle\Entity\Car;
+use DesoukOnline\CarBundle\Entity\CarConfig;
 use DesoukOnline\DeliveryBundle\Entity\Delivery;
 use DesoukOnline\ForSaleBundle\Entity\ForSale;
+use DesoukOnline\ForSaleBundle\Entity\ForSaleConfig;
 use DesoukOnline\JobsBundle\Entity\Job;
+use DesoukOnline\JobsBundle\Entity\JobsConfig;
+use DesoukOnline\MallBundle\Entity\MallConfig;
 use DesoukOnline\MallBundle\Entity\Product;
 use DesoukOnline\RealEstateBundle\Entity\RealEstate;
+use DesoukOnline\RealEstateBundle\Entity\RealEstateConfig;
+use DesoukOnline\WebDevelopmentBundle\Entity\WebDevelopment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -68,6 +74,22 @@ class FrontController extends Controller
      */
     public function mainComponentsAction()
     {
+        $mallConfig = $realEstateConfig = $carConfig = $forSaleConfig = $jobConfig = $webDevelopmentConfig = null;
+        $em = $this->getDoctrine()->getManager();
+        $mallConfig = $this->getConfig($em, get_class(new MallConfig()));
+        $realEstateConfig = $this->getConfig($em, get_class(new RealEstateConfig()));
+        $carConfig = $this->getConfig($em, get_class(new CarConfig()));
+        $forSaleConfig = $this->getConfig($em, get_class(new ForSaleConfig()));
+        $jobConfig = $this->getConfig($em, get_class(new JobsConfig()));
+        $webDevelopmentConfig = $this->getConfig($em, get_class(new WebDevelopment()));
+        return array(
+            'mall_config' => $mallConfig,
+            'real_estate_config' => $realEstateConfig,
+            'car_config' => $carConfig,
+            'for_sale_config' => $forSaleConfig,
+            'job_config' => $jobConfig,
+            'web_development_config' => $webDevelopmentConfig
+        );
     }
 
 
@@ -82,14 +104,14 @@ class FrontController extends Controller
         $forSale = $em->createQuery('SELECT a FROM ' . get_class(new ForSale()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
         $cars = $em->createQuery('SELECT a FROM ' . get_class(new Car()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
         $desoukMall = $em->createQuery('SELECT a FROM ' . get_class(new Product()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
-        $delivery = $em->createQuery('SELECT a FROM ' . get_class(new Delivery()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
+//        $delivery = $em->createQuery('SELECT a FROM ' . get_class(new Delivery()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
 
         return array(
             'real_estate' => $realEstate,
             'for_sale' => $forSale,
             'cars' => $cars,
             'desouk_mall' => $desoukMall,
-            'delivery' => $delivery
+//            'delivery' => $delivery
         );
     }
 
@@ -161,21 +183,21 @@ class FrontController extends Controller
                 ->getResult();
             $results['desouk_mall'] = $desoukMall;
         }
-        if ($searchIn == 'delivery' || $searchIn == 'desouk_online' || $searchIn == '') {
-            $queryBuilder = $em->createQueryBuilder();
-            $delivery = $queryBuilder
-                ->select('delivery')
-                ->from(get_class(new Delivery()), 'delivery')
-                ->where($queryBuilder->expr()->like('delivery.title', ':search'))
-                ->orWhere($queryBuilder->expr()->like('delivery.description', ':search'))
-                ->setParameters(array('search' => "%{$search}%"))
-                ->getQuery()
-                ->getResult();
-            $results['delivery'] = $delivery;
-        }
+//        if ($searchIn == 'delivery' || $searchIn == 'desouk_online' || $searchIn == '') {
+//            $queryBuilder = $em->createQueryBuilder();
+//            $delivery = $queryBuilder
+//                ->select('delivery')
+//                ->from(get_class(new Delivery()), 'delivery')
+//                ->where($queryBuilder->expr()->like('delivery.title', ':search'))
+//                ->orWhere($queryBuilder->expr()->like('delivery.description', ':search'))
+//                ->setParameters(array('search' => "%{$search}%"))
+//                ->getQuery()
+//                ->getResult();
+//            $results['delivery'] = $delivery;
+//        }
         if ($searchIn == 'jobs' || $searchIn == 'desouk_online' || $searchIn == '') {
             $queryBuilder = $em->createQueryBuilder();
-            $delivery = $queryBuilder
+            $jobs = $queryBuilder
                 ->select('jobs')
                 ->from(get_class(new Job()), 'jobs')
                 ->where($queryBuilder->expr()->like('jobs.title', ':search'))
@@ -183,7 +205,7 @@ class FrontController extends Controller
                 ->setParameters(array('search' => "%{$search}%"))
                 ->getQuery()
                 ->getResult();
-            $results['jobs'] = $delivery;
+            $results['jobs'] = $jobs;
         }
         return array('results' => $results, 'search' => $search, 'search_in' => $searchIn);
 
@@ -198,5 +220,15 @@ class FrontController extends Controller
 
     }
 
-
+    function getConfig($em, $entity)
+    {
+        $query = $em
+            ->createQuery('SELECT p FROM ' . $entity . ' p ');
+        try {
+            $config = $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+        return $config;
+    }
 }

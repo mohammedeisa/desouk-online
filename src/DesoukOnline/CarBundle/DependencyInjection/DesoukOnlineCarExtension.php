@@ -22,7 +22,21 @@ class DesoukOnlineCarExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('config.yml');
+
+        $groups['sonata.admin.group.desouk_online.car'] = array();
+        $car = $groups['sonata.admin.group.desouk_online.car'];
+        $car['icon'] = '<i class="fa fa-play-circle"></i>';
+        $car['label'] = 'Cars';
+
+        $car['items'][] = 'desouk_online.car.config';
+        $car['items'][] = 'desouk_online.car.mark';
+        $car['items'][] = 'desouk_online.car';
+
+        $groups['sonata.admin.group.desouk_online.car'] = $car;
+        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
     }
 }

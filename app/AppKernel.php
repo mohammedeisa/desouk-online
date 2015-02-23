@@ -97,6 +97,7 @@ class AppKernel extends Kernel
             new DesoukOnline\JobsBundle\DesoukOnlineJobsBundle(),
             new \Meisa\RatingBundle\MeisaRatingBundle(),
 
+            new DesoukOnline\SocialBundle\DesoukOnlineSocialBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

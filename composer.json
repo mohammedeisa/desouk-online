@@ -63,7 +63,8 @@
         "knplabs/knp-paginator-bundle": "~2.4",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
         "nomaya/social-bundle": "dev-master",
-        "mohammedeisa/rating-bundle": "~2.0"
+        "mohammedeisa/rating-bundle": "~2.0",
+        "facebook/php-sdk-v4" : "4.0.*"
     },
 
     "require-dev": {

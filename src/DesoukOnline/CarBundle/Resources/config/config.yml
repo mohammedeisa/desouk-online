@@ -1,8 +1,17 @@
 services:
+    desouk_online.car.config:
+        class: DesoukOnline\CarBundle\Admin\CarConfigAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Car Config" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\CarBundle\Entity\CarConfig
+            - ~
+
     desouk_online.car:
         class: DesoukOnline\CarBundle\Admin\CarAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Car" , show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "Cars" , show_in_dashboard: true }
         arguments:
             - ~
             - DesoukOnline\CarBundle\Entity\Car

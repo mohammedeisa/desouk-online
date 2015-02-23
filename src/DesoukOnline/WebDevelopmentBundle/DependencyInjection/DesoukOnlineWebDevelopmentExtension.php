@@ -29,7 +29,7 @@ class DesoukOnlineWebDevelopmentExtension extends Extension
 
         $webDevelopment=array();
         $webDevelopment['icon']='<i class="fa fa-play-circle"></i>';;
-        $webDevelopment['label']='Web development';
+        $webDevelopment['label']='Web Development';
 
         $webDevelopment['items'][] = 'desouk_online.web_development';
         $webDevelopment['items'][] = 'desouk_online.portfolio';

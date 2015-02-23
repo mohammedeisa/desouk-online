@@ -25,17 +25,17 @@ class DesoukOnlineDeliveryExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('config.yml');
 
-        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
-
-        $delivery = array();
-        $delivery['icon'] = '<i class="fa fa-play-circle"></i>';;
-        $delivery['label'] = 'Delivery';
-
-        $delivery['items'][] = 'desouk_online.delivery';
-        $delivery['items'][] = 'desouk_online.delivery.menu';
-
-        $groups['sonata.admin.group.desouk_online.delivery'] = $delivery;
-        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
+//        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
+//
+//        $delivery = array();
+//        $delivery['icon'] = '<i class="fa fa-play-circle"></i>';;
+//        $delivery['label'] = 'Delivery';
+//
+//        $delivery['items'][] = 'desouk_online.delivery';
+//        $delivery['items'][] = 'desouk_online.delivery.menu';
+//
+//        $groups['sonata.admin.group.desouk_online.delivery'] = $delivery;
+//        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
 
 
     }

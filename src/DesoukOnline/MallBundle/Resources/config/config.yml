@@ -2,7 +2,7 @@ services:
     desouk_online.mall.config:
         class: DesoukOnline\MallBundle\Admin\MallConfigAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Config" , show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Mall Config" , show_in_dashboard: true }
         arguments:
             - ~
             - DesoukOnline\MallBundle\Entity\MallConfig
@@ -41,7 +41,7 @@ services:
     desouk_online.mall.vendor.product.category:
         class: DesoukOnline\MallBundle\Admin\VendorProductCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Product categories" , show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: "Mall", label: "Product Categories" , show_in_dashboard: true }
         arguments:
             - ~
             - DesoukOnline\MallBundle\Entity\VendorProductCategory

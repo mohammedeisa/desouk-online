@@ -5,14 +5,16 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="center">
                         <a href="{{ path('mall') }}">
-                        	<img src="/images/icons/Online-store.png">
+                            <img src="/images/icons/Online-store.png">
                         </a>
                         <a href="{{ path('mall') }}">
-                            <h4>دسوق مول</h4>
+                            <h4>
+                                {{ (mall_config is defined)?mall_config.mallTitle }}
+                            </h4>
                         </a>
 
                         <p>
-                            هنا تقدر تتشّوق فى المحﻻت و تتفرج على المنتجات المعروضة و تقرر هتشترى إيه و أنت فى البيت
+                            {{ (mall_config is defined)?mall_config.mallDescription |raw}}
                         </p>
                     </div>
                 </div>
@@ -24,11 +26,12 @@
                         </a>
                         <a href="{{ path('realestate') }}">
 
-                            <h4>عقارات</h4>
+                            <h4>{{ (real_estate_config is defined)?real_estate_config.realEstateTitle }}
+                            </h4>
                         </a>
 
-                        <p> 
-                        	هنا هتلاقى العقارات المعروضة للبيع او للايجار فى دسوق
+                        <p>
+                            {{ (real_estate_config is defined)?real_estate_config.realEstateDescription |raw}}
                         </p>
                     </div>
                 </div>
@@ -38,12 +41,11 @@
                         <a href="{{ path('car') }}">
                             <img src="/images/icons/Sell-cars.png">
                         </a> <a href="{{ path('car') }}">
-                            <h4>سيارات</h4>
+                            <h4>{{ (car_config is defined)?car_config.carTitle }}
+                            </h4>
                         </a>
 
-                        <p>
-                           هنا هتلاقى كل السيارات المعروضة للبيع فى دسوق
-
+                        <p>{{ (car_config is defined)?car_config.carDescription |raw}}
                         </p>
                     </div>
                 </div>
@@ -56,12 +58,11 @@
                             <img src="/images/icons/For-sell.png">
                         </a>
                         <a href="{{ path('forSale') }}">
-                            <h4>معروض للبيع</h4>
+                            <h4>{{ (for_sale_config is defined)?for_sale_config.forSaleTitle }}
+                            </h4>
                         </a>
 
-                        <p>
-                            هنا هتﻻقى الوظايف المتاحة فى دسوق
-
+                        <p>{{ (for_sale_config is defined)?for_sale_config.forSaleDescription|raw }}
                         </p>
                     </div>
                 </div>
@@ -90,12 +91,11 @@
                             <img src="/images/icons/Jobs.png">
                         </a>
                         <a href="{{ path('jobs') }}">
-                            <h4>وظايف</h4>
+                            <h4>{{ (job_config is defined)?job_config.jobsTitle }}
+                            </h4>
                         </a>
 
-                        <p>
-                            لو عندك حاجة مستعملة او جديدة و عاوز تبعها . اعرضها عندنا ببلاش
-
+                        <p>{{ (job_config is defined)?job_config.jobsDescription|raw }}
                         </p>
                     </div>
                 </div>
@@ -104,11 +104,13 @@
                         <a href="{{ path('web_development') }}">
                             <img src="/images/icons/Create-website.png">
                         </a> <a href="{{ path('web_development') }}">
-                            <h4>برمجة و تطوير مواقع</h4>
+                            <h4>
+                                {{ (web_development_config is defined)?web_development_config.webDevelopmentTitle }}
+                            </h4>
                         </a>
 
                         <p>
-
+                            {{ (web_development_config is defined)?web_development_config.webDevelopmentDescription|raw }}
                         </p>
                     </div>
                 </div>

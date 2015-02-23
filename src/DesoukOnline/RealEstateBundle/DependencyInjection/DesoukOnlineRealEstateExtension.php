@@ -22,7 +22,21 @@ class DesoukOnlineRealEstateExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('config.yml');
+
+        $groups['sonata.admin.group.desouk_online.real_estate']=array();
+        $realEstate = $groups['sonata.admin.group.desouk_online.real_estate'];
+        $realEstate['icon']='<i class="fa fa-play-circle"></i>';
+        $realEstate['label']='Real Estate';
+
+        $realEstate['items'][] = 'desouk_online.real_estate.config';
+        $realEstate['items'][] = 'desouk_online.real_estate.area';
+        $realEstate['items'][] = 'desouk_online.real_estate';
+
+        $groups['sonata.admin.group.desouk_online.real_estate'] = $realEstate;
+        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
     }
 }

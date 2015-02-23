@@ -31,6 +31,7 @@ class DesoukOnlineJobsExtension extends Extension
         $jobs['icon'] = '<i class="fa fa-play-circle"></i>';;
         $jobs['label'] = 'Jobs';
 
+        $jobs['items'][] = 'desouk_online.jobs.config';
         $jobs['items'][] = 'desouk_online.jobs';
 
         $groups['sonata.admin.group.desouk_online.jobs'] = $jobs;

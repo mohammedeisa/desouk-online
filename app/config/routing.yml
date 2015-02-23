@@ -1,3 +1,8 @@
+desouk_online_social:
+    resource: "@DesoukOnlineSocialBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 meisa_rating:
     resource: "@MeisaRatingBundle/Controller/"
     type:     annotation

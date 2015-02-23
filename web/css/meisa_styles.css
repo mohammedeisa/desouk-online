@@ -110,51 +110,9 @@ img {
 #logo a {
     display: inline-block;
 }
-
-#logo_words_letters {
-    float: right;
+#logo a img{
+    max-height: 53px;
 }
-
-#logo_letters {
-    margin-bottom: 0;
-    font-weight: bolder;
-    display: inline-block;
-    float: right;
-    font-size: 48px;
-}
-
-#logo_letters span {
-    margin-right: 1px;
-}
-
-#logo_letter_d {
-    float: left;
-    /*transform: rotate(180deg);*/
-    /*line-height: 33px;*/
-    line-height: 57px;
-
-}
-
-#logo_letter_o {
-    margin-left: -2px;
-    line-height: 57px;
-}
-
-#logo_words {
-    float: right;
-    display: inline-block;
-}
-
-#logo_desouk_word {
-    display: inline-block;
-    margin-bottom: 0;
-}
-
-#logo_desouk_online {
-    color: #999;
-    /*margin-right: 30px;*/
-}
-
 /*LOGO*/
 
 .menu_table img {

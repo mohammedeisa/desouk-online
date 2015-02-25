@@ -38,10 +38,6 @@
     <script type="text/javascript" src="{{ asset('bundles/meisarating/js/rating.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/scripts.js') }}"></script>
 
-
-
-
-
     <script type="text/javascript" src="{{ asset('fancybox/jquery.mousewheel-3.0.6.pack.js') }}"></script>
 
     <!-- Add fancyBox main JS and CSS files -->
@@ -60,7 +56,14 @@
     <script type="text/javascript" src="{{ asset('fancybox/helpers/jquery.fancybox-media.js?v=1.0.6') }}"></script>
 
 
-
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=940214735998249&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <!--/head-->
 

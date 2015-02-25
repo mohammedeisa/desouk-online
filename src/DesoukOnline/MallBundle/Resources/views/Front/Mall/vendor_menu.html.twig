@@ -1,6 +1,6 @@
 <div class="col-md-3">
     <div class="list-group">
-        {% for category in vendor.getVendorProductCategories() %}
+        {% for category in vendor.getVendorProductCategories() if category.getProducts()|length>0%}
             <a href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
                class="list-group-item">{{ category.title }}</a>
         {% endfor %}
@@ -9,7 +9,7 @@
                class="list-group-item">{{ article.title }}</a>
         {% endfor %}
     </div>
-    {% include 'horizontal_social.html.twig' %}
+    {#{% include 'horizontal_social.html.twig' %}#}
     <div class="center">    {{ render(controller('DesoukOnlineVisitorsBundle:Front:visitors')) }}</div>
 
 </div>

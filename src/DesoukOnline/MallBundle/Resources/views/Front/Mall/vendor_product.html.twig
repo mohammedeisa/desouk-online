@@ -8,80 +8,63 @@
                 {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':product.vendorProductCategory.vendor.slug})) }}
                 <div class="col-md-9">
 
-                    <div class="">
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="center">
+                                <h3>{{ product.name }}</h3>
+                            </div>
+                            {% if product.price %}
+                                <div class="text-right width_49 inline_block">السعر</div>
+                                <div class="text-left width_49 inline_block">
+                                    <span class="big-price">{{ product.price }} جنية</span>
+                                </div>
+                                <hr>
+                            {% endif %}
+                            <div class="caption-full">
+                                {{ product.description|raw }}
+                                <hr>
+                            </div>
+                            {% include 'horizontal_social.html.twig' %}
+                            <hr>
+                            <div class="desouk_online_rating">
+                                {{ ("vendor_product_"~product.id)|show_rating|raw }}
+                            </div>
+
+                        </div>
                         {% if product.images %}
 
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="product_gallery">
+                                    <a class="gallery"
+                                       href="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
+                                       rel="group" data-rel="prettyPhoto[gallery]1"
+                                       title="">
 
-                                    <div class="center">
-                                        <h3>{{ product.name }}</h3>
-                                    </div>
-                                    <div class="text-right width_49 inline_block" >السعر</div>
-                                    <div class="text-left width_49 inline_block">
-                                        <span class="big-price">{{ product.price }} جنية</div>
-                                    </span>
-                                    <hr>
-                                    <div class="caption-full">
-                                        {{ product.description|raw }}
-                                        <hr>
-                                    </div>
-                                    {% include 'horizontal_social.html.twig' %}
-                                    <hr>
-                                    <div class="desouk_online_rating">
-                                        {{ ("vendor_product_"~product.id)|show_rating|raw }}
-                                    </div>
+                                        <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}">
 
-
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="product_gallery">
-                                        <a class="gallery"
-                                           href="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
+                                    </a>
+                                    {% for image in product.images %}
+                                        <a class="gallery" style="display: none"
+                                           href="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}"
                                            rel="group" data-rel="prettyPhoto[gallery]1"
                                            title="">
-
-                                            <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}">
+                                            <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
 
                                         </a>
-                                        {% for image in product.images %}
-                                            <a class="gallery" style="display: none"
-                                               href="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}"
-                                               rel="group" data-rel="prettyPhoto[gallery]1"
-                                               title="">
-                                                <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
-
-                                            </a>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
+                                    {% endfor %}
                                 </div>
+                                <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
                             </div>
                         {% endif %}
 
                     </div>
+                    <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
+                         data-colorscheme="light"></div>
                 </div>
-
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
 
-
-            $("a.gallery").fancybox({
-                'transitionIn': 'elastic',
-                'transitionOut': 'elastic',
-                'speedIn': 600,
-                'speedOut': 200,
-                'overlayShow': false,
-                beforeShow: function () {
-                    this.maxWidth = 800;
-                    this.maxHeight = 500;
-                }
-            });
-
-        });
-    </script>
 {% endblock %}

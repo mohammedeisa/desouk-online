@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 require_once __DIR__ . '/../app/bootstrap.php.cache';
 require_once __DIR__ . '/../app/AppKernel.php';
 
+$GLOBALS['root_path'] = __DIR__.'/';
 
 //$request = Sonata\PageBundle\Request\RequestFactory::createFromGlobals('host_with_path');
 

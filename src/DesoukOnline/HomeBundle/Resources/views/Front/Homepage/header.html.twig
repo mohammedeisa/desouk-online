@@ -11,9 +11,7 @@
                 {#<a class="navbar-brand" href="{{ path('home') }}"></a>#}
                 <div id="logo" class="navbar-brand">
                     <a class="" href="{{ path('home') }}">
-
                         <img src="{{ asset('images/logo.png') }}">
-
                     </a>
                 </div>
 
@@ -21,6 +19,13 @@
             </div>
             <div class="collapse navbar-collapse">
                 {{ "header_1"|show_menu|raw }}
+                <ul class="nav navbar-nav" style="padding-right: 0;">
+                    {% if app.user %}
+                        <li class=" " id=""><a href="{{ path('sonata_user_security_logout') }}">الخروج</a></li>
+                    {% else %}
+                        <li class=" " id=""><a href="{{ path('user_login') }}">الدخول</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </div>

@@ -19,12 +19,12 @@
                     <li class="portfolio-item real_estate">
                         <div class="item-inner">
                             <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
                                     <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_real_estate.png') }}" alt="">
                                 </a>
                             </div>
                             <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
                                     {{ product.title }}
                                 </a>
                             </h5>
@@ -35,14 +35,14 @@
                     <li class="portfolio-item for_sale">
                         <div class="item-inner">
                             <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
 
                                     <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_product_image') }}" alt="">
 
                                 </a>
                             </div>
                             <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
                                     {{ product.title }}
                                 </a>
                             </h5>
@@ -53,12 +53,12 @@
                     <li class="portfolio-item cars">
                         <div class="item-inner">
                             <div class="portfolio-image">
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('car_show',{'slug':product.slug}) }}">
                                     <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default_car_image') }}" alt="">
                                 </a>
                             </div>
                             <h5>
-                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                <a href="{{ path('car_show',{'slug':product.slug}) }}">
                                     {{ product.title }}
                                 </a>
                             </h5>

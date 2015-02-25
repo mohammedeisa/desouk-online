@@ -45,7 +45,7 @@ class Product
     /**
      * @var float
      *
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float",nullable=true)
      */
 
     private $price;
@@ -426,12 +426,12 @@ class Product
 	{
 		return null === $this->path ? null : '/'.$this->getUploadDir().'/'.$this->path;
 	}
-	
+
 	protected function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return  $GLOBALS['root_path'].$this->getUploadDir();
     }
 	
 	protected function getUploadDir()

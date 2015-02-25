@@ -122,7 +122,7 @@ class Category
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return  $GLOBALS['root_path'].$this->getUploadDir();
     }
 	
 	protected function getUploadDir()

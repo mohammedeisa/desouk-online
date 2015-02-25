@@ -3,73 +3,90 @@
     <!-- Page Content -->
     <div id="mall_category" class="real_estate_show">
         <div class="row">
-            <div class="center"><h3>{{ realestate.title }}</h3></div>
             {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': realestate.purpose,'type': realestate.type,'area': realestate.area })) }}
             <div class="reaestate_items col-md-9">
-                {% if has_slider %}
+                <div class="center"><h3>{{ realestate.title }}</h3></div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="reaestate_item apps container">
+                            <div class="reaestate_item_inner">
+                                <div class="realestate_properities">
+                                    {% if realestate.price %}
+                                        <div class="text-right width_49 inline_block">السعر</div>
+                                        <div class="text-left width_49 inline_block">
+                                            <span class="big-price">{{ realestate.price }} جنية</span>
+                                        </div>
+                                        <hr>
+                                    {% endif %}
 
-                    <div id="carousel-example-generic" class="carousel slide col-md-12" data-ride="carousel"
-                         style="padding-right: 20px;">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" class="active" data-slide-to="0"></li>
-                            {% for image in realestate.images %}
-                                <li data-target="#carousel-example-generic" data-slide-to="{{ loop.index }}"></li>
-                            {% endfor %}
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img class="slide-image"
-                                     src="{{ (realestate.path())?realestate.getWebPath():asset('images/default/default_real_estate_image.png') }}"
-                                     alt="">
+                                    {% if realestate.type %}
+                                        <div class="text-right width_49 inline_block">النوع</div>
+                                        <div class="text-left width_49 inline_block">
+                                            <span class="">{{ realestate.type }}</span>
+                                        </div>
+                                        <hr>
+                                    {% endif %}
+
+                                    {% if realestate.purpose %}
+                                        <div class="text-right width_49 inline_block">الغرض</div>
+                                        <div class="text-left width_49 inline_block">
+                                            <span class="">{{ realestate.purpose }}</span>
+                                        </div>
+                                        <hr>
+                                    {% endif %}
+
+                                    {% if realestate.area %}
+                                        <div class="text-right width_49 inline_block">المنطقة</div>
+                                        <div class="text-left width_49 inline_block">
+                                            <span class="">{{ realestate.area.name }}</span>
+                                        </div>
+                                        <hr>
+                                    {% endif %}
+                                    <div class="realestate_summary">
+                                        {{ realestate.description|raw }}
+                                    </div>
+                                    <hr>
+                                    {% include 'horizontal_social.html.twig' %}
+                                    <hr>
+                                    <div class="desouk_online_rating">
+                                        {{ ("realestate_"~realestate.id)|show_rating|raw }}
+                                    </div>
+                                </div>
                             </div>
-                            {% for image in realestate.images %}
-                                <div class="item ">
-                                    <img class="slide-image"
-                                         src="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
-                                         alt="">
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic"
-                           data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic"
-                           data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
-
-                {% else %}
-                    <div class="center">
-                        <img src="{{ asset('images/default/default_product_image.png') }}"/>
-                    </div>
-                {% endif %}
-                <div class="reaestate_item apps container">
-                    <div class="reaestate_item_inner">
-                        <div class="realestate_properities">
-
-
-                            <h4>
-                                <div class="desouk_online_rating">
-                                    {{ ("realestate_"~realestate.id)|show_rating|raw }}
-                                </div>
-                                السعر : <span>{{ realestate.price }} جنيه</span></h4>
-                            <h4>
-                                النوع : <span>{{ realestate.type }}</span>
-                            </h4>
-                            <h4>
-                                الغرض : <span>{{ realestate.purpose }}</span>
-                            </h4>
-                            <h4>
-                                المنطقة : <span>{{ realestate.area.name }}</span>
-                            </h4>
-                        </div>
-
-                        <div class="realestate_summary">
-                            {{ realestate.description|raw }}
                         </div>
                     </div>
+                    {% if has_slider %}
+
+                        <div class="col-md-6">
+                            <div class="product_gallery">
+                                <a class="gallery"
+                                   href="{{ (realestate.path())?realestate.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                   rel="group" data-rel="prettyPhoto[gallery]1"
+                                   title="">
+
+                                    <img src="{{ (realestate.path())?realestate.getWebPath():asset('images/default/default_real_estate_image.png') }}">
+
+                                </a>
+                                {% for image in realestate.images %}
+                                    <a class="gallery" style="display: none"
+                                       href="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                       rel="group" data-rel="prettyPhoto[gallery]1"
+                                       title="">
+                                        <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
+
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
+                        </div>
+
+
+                    {% else %}
+                        <div class="center">
+                            <img src="{{ asset('images/default/default_product_image.png') }}"/>
+                        </div>
+                    {% endif %}
                 </div>
                 <!--/.portfolio-item-->
             </div>

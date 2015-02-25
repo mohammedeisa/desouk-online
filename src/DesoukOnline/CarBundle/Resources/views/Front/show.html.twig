@@ -2,90 +2,92 @@
 {% block inner_content %}
     <!-- Page Content -->
     <div id="mall_category" class="car_show">
-        <div class="container">
-            <div class="row">
-                <div class="center">
-                    <div class="realestate_title">
-                        <h3>{{ car.title }}</h3>
-                    </div>
-                </div>
-                {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
-                <div class="col-md-9">
-                    {% if has_slider %}
+        <div class="row">
+            {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
+            <div class="reaestate_items col-md-9">
+                <div class="center"><h3>{{ car.title }}</h3></div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="reaestate_items container">
+                            <div class="reaestate_item apps">
+                                <div class="reaestate_item_inner">
+                                    <div class="realestate_properities">
+                                        {% if car.price %}
+                                            <div class="text-right width_49 inline_block">السعر</div>
+                                            <div class="text-left width_49 inline_block">
+                                                <span class="big-price">{{ car.price }} جنية</span>
+                                            </div>
+                                            <hr>
+                                        {% endif %}
+                                        {% if car.type %}
+                                            <div class="text-right width_49 inline_block">النوع</div>
+                                            <div class="text-left width_49 inline_block">
+                                                <span class="">{{ car.type }}</span>
+                                            </div>
+                                            <hr>
+                                        {% endif %}
 
-                        <div id="carousel-example-generic" class="carousel slide col-md-12" data-ride="carousel"
-                             style="padding-right: 20px;">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" class="active"
-                                    data-slide-to="0"></li>
-                                {% for image in car.images %}
-                                    <li data-target="#carousel-example-generic"
-                                        data-slide-to="{{ loop.index }}"></li>
-                                {% endfor %}
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img class="slide-image"
-                                         src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
-                                         alt="">
-                                </div>
-                                {% for image in car.images %}
-                                    <div class="item ">
-                                        <img class="slide-image"
-                                             src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
-                                             alt="">
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <a class="left carousel-control" href="#carousel-example-generic"
-                               data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-example-generic"
-                               data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                    {% else %}
-                        <div class="center">
-                            <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"/>
-                        </div>
-
-                    {% endif %}
-
-
-                    <div class="reaestate_items col-md-12 container">
-                        <div class="reaestate_item apps">
-                            <div class="reaestate_item_inner">
-
-                                <div class="realestate_properities">
-                                    <h4>
+                                        {% if car.mark %}
+                                            <div class="text-right width_49 inline_block">الماركة</div>
+                                            <div class="text-left width_49 inline_block">
+                                                <span class="">{{ car.mark.name }}</span>
+                                            </div>
+                                            <hr>
+                                        {% endif %}
+                                        <div class="realestate_summary">
+                                            {{ car.description|raw }}
+                                        </div>
+                                        <hr>
+                                        {% include 'horizontal_social.html.twig' %}
+                                        <hr>
                                         <div class="desouk_online_rating">
                                             {{ ("car_"~car.id)|show_rating|raw }}
                                         </div>
+                                    </div>
 
-
-                                        السعر : <span>{{ car.price }} جنيه</span></h4>
-                                    <h4>
-                                        النوع : <span>{{ car.type }}</span>
-                                    </h4>
-                                    {% if car.mark %}
-                                        <h4>
-                                            الماركة : <span>{{ car.mark.name }}</span>
-                                        </h4>
-                                    {% endif %}
-                                </div>
-                                <div class="realestate_summary">
-                                    {{ car.description|raw }}
                                 </div>
                             </div>
+                            <!--/.portfolio-item-->
                         </div>
-                        <!--/.portfolio-item-->
                     </div>
+
+                    {% if has_slider %}
+
+                        <div class="col-md-6">
+                            <div class="product_gallery">
+                                <a class="gallery"
+                                   href="{{ (car.path())?car.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                   rel="group" data-rel="prettyPhoto[gallery]1"
+                                   title="">
+
+                                    <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_real_estate_image.png') }}">
+
+                                </a>
+                                {% for image in car.images %}
+                                    <a class="gallery" style="display: none"
+                                       href="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                       rel="group" data-rel="prettyPhoto[gallery]1"
+                                       title="">
+                                        <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
+
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
+                        </div>
+
+
+                    {% else %}
+                        <div class="center">
+                            <img src="{{ asset('images/default/default_product_image.png') }}"/>
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
-            <!--/.box-->
         </div>
-        <!--/.container-->
+        <!--/.box-->
     </div>
+    <!--/.container-->
 {% endblock %}

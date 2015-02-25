@@ -37,7 +37,7 @@ class FrontController extends Controller
         $categories = $paginator->paginate(
             $categoriesResult,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            20/*limit per page*/
         );
 
         return array('categories' => $categories, 'config' => $config);
@@ -55,7 +55,7 @@ class FrontController extends Controller
         $categoryVendors = $paginator->paginate(
             $category->getVendors(),
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            20/*limit per page*/
         );
         return array('category' => $category, 'category_vendors' => $categoryVendors);
 
@@ -477,13 +477,13 @@ class FrontController extends Controller
      */
     public function deleteFrontVendorProductsImageAction($product, $image_id)
     {
-        $product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneBy(array('id' => $product_id));
+        $product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneBy(array('id' => $product));
         if (!$this->isAuthenticated($product->getVendor())) {
             return $this->redirect($this->generateUrl('home'));
         }
         $url = $this->generateUrl(
             'front_editVendor_products_edit',
-            array('product_id' => $product)
+            array('product_id' => $product->getId())
         );
         $image = $this->getDoctrine()->getManager()->getRepository(get_class(new ProductImage()))->findOneBy(array('id' => $image_id));
         if (is_file($image->getAbsolutePath())) {
@@ -504,7 +504,7 @@ class FrontController extends Controller
     public function editVendorProductsNewAction($vendor, Request $request)
     {
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        if (!$this->isAuthenticated($product->getVendor())) {
+        if (!$this->isAuthenticated($vendor)) {
             return $this->redirect($this->generateUrl('home'));
         }
         $product = new Product();
@@ -551,7 +551,7 @@ class FrontController extends Controller
     public function deleteFrontVendorProductAction($vendor, $product_id)
     {
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        if (!$this->isAuthenticated($product->getVendor())) {
+        if (!$this->isAuthenticated($vendor)) {
             return $this->redirect($this->generateUrl('home'));
         }
         $url = $this->generateUrl(
@@ -574,7 +574,7 @@ class FrontController extends Controller
     public function editVendorArticlesAction($vendor, Request $request)
     {
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        if (!$this->isAuthenticated($product->getVendor())) {
+        if (!$this->isAuthenticated($vendor)) {
             return $this->redirect($this->generateUrl('home'));
         }
         $paginator = $this->get('knp_paginator');
@@ -670,7 +670,7 @@ class FrontController extends Controller
     public function deleteFrontVendorArticleAction($vendor, $article_id)
     {
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneById($vendor);
-        if (!$this->isAuthenticated($product->getVendor())) {
+        if (!$this->isAuthenticated($vendor)) {
             return $this->redirect($this->generateUrl('home'));
         }
         $url = $this->generateUrl(

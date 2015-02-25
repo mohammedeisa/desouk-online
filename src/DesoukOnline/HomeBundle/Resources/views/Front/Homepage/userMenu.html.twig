@@ -22,20 +22,18 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">حسابات الديليفرى
-                </button>
-                <ul class="" role="menu">
-                    {% if user.deliveries|length == 0 %}
-                        <li><a href="">لا يوجد لديك محلات فى دسوق ديليفرى</a></li>
-                    {% endif %}
-                    {% for delivery in user.deliveries %}
-                        <li><a href="{{ path('front_editDelivery',{'delivery':delivery.id}) }}">{{ delivery.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
 
+            {% if user.vendors %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">زيارة المحلات
+                    </button>
+                    <ul class="" role="menu">
+                        {% for vendor in user.vendors %}
+                            <li><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         </div>
         {#{% else %}#}
         {#<div class="panel panel-default" id="user_security_panel">#}

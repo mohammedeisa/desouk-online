@@ -85,7 +85,7 @@ img {
 }
 
 .home_portfolio ul li img {
-    max-height: 156px;
+    height: 156px;
 }
 
 .carousel-control.right {
@@ -213,7 +213,6 @@ img {
 
 .realestate_summary {
     color: #777;
-    height: 74px;
 }
 
 .realestate_properities {
@@ -377,7 +376,6 @@ img {
 }
 
 #vendor_header_menu_container {
-    margin-top: 10px;
 }
 
 .vendor_header_menu {
@@ -509,7 +507,9 @@ img {
 .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11 {
     float: right;
 }
-
+#inner-search{
+    margin-bottom: 10px;
+}
 #inner-search input, #inner-search button {
     width: auto;
     display: inline-block;
@@ -531,7 +531,6 @@ img {
 
 .for_sale .ratings, .car_show .ratings, .real_estate_show .ratings {
     width: 170px;
-    float: left;
 }
 
 .real_estate .thumbnail .caption {

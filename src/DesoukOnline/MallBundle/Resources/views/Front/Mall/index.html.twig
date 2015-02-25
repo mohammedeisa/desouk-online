@@ -11,13 +11,15 @@
         {% endif %}
         {% if categories is defined %}
             <div class="row">
-                <div class="col-md-12">
+                {{ render(controller('DesoukOnlineMallBundle:Front:mallCategoriesMenu')) }}
+
+                <div class="col-md-9">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="row">
                                     {% for category in categories %}
-                                        <div class="col-sm-3">
+                                        <div class="col-md-4">
                                             <div class="member">
                                                 <p>
                                                     <a href="{{ path('mall_category',{'slug':category.slug}) }}">

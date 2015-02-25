@@ -9,8 +9,7 @@
                 {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor.slug})) }}
 
                 <div class="col-md-9">
-                    {% if vendor.images %}
-
+                    {% if vendor.images and vendor.images|length %}
                         <div class="row carousel-holder">
 
                             <div class="col-md-12">
@@ -45,6 +44,7 @@
                     {% endif %}
 
                     {% for category in vendor.getVendorProductCategories if category.isInHome %}
+                        {% if category.getProducts() and category.getProducts()|length>0 %}
                         <div class="row">
                             <div class="col-sm-12 col-lg-12 col-md-12">
 
@@ -93,6 +93,7 @@
                             </div>
                         </div>
                         <hr>
+                            {% endif %}
                     {% endfor %}
                 </div>
             </div>

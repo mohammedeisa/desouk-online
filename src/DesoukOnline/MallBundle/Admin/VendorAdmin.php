@@ -93,7 +93,7 @@ class VendorAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
+            ->addIdentifier('title')
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(

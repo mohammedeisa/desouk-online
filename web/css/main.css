@@ -70,8 +70,9 @@ a:focus {
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    padding: 200px 0;
+    padding-top: 70px;
     color: #fff;
+    height: 560px;
 }
 
 #main-slider .item {
@@ -195,7 +196,7 @@ a:focus {
 
 .box.first {
     margin-top: -40px;
-    margin-top: -156px;
+    margin-top: -280px;
 
     border-radius: 5px 5px 0 0;
 }

@@ -73,7 +73,6 @@ img {
 }
 
 #vendor_product .carousel-inner > .item > img, .carousel-inner {
-    height: 300px;
 }
 
 #vendor_product .carousel-inner > .item > img, .carousel-inner > .item > a > img {
@@ -110,9 +109,11 @@ img {
 #logo a {
     display: inline-block;
 }
-#logo a img{
+
+#logo a img {
     max-height: 53px;
 }
+
 /*LOGO*/
 
 .menu_table img {
@@ -318,15 +319,17 @@ img {
 .user_new_form {
     margin-bottom: 20px;
 }
-.pagination>li{
-	display: inline-block;
+
+.pagination > li {
+    display: inline-block;
 }
+
 /*Added by Wardany*/
 
 .pagination_container {
     text-align: center;
     direction: rtl;
-	clear: both;
+    clear: both;
 }
 
 .horizontal_social, .facebook_share, .twitter_share {
@@ -432,7 +435,8 @@ img {
 #vendor_logo_container {
     width: 25%;
 }
-#header_vendor_name_container{
+
+#header_vendor_name_container {
     width: 49%;
     text-align: center;
 }
@@ -548,4 +552,24 @@ img {
 
 .custom_login form {
     text-align: right;
+}
+
+.product_gallery {
+    text-align: center;
+}
+
+.product_gallery img {
+
+    max-height: 200px;
+}
+
+.width_50{
+    width: 50%;
+}
+
+.width_49{
+    width: 49%;
+}
+.inline_block{
+    display: inline-block;
 }

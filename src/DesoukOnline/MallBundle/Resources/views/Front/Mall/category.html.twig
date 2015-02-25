@@ -7,6 +7,7 @@
             {{ category.description|raw }}
             {% include 'horizontal_social.html.twig' %}
         </div>
+        {{ render(controller('DesoukOnlineMallBundle:Front:mallCategoriesMenu')) }}
         <ul class="portfolio-items col-4">
             {% for vendor in category_vendors %}
                 <li class="portfolio-item apps">

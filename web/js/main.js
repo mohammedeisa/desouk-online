@@ -35,6 +35,25 @@ jQuery(function($) {
 	$("a.preview").prettyPhoto({
 		social_tools: false
 	});
+    //
+    //$("*:not(.clone) a[data-rel^='prettyPhoto']").prettyPhoto({
+    //    animation_speed: 'fast', /* fast/slow/normal */
+    //    slideshow: 10000, /* false OR interval time in ms */
+    //    autoplay_slideshow: false, /* true/false */
+    //    opacity: 0.8, /* Value between 0 and 1 */
+    //    show_title: true, /* true/false */
+    //    allow_resize: true, /* Resize the photos bigger than viewport. true/false */
+    //    default_width: 500,
+    //    default_height: 344,
+    //    counter_separator_label: '/', /* The separator for the gallery counter 1 "of" 2 */
+    //    theme: 'pp_default', /* light_rounded / dark_rounded / light_square / dark_square / facebook */
+    //    horizontal_padding: 20, /* The padding on each side of the picture */
+    //    autoplay: true, /* Automatically start videos: True/False */
+    //    deeplinking: false, /* Allow prettyPhoto to update the url to enable deeplinking. */
+    //    overlay_gallery: false, /* If set to true, a gallery will overlay the fullscreen image on mouse over */
+    //    keyboard_shortcuts: true, /* Set to false if you open forms inside prettyPhoto */
+    //    social_tools: false /* html or false to disable; comment out this line to enable this option with default html content */
+    //});
 
 	//Isotope
 	$(window).load(function(){
@@ -56,7 +75,7 @@ jQuery(function($) {
 			return false;
 		});
 
-		$('.real_state_portfolio_button').trigger('click');
+		$('.all_portfolio_button').trigger('click');
 
 	});
 });

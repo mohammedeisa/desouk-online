@@ -2,25 +2,27 @@
 {% block inner_content %}
     <div id="vendor_product_category" class="">
         <div class="container">
-                <div class="row">
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':vendor_product_category.vendor.slug})) }}
-                    <div class="upper_data">
-                        <div class="center">
-                            <h4>{{ vendor_product_category.title }}</h4>
-                            {{ vendor_product_category.description|raw }}
-                        </div>
+            <div class="row">
+                {{ render(controller('DesoukOnlineMallBundle:Front:vendorHeaderMenu',{'slug':vendor_product_category.vendor.slug})) }}
+                <div class="upper_data">
+                    <div class="center">
+                        <h4>{{ vendor_product_category.title }}</h4>
+                        {% include 'horizontal_social.html.twig' %}
+                        {{ vendor_product_category.description|raw }}
                     </div>
-                    {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor_product_category.vendor.slug})) }}
-                    <div class="col-md-9 ">
+                </div>
+                {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor_product_category.vendor.slug})) }}
+                <div class="col-md-9 ">
 
-<div class="col-md-12">
+                    <div class="col-md-12">
 
                         {% for product in category_products %}
 
                             <div class="portfolio-item col-md-4">
                                 <div class="thumbnail">
                                     <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                        <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
+                                        <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
+                                             alt="">
                                     </a>
 
                                     <div class="caption">
@@ -35,6 +37,7 @@
                                             </span>
 
                                         <br>
+
                                         <p>{{ product.description|striptags|slice(0, 90) }}</p>
                                         <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
                                             المزيد </a>
@@ -45,10 +48,10 @@
                                 </div>
                             </div>
                         {% endfor %}
-</div>
                     </div>
                 </div>
-                {{ knp_pagination_render(category_products) }}
+            </div>
+            {{ knp_pagination_render(category_products) }}
             <!--/.box-->
         </div>
         <!--/.container-->

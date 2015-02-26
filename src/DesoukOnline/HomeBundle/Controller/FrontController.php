@@ -18,6 +18,7 @@ use DesoukOnline\WebDevelopmentBundle\Entity\WebDevelopment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use DesoukOnline\RealEstateBundle\Entity\Area;
 
@@ -183,18 +184,7 @@ class FrontController extends Controller
                 ->getResult();
             $results['desouk_mall'] = $desoukMall;
         }
-//        if ($searchIn == 'delivery' || $searchIn == 'desouk_online' || $searchIn == '') {
-//            $queryBuilder = $em->createQueryBuilder();
-//            $delivery = $queryBuilder
-//                ->select('delivery')
-//                ->from(get_class(new Delivery()), 'delivery')
-//                ->where($queryBuilder->expr()->like('delivery.title', ':search'))
-//                ->orWhere($queryBuilder->expr()->like('delivery.description', ':search'))
-//                ->setParameters(array('search' => "%{$search}%"))
-//                ->getQuery()
-//                ->getResult();
-//            $results['delivery'] = $delivery;
-//        }
+
         if ($searchIn == 'jobs' || $searchIn == 'desouk_online' || $searchIn == '') {
             $queryBuilder = $em->createQueryBuilder();
             $jobs = $queryBuilder
@@ -230,5 +220,110 @@ class FrontController extends Controller
             return null;
         }
         return $config;
+    }
+
+    /**
+     * @Route("/search_suggestion", name="search_suggestion" , options={"expose"=true})
+     */
+    public function searchSuggestionAction(Request $request)
+    {
+        $search = $request->query->get('search_in');
+        $searchIn = $request->query->get('search_string');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $results = array();
+        if ($searchIn == 'real_estate' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
+            $realEstate = $queryBuilder
+                ->select('real_estate.title')
+                ->from(get_class(new RealEstate()), 'real_estate')
+                ->innerJoin('real_estate.area', 'area')
+                ->where($queryBuilder->expr()->like('real_estate.title', ':search'))
+                ->orWhere($queryBuilder->expr()->like('real_estate.description', ':search'))
+                ->orWhere($queryBuilder->expr()->like('area.name', ':search'))
+                ->setParameters(array('search' => "%{$search}%"))
+                ->getQuery()
+                ->getResult();
+
+            foreach ($realEstate as $result) {
+                $results[] = $result['title'];
+            }
+
+        }
+        if ($searchIn == 'for_sale' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
+            $forSale = $queryBuilder
+                ->select('for_sale.title')
+                ->from(get_class(new ForSale()), 'for_sale')
+                ->where($queryBuilder->expr()->like('for_sale.title', ':search'))
+                ->orWhere($queryBuilder->expr()->like('for_sale.description', ':search'))
+                ->orWhere($queryBuilder->expr()->like('for_sale.summary', ':search'))
+                ->setParameters(array('search' => "%{$search}%"))
+                ->getQuery()
+                ->getResult();
+            foreach ($forSale as $result) {
+                $results[] = $result['title'];
+            }
+
+        }
+        if ($searchIn == 'cars' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
+            $cars = $queryBuilder
+                ->select('cars.title')
+                ->from(get_class(new Car()), 'cars')
+                ->innerJoin('cars.mark', 'mark')
+                ->where($queryBuilder->expr()->like('cars.title', ':search'))
+                ->orWhere($queryBuilder->expr()->like('cars.type', ':search'))
+                ->orWhere($queryBuilder->expr()->like('cars.description', ':search'))
+                ->orWhere($queryBuilder->expr()->like('mark.name', ':search'))
+                ->setParameters(array('search' => "%{$search}%"))
+                ->getQuery()
+                ->getResult();
+            foreach ($cars as $result) {
+                $results[] = $result['title'];
+            }
+        }
+        if ($searchIn == 'desouk_mall' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
+            $desoukMall = $queryBuilder
+                ->select('desouk_mall_products.name')
+                ->from(get_class(new Product()), 'desouk_mall_products')
+                ->innerJoin('desouk_mall_products.vendorProductCategory', 'vpc')
+                ->innerJoin('vpc.vendor', 'vendor')
+                ->where($queryBuilder->expr()->like('desouk_mall_products.name', ':search'))
+                ->orWhere($queryBuilder->expr()->like('desouk_mall_products.description', ':search'))
+                ->orWhere($queryBuilder->expr()->like('vpc.title', ':search'))
+                ->orWhere($queryBuilder->expr()->like('vendor.title', ':search'))
+                ->setParameters(array('search' => "%{$search}%"))
+                ->getQuery()
+                ->getResult();
+            foreach ($desoukMall as $result) {
+                $results[] = $result['name'];
+            }
+        }
+
+        if ($searchIn == 'jobs' || $searchIn == 'desouk_online' || $searchIn == '') {
+            $queryBuilder = $em->createQueryBuilder();
+            $jobs = $queryBuilder
+                ->select('jobs.title')
+                ->from(get_class(new Job()), 'jobs')
+                ->where($queryBuilder->expr()->like('jobs.title', ':search'))
+                ->orWhere($queryBuilder->expr()->like('jobs.description', ':search'))
+                ->setParameters(array('search' => "%{$search}%"))
+                ->getQuery()
+                ->getResult();
+            foreach ($jobs as $result) {
+                $results[] = $result['title'];
+            }
+        }
+//        $em = $this->get('doctrine.orm.entity_manager');
+//        $dql = "SELECT p.name FROM ".get_class(new Product())." p where p.name like '%" . $search . "%' or p.description like '%" . $search . "%'";
+//        $query = $em->createQuery($dql);
+//        $searchResults = $query->getResult();
+//        $results=array();
+//        foreach($searchResults as $result){
+//            $results[]=$result['name'];
+//        }
+        return new JsonResponse(array('results' => $results));
+
     }
 }

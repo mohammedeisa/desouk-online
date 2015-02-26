@@ -6,6 +6,7 @@
             <div class="reaestate_box">
                 <div class="center">
                     <h3>عقارات دسوق</h3>
+                    {% include 'horizontal_social.html.twig' %}
                 </div>
                 <div class="row">
                     {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}

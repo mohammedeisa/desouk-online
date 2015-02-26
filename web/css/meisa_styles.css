@@ -192,7 +192,9 @@ img {
 
 .reaestate_item_inner {
 }
-
+.reaestate_items .caption {
+    height: 185px;
+}
 .realestate_image {
     width: 100%;
     text-align: center;
@@ -201,6 +203,7 @@ img {
 .realestate_image img {
     height: 135px;
     vertical-align: middle;
+    margin-top: 4px;
 }
 
 .realestate_title {
@@ -512,7 +515,7 @@ img {
 }
 #inner-search input, #inner-search button {
     width: auto;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .price {
@@ -572,3 +575,60 @@ img {
 .inline_block{
     display: inline-block;
 }
+
+
+
+
+/*Auto complete styles*/
+span.twitter-typeahead{
+    width: 85%;
+}
+.bs-example {
+    font-family: sans-serif;
+    position: relative;
+    margin: 100px;
+}
+
+.tt-query, .tt-hint {
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 30px;
+    outline: medium none;
+    padding: 8px 12px;
+    width: 396px;
+}
+
+.tt-query {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+    color: #999999;
+}
+
+.tt-dropdown-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 4px 0;
+    width: 230px;
+}
+
+.tt-suggestion {
+    font-size: 12px;
+    padding: 1px 20px;
+}
+
+.tt-suggestion.tt-is-under-cursor {
+    background-color: #3f8094;
+    color: #FFFFFF;
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+/*End auto complete styles*/

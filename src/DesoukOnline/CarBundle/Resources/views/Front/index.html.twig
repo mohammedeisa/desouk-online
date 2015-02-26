@@ -5,50 +5,51 @@
     <div class="row">
     <div class="center">
         <h3>سيارات دسوق</h3>
+        {% include 'horizontal_social.html.twig' %}
     </div>
     {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': app.request.get('type'),'mark': app.request.get('mark') })) }}
     <div class="row reaestate_items col-md-9">
         {% for car in cars %}
-        <div class="col-sm-4 col-lg-4 col-md-4 ">
-            <div class="reaestate_item_inner  thumbnail">
-                <div class="realestate_image">
-                    <a href="{{ path('car_show',{'slug':car.slug}) }}">
-                        <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
-                             alt="">
-                    </a>
-                </div>
-                <div class="caption">
-                    <h4>
-                        <div class="center"><a
-                                    href="{{ path('car_show',{'slug':car.slug}) }}">{{ car.title }}</a>
-                        </div>
-                    </h4>
+            <div class="col-sm-4 col-lg-4 col-md-4 ">
+                <div class="reaestate_item_inner  thumbnail">
+                    <div class="realestate_image">
+                        <a href="{{ path('car_show',{'slug':car.slug}) }}">
+                            <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
+                                 alt="">
+                        </a>
+                    </div>
+                    <div class="caption">
+                        <h4>
+                            <div class="center"><a
+                                        href="{{ path('car_show',{'slug':car.slug}) }}">{{ car.title }}</a>
+                            </div>
+                        </h4>
                               <span class="">
                                         <span class="pull-right">السعر</span>
                                         <span class="pull-left price">{{ car.price }} جنية</span>
                                     </span>
-                    <br>
+                        <br>
                                <span class="">
                                         <span class="pull-right">النوع</span>
                                         <span class="pull-left price">{{ car.type }}</span>
                                     </span>
-                    <br>
-                    {% if car.mark %}
+                        <br>
+                        {% if car.mark %}
 
-                        <span class="">
+                            <span class="">
                                         <span class="pull-right">الماركة</span>
                                         <span class="pull-left price">{{ car.mark.name }}</span>
                                     </span>
-                        <br>
-                    {% endif %}
-                    {{ car.summary }}
+                            <br>
+                        {% endif %}
+                        {{ car.summary }}
 
-                    <div class="desouk_online_rating">
-                        {{ ("car_"~car.id)|show_rating|raw }}
+                        <div class="desouk_online_rating">
+                            {{ ("car_"~car.id)|show_rating|raw }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
     <!--/.portfolio-item-->

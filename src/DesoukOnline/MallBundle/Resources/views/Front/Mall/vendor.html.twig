@@ -41,6 +41,8 @@
 
 
                         </div>
+                        {% include 'horizontal_social.html.twig' %}
+
                     {% endif %}
 
                     {% for category in vendor.getVendorProductCategories if category.isInHome %}

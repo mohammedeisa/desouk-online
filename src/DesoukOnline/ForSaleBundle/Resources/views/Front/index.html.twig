@@ -6,6 +6,7 @@
                 <div class="row">
                 <div class="center">
                     <h3>المعروض للبيع فى دسوق</h3>
+                    {% include 'horizontal_social.html.twig' %}
                 </div>
                 {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': app.request.get('cat') })) }}
                 <div class="row reaestate_items col-md-9">

@@ -7,10 +7,11 @@
             {{ category.description|raw }}
             {% include 'horizontal_social.html.twig' %}
         </div>
+        <div class="row">
         {{ render(controller('DesoukOnlineMallBundle:Front:mallCategoriesMenu')) }}
-        <ul class="portfolio-items col-4">
+        <div class="col-md-9">
             {% for vendor in category_vendors %}
-                <li class="portfolio-item apps">
+                <div class="portfolio-item apps col-md-3">
                     <div class="item-inner">
                         <div class="portfolio-image">
                             <a href="{{ path('vendor',{'slug':vendor.slug}) }}">
@@ -19,9 +20,10 @@
                         </div>
                         <h5><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a></h5>
                     </div>
-                </li><!--/.portfolio-item-->
+                </div><!--/.portfolio-item-->
             {% endfor %}
-        </ul>
+        </div>
+        </div>
         {{ knp_pagination_render(category_vendors) }}
         <!--/.container-->
     </div>

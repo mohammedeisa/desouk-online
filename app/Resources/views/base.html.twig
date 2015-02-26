@@ -42,25 +42,28 @@
 
     <!-- Add fancyBox main JS and CSS files -->
     <script type="text/javascript" src="{{ asset('fancybox/jquery.fancybox.js?v=2.1.5') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/jquery.fancybox.css?v=2.1.5') }}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/jquery.fancybox.css?v=2.1.5') }}" media="screen"/>
 
     <!-- Add Button helper (this is optional) -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5') }}"/>
     <script type="text/javascript" src="{{ asset('fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5') }}"></script>
 
     <!-- Add Thumbnail helper (this is optional) -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7') }}"/>
     <script type="text/javascript" src="{{ asset('fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7') }}"></script>
 
     <!-- Add Media helper (this is optional) -->
     <script type="text/javascript" src="{{ asset('fancybox/helpers/jquery.fancybox-media.js?v=1.0.6') }}"></script>
 
+    <script src="{{ asset('js/typeahead.min.js') }}"></script>
+
 
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
+    <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=940214735998249&version=v2.0";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
@@ -79,12 +82,15 @@
                 <div class="box">
                     {% block search %}
                         <div class="container">
-                            <form id="inner-search" class="bs-example bs-example-form" data-example-id="input-group-with-button" action="{{ path('search') }}">
+                            <form id="inner-search" class="bs-example bs-example-form"
+                                  data-example-id="input-group-with-button" action="{{ path('search') }}">
                                 <div class="row row-centered">
                                     <div class="col-lg-6 col-centered">
-                                        <input style="width: 86%" type="text" name="search_string" class="form-control" placeholder="ابحث عن ..."/>
+                                        <input style="width: 100%" type="text" name="search_string" id="search_string"
+                                               class="form-codntrol"
+                                               placeholder="ابحث عن ..."/>
                                         <input type="hidden" name="search_in" id="search_in">
-                                        <button type="button" class="btn btn-primary" >ابحث</button>
+                                        <button type="submit" class="btn btn-primary">ابحث</button>
                                         <!-- /input-group -->
                                     </div>
                                     <!-- /.col-lg-6 -->
@@ -103,5 +109,55 @@
 </div>
 {{ render(controller('DesoukOnlineHomeBundle:Front:footer')) }}
 {{ render(controller('DesoukOnlineHomeBundle:Front:userMenu')) }}
+
+<script>
+    $(document).ready(function () {
+
+        var movies = new Bloodhound({
+            datumTokenizer: function (datum) {
+                return Bloodhound.tokenizers.whitespace(datum.value);
+            },
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: Routing.generate('search_suggestion', {
+                    search_string: $('#search_string').val(),
+                    search_in: $('#search_in').val()
+                }),
+                filter: function (data) {
+// Map the remote source JSON array to a JavaScript object array
+                    return $.map(data.results, function (oneString) {
+                        return {
+                            value: oneString
+                        };
+                    });
+                },
+                replace: function (url, uriEncodedQuery) {
+                    return url + uriEncodedQuery;
+                },
+                ajax: {
+                    type: "POST",
+//                    beforeSend: function(xhr) {
+//                        $(".searching-person").show();
+//                    },
+                    data: {
+                        q: function () {
+                            return $('input[name="search_string"]').val()
+                        }
+                    }
+                }
+            }
+        });
+
+// Initialize the Bloodhound suggestion engine
+        movies.initialize();
+
+// Instantiate the Typeahead UI
+        $('input[name="search_string"]').typeahead(null, {
+            displayKey: 'value',
+            source: movies.ttAdapter()
+        });
+
+    });
+</script>
 </body>
 </html>

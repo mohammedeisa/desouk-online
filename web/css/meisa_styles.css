@@ -141,6 +141,7 @@ img {
 
 .home-search-form {
     direction: ltr;
+    margin: auto;
 }
 
 .home-search-form .form-control {

@@ -70,10 +70,12 @@
                                                     <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
                                                 </h4>
                                             </div>
-                                            <span class="">
-                                                <label class="pull-right">السعر</label>
-                                                <span class="pull-left price">{{ product.price }} جنية</span>
-                                            </span>
+                                            {% if product.price %}
+	                                            <span class="">
+	                                                <label class="pull-right">السعر</label>
+	                                                <span class="pull-left price">{{ product.price }} جنية</span>
+	                                            </span>
+                                            {% endif %}
 
 <br>
                                             {{ product.description|striptags|slice(0, 55) }}

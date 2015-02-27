@@ -180,6 +180,7 @@ img {
 }
 
 .reaestate_items {
+    float: left;
     list-style: none;
 }
 
@@ -191,11 +192,9 @@ img {
 
 .reaestate_item_inner {
 }
-
 .reaestate_items .caption {
     height: 185px;
 }
-
 .realestate_image {
     width: 100%;
     text-align: center;
@@ -511,16 +510,12 @@ img {
 .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11 {
     float: right;
 }
-
-#inner-search {
+#inner-search{
     margin-bottom: 10px;
 }
-
 #inner-search input, #inner-search button {
     width: auto;
     /*display: inline-block;*/
-    text-align: right;
-    direction: rtl;
 }
 
 .price {
@@ -570,23 +565,24 @@ img {
     max-height: 200px;
 }
 
-.width_50 {
+.width_50{
     width: 50%;
 }
 
-.width_49 {
+.width_49{
     width: 49%;
 }
-
-.inline_block {
+.inline_block{
     display: inline-block;
 }
 
+
+
+
 /*Auto complete styles*/
-span.twitter-typeahead {
+span.twitter-typeahead{
     width: 85%;
 }
-
 .bs-example {
     font-family: sans-serif;
     position: relative;
@@ -601,10 +597,6 @@ span.twitter-typeahead {
     outline: medium none;
     padding: 8px 12px;
     width: 396px;
-}
-
-.tt-dropdown-menu {
-    color: #777;
 }
 
 .tt-query {
@@ -622,18 +614,17 @@ span.twitter-typeahead {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     margin-top: 12px;
     padding: 4px 0;
-    width: 100%;
-    text-align: right;
+    width: 230px;
 }
 
 .tt-suggestion {
     font-size: 12px;
     padding: 1px 20px;
 }
-.tt-suggestion.tt-cursor{
+
+.tt-suggestion.tt-is-under-cursor {
     background-color: #3f8094;
     color: #FFFFFF;
-
 }
 
 .tt-suggestion p {
@@ -641,16 +632,3 @@ span.twitter-typeahead {
 }
 
 /*End auto complete styles*/
-
-
-.thumbnail img{
-    max-width: 100%;
-    max-height: 123px;
-    margin: auto;
-    width: auto;
-}
-.thumbnail a.img_container{
-    display: block;
-    text-align: center;
-    height: 123px;
-}

@@ -83,7 +83,7 @@ class ForSaleAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('price')
+//            ->add('price')
             ->add('category')
             ->add('enabled')
             ->add('_action', 'actions', array(

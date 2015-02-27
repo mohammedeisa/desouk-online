@@ -2,8 +2,8 @@
 {% block inner_content %}
     <!-- Page Content -->
     <div id="mall_category" class="">
-            <div class="reaestate_box">
-                <div class="row">
+        <div class="reaestate_box">
+            <div class="row">
                 <div class="center">
                     <h3>المعروض للبيع فى دسوق</h3>
                     {% include 'horizontal_social.html.twig' %}
@@ -15,7 +15,8 @@
                             <div class="reaestate_item_inner thumbnail">
                                 <div class="realestate_image">
                                     <a href="{{ path('forSale_show',{'slug':forSale.slug}) }}">
-                                        <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_car_image.png') }}" alt="">
+                                        <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_car_image.png') }}"
+                                             alt="">
                                     </a>
                                 </div>
                                 <div class="caption">
@@ -29,9 +30,10 @@
                                         <label>القسم :</label>
                                         <span>{{ forSale.category.title }}</span>
                                     {% endif %}
-                                    <div class="realestate_summary">
-                                        {{ forSale.summary }}
-                                    </div>
+                                    {{ forSale.summary|slice(0,55) }}
+                                    <a href="{{ path('forSale_show',{'slug':forSale.slug}) }}" class="">
+                                        المزيد </a>
+
                                     <div class="desouk_online_rating">
                                         {{ ("for_sale_"~forSale.id)|show_rating|raw }}
                                     </div>
@@ -42,8 +44,8 @@
                     {{ knp_pagination_render(forSales) }}
                 </div>
             </div>
-            </div>
-            <!--/.box-->
+        </div>
+        <!--/.box-->
         <!--/.container-->
     </div>
 {% endblock %}

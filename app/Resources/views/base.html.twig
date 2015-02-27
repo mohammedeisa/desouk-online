@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" l xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
     <meta name="author" content="">
-    <title>Desouk online| Desouk Mall</title>
+
+    {% block website_title %}
+        <meta name="description" content="دسوق اونلاين">
+    {% endblock %}
+
+    {% block website_description %}
+        <meta name="description" content="دسوق اونلاين">
+    {% endblock %}
+    {% block og_image %}
+        <meta property="og:image" content="{{ asset('images/logo.png') }}"/>
+        <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="دسوق اون لاين | تسويق مش سمسرة"/>
+    {% endblock %}
+
+    {% block og_description %}
+        <meta property="og:description" content="دلوقتى تقدر تشترى و تبيع و تاجر باسهل الطرق فى دسوق"/>
+    {% endblock %}
+    {% block og_author %}
+        <meta property="article:author" content="سوق اون لاين"/>
+    {% endblock %}
+
+
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
+    <title>دسوق اونلاين</title>
+
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/prettyPhoto.css') }}" rel="stylesheet">
@@ -82,13 +112,12 @@
                 <div class="box">
                     {% block search %}
                         <div class="container">
-                            <form id="inner-search" class="bs-example bs-example-form"
-                                  data-example-id="input-group-with-button" action="{{ path('search') }}">
+                            <form id="inner-search" action="{{ path('search') }}">
                                 <div class="row row-centered">
                                     <div class="col-lg-6 col-centered">
+
                                         <input style="width: 100%" type="text" name="search_string" id="search_string"
-                                               class="form-codntrol"
-                                               placeholder="ابحث عن ..."/>
+                                               class="form-control" placeholder="ابحث عن ..."/>
                                         <input type="hidden" name="search_in" id="search_in">
                                         <button type="submit" class="btn btn-primary">ابحث</button>
                                         <!-- /input-group -->

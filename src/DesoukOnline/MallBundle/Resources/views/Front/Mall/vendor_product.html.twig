@@ -1,5 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اون لاين | "~product.vendorProductCategory.vendor.title  }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ product.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        <meta property="og:image" content="{{ app.request.uriForPath( product.getWebPath()) }}"/>
+        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ "دسوق اون لاين | "~product.vendorProductCategory.vendor.title~' | '~product.name  }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ product.description|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
 
     <div id="vendor_product" class="">
         <div class="container">
@@ -23,7 +45,9 @@
                                 <hr>
                             {% endif %}
                             <div class="caption-full">
-                                {{ product.description|raw }}
+                                <p>
+                                    {{ product.description|raw }}
+                                </p>
                                 <hr>
                             </div>
                             {% include 'horizontal_social.html.twig' %}
@@ -34,7 +58,6 @@
 
                         </div>
                         {% if product.images %}
-
                             <div class="col-md-6">
                                 <div class="product_gallery">
                                     <a class="gallery"
@@ -60,10 +83,10 @@
                         {% endif %}
 
                     </div>
-                    <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+                    <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
+                         data-colorscheme="light"></div>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

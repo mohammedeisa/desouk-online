@@ -1,6 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
     <!-- Page Content -->
+    {% block website_title %}
+        <meta name="title" content="{{"دسوق اونلاين | سيارات"~' | '~car.title}}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ car.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        <meta property="og:image" content="{{ app.request.uriForPath( car.getWebPath()) }}"/>
+        {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title"
+              content="{{"دسوق اونلاين | سيارات"~' | '~car.title}}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ car.description|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
     <div id="mall_category" class="car_show">
         <div class="row">
             {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
@@ -12,7 +35,7 @@
                         <div class="reaestate_items container">
                             <div class="reaestate_item apps">
                                 <div class="reaestate_item_inner">
-                                    <div class="realestate_properities">
+                                    <div class="car_properities">
                                         {% if car.price %}
                                             <div class="text-right width_49 inline_block">السعر</div>
                                             <div class="text-left width_49 inline_block">
@@ -35,7 +58,7 @@
                                             </div>
                                             <hr>
                                         {% endif %}
-                                        <div class="realestate_summary">
+                                        <div class="car_summary">
                                             {{ car.description|raw }}
                                         </div>
                                         <hr>

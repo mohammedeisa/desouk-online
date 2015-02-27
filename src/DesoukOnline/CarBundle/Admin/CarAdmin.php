@@ -92,7 +92,7 @@ class CarAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('price')
+//            ->add('price')
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(

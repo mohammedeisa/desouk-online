@@ -13,15 +13,15 @@
                     {% for realestate in realestates %}
                         <div class="col-sm-3 col-lg-3 col-md-3">
                             <div class="thumbnail">
-                                <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}">
+                                <a class="img_container" href="{{ path('realestate_show',{'slug':realestate.slug}) }}">
                                     <img src="{{ (realestate.path())?realestate.getWebPath():asset('images/default/default_real_estate_image.png') }}" alt="">
                                 </a>
 
                                 <div class="caption">
                                     <h4>
-                                        <div class="center"><a
+                                        <p class="center"><a
                                                     href="{{ path('realestate_show',{'slug':realestate.slug}) }}">{{ realestate.title }}</a>
-                                        </div>
+                                        </p>
                                     </h4>
                                     <span class="">
                                         <label class="">السعر</label>
@@ -39,8 +39,8 @@
                                     </span>
                                     <br>
 
-                                    <div class="realestate_summary">
-                                        {{ realestate.summary }}
+                                    <div class="caption">
+                                        {{ realestate.summary|slice(0,55) }}
                                         <a href="{{ path('realestate_show',{'slug':realestate.slug}) }}" class="">
                                             المزيد </a>
                                     </div>

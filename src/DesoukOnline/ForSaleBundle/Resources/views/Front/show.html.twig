@@ -1,6 +1,29 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
     <!-- Page Content -->
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اونلاين | للبيع"~' | '~forSale.title }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ forSale.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        <meta property="og:image" content="{{ app.request.uriForPath( forSale.getWebPath()) }}"/>
+        {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title"
+              content="{{"دسوق اونلاين | للبيع"~' | '~forSale.title }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ forSale.description|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
     <div id="mall_category" class="for_sale">
         <div class="row">
             {% set cat = (forSale.Category!=null)?forSale.Category.title:null %}
@@ -78,7 +101,8 @@
                     {% endif %}
                     <!--/.portfolio-item-->
                 </div>
-                <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+                <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
+                     data-colorscheme="light"></div>
             </div>
             <!--/.box-->
         </div>

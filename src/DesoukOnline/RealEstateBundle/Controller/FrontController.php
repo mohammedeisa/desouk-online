@@ -22,7 +22,8 @@ class FrontController extends Controller
             ->getRepository('DesoukOnlineRealEstateBundle:RealEstate');
 
         $query = $repository->createQueryBuilder('r')
-			->leftJoin('r.area' ,'a');
+			->leftJoin('r.area' ,'a')
+			->orderBy("r.createdAt", 'DESC');
 		if ($request->query->get('purpose') ) {
 			$query->andWhere('r.purpose = :purpose')
 			->setParameter('purpose',$request->query->get('purpose'));

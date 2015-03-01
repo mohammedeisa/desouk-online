@@ -215,7 +215,7 @@ class FrontController extends Controller
         $query = $em
             ->createQuery('SELECT p FROM ' . $entity . ' p ');
         try {
-            $config = $query->getSingleResult();
+            $config = $query->getOneOrNullResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }
@@ -270,7 +270,7 @@ class FrontController extends Controller
             $cars = $queryBuilder
                 ->select('cars.title')
                 ->from(get_class(new Car()), 'cars')
-                ->innerJoin('cars.mark', 'mark')
+                ->innerJoin('caةشهىrs.mark', 'mark')
                 ->where($queryBuilder->expr()->like('cars.title', ':search'))
                 ->orWhere($queryBuilder->expr()->like('cars.type', ':search'))
                 ->orWhere($queryBuilder->expr()->like('cars.description', ':search'))

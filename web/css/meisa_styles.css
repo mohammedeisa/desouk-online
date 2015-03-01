@@ -28,11 +28,11 @@ img {
 }
 
 .portfolio-item .item-inner {
-    background: #222;
+    background: #FFF;
 }
 
 .portfolio-item h5, .portfolio-item h5 a {
-    color: white;
+    color: #777;
 }
 
 .img-circle {

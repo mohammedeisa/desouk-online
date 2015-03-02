@@ -2,18 +2,18 @@
 {% block inner_content %}
     <!-- Page Content -->
     {% block website_title %}
-        <meta name="title" content="{{"دسوق اونلاين | سيارات"~' | '~car.title}}"/>
+        <meta name="title" content="{{"دسوق اون لاين | سيارات"~' | '~car.title}}"/>
     {% endblock %}
     {% block website_description %}
         <meta name="description" content="{{ car.description|striptags }}"/>
     {% endblock %}
     {% block og_image %}
-        <meta property="og:image" content="{{ app.request.uriForPath( car.getWebPath()) }}"/>
+        <meta property="og:image" content="{{ app.request.uriForPath( has_slider?car.getWebPath():asset('images/default/default_car_image.png')) }}"/>
         {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
     {% endblock %}
     {% block og_title %}
         <meta property="og:title"
-              content="{{"دسوق اونلاين | سيارات"~' | '~car.title}}"/>
+              content="{{"دسوق اون لاين | سيارات"~' | '~car.title}}"/>
     {% endblock %}
     {% block og_description %}
         <meta property="og:description" content="{{ car.description|striptags }}"/>
@@ -80,19 +80,19 @@
                         <div class="col-md-6">
                             <div class="product_gallery">
                                 <a class="gallery"
-                                   href="{{ (car.path())?car.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                   href="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}"
                                    rel="group" data-rel="prettyPhoto[gallery]1"
                                    title="">
 
-                                    <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_real_estate_image.png') }}">
+                                    <img src="{{ (car.path())?car.getWebPath():asset('images/default/default_car_image.png') }}">
 
                                 </a>
                                 {% for image in car.images %}
                                     <a class="gallery" style="display: none"
-                                       href="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                       href="{{ (image.path())?image.getWebPath():asset('images/default/default_car_image.png') }}"
                                        rel="group" data-rel="prettyPhoto[gallery]1"
                                        title="">
-                                        <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
+                                        <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_car_image.png') }}">
 
                                     </a>
                                 {% endfor %}
@@ -103,7 +103,7 @@
 
                     {% else %}
                         <div class="center">
-                            <img src="{{ asset('images/default/default_product_image.png') }}"/>
+                            <img src="{{ asset('images/default/default_car_image.png') }}"/>
                         </div>
                     {% endif %}
 

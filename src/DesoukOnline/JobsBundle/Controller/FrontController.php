@@ -15,7 +15,14 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $jobsResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Job()))->findAll();
+        $repository = $this->getDoctrine()
+            ->getRepository('DesoukOnlineJobsBundle:Job');
+		$query = $repository->createQueryBuilder('j')
+			->orderBy("j.createdAt", 'DESC');
+		$query = $query->getQuery();
+
+        $jobsResult = $query->getResult();
+			
         $paginator = $this->get('knp_paginator');
         $jobs = $paginator->paginate(
             $jobsResult,

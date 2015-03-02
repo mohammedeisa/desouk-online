@@ -25,9 +25,16 @@
                                         </p>
                                     </h4>
                                     <span class="">
+                                        <label class="">تاريخ الإعلان</label>
+                                        <span class="pull-left">{{ realestate.createdAt|date("Y/m/d") }}</span>
+                                    </span>
+                                    {% if realestate.price %}
+                                    <br>
+                                    <span class="">
                                         <label class="">السعر</label>
                                         <span class="pull-left price">{{ realestate.price }} جنية</span>
                                     </span>
+                                    {% endif %}
                                     <br>
                                     <span class="">
                                         <label class="">النوع</label>

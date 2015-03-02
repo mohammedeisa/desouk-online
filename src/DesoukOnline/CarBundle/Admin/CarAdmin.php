@@ -56,7 +56,6 @@ class CarAdmin extends Admin
 			->add('summary')
             ->add('description', 'ckeditor')
             ->add('price')
-            ->add('gallery', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'default')))
             ->add('enabled', null, array('required' => true, 'data' => True))
 			->add('file', 'file', $fileFieldOptions)
 			->add('images', 'sonata_type_collection',
@@ -84,7 +83,15 @@ class CarAdmin extends Admin
             ->add('price')
         ;
     }
+	
+	protected $datagridValues = array(
+        '_page' => 1,            // display the first page (default = 1)
+        '_sort_order' => 'DESC', // reverse order (default = 'ASC')
+        '_sort_by' => 'createdAt'  // name of the ordered field
+                                 // (default = the model's id field, if any)
 
+        // the '_sort_by' key can be of the form 'mySubModel.mySubSubModel.myField'.
+    );
     /**
      * {@inheritdoc}
      */

@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             {% for product in category.products if product.isInHome %}
-                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                <div class="col-sm-4 col-lg-4 col-md-4  col-xs-12">
                                     <div class="thumbnail">
                                         <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
                                             <img src="{{ (product.getPath()!=null)?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">

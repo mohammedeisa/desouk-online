@@ -16,7 +16,7 @@
                     <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
                         <div class="thumbnail">
                             <a class="img_container"  href="{{ path('realestate_show',{'slug':product.slug}) }}">
-                                <img src="{{ product.getWebPath }}" alt="">
+                                <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_real_estate_image.png') }}" alt="">
                             </a>
 
                             <div class="caption">
@@ -46,7 +46,7 @@
                     <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
                         <div class="thumbnail">
                             <a class="img_container" href="{{ path('forSale_show',{'slug':product.slug}) }}">
-                                <img src="{{ product.getWebPath }}" alt="">
+                                <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_car_image.png') }}" alt="">
                             </a>
 
                             <div class="caption">
@@ -77,7 +77,7 @@
                     <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
                         <div class="thumbnail">
                             <a class="img_container" href="{{ path('car_show',{'slug':product.slug}) }}">
-                                <img src="{{ product.getWebPath }}" alt="">
+                                <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_car_image.png') }}" alt="">
                             </a>
 
                             <div class="caption">
@@ -108,7 +108,7 @@
                     <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
                         <div class="thumbnail">
                             <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                <img src="{{ product.getWebPath }}" alt="">
+                                <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
                             </a>
 
                             <div class="caption">
@@ -129,34 +129,6 @@
                 {% endfor %}
             </div>
             <hr>
-        {% endif %}
-        {% if results.delivery is defined and results.delivery|length>0 %}
-
-            <div class="row">
-                <h3 class="container">ديليفرى</h3>
-
-                {% for product in results.delivery %}
-                    <div class="col-sm-3 col-lg-3 col-md-3  portfolio-item">
-                        <div class="thumbnail">
-                            <a class="img_container" href="{{ path('delivery_delivery',{'slug':product.slug}) }}">
-                                <img src="{% path product.logo, 'preview' %}" alt="">
-                            </a>
-
-                            <div class="caption">
-                                {#<h4 class="pull-right">{{ product.price }} جنية</h4>#}
-                                <h4 class="pull-right">
-                                    <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">{{ product.title }}</a>
-                                </h4>
-                                <hr>
-                                {{ product.description|striptags|slice(0, 90) }}
-                                <a href="{{ path('delivery_delivery',{'slug':product.slug}) }}">see
-                                    more </a>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                {% endfor %}
-            </div>
         {% endif %}
         {% if results.jobs is defined  and results.jobs|length>0 %}
             {% for job in results.jobs %}

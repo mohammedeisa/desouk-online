@@ -105,6 +105,7 @@ class ProductAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
+            ->add('vendor')
             ->add('enabled')
             ->add('code');
     }
@@ -121,12 +122,12 @@ class ProductAdmin extends Admin
 	    $this->renameFile($product);
 		$this->manageEmbeddedImageAdmins($product);
 	 }
-	
+
 	 public function preUpdate($product) {
 	    $this->renameFile($product);
 		$this->manageEmbeddedImageAdmins($product);
 	 }
-	
+
 	 public function renameFile($product) {
 	    if (null !== $product->getFile()) {
 	        // do whatever you want to generate a unique name
@@ -146,10 +147,10 @@ class ProductAdmin extends Admin
 					if ($image->getFile()) {
                         // update the Image to trigger file management
                         $image->upload();
-                    } 
+                    }
 				}
             }
         }
     }
-	 
+
 }

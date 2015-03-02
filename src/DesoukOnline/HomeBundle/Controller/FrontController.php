@@ -270,7 +270,7 @@ class FrontController extends Controller
             $cars = $queryBuilder
                 ->select('cars.title')
                 ->from(get_class(new Car()), 'cars')
-                ->innerJoin('caةشهىrs.mark', 'mark')
+                ->innerJoin('cars.mark', 'mark')
                 ->where($queryBuilder->expr()->like('cars.title', ':search'))
                 ->orWhere($queryBuilder->expr()->like('cars.type', ':search'))
                 ->orWhere($queryBuilder->expr()->like('cars.description', ':search'))

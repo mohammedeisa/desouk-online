@@ -1,22 +1,22 @@
 <div id="vendor_header_menu_container" class="col-md-12">
     <div id="navbar" class="navbar navbar-default vendor_header_menu">
         <div class="">
-            <ul class="nav navbar-nav">
-                <li class=" " id="vendor_logo_container">
+            <div class="row">
+                <div class="col-md-4 col-xs-6" id="vendor_logo_container">
                     {% if vendor.file is defined %}
                         <a href="">
                             <img src="{{ vendor.getWebPath() }}">
                         </a>
                     {% endif %}
-                </li>
-                <li class=" " id="header_vendor_name_container"><a id="vendor_name"
-                                       href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}
-                    </a></li>
+                </div>
+                <div class="col-md-4 col-xs-6" id="header_vendor_name_container">
+                    <a id="vendor_name" href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}</a>
+                </div>
 
-                <li class=" " id="vendor_menu_contacts" style="color: #555">
+                <div class="col-md-4" id="vendor_menu_contacts" style="color: #555">
                     {% if vendor.telephone %}
                         <div class="vendor_contact">
-                            <i class="fa fa-mobile-phone fa-fw" id="header_menu_tel_icon" ></i>{{ vendor.telephone }}
+                            <i class="fa fa-mobile-phone fa-fw" id="header_menu_tel_icon"></i>{{ vendor.telephone }}
                         </div>
                     {% endif %}
                     {% if vendor.telephone %}
@@ -26,12 +26,14 @@
                     {% endif %}
                     {% if vendor.facebook %}
                         <div class="vendor_contact" style="color: #44619D">
-                            <i class="fa fa-facebook-official fa-fw"></i><a href="{{ vendor.facebook }}" style="color: #44619D"><span class="vendor_email">صفحتنا على الفيسبوك</span></a>
+                            <i class="fa fa-facebook-official fa-fw"></i><a href="{{ vendor.facebook }}"
+                                                                            style="color: #44619D"><span
+                                        class="vendor_email">صفحتنا على الفيسبوك</span></a>
                         </div>
                     {% endif %}
 
-                </li>
-            </ul>
+                </div>
+                </ul>
+            </div>
         </div>
     </div>
-</div>

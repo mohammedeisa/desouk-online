@@ -74,7 +74,7 @@ class CategoryAdmin extends Admin
     {
         $listMapper
             ->add('title')
-            ->add('enabled')
+            ->add('enabled', null, array('editable'=>true))
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),

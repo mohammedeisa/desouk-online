@@ -87,7 +87,7 @@ class ProductAdmin extends Admin
             ->addIdentifier('name')
             ->add('code')
             ->add('price')
-            ->add('enabled')
+            ->add('enabled', null, array('editable'=>true))
             ->add('isInHome', null, array('editable'=>true))
             ->add('_action', 'actions', array(
                 'actions' => array(

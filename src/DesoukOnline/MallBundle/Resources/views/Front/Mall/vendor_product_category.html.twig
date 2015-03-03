@@ -18,7 +18,7 @@
 
                         {% for product in category_products %}
 
-                            <div class="portfolio-item col-md-4">
+                            <div class="portfolio-item col-md-4 col-xs-12">
                                 <div class="thumbnail">
                                     <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
                                         <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"

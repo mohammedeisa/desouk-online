@@ -2,14 +2,14 @@
     <div id="navbar" class="navbar navbar-default vendor_header_menu">
         <div class="">
             <div class="row">
-                <div class="col-md-4 col-xs-6" id="vendor_logo_container">
+                <div class="col-md-4" id="vendor_logo_container">
                     {% if vendor.file is defined %}
                         <a href="">
                             <img src="{{ vendor.getWebPath() }}">
                         </a>
                     {% endif %}
                 </div>
-                <div class="col-md-4 col-xs-6" id="header_vendor_name_container">
+                <div class="col-md-4 col-xs-7" id="header_vendor_name_container">
                     <a id="vendor_name" href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title|capitalize }}</a>
                 </div>
 
@@ -19,7 +19,7 @@
                             <i class="fa fa-mobile-phone fa-fw" id="header_menu_tel_icon"></i>{{ vendor.telephone }}
                         </div>
                     {% endif %}
-                    {% if vendor.telephone %}
+                    {% if vendor.email %}
                         <div class="vendor_contact">
                             <i class="fa fa-envelope-o fa-fw"></i><span class="vendor_email">{{ vendor.email }}</span>
                         </div>

@@ -1,5 +1,33 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
+
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اون لاين | "~vendor.title  }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ vendor.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        {% if vendor.file is defined %}
+            <meta property="og:image" content="{{ app.request.uriForPath( vendor.getWebPath() ) }}"/>
+        {% else %}
+            <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+        {% endif %}
+        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ "دسوق اون لاين | "~vendor.title  }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ vendor.description|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
+
     <!-- Page Content -->
 
     <div id="vendor_homepage" class="">
@@ -10,7 +38,7 @@
 
                 <div class="col-md-9">
                     {% if vendor.images and vendor.images|length %}
-                        <div class="row carousel-holder">
+                        <div class="carousel-holder">
 
                             <div class="col-md-12">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -23,7 +51,8 @@
                                     <div class="carousel-inner">
                                         {% for image in vendor.images %}
                                             <div class="item {{ (loop.index==1)?'active':'' }}">
-                                                <img class="slide-image" src="{{ (image.getPath())?image.getWebPath():asset('images/default/default_product_image.png') }}"
+                                                <img class="slide-image"
+                                                     src="{{ (image.getPath())?image.getWebPath():asset('images/default/default_product_image.png') }}"
                                                      alt="">
                                             </div>
                                         {% endfor %}
@@ -44,11 +73,10 @@
                         {% include 'horizontal_social.html.twig' %}
 
                     {% endif %}
-
+                    {% set counter=1 %}
                     {% for category in vendor.getVendorProductCategories if category.isInHome %}
                         {% if category.getProducts() and category.getProducts()|length>0 %}
-                        <div class="row">
-                            <div class="col-sm-12 col-lg-12 col-md-12">
+                            <div class="col-xs-12 col-sm-12 col-lg-12 col-md-3">
 
                                 <div class="left">
                                     <h3>
@@ -61,9 +89,12 @@
                             {% for product in category.products if product.isInHome %}
                                 <div class="col-sm-4 col-lg-4 col-md-4  col-xs-12">
                                     <div class="thumbnail">
-                                        <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                            <img src="{{ (product.getPath()!=null)?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
+                                        <a class="img_container"
+                                           href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                            <img src="{{ (product.getPath()!=null)?product.getWebPath():asset('images/default/default_product_image.png') }}"
+                                                 alt="">
                                         </a>
+
                                         <div class="caption">
                                             <div class="center">
                                                 <h4>
@@ -71,13 +102,13 @@
                                                 </h4>
                                             </div>
                                             {% if product.price %}
-	                                            <span class="">
+                                                <span class="">
 	                                                <label class="pull-right">السعر</label>
 	                                                <span class="pull-left price">{{ product.price }} جنية</span>
 	                                            </span>
                                             {% endif %}
 
-<br>
+                                            <br>
                                             {{ product.description|striptags|slice(0, 55) }}
                                             <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
                                                 المزيد </a>
@@ -87,17 +118,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{ (counter%3==0)?'<div class="clearfix"></div>':'' }}
+                                {% set counter=counter+1 %}
                             {% endfor %}
-                            <div class="row"></div>
-                            <div class="col-sm-2 col-lg-2 col-md-2 pull-left">
-
+                            <div class="clearfix"></div>
+                            <div class="col-sm-2 col-lg-2 col-md-2 col-xs-12 pull-left">
                                 <a class="pull-left btn btn-primary btn-lg"
                                    href="{{ path('vendor_product_category',{'slug':category.slug}) }}"
                                    role="button">المزيد</a>
                             </div>
-                        </div>
-                        <hr>
-                            {% endif %}
+                            <hr>
+                        {% endif %}
+                        {% set counter=1 %}
                     {% endfor %}
                 </div>
             </div>

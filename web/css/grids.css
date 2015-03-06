@@ -96,4 +96,13 @@
         max-height: 400px;
         max-width: 100%;
     }
+    .box{
+        padding: 50px 2px;
+    }
+    #inner-search input, #inner-search button{
+        padding: 6px 4px;
+    }
+    .facebook_share, .twitter_share{
+        width: 35%;
+    }
 }

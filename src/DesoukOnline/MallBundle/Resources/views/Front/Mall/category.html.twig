@@ -1,6 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
-    <!-- Page Content -->
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اون لاين | "~category.title  }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ category.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+            <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+            <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ "دسوق اون لاين | "~category.title  }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ category.description|striptags }}"/>
+    {% endblock %}
+
+        <!-- Page Content -->
     <div id="mall_category" class="">
         <div class="center">
             <h3>{{ category.title }}</h3>
@@ -11,7 +28,7 @@
             {{ render(controller('DesoukOnlineMallBundle:Front:mallCategoriesMenu')) }}
             {% for vendor in category_vendors %}
                 <div class="col-md-3 col-xs-12 mall_category_in_category">
-                    <a href="{{ path('vendor',{'slug':vendor.slug}) }}">
+                    <a  class="category_logo_link" href="{{ path('vendor',{'slug':vendor.slug}) }}">
                         <img src="{{ vendor.getWebPath() }}" alt="">
                     </a>
                     <h5><a href="{{ path('vendor',{'slug':vendor.slug}) }}">{{ vendor.title }}</a></h5>

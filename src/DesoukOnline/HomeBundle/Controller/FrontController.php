@@ -100,6 +100,7 @@ class FrontController extends Controller
      */
     public function recentProductsAction()
     {
+
         $em = $this->getDoctrine()->getManager();
         $realEstate = $em->createQuery('SELECT a FROM ' . get_class(new RealEstate()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
         $forSale = $em->createQuery('SELECT a FROM ' . get_class(new ForSale()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();

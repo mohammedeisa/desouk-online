@@ -1,5 +1,31 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اون لاين | "~vendor_product_category.vendor.title  }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ vendor_product_category.vendor.description|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        {% if vendor_product_category.vendor.file is defined %}
+            <meta property="og:image" content="{{ app.request.uriForPath( vendor_product_category.vendor.getWebPath() ) }}"/>
+        {% else %}
+            <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+        {% endif %}
+        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ "دسوق اون لاين | "~vendor_product_category.vendor.title  }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ vendor_product_category.vendor.description|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
     <div id="vendor_product_category" class="">
         <div class="container">
             <div class="row">
@@ -13,43 +39,42 @@
                 </div>
                 {{ render(controller('DesoukOnlineMallBundle:Front:vendorMenu',{'slug':vendor_product_category.vendor.slug})) }}
                 <div class="col-md-9 ">
+                    {% set counter=1 %}
+                    {% for product in category_products %}
 
-                    <div class="col-md-12">
+                        <div class="portfolio-item col-md-4 col-xs-12">
+                            <div class="thumbnail">
+                                <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
+                                         alt="">
+                                </a>
 
-                        {% for product in category_products %}
-
-                            <div class="portfolio-item col-md-4 col-xs-12">
-                                <div class="thumbnail">
-                                    <a class="img_container" href="{{ path('vendor_product',{'slug':product.slug}) }}">
-                                        <img src="{{ (product.path())?product.getWebPath():asset('images/default/default_product_image.png') }}"
-                                             alt="">
-                                    </a>
-
-                                    <div class="caption">
-                                        <div class="center">
-                                            <h4>
-                                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
-                                            </h4>
-                                        </div>
-                                        {% if product.price %}
-                                            <span class="">
+                                <div class="caption">
+                                    <div class="center">
+                                        <h4>
+                                            <a href="{{ path('vendor_product',{'slug':product.slug}) }}">{{ product.name }}</a>
+                                        </h4>
+                                    </div>
+                                    {% if product.price %}
+                                        <span class="">
                                                 <label class="">السعر</label>
                                                 <span class="pull-left price">{{ product.price }} جنية</span>
                                             </span>
-										{% endif %}
-                                        <br>
+                                    {% endif %}
+                                    <br>
 
-                                        <p>{{ product.description|striptags|slice(0, 55) }}</p>
-                                        <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
-                                            المزيد </a>
-                                    </div>
-                                    <div class="desouk_online_rating">
-                                        {{ ("vendor_product_"~product.id)|show_rating|raw }}
-                                    </div>
+                                    <p>{{ product.description|striptags|slice(0, 55) }}</p>
+                                    <a href="{{ path('vendor_product',{'slug':product.slug}) }}" class="">
+                                        المزيد </a>
+                                </div>
+                                <div class="desouk_online_rating">
+                                    {{ ("vendor_product_"~product.id)|show_rating|raw }}
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                        {{ (counter%3==0)?'<div class="clearfix"></div>':'' }}
+                        {% set counter=counter+1 %}
+                    {% endfor %}
                 </div>
             </div>
             {{ knp_pagination_render(category_products) }}

@@ -1,5 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block inner_content %}
+
+    {% block website_title %}
+        <meta name="title" content="{{ "دسوق اون لاين | "~config.mallTitle  }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ config.mallDescription|striptags }}"/>
+    {% endblock %}
+    {% block og_image %}
+        <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ "دسوق اون لاين | "~config.mallTitle  }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ config.mallDescription|striptags }}"/>
+    {% endblock %}
+    {% block og_author %}
+        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
     <!-- Page Content -->
     <div id="mall">
         {% if config is defined %}

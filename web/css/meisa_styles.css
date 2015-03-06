@@ -655,7 +655,10 @@ span.twitter-typeahead {
 #main-slider{
      height: 604px;
  }
-
+.mall_category_in_category{
+ text-align: center;
+}
 .mall_category_in_category img{
     max-width: 100%;
+    max-height: 124px;
 }

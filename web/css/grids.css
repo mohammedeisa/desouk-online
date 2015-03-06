@@ -105,4 +105,8 @@
     .facebook_share, .twitter_share{
         width: 35%;
     }
+    .portfolio-items.col-4 > li{
+        width: 100%;
+        float: none;
+    }
 }

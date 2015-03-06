@@ -162,7 +162,9 @@ img {
     text-align: right;
     left: auto;
 }
-
+#services .main_component_item {
+    height: 212px;
+}
 .desouk_online_rating {
     width: 200px;
     text-align: left;

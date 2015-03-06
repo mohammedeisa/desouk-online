@@ -1,178 +1,106 @@
-{#<section id="" class="home_portfolio">#}
-    {#<div class="container well well-large">#}
-        {#<div class="center gap">#}
-            {#<h3>الجديد من دسوق اونلاين</h3>#}
-        {#</div>#}
-        {#<!--/.center-->#}
-        {#<ul class="filter nav nav-pills">#}
-            {#<li><a class="" href="#" data-value="all">الكل</a></li>#}
-            {#<li><a class="" href="#" data-value="real_estate">عقارات</a></li>#}
-            {#<li><a class="" href="#" data-value="for_sale">للبيع</a></li>#}
-            {#<li><a class="" href="#" data-value="cars">سيارات</a></li>#}
-            {#<li><a class="" href="#" data-value="desouk_mall">دسوق مول</a></li>#}
-            {#&#123;&#35;<li><a class="" href="#" data-value=".delivery">ديليفرى</a></li>&#35;&#125;#}
-        {#</ul>#}
-        {#<!--/#portfolio-filter-->#}
-        {#<ul class="thumbnails">#}
-            {#{% for product in real_estate %}#}
-                {#<li data-type="real_estate" data-id="id-{{ loop.index }}" class="span3">#}
-                    {#<a class=" href="{{ path('realestate_show',{'slug':product.slug}) }}">#}
-                    {#<img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_real_estate_image.png') }}"#}
-                         {#alt="">#}
-                    {#<a href="{{ path('realestate_show',{'slug':product.slug}) }}">#}
-                        {#{{ product.title }}#}
-                    {#</a>#}
-                    {#</a>#}
+<section id="portfolio" class="home_portfolio">
+    <div class="container">
+        <div class="box">
+            <div class="center gap">
+                <h3>الجديد من دسوق اونلاين</h3>
+            </div>
+            <!--/.center-->
+            <ul class="portfolio-filter">
+                <li><a class="btn btn-primary active all_portfolio_button" href="#" data-filter="*">الكل</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".real_estate">عقارات</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".for_sale">للبيع</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".cars">سيارات</a></li>
+                <li><a class="btn btn-primary" href="#" data-filter=".desouk_mall">دسوق مول</a></li>
+                {#<li><a class="btn btn-primary" href="#" data-filter=".delivery">ديليفرى</a></li>#}
+            </ul>
+            <!--/#portfolio-filter-->
+            <ul class="portfolio-items col-4">
+                {% for product in real_estate %}
+                    <li class="portfolio-item col-xs-12 col-md-4 col-sm-3 real_estate">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_real_estate_image.png') }}" alt="">
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('realestate_show',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in for_sale %}
+                    <li class="portfolio-item col-xs-12 col-md-4 col-sm-3 for_sale">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
+
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
+
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('forSale_show',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in cars %}
+                    <li class="portfolio-item col-xs-12 col-md-4 col-sm-3 cars">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('car_show',{'slug':product.slug}) }}">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_car_image.png') }}" alt="">
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('car_show',{'slug':product.slug}) }}">
+                                    {{ product.title }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {% for product in desouk_mall %}
+                    <li class="portfolio-item col-xs-12 col-md-4 col-sm-3 desouk_mall">
+                        <div class="item-inner">
+                            <div class="portfolio-image">
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    <img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_product_image.png') }}" alt="">
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{ path('vendor_product',{'slug':product.slug}) }}">
+                                    {{ product.name }}
+                                </a>
+                            </h5>
+                        </div>
+                    </li><!--/.portfolio-item-->
+                {% endfor %}
+                {#{% for product in delivery %}#}
+                {#<li class="portfolio-item col-xs-12 col-md-4 col-sm-3 delivery">#}
+                {#<div class="item-inner">#}
+                {#<div class="portfolio-image">#}
+                {#<a href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
+                {#<img src="{{ product.getWebPath() }}" alt="">#}
+                {#</a>#}
+                {#</div>#}
+                {#<h5>#}
+                {#<a href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
+                {#{{ product.title }}#}
+                {#</a>#}
+                {#</h5>#}
+                {#</div>#}
                 {#</li><!--/.portfolio-item-->#}
-            {#{% endfor %}#}
-            {#{% for product in for_sale %}#}
-                {#<li data-type="for_sale" data-id="id-{{ loop.index  }}" class="for_sale span3">#}
-                    {#<a class=" href="{{ path('forSale_show',{'slug':product.slug}) }}">#}
-                    {#<img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_product_image.png') }}"#}
-                         {#alt="">#}
-                    {#<a href="{{ path('forSale_show',{'slug':product.slug}) }}">#}
-                        {#{{ product.title }}#}
-                    {#</a>#}
+                {#{% endfor %}#}
 
-                    {#</a>#}
-                {#</li><!--/.portfolio-item-->#}
-            {#{% endfor %}#}
-            {#{% for product in cars %}#}
-                {#<li data-type="cars" data-id="id-{{ loop.index  }}" class="cars span3">#}
-                    {#<a class=" href="{{ path('car_show',{'slug':product.slug}) }}">#}
-                    {#<img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_car_image.png') }}"#}
-                         {#alt="">#}
-                    {#<a href="{{ path('car_show',{'slug':product.slug}) }}">#}
-                        {#{{ product.title }}#}
-                    {#</a>#}
-                    {#</a>#}
-                {#</li><!--/.portfolio-item-->#}
-            {#{% endfor %}#}
-            {#{% for product in desouk_mall %}#}
-                {#<li data-type="desouk_mall" data-id="id-{{ loop.index }}" class="desouk_mall span3">#}
-                    {#<a class=" href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
-                    {#<img src="{{ (product.getWebPath())?product.getWebPath():asset('images/default/default_product_image.png') }}"#}
-                         {#alt="">#}
-                    {#<a href="{{ path('vendor_product',{'slug':product.slug}) }}">#}
-                        {#{{ product.name }}#}
-                    {#</a>#}
-                    {#</a>#}
-                {#</li><!--/.portfolio-item-->#}
-            {#{% endfor %}#}
-        {#</ul>#}
-        {#<!--/.box-->#}
-    {#</div>#}
-    {#<!--/.container-->#}
-{#</section><!--/#portfolio-->#}
-
-{#<script type="text/javascript" src="{{ asset('js/jquery.quicksand.js') }}"></script>#}
-
-{#<script>#}
-
-    {#var $itemsHolder = $('ul.thumbnails');#}
-    {#var $itemsClone = $itemsHolder.clone();#}
-    {#var $filterClass = "";#}
-    {#$('ul.filter li').click(function (e) {#}
-        {#e.preventDefault();#}
-        {#$filterClass = $(this).attr('data-value');#}
-        {#if ($filterClass == 'all') {#}
-            {#var $filters = $itemsClone.find('li');#}
-        {#}#}
-        {#else {#}
-            {#var $filters = $itemsClone.find('li[data-type=' + $filterClass + ']');#}
-        {#}#}
-        {#$itemsHolder.quicksand(#}
-                {#$filters,#}
-                {#{duration: 1000}#}
-        {#);#}
-    {#});#}
-{#</script>#}
-<div class="container well well-large">
-
-    <h1>Bootstrap Filtered Portfolio</h1>
-
-    <hr>
-
-    <ul class="filter nav nav-pills">
-        <li data-value="all"><a href="#">All</a></li>
-        <li data-value="dog"><a href="#">Dog</a></li>
-        <li data-value="cat"><a href="#">Cat</a></li>
-        <li data-value="bird"><a href="#">Birds</a></li>
-    </ul>
-
-    <hr>
-
-    <ul class="thumbnails">
-        <li data-type="dog" data-id="id-1" class="span3">
-            <a href="#" class="thumbnail" id="dog1"><img src="images/dog1.jpg" alt=""></a>
-        </li>
-        <li data-type="cat" data-id="id-2" class="span3">
-            <a href="#" class="thumbnail" id="cat1"><img src="images/cat1.jpg" alt=""></a>
-        </li>
-        <li data-type="bird" data-id="id-3" class="span3">
-            <a href="#" class="thumbnail" id="bird1"><img src="images/bird1.jpg" alt=""></a>
-        </li>
-        <li data-type="dog" data-id="id-4" class="span3">
-            <a href="#" class="thumbnail" id="dog2"><img src="images/dog2.jpg" alt=""></a>
-        </li>
-        <li data-type="cat" data-id="id-5" class="span3">
-            <a href="#" class="thumbnail" id="cat2"><img src="images/cat2.jpg" alt=""></a>
-        </li>
-        <li data-type="bird" data-id="id-6" class="span3">
-            <a href="#" class="thumbnail" id="bird2"><img src="images/bird2.jpg" alt=""></a>
-        </li>
-        <li data-type="dog" data-id="id-7" class="span3">
-            <a href="#" class="thumbnail" id="dog3"><img src="images/dog3.jpg" alt=""></a>
-        </li>
-        <li data-type="cat" data-id="id-8" class="span3">
-            <a href="#" class="thumbnail" id="cat3"><img src="images/cat3.jpg" alt=""></a>
-        </li>
-        <li data-type="bird" data-id="id-9" class="span3">
-            <a href="#" class="thumbnail" id="bird3"><img src="images/bird3.jpg" alt=""></a>
-        </li>
-        <li data-type="dog" data-id="id-10" class="span3">
-            <a href="#" class="thumbnail" id="dog4"><img src="images/dog4.jpg" alt=""></a>
-        </li>
-        <li data-type="cat" data-id="id-11" class="span3">
-            <a href="#" class="thumbnail" id="cat4"><img src="images/cat4.jpg" alt=""></a>
-        </li>
-        <li data-type="bird" data-id="id-12" class="span3">
-            <a href="#" class="thumbnail" id="bird4"><img src="images/bird4.jpg" alt=""></a>
-        </li>
-        <li data-type="dog" data-id="id-13" class="span3">
-            <a href="#" class="thumbnail" id="dog5"><img src="images/dog5.jpg" alt=""></a>
-        </li>
-        <li data-type="cat" data-id="id-14" class="span3">
-            <a href="#" class="thumbnail" id="cat5"><img src="images/cat5.jpg" alt=""></a>
-        </li>
-        <li data-type="bird" data-id="id-15" class="span3">
-            <a href="#" class="thumbnail" id="bird5"><img src="images/bird5.jpg" alt=""></a>
-        </li>
-    </ul>
-
-</div>
-
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-<script src="js/bootstrap.min.js"></script>
-<script type='text/javascript' src="js/bootbox.min.js"></script>
-<script type="text/javascript" src="js/jquery.quicksand.js"></script>
-<script>
-    var $itemsHolder = $('ul.thumbnails');
-    var $itemsClone = $itemsHolder.clone();
-    var $filterClass = "";
-    $('ul.filter li').click(function (e) {
-        e.preventDefault();
-        $filterClass = $(this).attr('data-value');
-        if ($filterClass == 'all') {
-            var $filters = $itemsClone.find('li');
-        }
-        else {
-            var $filters = $itemsClone.find('li[data-type=' + $filterClass + ']');
-        }
-        $itemsHolder.quicksand(
-                $filters,
-                {duration: 1000}
-        );
-    });
-</script>
-
+            </ul>
+        </div>
+        <!--/.box-->
+    </div>
+    <!--/.container-->
+</section><!--/#portfolio-->

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
 
-    {% block website_title %}
-        <meta name="description" content="دسوق اونلاين">
+    {% block website_meta_title %}
+        <meta name="title" content="دسوق اونلاين">
     {% endblock %}
 
     {% block website_description %}
@@ -33,7 +33,13 @@
     {% block og_type %}
         <meta property="og:type" content="article"/>
     {% endblock %}
-    <title>دسوق اونلاين</title>
+
+
+    <title>دسوق اون لاين للتسويق</title>
+
+    {% block website_title %}
+        <title>دسوق اون لاين تسويق مش سمسرة</title>
+    {% endblock %}
 
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">

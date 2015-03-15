@@ -792,8 +792,5 @@ textarea#message {
 .nav-tabs>li>a{
     color: #777;
 }
-.nav-tabs>li.active>a{
-    background-color: #777;
-    color: #ffffff;
-}
+
 /*Added by MEISA*/

@@ -518,12 +518,21 @@ img {
 }
 
 #inner-search input, #inner-search button {
-    width: auto;
-    /*display: inline-block;*/
-    text-align: right;
+    display: inline-block;
     direction: rtl;
+    vertical-align: top;
 }
 
+#inner-search input{
+    width: 79%;
+    text-align: right;
+
+}
+#inner-search button{
+    width: 19%;
+    text-align: center;
+
+}
 .price {
     color: black;
 }
@@ -585,9 +594,11 @@ img {
 
 /*Auto complete styles*/
 span.twitter-typeahead {
-    width: 70%;
+    width: 79%;
 }
-
+span.twitter-typeahead #search_string{
+    width: 100%;
+}
 .bs-example {
     font-family: sans-serif;
     position: relative;
@@ -678,4 +689,18 @@ span.twitter-typeahead {
 
 .float-right{
     float: right;
+}
+
+.nav-tabs>li>a{
+    background: rgba(153, 153, 153, 0.18);
+}
+#desouk_online_portfolio .overlay a{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(251, 251, 251, 0.16);
+}
+#desouk_online_portfolio img{
+    max-width: 100%;
 }

@@ -101,7 +101,7 @@ sonata_media:
             formats:
                 preview:   { width: 235, quality: 100}
                 small:     { width: 300, quality: 100}
-                large:     { width: 750, quality: 100}
+                large:     { width: 1030, quality: 100}
 
         desouk_online_web_development:
             providers:
@@ -109,7 +109,7 @@ sonata_media:
             formats:
                 preview:   { width: 235, quality: 100}
                 small:     { width: 300, quality: 100}
-                large:     { width: 750, quality: 100}
+                large:     { width: 1030, quality: 100}
 
         desouk_online_web_development_banner:
             providers:

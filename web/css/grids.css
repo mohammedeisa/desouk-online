@@ -109,4 +109,11 @@
         width: 100%;
         float: none;
     }
+    #desouk_online_portfolio .nav-tabs>li{
+        padding: 0;
+    }
+    .nav-tabs>li{
+        float: none;
+        display: inline-block;
+    }
 }

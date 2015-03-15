@@ -1,19 +1,19 @@
 <section id="portfolio">
     <img src="{% path portfolio.image , 'large' %}"/>
-{{ portfolio.description|raw }}
+<div class="center"> {{ portfolio.description|raw }}</div>
 <ul class="portfolio-items col-4" style="min-height: 250px;">
     {% for item in portfolio.getPortfolioItems() %}
-        <li class="portfolio-item apps">
+        <div class="">
             <div class="item-inner">
-                <div class="portfolio-image">
+                <div class="col-md-3 col-xs-6">
                     <img src="{% path item.image,'preview' %}" alt="">
                     <div class="overlay">
                         <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="{% path item.image,'large' %}"><i class="icon-eye-open"></i></a>
                     </div>
+                    <h5>{{ item.title }}</h5>
                 </div>
-                <h5>{{ item.title }}</h5>
             </div>
-        </li><!--/.portfolio-item-->
+        </div><!--/.portfolio-item-->
 
     {% endfor %}
     <!--/.portfolio-item-->

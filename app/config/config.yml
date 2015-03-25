@@ -27,15 +27,8 @@ imports:
     - { resource: @DesoukOnlineMallBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineCarBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineForSaleBundle/Resources/config/config.yml }
-    - { resource: @DesoukOnlineArticleBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineBannerBundle/Resources/config/config.yml }
-    - { resource: @DesoukOnlineFaqBundle/Resources/config/config.yml }
     - { resource: @DesoukOnlineFocusBundle/Resources/config/config.yml }
-    - { resource: @DesoukOnlineNewsBundle/Resources/config/config.yml }
-    - { resource: @DesoukOnlineProductBundle/Resources/config/config.yml }
-    - { resource: @DesoukOnlineProductBundle/Resources/config/category.yml }
-    - { resource: @DesoukOnlineProductBundle/Resources/config/product_has_category.yml }
-    - { resource: @DesoukOnlineProductBundle/Resources/config/product_hasTag.yml }
     - { resource: @MeisaRatingBundle/Resources/config/config.yml }
 
 framework:

@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        <!-- Page Content -->
+        {% block website_meta_title %}
+            <meta name="title"
+                  content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.carMiddleOfTitleInShow~'|'~car.title }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ car.summary }}"/>
+        {% endblock %}
+        {% block og_image %}
+            <meta property="og:image"
+                  content="{{ app.request.uriForPath( has_slider?car.getWebPath():asset('images/default/default_car_image.png')) }}"/>
+            {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.carMiddleOfTitleInShow~'|'~car.title }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ car.summary }}"/>
+        {% endblock %}
+        {% block og_author %}
+            {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
 {% block inner_content %}
-    <!-- Page Content -->
-    {% block website_meta_title %}
-        <meta name="title" content="{{"دسوق اون لاين | سيارات"~' | '~car.title}}"/>
-    {% endblock %}
-    {% block website_description %}
-        <meta name="description" content="{{ car.description|striptags }}"/>
-    {% endblock %}
-    {% block og_image %}
-        <meta property="og:image" content="{{ app.request.uriForPath( has_slider?car.getWebPath():asset('images/default/default_car_image.png')) }}"/>
-        {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
-    {% endblock %}
-    {% block og_title %}
-        <meta property="og:title"
-              content="{{"دسوق اون لاين | سيارات"~' | '~car.title}}"/>
-    {% endblock %}
-    {% block og_description %}
-        <meta property="og:description" content="{{ car.description|striptags }}"/>
-    {% endblock %}
-    {% block og_author %}
-        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
-    {% endblock %}
-    {% block og_type %}
-        <meta property="og:type" content="article"/>
-    {% endblock %}
+
     <div id="mall_category" class="car_show">
         <div class="row">
             {{ render(controller('DesoukOnlineCarBundle:Front:sideFilter', { 'type': car.type,'mark': car.mark })) }}
@@ -108,7 +116,8 @@
                     {% endif %}
 
                 </div>
-                <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+                <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
+                     data-colorscheme="light"></div>
 
             </div>
         </div>

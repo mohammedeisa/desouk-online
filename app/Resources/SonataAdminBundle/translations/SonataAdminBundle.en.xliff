@@ -525,6 +525,15 @@
                 <target>القوائم الرئيسية</target>
             </trans-unit>
 
+            <trans-unit id="general">
+                <source>General</source>
+                <target>اعدادات عاملة</target>
+            </trans-unit>
+
+            <trans-unit id="general_config">
+                <source>General Config</source>
+                <target>اعدادات عاملة</target>
+            </trans-unit>
 
         </body>
     </file>

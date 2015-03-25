@@ -2,6 +2,7 @@
 
 namespace DesoukOnline\MallBundle\Controller;
 
+use DesoukOnline\HomeBundle\Entity\General;
 use DesoukOnline\MallBundle\Entity\Article;
 use DesoukOnline\MallBundle\Entity\MallConfig;
 use DesoukOnline\MallBundle\Entity\Product;
@@ -23,15 +24,9 @@ class FrontController extends Controller
      */
     public function indexAction()
     {
-        $config = null;
-        $query = $this->getDoctrine()->getManager()
-            ->createQuery('SELECT p FROM ' . get_class(new MallConfig()) . ' p ');
-        try {
-            $config = $query->getSingleResult();
-        } catch (\Doctrine\ORM\NoResultException $e) {
-            return null;
-        }
-        $categoriesResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findBy(array('enabled'=>true));
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
+
+        $categoriesResult = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findBy(array('enabled' => true));
 
         $paginator = $this->get('knp_paginator');
         $categories = $paginator->paginate(
@@ -49,6 +44,7 @@ class FrontController extends Controller
      */
     public function categoryAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
         $category = $this->getDoctrine()->getManager()->getRepository(get_class(new Category()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
 
         $paginator = $this->get('knp_paginator');
@@ -57,7 +53,7 @@ class FrontController extends Controller
             $this->container->get('request')->query->get('page', 1)/*page number*/,
             20/*limit per page*/
         );
-        return array('category' => $category, 'category_vendors' => $categoryVendors);
+        return array('category' => $category, 'category_vendors' => $categoryVendors, 'config' => $config);
 
     }
 
@@ -67,8 +63,9 @@ class FrontController extends Controller
      */
     public function vendorAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
         $vendor = $this->getDoctrine()->getManager()->getRepository(get_class(new Vendor()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
-        return array('vendor' => $vendor);
+        return array('vendor' => $vendor, 'config' => $config);
     }
 
     /**
@@ -77,6 +74,7 @@ class FrontController extends Controller
      */
     public function vendorProductCategoryAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
         $vendorProductCategory = $this->getDoctrine()->getManager()->getRepository(get_class(new VendorProductCategory()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
 
         $paginator = $this->get('knp_paginator');
@@ -86,7 +84,7 @@ class FrontController extends Controller
             20/*limit per page*/
         );
 
-        return array('vendor_product_category' => $vendorProductCategory, 'category_products' => $categoryProducts);
+        return array('vendor_product_category' => $vendorProductCategory, 'category_products' => $categoryProducts, 'config' => $config);
     }
 
 
@@ -96,8 +94,9 @@ class FrontController extends Controller
      */
     public function vendorProductAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
         $product = $this->getDoctrine()->getManager()->getRepository(get_class(new Product()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
-        return array('product' => $product);
+        return array('product' => $product, 'config' => $config);
     }
 
 
@@ -107,8 +106,9 @@ class FrontController extends Controller
      */
     public function vendorArticleAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new MallConfig()));
         $article = $this->getDoctrine()->getManager()->getRepository(get_class(new Article()))->findOneBy(array('slug' => $this->get('request')->get('slug')));
-        return array('article' => $article);
+        return array('article' => $article, 'config' => $config);
     }
 
     /**

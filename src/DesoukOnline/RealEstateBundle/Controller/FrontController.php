@@ -2,6 +2,8 @@
 
 namespace DesoukOnline\RealEstateBundle\Controller;
 
+use DesoukOnline\HomeBundle\Entity\General;
+use DesoukOnline\RealEstateBundle\Entity\RealEstateConfig;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -18,7 +20,8 @@ class FrontController extends Controller
      */
     public function indexAction(Request $request)
     {
-    	$repository = $this->getDoctrine()
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new RealEstateConfig()));
+        $repository = $this->getDoctrine()
             ->getRepository('DesoukOnlineRealEstateBundle:RealEstate');
 
         $query = $repository->createQueryBuilder('r')
@@ -46,7 +49,7 @@ class FrontController extends Controller
             $this->container->get('request')->query->get('page', 1)/*page number*/,
             20/*limit per page*/
         );
-        return array('realestates' => $realestates);
+        return array('realestates' => $realestates,'config'=>$config);
     }
 	
 	/**
@@ -55,6 +58,7 @@ class FrontController extends Controller
      */
     public function showAction($slug)
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new RealEstateConfig()));
         $realestate = $this->getDoctrine()->getManager()->getRepository(get_class(new RealEstate()))->findOneBy(array('slug' => $slug));
         $variables = array('realestate' => $realestate);
 		if(is_file($realestate->getAbsolutePath())){
@@ -63,6 +67,7 @@ class FrontController extends Controller
 		else{
 			$variables['has_slider'] = false;
 		}
+        $variables['config']=$config;
         return $variables;
     }
 	

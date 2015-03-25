@@ -43,6 +43,7 @@ class ProductAdmin extends Admin
         $formMapper
             ->add('name')
             ->add('description', 'ckeditor')
+            ->add('summary')
             ->add('code')
             ->add('price')
 			->add('vendor')

@@ -1,31 +1,36 @@
 {% extends 'base.html.twig' %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~vendor_product_category.vendor.title~'|'~vendor_product_category.title }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ vendor_product_category.summary }}"/>
+        {% endblock %}
+        {% block og_image %}
+            {% if vendor_product_category.vendor.file is defined %}
+                <meta property="og:image"
+                      content="{{ app.request.uriForPath( vendor_product_category.vendor.getWebPath() ) }}"/>
+            {% else %}
+                <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+            {% endif %}
+            <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~vendor_product_category.vendor.title~'|'~vendor_product_category.title }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ vendor_product_category.summary }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
 {% block inner_content %}
-    {% block website_meta_title %}
-        <meta name="title" content="{{ "دسوق اون لاين | "~vendor_product_category.vendor.title  }}"/>
-    {% endblock %}
-    {% block website_description %}
-        <meta name="description" content="{{ vendor_product_category.vendor.description|striptags }}"/>
-    {% endblock %}
-    {% block og_image %}
-        {% if vendor_product_category.vendor.file is defined %}
-            <meta property="og:image" content="{{ app.request.uriForPath( vendor_product_category.vendor.getWebPath() ) }}"/>
-        {% else %}
-            <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
-        {% endif %}
-        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
-    {% endblock %}
-    {% block og_title %}
-        <meta property="og:title" content="{{ "دسوق اون لاين | "~vendor_product_category.vendor.title  }}"/>
-    {% endblock %}
-    {% block og_description %}
-        <meta property="og:description" content="{{ vendor_product_category.vendor.description|striptags }}"/>
-    {% endblock %}
-    {% block og_author %}
-        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
-    {% endblock %}
-    {% block og_type %}
-        <meta property="og:type" content="article"/>
-    {% endblock %}
     <div id="vendor_product_category" class="">
         <div class="container">
             <div class="row">

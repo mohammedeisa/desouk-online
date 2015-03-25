@@ -54,13 +54,8 @@ sonata_admin:
                           label: Main
                           icon:  '<i class="fa fa-play-circle"></i>'
                           items:
-                              - desouk_online.category
-                              - desouk_online.product
-                              - desouk_online.article
-                              - desouk_online.news
                               - desouk_online.banner
                               - desouk_online.focus
-                              - desouk_online.faq
             sonata.admin.group.meisa:
                           label: Menu
                           icon:  '<i class="fa fa-play-circle"></i>'

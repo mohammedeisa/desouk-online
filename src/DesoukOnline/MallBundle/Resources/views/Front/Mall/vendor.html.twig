@@ -1,33 +1,35 @@
 {% extends 'base.html.twig' %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~vendor.category.title~'|'~vendor.title }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ vendor.summary }}"/>
+        {% endblock %}
+        {% block og_image %}
+            {% if vendor.file is defined %}
+                <meta property="og:image" content="{{ app.request.uriForPath( vendor.getWebPath() ) }}"/>
+            {% else %}
+                <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
+            {% endif %}
+            <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~vendor.category.title~'|'~vendor.title }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ vendor.summary }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
+
 {% block inner_content %}
-
-    {% block website_meta_title %}
-        <meta name="title" content="{{ "دسوق اون لاين | "~vendor.title  }}"/>
-    {% endblock %}
-    {% block website_description %}
-        <meta name="description" content="{{ vendor.description|striptags }}"/>
-    {% endblock %}
-    {% block og_image %}
-        {% if vendor.file is defined %}
-            <meta property="og:image" content="{{ app.request.uriForPath( vendor.getWebPath() ) }}"/>
-        {% else %}
-            <meta property="og:image" content="{{ asset('images/logo.jpg') }}"/>
-        {% endif %}
-        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
-    {% endblock %}
-    {% block og_title %}
-        <meta property="og:title" content="{{ "دسوق اون لاين | "~vendor.title  }}"/>
-    {% endblock %}
-    {% block og_description %}
-        <meta property="og:description" content="{{ vendor.description|striptags }}"/>
-    {% endblock %}
-    {% block og_author %}
-        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
-    {% endblock %}
-    {% block og_type %}
-        <meta property="og:type" content="article"/>
-    {% endblock %}
-
     <!-- Page Content -->
 
     <div id="vendor_homepage" class="">

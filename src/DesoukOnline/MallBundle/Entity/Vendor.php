@@ -45,6 +45,13 @@ class Vendor
     /**
      * @var string
      *
+     * @ORM\Column(name="summary", type="text" )
+     */
+    private $summary;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="telephone", type="string" , length=255)
      */
     private $telephone;
@@ -711,4 +718,22 @@ class Vendor
     {
         $this->images->removeElement($images);
     }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+
 }

@@ -59,6 +59,13 @@ class Product
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text" )
+     */
+    private $summary;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean", options={"default":1})
@@ -544,4 +551,21 @@ class Product
     {
         $this->images->removeElement($images);
     }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
 }

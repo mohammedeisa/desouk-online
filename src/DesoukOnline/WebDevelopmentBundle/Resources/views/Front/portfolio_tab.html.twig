@@ -1,28 +1,22 @@
 <section id="">
     <img src="{% path portfolio.image , 'large' %}"/>
 
-    <div class="box">
+    <div class="row">
         <div class="center"> {{ portfolio.description|raw }}</div>
-    <ul class="portfolio-items col-4" style="min-height: 250px;">
             {% for item in portfolio.getPortfolioItems() %}
-                <div class="">
-                    <div class="item-inner">
-                        <div class="col-md-3 col-xs-6">
-                            <img src="{% path item.image,'preview' %}" alt="">
+                <div class="col-md-3 col-xs-6">
+                    <img src="{% path item.image,'preview' %}" alt="">
 
-                            <div class="overlay">
-                                <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
-                                   href="{% path item.image,'large' %}"><i class="icon-eye-open"></i></a>
-                            </div>
-                            <h5>{{ item.title }}</h5>
-                        </div>
+                    <div class="overlay">
+                        <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet"
+                           href="{% path item.image,'large' %}"><i class="icon-eye-open"></i></a>
                     </div>
-                </div><!--/.portfolio-item-->
-
+                    <h5>{{ item.title }}</h5>
+                </div>
             {% endfor %}
             <!--/.portfolio-item-->
-        </ul>
 
-        <div></div>    </div>
+        <div></div>
+    </div>
 
 </section>

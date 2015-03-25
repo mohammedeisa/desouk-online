@@ -46,7 +46,10 @@ class WebDevelopmentAdmin extends Admin
             ->add('image', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_web_development')))
             ->add('banners', 'sonata_type_model_list', array(), array('link_parameters' => array('context' => 'desouk_online_web_development')))
             ->end()
-            ->end();
+            ->end()
+            ->add('metaTitle')
+            ->add('metaDescription')
+        ;
     }
 
 

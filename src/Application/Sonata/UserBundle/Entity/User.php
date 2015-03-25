@@ -45,11 +45,6 @@ class User extends BaseUser
      */
     protected $vendors;
 
-    /**
-     * @ORM\OneToMany(targetEntity="DesoukOnline\DeliveryBundle\Entity\Delivery", mappedBy="user")
-     */
-    protected $deliveries;
-
 
     /**
      * Get id
@@ -96,44 +91,6 @@ class User extends BaseUser
     public function getVendors()
     {
         return $this->vendors;
-    }
-
-
-    /**
-     * @param mixed $objects
-     */
-    public function setDeliveries($objects)
-    {
-        $this->deliveries = new ArrayCollection();
-        foreach ($objects as $object) {
-            $object->setUser($this);
-            $this->addDeliveries($object);
-        }
-    }
-
-    public function addDeliveries($object)
-    {
-        $this->deliveries[] = $object;
-        return $this;
-    }
-
-    /**
-     * Remove Menu
-     *
-     * @param StudentSessions $object
-     */
-    public function removeDeliveries($object)
-    {
-        $this->deliveries->removeElement($object);
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getDeliveries()
-    {
-        return $this->deliveries;
     }
 
 

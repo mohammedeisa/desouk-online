@@ -41,10 +41,6 @@ desouk_online_mall:
     type:     annotation
     prefix:   /
 
-desouk_online_delivery:
-    resource: "@DesoukOnlineDeliveryBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 desouk_online_for_sale:
     resource: "@DesoukOnlineForSaleBundle/Controller/"
@@ -70,19 +66,6 @@ meisa_menu:
     resource: "@MeisaMenuBundle/Controller/"
     type:     annotation
     prefix:   /
-    
-#fos_js_routing:
-#    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-
-desouk_online_faq:
-    resource: "@DesoukOnlineFaqBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-desouk_online_news:
-    resource: "@DesoukOnlineNewsBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 #_liip_imagine:
 #    resource: "@LiipImagineBundle/Resources/config/routing.xml"
@@ -91,21 +74,12 @@ sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
 
-desouk_online_article:
-    resource: "@DesoukOnlineArticleBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 desouk_online_banner:
     resource: "@DesoukOnlineBannerBundle/Controller/"
     type:     annotation
     prefix:   /
 
-
-desouk_online_product:
-    resource: "@DesoukOnlineProductBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
 desouk_online_focus:
     resource: "@DesoukOnlineFocusBundle/Controller/"

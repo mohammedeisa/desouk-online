@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="">
-
+    {% block seo %}
     {% block website_meta_title %}
         <meta name="title" content="دسوق اونلاين">
     {% endblock %}
@@ -32,6 +32,7 @@
 
     {% block og_type %}
         <meta property="og:type" content="article"/>
+    {% endblock %}
     {% endblock %}
 
 

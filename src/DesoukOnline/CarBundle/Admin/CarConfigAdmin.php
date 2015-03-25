@@ -30,7 +30,9 @@ class CarConfigAdmin extends Admin
     {
         $formMapper
             ->add('carTitle')
-            ->add('carDescription', 'ckeditor');
+            ->add('carDescription', 'ckeditor')
+            ->add('metaDescription')
+        ;
     }
 
     /**

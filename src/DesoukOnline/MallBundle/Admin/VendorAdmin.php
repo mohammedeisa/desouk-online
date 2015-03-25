@@ -47,6 +47,7 @@ class VendorAdmin extends Admin
             ->add('user')
             ->add('title')
             ->add('description', 'ckeditor')
+            ->add('summary')
             ->add('category')
             ->add('telephone')
             ->add('facebook')
@@ -93,7 +94,7 @@ class VendorAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
+            ->add('title')
             ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(

@@ -594,7 +594,7 @@ img {
 
 /*Auto complete styles*/
 span.twitter-typeahead {
-    width: 79%;
+    width: 77%;
 }
 span.twitter-typeahead #search_string{
     width: 100%;
@@ -704,3 +704,9 @@ span.twitter-typeahead #search_string{
 #desouk_online_portfolio img{
     max-width: 100%;
 }
+
+#desouk_online_portfolio .tab-content{
+    border-right: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+}
+

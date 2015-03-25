@@ -1,16 +1,36 @@
 {% extends 'base.html.twig' %}
-{% block inner_content %}
-    <!-- Page Content -->
-    <div id="mall_category" class="real_estate">
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.realEstateMiddleOfTitleInIndex }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ config.bundleConfig.metaDescription }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.realEstateMiddleOfTitleInIndex }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ config.bundleConfig.metaDescription }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+
+    {% endif %}
+{% endblock %}
+    {% block inner_content %}
+        <!-- Page Content -->
+        <div id="mall_category" class="real_estate">
         <div class="container">
-            <div class="reaestate_box">
-                <div class="center">
-                    <h3>عقارات دسوق</h3>
-                    {% include 'horizontal_social.html.twig' %}
-                </div>
-                <div class="row">
-                    {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}
-                    <div class="col-sm-9 col-lg-9 col-md-9">
+        <div class="reaestate_box">
+            <div class="center">
+                <h3>عقارات دسوق</h3>
+                {% include 'horizontal_social.html.twig' %}
+            </div>
+            <div class="row">
+                {{ render(controller('DesoukOnlineRealEstateBundle:Front:sideFilter', { 'purpose': app.request.get('purpose'),'type': app.request.get('type'),'area': app.request.get('area') })) }}
+                <div class="col-sm-9 col-lg-9 col-md-9">
                     {% for realestate in realestates %}
                         <div class="col-sm-6 col-lg-6 col-md-6">
                             <div class="thumbnail">
@@ -29,8 +49,8 @@
                                         <span class="pull-left">{{ realestate.createdAt|date("Y/m/d") }}</span>
                                     </span>
                                     {% if realestate.price %}
-                                    <br>
-                                    <span class="">
+                                        <br>
+                                        <span class="">
                                         <label class="">السعر</label>
                                         <span class="pull-left price">{{ realestate.price }} جنية</span>
                                     </span>
@@ -63,11 +83,11 @@
                         </div>
                     {% endfor %}
                     <div class="col-sm-9 col-lg-9 col-md-9">
-                    {{ knp_pagination_render(realestates) }}
-                    <!--/.box-->
+                        {{ knp_pagination_render(realestates) }}
+                        <!--/.box-->
+                    </div>
                 </div>
             </div>
+            <!--/.container-->
         </div>
-        <!--/.container-->
-    </div>
-{% endblock %}
+    {% endblock %}

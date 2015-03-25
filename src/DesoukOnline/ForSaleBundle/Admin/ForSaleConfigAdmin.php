@@ -30,7 +30,9 @@ class ForSaleConfigAdmin extends Admin
     {
         $formMapper
             ->add('forSaleTitle')
-            ->add('forSaleDescription', 'ckeditor');
+            ->add('forSaleDescription', 'ckeditor')
+            ->add('metaDescription')
+        ;
     }
 
     /**

@@ -40,6 +40,13 @@ class Article
      */
     private $description;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
+
 
     /**
      * @var string
@@ -251,6 +258,22 @@ class Article
     public function setVendor($vendor)
     {
         $this->vendor = $vendor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
     }
 
 }

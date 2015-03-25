@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+    {% block website_meta_title %}
+        <meta name="title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.forSaleMiddleOfTitleInIndex }}"/>
+    {% endblock %}
+    {% block website_description %}
+        <meta name="description" content="{{ config.bundleConfig.metaDescription }}"/>
+    {% endblock %}
+    {% block og_title %}
+        <meta property="og:title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.forSaleMiddleOfTitleInIndex }}"/>
+    {% endblock %}
+    {% block og_description %}
+        <meta property="og:description" content="{{ config.bundleConfig.metaDescription }}"/>
+    {% endblock %}
+    {% block og_type %}
+        <meta property="og:type" content="article"/>
+    {% endblock %}
+ {% endif %}
+{% endblock %}
 {% block inner_content %}
+
     <!-- Page Content -->
     <div id="mall_category" class="">
         <div class="reaestate_box">

@@ -9,18 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace DesoukOnline\MallBundle\Admin;
+namespace DesoukOnline\HomeBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
  */
-class VendorProductCategoryAdmin extends Admin
+class HomeAdmin extends Admin
 {
 
     /**
@@ -28,33 +30,15 @@ class VendorProductCategoryAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $repository_ = $this->getModelManager()->getEntityManager($this->getClass())->getRepository($this->getClass());
-        $repository = $repository_->createQueryBuilder('p')
-            ->addOrderBy('p.root', 'ASC')
-            ->addOrderBy('p.lft', 'ASC');
         $formMapper
-            ->add('title')
-            ->add('description', 'ckeditor')
-            ->add('summary')
-            ->add('vendor')
-            ->add('isInHome', null, array())
-            ->add('enabled', null, array());
+            ->with('SEO',array('tab'=>true))
+            ->add('metaTitle')
+            ->add('metaDescription')
+            ->end()
+            ->end() ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
 
-        $showMapper
-            ->add('title')
-            ->add('image')
-            ->add('parent')
-            ->add('description')
-            ->add('enabled')
-        ;
-    }
 
     /**
      * {@inheritdoc}
@@ -62,9 +46,8 @@ class VendorProductCategoryAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
-            ->add('enabled')
-            ->add('isInHome', null, array('editable'=>true))
+            ->add('metaTitle')
+            ->add('metaDescription')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -74,16 +57,32 @@ class VendorProductCategoryAdmin extends Admin
             ));
     }
 
+
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+
     /**
      * {@inheritdoc}
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title')
-            ->add('enabled', null, array('required' => true, 'data' => True));
+            ->add('metaTitle')
+            ->add('enabled');
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('metaTitle')
+            ->add('metaDescription')
+            ->add('enabled');
+    }
 
 }

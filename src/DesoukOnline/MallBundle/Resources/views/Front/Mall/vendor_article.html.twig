@@ -1,6 +1,27 @@
 {% extends 'base.html.twig' %}
-{% block inner_content %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~article.vendor.title ~'|'~article.title }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ article.summary }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~article.vendor.title ~'|'~article.title }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ article.summary }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
 
+{% block inner_content %}
     <div id="vendor_product" class="">
         <div class="container">
             <div class="box">

@@ -1,0 +1,9 @@
+services:
+    desouk_online.general:
+        class: DesoukOnline\HomeBundle\Admin\GeneralAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "DesoukOnline", label: "General" , show_in_dashboard: true }
+        arguments:
+            - ~
+            - DesoukOnline\HomeBundle\Entity\General
+            - ~

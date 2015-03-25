@@ -1,111 +1,115 @@
 {% extends 'base.html.twig' %}
-{% block inner_content %}
-    <!-- Page Content -->
-    {% block website_meta_title %}
-        <meta name="title" content="{{ "دسوق اونلاين | للبيع"~' | '~forSale.title }}"/>
-    {% endblock %}
-    {% block website_description %}
-        <meta name="description" content="{{ forSale.description|striptags }}"/>
-    {% endblock %}
-    {% block og_image %}
-        <meta property="og:image" content="{{ app.request.uriForPath( forSale.getWebPath()) }}"/>
-        {#<meta property="og:image:secure_url" content="{{ app.request.uri }}"/>#}
-    {% endblock %}
-    {% block og_title %}
-        <meta property="og:title"
-              content="{{"دسوق اونلاين | للبيع"~' | '~forSale.title }}"/>
-    {% endblock %}
-    {% block og_description %}
-        <meta property="og:description" content="{{ forSale.description|striptags }}"/>
-    {% endblock %}
-    {% block og_author %}
-        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
-    {% endblock %}
-    {% block og_type %}
-        <meta property="og:type" content="article"/>
-    {% endblock %}
-    <div id="mall_category" class="for_sale">
-        <div class="row">
-            {% set cat = (forSale.Category!=null)?forSale.Category.title:null %}
-            {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': cat })) }}
-            <div class="reaestate_items col-md-9">
-                <div class="center"><h3>{{ forSale.title }}</h3></div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="reaestate_item apps container">
-                            <div class="reaestate_item_inner">
-                                <div class="realestate_properities">
-
-                                    {% if forSale.price %}
-                                        <div class="text-right width_49 inline_block">السعر</div>
-                                        <div class="text-left width_49 inline_block">
-                                            <span class="big-price">{{ forSale.price }} جنية</span>
-                                        </div>
-                                        <hr>
-                                    {% endif %}
-
-                                    {% if cat %}
-                                        <div class="text-right width_49 inline_block">القسم</div>
-                                        <div class="text-left width_49 inline_block">
-                                            <span class="">{{ cat }}</span>
-                                        </div>
-                                        <hr>
-                                    {% endif %}
-
-
-
-                                    <div class="realestate_summary">
-                                        {{ forSale.description|raw }}
-                                    </div>
-                                    <hr>
-                                    {% include 'horizontal_social.html.twig' %}
-                                    <hr>
-                                    {{ ("for_sale_"~forSale.id)|show_rating|raw }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {% if has_slider %}
-
-                        <div class="col-md-6">
-                            <div class="product_gallery">
-                                <a class="gallery"
-                                   href="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_real_estate_image.png') }}"
-                                   rel="group" data-rel="prettyPhoto[gallery]1"
-                                   title="">
-
-                                    <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_real_estate_image.png') }}">
-
-                                </a>
-                                {% for image in forSale.images %}
-                                    <a class="gallery" style="display: none"
-                                       href="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
-                                       rel="group" data-rel="prettyPhoto[gallery]1"
-                                       title="">
-                                        <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
-
-                                    </a>
-                                {% endfor %}
-                            </div>
-                            <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
-                        </div>
-
-
-                    {% else %}
-                        <div class="center">
-                            <img src="{{ asset('images/default/default_product_image.png') }}"/>
-                        </div>
-                    {% endif %}
-                    <!--/.portfolio-item-->
-                </div>
-                <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
-                     data-colorscheme="light"></div>
-            </div>
-            <!--/.box-->
-        </div>
-        <!--/.container-->
-    </div>
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title" content="{{config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.forSaleMiddleOfTitleInShow~'|'~forSale.title }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ forSale.summary }}"/>
+        {% endblock %}
+        {% block og_image %}
+            <meta property="og:image" content="{{ app.request.uriForPath( forSale.getWebPath()) }}"/>
+            <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.forSaleMiddleOfTitleInShow~'|'~forSale.title }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ forSale.summary}}"/>
+        {% endblock %}
+        {% block og_author %}
+            {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
 {% endblock %}
+   {% block inner_content %}
+
+       <div id="mall_category" class="for_sale">
+           <div class="row">
+               {% set cat = (forSale.Category!=null)?forSale.Category.title:null %}
+               {{ render(controller('DesoukOnlineForSaleBundle:Front:sideFilter', { 'cat': cat })) }}
+               <div class="reaestate_items col-md-9">
+                   <div class="center"><h3>{{ forSale.title }}</h3></div>
+                   <hr>
+                   <div class="row">
+                       <div class="col-md-6">
+                           <div class="reaestate_item apps container">
+                               <div class="reaestate_item_inner">
+                                   <div class="realestate_properities">
+
+                                       {% if forSale.price %}
+                                           <div class="text-right width_49 inline_block">السعر</div>
+                                           <div class="text-left width_49 inline_block">
+                                               <span class="big-price">{{ forSale.price }} جنية</span>
+                                           </div>
+                                           <hr>
+                                       {% endif %}
+
+                                       {% if cat %}
+                                           <div class="text-right width_49 inline_block">القسم</div>
+                                           <div class="text-left width_49 inline_block">
+                                               <span class="">{{ cat }}</span>
+                                           </div>
+                                           <hr>
+                                       {% endif %}
+
+
+
+                                       <div class="realestate_summary">
+                                           {{ forSale.description|raw }}
+                                       </div>
+                                       <hr>
+                                       {% include 'horizontal_social.html.twig' %}
+                                       <hr>
+                                       {{ ("for_sale_"~forSale.id)|show_rating|raw }}
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
+
+                       {% if has_slider %}
+
+                           <div class="col-md-6">
+                               <div class="product_gallery">
+                                   <a class="gallery"
+                                      href="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                      rel="group" data-rel="prettyPhoto[gallery]1"
+                                      title="">
+
+                                       <img src="{{ (forSale.path())?forSale.getWebPath():asset('images/default/default_real_estate_image.png') }}">
+
+                                   </a>
+                                   {% for image in forSale.images %}
+                                       <a class="gallery" style="display: none"
+                                          href="{{ (image.path())?image.getWebPath():asset('images/default/default_real_estate_image.png') }}"
+                                          rel="group" data-rel="prettyPhoto[gallery]1"
+                                          title="">
+                                           <img src="{{ (image.path())?image.getWebPath():asset('images/default/default_product_image.png') }}">
+
+                                       </a>
+                                   {% endfor %}
+                               </div>
+                               <div class="center">اضغط هنا لمشاهدة الصور كاملة</div>
+                           </div>
+
+
+                       {% else %}
+                           <div class="center">
+                               <img src="{{ asset('images/default/default_product_image.png') }}"/>
+                           </div>
+                       {% endif %}
+                       <!--/.portfolio-item-->
+                   </div>
+                   <div class="fb-comments" data-href="{{ app.request.uri }}" data-width="100%" data-numposts="5"
+                        data-colorscheme="light"></div>
+               </div>
+               <!--/.box-->
+           </div>
+           <!--/.container-->
+       </div>
+   {% endblock %}

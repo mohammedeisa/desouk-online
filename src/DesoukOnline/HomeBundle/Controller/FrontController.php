@@ -8,6 +8,7 @@ use DesoukOnline\CarBundle\Entity\CarConfig;
 use DesoukOnline\DeliveryBundle\Entity\Delivery;
 use DesoukOnline\ForSaleBundle\Entity\ForSale;
 use DesoukOnline\ForSaleBundle\Entity\ForSaleConfig;
+use DesoukOnline\HomeBundle\Entity\General;
 use DesoukOnline\JobsBundle\Entity\Job;
 use DesoukOnline\JobsBundle\Entity\JobsConfig;
 use DesoukOnline\MallBundle\Entity\MallConfig;
@@ -31,6 +32,8 @@ class FrontController extends Controller
      */
     public function homeAction()
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new General()));
+        return array('config'=>$config);
     }
 
     /**
@@ -100,7 +103,6 @@ class FrontController extends Controller
      */
     public function recentProductsAction()
     {
-
         $em = $this->getDoctrine()->getManager();
         $realEstate = $em->createQuery('SELECT a FROM ' . get_class(new RealEstate()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();
         $forSale = $em->createQuery('SELECT a FROM ' . get_class(new ForSale()) . ' a order by a.updatedAt DESC')->setMaxResults(4)->getResult();

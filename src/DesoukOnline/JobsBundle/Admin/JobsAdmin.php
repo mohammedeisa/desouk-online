@@ -31,7 +31,9 @@ class JobsAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('owner')
-            ->add('description', 'ckeditor');
+            ->add('description', 'ckeditor')
+            ->add('summary')
+        ;
     }
 
     /**

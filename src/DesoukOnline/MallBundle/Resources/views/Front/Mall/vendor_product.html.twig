@@ -1,28 +1,31 @@
 {% extends 'base.html.twig' %}
-{% block inner_content %}
-    {% block website_meta_title %}
-        <meta name="title" content="{{ "دسوق اون لاين | "~product.vendorProductCategory.vendor.title  }}"/>
-    {% endblock %}
-    {% block website_description %}
-        <meta name="description" content="{{ product.description|striptags }}"/>
-    {% endblock %}
-    {% block og_image %}
-        <meta property="og:image" content="{{ app.request.uriForPath( product.getWebPath()) }}"/>
-        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
-    {% endblock %}
-    {% block og_title %}
-        <meta property="og:title" content="{{ "دسوق اون لاين | "~product.vendorProductCategory.vendor.title~' | '~product.name  }}"/>
-    {% endblock %}
-    {% block og_description %}
-        <meta property="og:description" content="{{ product.description|striptags }}"/>
-    {% endblock %}
-    {% block og_author %}
-        {#<meta property="article:author" content="{{ product.vendorProductCategory.vendor.title }}"/>#}
-    {% endblock %}
-    {% block og_type %}
-        <meta property="og:type" content="article"/>
-    {% endblock %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~product.vendorProductCategory.vendor.title~'|'~product.name }}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ product.summary }}"/>
+        {% endblock %}
+        {% block og_image %}
+            <meta property="og:image" content="{{ app.request.uriForPath( product.getWebPath()) }}"/>
+            <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title"
+                  content="{{ config.generalConfig.mallPreTitle~'|'~product.vendorProductCategory.vendor.title~'|'~product.name }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ product.summary }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
 
+{% block inner_content %}
     <div id="vendor_product" class="">
         <div class="container">
             <div class="row">

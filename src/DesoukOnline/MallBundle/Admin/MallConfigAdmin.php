@@ -30,7 +30,10 @@ class MallConfigAdmin extends Admin
     {
         $formMapper
             ->add('mallTitle')
-            ->add('mallDescription', 'ckeditor');
+            ->add('mallDescription', 'ckeditor')
+            ->add('metaTitle')
+            ->add('metaDescription')
+        ;
     }
 
     /**

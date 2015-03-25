@@ -47,6 +47,13 @@ class Job
      */
     private $description;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
+
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -186,6 +193,22 @@ class Job
     function __toString()
     {
         return ($this->getTitle()) ? $this->getTitle() : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
     }
 
 }

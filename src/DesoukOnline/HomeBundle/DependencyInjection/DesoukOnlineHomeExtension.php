@@ -22,7 +22,18 @@ class DesoukOnlineHomeExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('config.yml');
+
+        $groups = $container->getParameter('sonata.admin.configuration.dashboard_groups');
+
+        $jobs = array();
+        $jobs['icon'] = '<i class="fa fa-play-circle"></i>';;
+        $jobs['label'] = 'General';
+
+        $jobs['items'][] = 'desouk_online.general';
+
+        $groups['sonata.admin.group.desouk_online.general'] = $jobs;
+        $container->setParameter('sonata.admin.configuration.dashboard_groups', $groups);
     }
 }

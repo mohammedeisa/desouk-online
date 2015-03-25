@@ -1,10 +1,25 @@
 {% extends 'base.html.twig' %}
+{% block seo %}
+    {% if config['generalConfig'] and  config['bundleConfig'] %}
+        {% block website_meta_title %}
+            <meta name="title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.homepageMetaTitle}}"/>
+        {% endblock %}
+        {% block website_description %}
+            <meta name="description" content="{{ config.generalConfig.homepageMetaDescription }}"/>
+        {% endblock %}
+        {% block og_title %}
+            <meta property="og:title" content="{{ config.generalConfig.generalModulesPreTitle~'|'~config.generalConfig.homepageMetaTitle }}"/>
+        {% endblock %}
+        {% block og_description %}
+            <meta property="og:description" content="{{ config.generalConfig.homepageMetaDescription }}"/>
+        {% endblock %}
+        {% block og_type %}
+            <meta property="og:type" content="article"/>
+        {% endblock %}
+    {% endif %}
+{% endblock %}
 {% block homecontent %}
-    {% block og_image %}
-        <meta property="og:image" content="{{ app.request.uriForPath( '/images/logo.jpg') }}"/>
-        <meta property="og:image:secure_url" content="{{ app.request.uri }}"/>
-    {% endblock %}
-    {{ render(controller('DesoukOnlineHomeBundle:Front:banner')) }}
+     {{ render(controller('DesoukOnlineHomeBundle:Front:banner')) }}
     {{ render(controller('DesoukOnlineHomeBundle:Front:mainComponents')) }}
     {{ render(controller('DesoukOnlineHomeBundle:Front:recentProducts')) }}
     {#{{ render(controller('DesoukOnlineSponsorBundle:Front:index')) }}#}

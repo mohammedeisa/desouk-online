@@ -30,7 +30,9 @@ class JobsConfigAdmin extends Admin
     {
         $formMapper
             ->add('jobsTitle')
-            ->add('jobsDescription', 'ckeditor');
+            ->add('jobsDescription', 'ckeditor')
+            ->add('metaDescription')
+        ;
     }
 
     /**

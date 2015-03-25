@@ -37,6 +37,12 @@ class VendorProductCategory
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text" )
+     */
+    private $summary;
+    /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean", nullable=true)
@@ -278,6 +284,22 @@ class VendorProductCategory
     public function setIsInHome($isInHome)
     {
         $this->isInHome = $isInHome;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
     }
 
 }

@@ -48,6 +48,7 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('title')
             ->add('description', 'ckeditor')
+            ->add('summary')
             ->add('file', 'file', $fileFieldOptions)
             ->add('enabled', null, array());
     }

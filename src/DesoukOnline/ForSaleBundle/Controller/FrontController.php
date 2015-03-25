@@ -2,6 +2,8 @@
 
 namespace DesoukOnline\ForSaleBundle\Controller;
 
+use DesoukOnline\ForSaleBundle\Entity\ForSaleConfig;
+use DesoukOnline\HomeBundle\Entity\General;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -18,7 +20,9 @@ class FrontController extends Controller
      */
     public function indexAction(Request $request)
     {
-    	$repository = $this->getDoctrine()
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new ForSaleConfig()));
+
+        $repository = $this->getDoctrine()
             ->getRepository('DesoukOnlineForSaleBundle:ForSale');
 
         $query = $repository->createQueryBuilder('f')
@@ -38,7 +42,7 @@ class FrontController extends Controller
             20/*limit per page*/
         );
 		
-        return array('forSales' => $forSales);
+        return array('forSales' => $forSales,'config'=>$config);
     }
 	
 	/**
@@ -47,6 +51,8 @@ class FrontController extends Controller
      */
     public function showAction($slug)
     {
+        $config = $this->getDoctrine()->getRepository(get_class(new General()))->getGeneralConfigurationsAndBundleConfigurations(get_class(new ForSaleConfig()));
+
         $forSale = $this->getDoctrine()->getManager()->getRepository(get_class(new ForSale()))->findOneBy(array('slug' => $slug));
         $variables = array('forSale' => $forSale);
 		if(is_file($forSale->getAbsolutePath())){
@@ -55,6 +61,7 @@ class FrontController extends Controller
 		else{
 			$variables['has_slider'] = false;
 		}
+        $variables['config']=$config;
         return $variables;
     }
 

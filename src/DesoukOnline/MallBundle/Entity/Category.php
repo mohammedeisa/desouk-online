@@ -39,6 +39,14 @@ class Category
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text" )
+     */
+    private $summary;
+
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean", options={"default":1})
@@ -350,6 +358,22 @@ class Category
         if ($this->getTitle())
             return $this->getTitle();
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
     }
 
 }

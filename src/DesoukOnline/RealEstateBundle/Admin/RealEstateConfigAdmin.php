@@ -30,7 +30,9 @@ class RealEstateConfigAdmin extends Admin
     {
         $formMapper
             ->add('realEstateTitle')
-            ->add('realEstateDescription', 'ckeditor');
+            ->add('realEstateDescription', 'ckeditor')
+            ->add('metaDescription')
+        ;
     }
 
     /**

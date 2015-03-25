@@ -109,6 +109,14 @@
 <!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=368206399929470&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <div class="wrapper">
     {{ render(controller('DesoukOnlineHomeBundle:Front:header')) }}
 
@@ -146,6 +154,9 @@
 </div>
 {{ render(controller('DesoukOnlineHomeBundle:Front:footer')) }}
 {{ render(controller('DesoukOnlineHomeBundle:Front:userMenu')) }}
+<div style="position:fixed;bottom:0;right:0;background:#fff;">
+<div class="fb-like-box" data-height="200" data-width="200" data-href="https://www.facebook.com/desouk.online" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
+</div>
 
 <script>
     $(document).ready(function () {
